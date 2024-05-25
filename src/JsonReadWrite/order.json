@@ -1,0 +1,81 @@
+[ {
+  "orderID" : 1,
+  "totalCost" : 12.95,
+  "groceryItems" : [ {
+    "name" : "Milk",
+    "price" : 2.99,
+    "quantity" : 5
+  }, {
+    "name" : "Bread",
+    "price" : 1.99,
+    "quantity" : 5
+  }, {
+    "name" : "Milk",
+    "price" : 2.99,
+    "quantity" : 4
+  }, {
+    "name" : "Bread",
+    "price" : 1.99,
+    "quantity" : 4
+  }, {
+    "name" : "Milk",
+    "price" : 2.99,
+    "quantity" : 3
+  } ]
+}, {
+  "orderID" : 2,
+  "totalCost" : 12.95,
+  "groceryItems" : [ {
+    "name" : "Milk",
+    "price" : 2.99,
+    "quantity" : 5
+  }, {
+    "name" : "Bread",
+    "price" : 1.99,
+    "quantity" : 5
+  }, {
+    "name" : "Milk",
+    "price" : 2.99,
+    "quantity" : 4
+  }, {
+    "name" : "Bread",
+    "price" : 1.99,
+    "quantity" : 4
+  }, {
+    "name" : "Milk",
+    "price" : 2.99,
+    "quantity" : 3
+  } ]
+}, {
+  "orderID" : 3,
+  "totalCost" : 3.98,
+  "groceryItems" : [ {
+    "name" : "Bread",
+    "price" : 1.99,
+    "quantity" : 4
+  }, {
+    "name" : "Bread",
+    "price" : 1.99,
+    "quantity" : 3
+  } ]
+}, {
+  "orderID" : 4,
+  "totalCost" : 4.98,
+  "groceryItems" : [ {
+    "name" : "Bread",
+    "price" : 1.99,
+    "quantity" : 2
+  }, {
+    "name" : "Milk",
+    "price" : 2.99,
+    "quantity" : 2
+  } ]
+}, {
+  "orderID" : 5,
+  "totalCost" : 2.33,
+  "groceryItems" : [ {
+    "name" : "Cookies",
+    "price" : 2.33,
+    "quantity" : 1
+  } ]
+} ]

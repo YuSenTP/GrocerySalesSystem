@@ -1,0 +1,31 @@
+[{
+    "orderID": 1,
+    "totalCost": 12.95,
+    "groceryItems": [
+      {
+        "name": "Milk",
+        "price": 2.99,
+        "quantity": 5
+      },
+      {
+        "name": "Bread",
+        "price": 1.99,
+        "quantity": 5
+      },
+      {
+        "name": "Milk",
+        "price": 2.99,
+        "quantity": 4
+      },
+      {
+        "name": "Bread",
+        "price": 1.99,
+        "quantity": 4
+      },
+      {
+        "name": "Milk",
+        "price": 2.99,
+        "quantity": 3
+      }
+    ]
+  }]
