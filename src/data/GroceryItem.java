@@ -60,7 +60,7 @@ public class GroceryItem {
 	 }
 
 	public GroceryItem copy() { 
-		return new GroceryItem(this.name, this.price, this.quantity);
+		return new GroceryItem(this.name, this.price, 1); //start from quantity 1
 	 } 
 
 }

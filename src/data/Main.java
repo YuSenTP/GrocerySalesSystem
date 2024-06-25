@@ -26,7 +26,8 @@ public class Main {
 //		 Staff staff2 = new Staff("Staff2", "5678");
 //		 staffs.add(staff1);
 //		 staffs.add(staff2);
-
+		
+		//Order1 3milk 1bread
 		staffs.get(0).editOrder("add", inventory.get(0)); // -milk
 		staffs.get(0).editOrder("add", inventory.get(1)); // -bread
 		staffs.get(0).editOrder("add", inventory.get(0)); // -milk
@@ -35,10 +36,12 @@ public class Main {
 		staffs.get(0).editOrder("delete", inventory.get(1)); // +bread
 		staffs.get(0).saveOrder(); // bread = 4, milk = 2
 		
+		//Order2 2bread
 		staffs.get(1).editOrder("add", inventory.get(1)); // -bread
 		staffs.get(1).editOrder("add", inventory.get(1)); // -bread
 		staffs.get(1).saveOrder(); // bread = 2, milk = 2
 		
+		//Order3 1milk 1bread
 		staffs.get(0).editOrder("add", inventory.get(1)); // -bread
 		staffs.get(0).editOrder("add", inventory.get(0)); // -milk
 		staffs.get(0).saveOrder(); // bread = 1, milk = 1
@@ -46,6 +49,7 @@ public class Main {
 		managers.get(0).editGroceryItem(inventory.get(0), "Cookies"); // cookies = 1, milk = 1
 		managers.get(0).editGroceryItem(inventory.get(0), 2.33); // cookies = 2.33
 		
+		//Order4 1cookie
 		staffs.get(1).editOrder("add", inventory.get(0)); 
 		staffs.get(1).editOrder("add", inventory.get(0)); 
 		staffs.get(1).saveOrder(); // cookies = 0, milk = 1

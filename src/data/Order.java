@@ -15,7 +15,7 @@ public class Order {
 	private static int counter = Main.orders.size() + 1;
 	
 	public Order() { 
-		this.groceryItems= new Vector();
+		this.groceryItems= new Vector<GroceryItem>();
 		this.totalCost = BigDecimal.ZERO;
 		this.orderID = counter++;
 	 }
@@ -55,17 +55,40 @@ public class Order {
 	public BigDecimal calculateTotalCost() { 
 		totalCost = BigDecimal.ZERO; //!
 		for(int i = 0; i < groceryItems.size(); i++){
-			totalCost = totalCost.add(groceryItems.get(i).getPrice()); // BigDecimal is Immutable
+			BigDecimal groceryCost = groceryItems.get(i).getPrice().multiply(BigDecimal.valueOf(groceryItems.get(i).getQuantity()));
+			totalCost = totalCost.add(groceryCost);
+//			totalCost = totalCost.add(groceryItems.get(i).getPrice() * BigDecimal.valueOf(groceryItems.get(i).getQuantity())); // BigDecimal is Immutable
 		}
 		return totalCost;
 	 }
 
-	public void deleteGroceryItem(GroceryItem item) { 
-		groceryItems.remove(item);
+	public void deleteGroceryItem(GroceryItem item) { //check this
+//		groceryItems.get(index)
+		for (int i = 0; i < groceryItems.size(); i++){
+			if(groceryItems.get(i).getName() == item.getName()){
+				groceryItems.get(i).subtractQuantity();
+			}
+		}
+
 	 }
 
 	public void addGroceryItem(GroceryItem item) { 
-		groceryItems.add(item.copy());
+		boolean itemPresent = false;
+		int index = 0;
+		for (int i = 0; i < groceryItems.size(); i++){
+			if(groceryItems.get(i).getName() == item.getName()){
+				itemPresent = true;
+				index = i;
+			}
+		}
+		if (itemPresent == false){
+			groceryItems.add(item.copy());
+		}
+		else{
+			//add 1 to the grocery item
+			groceryItems.get(index).addQuantity(); 
+		}
+		
 	 } 
 
 }

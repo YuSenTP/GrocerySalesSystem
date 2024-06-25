@@ -35,11 +35,11 @@ public class Staff extends User {
 		if (choice == "add" && item.getQuantity() > 0){
 //			System.out.println(item);
 			this.order.addGroceryItem(item);
-			item.subtractQuantity();
+			item.subtractQuantity(); // minus 1 from inventory
 		}
 		else if (choice == "delete"){
 			this.order.deleteGroceryItem(item);
-			item.addQuantity();
+			item.addQuantity();// add 1 to inventory
 		}
 	 } 
 	

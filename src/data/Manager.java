@@ -55,7 +55,7 @@ public class Manager extends User {
 			System.out.println("Order" + order.getOrderID());
 			for(int i = 0; i < order.getGroceryItems().size(); i++){
 				GroceryItem item = order.getGroceryItems().get(i);
-				System.out.println(item.getName() + " $" + item.getPrice());
+				System.out.println(item.getName() + " $" + item.getPrice() + " " + item.getQuantity());
 			}
 			System.out.println("Total Cost: $" + order.calculateTotalCost());
 			System.out.println();

@@ -37,7 +37,7 @@ public class ReadWriteFile {
          );
          
          Main.orders = objectMapper.readValue(
-                 new File("./src/JsonReadWrite/startorder.json"),
+                 new File("./src/JsonReadWrite/emptyorder.json"),
                  new TypeReference<Vector<Order>>(){}
          );
          // Output the list of User objects
