@@ -7,6 +7,8 @@ import java.awt.CardLayout;
 
 import javax.swing.JFrame;
 
+import gui.ManagerHome;
+
 /**
  * @author Yu Sen
  *
@@ -19,6 +21,7 @@ public class MainFrame extends JFrame {
 		this.setTitle("Joy MiniMart");
 		this.setSize(750, 550);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		setResizable(false);
 		
 		// Instantiation of controller and card
 		this.cont = new Controller();
@@ -26,6 +29,7 @@ public class MainFrame extends JFrame {
 		this.setLayout(this.card);
 		
 		// Add first method (e.g. showLoginScreen)
+		showManagerHome();
 		
 		this.setVisible(true);
 		
@@ -37,6 +41,12 @@ public class MainFrame extends JFrame {
 	
 	public void showLoginScreen(){
 		
+	}
+	
+	public void showManagerHome(){
+		ManagerHome p2 = new ManagerHome(this);
+		this.add(p2, "ManagerHome");
+		this.card.show(this.getContentPane(), "ManagerHome");
 	}
 	
 	public static void main(String[] args){
