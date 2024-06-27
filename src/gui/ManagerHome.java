@@ -8,6 +8,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -24,50 +26,101 @@ import controller.MainFrame;
  */
 public class ManagerHome extends JPanel{
 	private MainFrame main;
+	private JPanel gridPanel;
+	private String[] buttonNames = {"Grocery Menu", "Sales", "Inventory", "Add Account", "Edit Profile", "Delete Account"};
+	private JLabel nameLabel;
+	private JButton button;
+	private JLabel frameName;
+	private JPanel bottomPanel;
+	private JButton logOutButton;
 	
 	public ManagerHome(MainFrame main){
 		this.main = main;
 		this.setBackground(Color.WHITE);
 		main.setTitle("Joy MiniMart - Manager Home");
 		
-		JPanel gridPanel = new JPanel(new GridLayout(0, 3, 20, 20));
-        gridPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
+		this.gridPanel = new JPanel(new GridLayout(0, 3, 20, 20)); // rows, cols, hgap, vgap
+        this.gridPanel.setBorder(new EmptyBorder(20, 20, 20, 20)); // top, left, bottom, right
         
-        setLayout(new BorderLayout(0, 0));
-        setBackground(UIManager.getColor("OptionPane.background"));
+        this.setLayout(new BorderLayout(0, 0));
+        this.setBackground(UIManager.getColor("OptionPane.background"));
         
-        String[] buttons = {"Menu", "Sales", "Inventory", "Add Account", "Edit Profile", "Delete Account"};
-        
-        for (int i = 0; i < buttons.length; i++){
-        	JButton button = new JButton();
-        	button.setLayout(new BorderLayout());
-        	button.setPreferredSize(new Dimension(213, 123));
+        //Func Buttons
+        for (int i = 0; i < buttonNames.length; i++){
+        	this.button = new JButton();
+        	this.button.setLayout(new BorderLayout());
+        	this.button.setPreferredSize(new Dimension(213, 123));
+        	this.button.setActionCommand(buttonNames[i]);
+        	this.button.addActionListener(new ActionListener(){
+        		@Override
+        		public void actionPerformed(ActionEvent e){
+        			String buttonName = e.getActionCommand();
+        			showNextPanel(buttonName);
+        		}
+        	});
         	
-        	JLabel nameLabel = new JLabel(buttons[i]);
-        	nameLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        	nameLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
-        	button.add(nameLabel, BorderLayout.CENTER);
-        	gridPanel.add(button);
+        	this.nameLabel = new JLabel(buttonNames[i]);
+        	this.nameLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        	this.nameLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
+        	this.button.add(nameLabel, BorderLayout.CENTER);
+        	this.gridPanel.add(this.button);
         	
         }
-        this.add(gridPanel);
+        this.add(this.gridPanel);
         
-        JLabel lblNewLabel = new JLabel("Manager Home");
-        lblNewLabel.setBackground(UIManager.getColor("Button.background"));
-        lblNewLabel.setPreferredSize(new Dimension(87, 70));
-        lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 19));
-        lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        this.add(lblNewLabel, BorderLayout.NORTH);
+        //Frame Name
+        this.frameName = new JLabel("Manager Home");
+        this.frameName.setBackground(UIManager.getColor("Button.background"));
+        this.frameName.setPreferredSize(new Dimension(87, 60));
+        this.frameName.setFont(new Font("Tahoma", Font.BOLD, 20));
+        this.frameName.setHorizontalAlignment(SwingConstants.CENTER);
+        this.frameName.setVerticalAlignment(SwingConstants.CENTER);
+        this.add(this.frameName, BorderLayout.NORTH);
         
-        JPanel panel = new JPanel();
-        this.add(panel, BorderLayout.SOUTH);
-        panel.setLayout(new BorderLayout(0, 0));
+        //Bottom Panel
+        this.bottomPanel = new JPanel();
+        this.bottomPanel.setLayout(new BorderLayout(0, 0));
+        this.bottomPanel.setBorder(new EmptyBorder(0, 20, 10, 0));
+        this.add(this.bottomPanel, BorderLayout.SOUTH);
         
-        JButton btnNewButton = new JButton("Logout");
-        btnNewButton.setPreferredSize(new Dimension(90, 35));
-        btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 15));
-        panel.add(btnNewButton, BorderLayout.WEST);
+        //Logout Button
+        this.logOutButton = new JButton("Logout");
+        this.logOutButton.setPreferredSize(new Dimension(90, 40));
+        this.logOutButton.setFont(new Font("Tahoma", Font.BOLD, 15));
+        this.logOutButton.addActionListener(new ActionListener(){
+    		@Override
+    		public void actionPerformed(ActionEvent e){
+    			logOut();
+    		}
+    	});
+        bottomPanel.add(this.logOutButton, BorderLayout.WEST);
         
+	}
+	
+	private void showNextPanel(String name){
+		if (name == "Grocery Menu"){
+			System.out.println("Grocery Menu");
+//			this.main.
+		}
+		else if (name == "Sales"){
+			System.out.println("Sales");
+		}
+		else if (name == "Inventory"){
+			System.out.println("Inventory");
+		}
+		else if (name == "Add Account"){
+			System.out.println("Add Account");
+		}
+		else if (name == "Edit Profile"){
+			System.out.println("Edit Profile");
+		}
+		else if (name == "Delete Account"){
+			System.out.println("Delete Account");
+		}
+	}
+	
+	private void logOut(){
+		System.out.println("LogOut");
 	}
 
 }
