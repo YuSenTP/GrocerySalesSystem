@@ -36,14 +36,13 @@ public class ManagerHome extends JPanel{
 	
 	public ManagerHome(MainFrame main){
 		this.main = main;
-		this.setBackground(Color.WHITE);
+		this.setLayout(new BorderLayout(0, 0));
+        this.setBackground(UIManager.getColor("OptionPane.background"));
+
 		main.setTitle("Joy MiniMart - Manager Home");
 		
-		this.gridPanel = new JPanel(new GridLayout(0, 3, 20, 20)); // rows, cols, hgap, vgap
+		this.gridPanel = new JPanel(new GridLayout(0, 3, 40, 40)); // rows, cols, hgap, vgap
         this.gridPanel.setBorder(new EmptyBorder(20, 20, 20, 20)); // top, left, bottom, right
-        
-        this.setLayout(new BorderLayout(0, 0));
-        this.setBackground(UIManager.getColor("OptionPane.background"));
         
         //Func Buttons
         for (int i = 0; i < buttonNames.length; i++){
@@ -100,7 +99,7 @@ public class ManagerHome extends JPanel{
 	private void showNextPanel(String name){
 		if (name == "Grocery Menu"){
 			System.out.println("Grocery Menu");
-//			this.main.
+			this.main.showManagerMenu();
 		}
 		else if (name == "Sales"){
 			System.out.println("Sales");

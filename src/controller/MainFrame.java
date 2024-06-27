@@ -8,6 +8,7 @@ import java.awt.CardLayout;
 import javax.swing.JFrame;
 
 import gui.ManagerHome;
+import gui.ManagerMenu;
 
 /**
  * @author Yu Sen
@@ -47,6 +48,12 @@ public class MainFrame extends JFrame {
 		ManagerHome p2 = new ManagerHome(this);
 		this.add(p2, "ManagerHome");
 		this.card.show(this.getContentPane(), "ManagerHome");
+	}
+	
+	public void showManagerMenu(){
+		ManagerMenu p3 = new ManagerMenu(this);
+		this.add(p3, "ManagerMenu");
+		this.card.show(this.getContentPane(), "ManagerMenu");
 	}
 	
 	public static void main(String[] args){
