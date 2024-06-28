@@ -2,11 +2,31 @@
   {
     "name": "Milk",
     "price": 2.99,
-    "quantity": 5
+    "quantity": 5,
+    "picFile": ""
   },
   {
     "name": "Bread",
     "price": 1.99,
-    "quantity": 5
+    "quantity": 5,
+    "picFile": ""
+  },
+  {
+    "name": "Tomato",
+    "price": 1.15,
+    "quantity": 5,
+    "picFile": "./img/tomato.jpg"
+  },
+  {
+    "name": "Lettuce",
+    "price": 2.10,
+    "quantity": 5,
+    "picFile": "./img/lettuce.jpg"
+  },
+  {
+    "name": "Watermelon",
+    "price": 3.50,
+    "quantity": 5,
+    "picFile": "./img/watermelon1.jpg"
   }
 ]

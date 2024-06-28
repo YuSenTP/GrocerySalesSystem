@@ -14,8 +14,8 @@ public class Manager extends User {
 		super(name, password);
 	 }
 	
-	public void createGroceryItem(String itemName, double price, int quantity) { 
-		GroceryItem temp = new GroceryItem(itemName, price, quantity);
+	public void createGroceryItem(String itemName, double price, int quantity, String picFile) { 
+		GroceryItem temp = new GroceryItem(itemName, price, quantity, picFile);
 		Main.inventory.add(temp);
 	 }
 
