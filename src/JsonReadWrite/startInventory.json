@@ -3,13 +3,13 @@
     "name": "Milk",
     "price": 2.99,
     "quantity": 5,
-    "picFile": ""
+    "picFile": "./img/milk1.jpg"
   },
   {
     "name": "Bread",
     "price": 1.99,
     "quantity": 5,
-    "picFile": ""
+    "picFile": "./img/bread2.jpg"
   },
   {
     "name": "Tomato",
@@ -51,30 +51,30 @@
     "name": "Apple",
     "price": 0.50,
     "quantity": 100,
-    "picFile": ""
+    "picFile": "./img/apple.jpg"
   },
   {
     "name": "Banana",
     "price": 0.30,
     "quantity": 150,
-    "picFile": ""
+    "picFile": "./img/banana.jpg"
   },
   {
     "name": "Orange Juice",
     "price": 3.50,
     "quantity": 70,
-    "picFile": ""
+    "picFile": "./img/orangejuice.jpg"
   },
   {
     "name": "Cheese",
     "price": 4.00,
     "quantity": 30,
-    "picFile": ""
+    "picFile": "./img/cheese.jpg"
   },
   {
     "name": "Pasta",
     "price": 1.50,
     "quantity": 120,
-    "picFile": ""
+    "picFile": "./img/pasta.jpg"
   }
 ]
