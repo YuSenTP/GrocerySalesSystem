@@ -45,24 +45,24 @@ public class ManagerMenu extends JPanel{
 	private JPanel bottomPanel;
 	private JButton backButton;
 	private JButton cartButton;
-	private String[][] items = {
-            {"Tomato", "$33.48", "./img/tomato.jpg"},
-            {"Lettuce", "$96.76", "./img/lettuce.jpg"},
-            {"Watermelon", "$14.03", "./img/watermelon1.jpg"},
-            {"Apple", "$24.26", "green_apple.png"},
-            {"Orange", "$90.86", "orange.png"},
-            {"Lime", "$98.32", "lime.png"},
-            {"Cucumber", "$8.46", "cucumber.png"},
-            {"Peach", "$14.73", "peach.png"},
-            {"Apple", "$12.24", "red_apple.png"},
-            {"Avocado", "$18.76", "avocado.png"},
-            {"Carrot", "$10.11", "carrot.png"},
-            {"Lemon", "$68.99", "lemon.png"},
-            {"Carrot", "$45.53", "carrot.png"},
-            {"Banana", "$5.83", "banana.png"},
-            {"Maracuya", "$9.46", "maracuya.png"},
-            {"Cherry", "$23.16", "cherry.png"}
-        };
+//	private String[][] items = {
+//            {"Tomato", "$33.48", "./img/tomato.jpg"},
+//            {"Lettuce", "$96.76", "./img/lettuce.jpg"},
+//            {"Watermelon", "$14.03", "./img/watermelon1.jpg"},
+//            {"Apple", "$24.26", "green_apple.png"},
+//            {"Orange", "$90.86", "orange.png"},
+//            {"Lime", "$98.32", "lime.png"},
+//            {"Cucumber", "$8.46", "cucumber.png"},
+//            {"Peach", "$14.73", "peach.png"},
+//            {"Apple", "$12.24", "red_apple.png"},
+//            {"Avocado", "$18.76", "avocado.png"},
+//            {"Carrot", "$10.11", "carrot.png"},
+//            {"Lemon", "$68.99", "lemon.png"},
+//            {"Carrot", "$45.53", "carrot.png"},
+//            {"Banana", "$5.83", "banana.png"},
+//            {"Maracuya", "$9.46", "maracuya.png"},
+//            {"Cherry", "$23.16", "cherry.png"}
+//        };
 
 	
 	public ManagerMenu(MainFrame main){
@@ -77,17 +77,19 @@ public class ManagerMenu extends JPanel{
         this.gridPanel.setBorder(new EmptyBorder(0, 10, 10, 10));// top, left, bottom, right
         this.gridPanel.setBackground(UIManager.getColor("OptionPane.background"));
         
-        for (int i = 0; i < items.length; i++) {
+        for (int i = 0; i < this.inventory.size(); i++) {
+        	GroceryItem currentItem = this.inventory.elementAt(i);
+        	
             this.itemPanel = new JPanel(new BorderLayout());
             
             this.itemButton = new JButton();
 //            this.itemButton.setFocusable(false); //CAN USE
             this.itemButton.setLayout(new BorderLayout());
             this.itemButton.setBackground(Color.WHITE);
-    		this.itemButton.setPreferredSize(new Dimension(213, 123));          
+    		this.itemButton.setPreferredSize(new Dimension(213, 143));          
             
             //Item Action
-    		this.itemButton.setActionCommand(items[i][0]);
+    		this.itemButton.setActionCommand(currentItem.getName());
         	this.itemButton.addActionListener(new ActionListener(){
         		@Override
         		public void actionPerformed(ActionEvent e){
@@ -98,22 +100,22 @@ public class ManagerMenu extends JPanel{
         	});
 
             //Item Pic
-            this.itemPic = new ImageIcon(items[i][2]);
+            this.itemPic = new ImageIcon(currentItem.getPicFile());
             Image img = this.itemPic.getImage() ;  
     		Image newimg = img.getScaledInstance( 90, 90,  java.awt.Image.SCALE_SMOOTH ) ;  
     		this.itemPic = new ImageIcon( newimg );
     		this.itemButton.setIcon(this.itemPic);
             
         	//Item Name
-            this.nameLabel = new JLabel(items[i][0]);
+            this.nameLabel = new JLabel(currentItem.getName());
             this.nameLabel.setHorizontalAlignment(SwingConstants.CENTER);
-            this.nameLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
+            this.nameLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
             this.itemButton.add(this.nameLabel, BorderLayout.NORTH);
             
             //Item Price
-            this.priceLabel = new JLabel(items[i][1]);
+            this.priceLabel = new JLabel("$" + currentItem.getPrice().toString());
             this.priceLabel.setHorizontalAlignment(SwingConstants.CENTER);
-            this.priceLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
+            this.priceLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
             this.itemButton.add(this.priceLabel, BorderLayout.SOUTH);
             
             this.itemPanel.add(this.itemButton, BorderLayout.CENTER);
@@ -132,8 +134,8 @@ public class ManagerMenu extends JPanel{
         this.topPanel = new JPanel();
 
         this.lblGroceryItems = new JLabel("Grocery Items");
-        this.lblGroceryItems.setPreferredSize(new Dimension(125, 30));
-        this.lblGroceryItems.setFont(new Font("Tahoma", Font.BOLD, 17));
+        this.lblGroceryItems.setPreferredSize(new Dimension(130, 50));
+        this.lblGroceryItems.setFont(new Font("Tahoma", Font.BOLD, 18));
         this.lblGroceryItems.setHorizontalAlignment(SwingConstants.CENTER);
         this.topPanel.add(this.lblGroceryItems);
 

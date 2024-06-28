@@ -28,5 +28,53 @@
     "price": 3.50,
     "quantity": 5,
     "picFile": "./img/watermelon1.jpg"
+  },
+  {
+    "name": "Chicken Breast",
+    "price": 3.00,
+    "quantity": 5,
+    "picFile": "./img/bonelessChickenBreast.jpg"
+  },
+  {
+    "name": "Eggs Carton",
+    "price": 2.20,
+    "quantity": 5,
+    "picFile": "./img/eggsCarton.jpg"
+  },
+  {
+    "name": "Lays Classic",
+    "price": 1.50,
+    "quantity": 5,
+    "picFile": "./img/laysClassic.jpg"
+  },
+  {
+    "name": "Apple",
+    "price": 0.50,
+    "quantity": 100,
+    "picFile": ""
+  },
+  {
+    "name": "Banana",
+    "price": 0.30,
+    "quantity": 150,
+    "picFile": ""
+  },
+  {
+    "name": "Orange Juice",
+    "price": 3.50,
+    "quantity": 70,
+    "picFile": ""
+  },
+  {
+    "name": "Cheese",
+    "price": 4.00,
+    "quantity": 30,
+    "picFile": ""
+  },
+  {
+    "name": "Pasta",
+    "price": 1.50,
+    "quantity": 120,
+    "picFile": ""
   }
 ]
