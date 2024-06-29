@@ -15,6 +15,7 @@ import java.awt.Dimension;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import java.awt.Font;
 import java.awt.Image;
@@ -22,6 +23,8 @@ import java.awt.Image;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
+
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -42,7 +45,6 @@ public class EditGroceryItem extends JPanel{
 	private JLabel picLabel;
 	private JButton backButton;
 	private JButton saveButton;
-//	private BufferedImage itemPicture;
 	private Image itemPic;
 	private JButton btnChangePic;
 	private JTextField itemName;
@@ -50,6 +52,7 @@ public class EditGroceryItem extends JPanel{
 	private JTextField priceText;
 	private JLabel lblQuantity;
 	private JTextField quantityText;
+	private JLabel lblonlyAddSquare;
 	
 	public EditGroceryItem(MainFrame main, GroceryItem item){
 		this.main = main;
@@ -88,8 +91,13 @@ public class EditGroceryItem extends JPanel{
 		this.middlePanel.add(this.picLabel);
 		
 		this.btnChangePic = new JButton("Change Picture");
+		this.btnChangePic.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				changePic();
+			}
+		});
 		this.btnChangePic.setFont(new Font("Tahoma", Font.BOLD, 15));
-		this.btnChangePic.setBounds(134, 313, 166, 32);
+		this.btnChangePic.setBounds(134, 333, 166, 32);
 		this.middlePanel.add(this.btnChangePic);
 		
 		this.itemName = new JTextField(this.item.getName());
@@ -123,6 +131,12 @@ public class EditGroceryItem extends JPanel{
 		this.quantityText.setBounds(437, 169, 156, 32);
 		this.middlePanel.add(this.quantityText);
 		
+		this.lblonlyAddSquare = new JLabel("*Only Add Square Picture");
+		this.lblonlyAddSquare.setForeground(new Color(255, 0, 51));
+		this.lblonlyAddSquare.setFont(new Font("Tahoma", Font.BOLD, 12));
+		this.lblonlyAddSquare.setBounds(135, 313, 165, 16);
+		this.middlePanel.add(this.lblonlyAddSquare);
+		
 		this.bottomPanel = new JPanel();
 		this.bottomPanel.setBackground(Color.WHITE);
 		this.bottomPanel.setLayout(new BorderLayout(0, 0));
@@ -147,5 +161,50 @@ public class EditGroceryItem extends JPanel{
 	
 	private void back(){
 		this.main.showManagerMenu();
+	}
+	
+	private void changePic(){
+		JFileChooser fileChooser = new JFileChooser();
+		//Only allow jpg
+		fileChooser.setAcceptAllFileFilterUsed(false);
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG Images", "jpg", "jpeg");
+        fileChooser.setFileFilter(filter);
+        
+		int r = fileChooser.showSaveDialog(this);
+		
+		if (r == JFileChooser.APPROVE_OPTION){
+			
+			String selectedFile = fileChooser.getSelectedFile().getAbsolutePath();
+//			System.out.println(selectedFile);
+			String[] fileNameList = selectedFile.split("\\\\"); //f this shit
+			String fileName = fileNameList[fileNameList.length-1];
+//			System.out.println(fileName);
+			
+			String folder = ".\\img";
+//	        System.out.println(folder);
+	        
+			
+			try {
+				BufferedImage originalImage = ImageIO.read(new File(selectedFile));
+				File destinationFile = new File(folder, fileName);
+				
+	            if (!destinationFile.getParentFile().exists()) {
+	            	destinationFile.getParentFile().mkdirs();
+	            }
+	            
+				ImageIO.write(originalImage, "jpg", destinationFile);
+				this.item.setPicFile("./img/" + fileName);
+				this.main.showEditGroceryItem(this.item);
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
+		
+		
+		
 	}
 }
