@@ -44,7 +44,7 @@ public class ManagerMenu extends JPanel{
 	private JLabel lblGroceryItems;
 	private JPanel bottomPanel;
 	private JButton backButton;
-	private JButton cartButton;
+	private JButton createItemButton;
 //	private String[][] items = {
 //            {"Tomato", "$33.48", "./img/tomato.jpg"},
 //            {"Lettuce", "$96.76", "./img/lettuce.jpg"},
@@ -90,12 +90,18 @@ public class ManagerMenu extends JPanel{
             
             //Item Action
     		this.itemButton.setActionCommand(currentItem.getName());
+    		this.itemButton.putClientProperty("object", currentItem); //associate each button to each GroceryItem object
         	this.itemButton.addActionListener(new ActionListener(){
         		@Override
         		public void actionPerformed(ActionEvent e){
         			//TO CHANGE
+//        			System.out.println(e.getSource());
+        			JButton sourceBtn = (JButton) e.getSource();
+        			GroceryItem object = (GroceryItem) sourceBtn.getClientProperty("object");
+//        			System.out.println(object);
+        			
         			String buttonName = e.getActionCommand();
-        			showItemScreen(buttonName);
+        			showItemScreen(buttonName, object);
         		}
         	});
 
@@ -134,8 +140,8 @@ public class ManagerMenu extends JPanel{
         this.topPanel = new JPanel();
 
         this.lblGroceryItems = new JLabel("Grocery Items");
-        this.lblGroceryItems.setPreferredSize(new Dimension(130, 50));
-        this.lblGroceryItems.setFont(new Font("Tahoma", Font.BOLD, 18));
+        this.lblGroceryItems.setPreferredSize(new Dimension(200, 60));
+        this.lblGroceryItems.setFont(new Font("Tahoma", Font.BOLD, 20));
         this.lblGroceryItems.setHorizontalAlignment(SwingConstants.CENTER);
         this.topPanel.add(this.lblGroceryItems);
 
@@ -160,10 +166,10 @@ public class ManagerMenu extends JPanel{
     	});
         this.bottomPanel.add(this.backButton, BorderLayout.WEST);
 
-        this.cartButton = new JButton("Create Item");
-        this.cartButton.setFont(new Font("Tahoma", Font.BOLD, 15));
-        this.cartButton.setPreferredSize(new Dimension(140, 40));
-        this.bottomPanel.add(this.cartButton, BorderLayout.EAST);
+        this.createItemButton = new JButton("Create Item");
+        this.createItemButton.setFont(new Font("Tahoma", Font.BOLD, 15));
+        this.createItemButton.setPreferredSize(new Dimension(140, 40));
+        this.bottomPanel.add(this.createItemButton, BorderLayout.EAST);
         
         this.add(this.bottomPanel, BorderLayout.SOUTH);
         
@@ -171,8 +177,9 @@ public class ManagerMenu extends JPanel{
 
 	}
     
-	private void showItemScreen(String name){
+	private void showItemScreen(String name, GroceryItem item){
 		System.out.println(name);
+		this.main.showEditGroceryItem(item);
 	}
 	
 	private void back(){

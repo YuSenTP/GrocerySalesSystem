@@ -7,6 +7,8 @@ import java.awt.CardLayout;
 
 import javax.swing.JFrame;
 
+import data.GroceryItem;
+import gui.EditGroceryItem;
 import gui.ManagerHome;
 import gui.ManagerMenu;
 
@@ -40,7 +42,7 @@ public class MainFrame extends JFrame {
 		return this.cont;
 	}
 	
-	public void showLoginScreen(){
+	public void showLoginScreen(){ //p1
 		
 	}
 	
@@ -54,6 +56,12 @@ public class MainFrame extends JFrame {
 		ManagerMenu p3 = new ManagerMenu(this);
 		this.add(p3, "ManagerMenu");
 		this.card.show(this.getContentPane(), "ManagerMenu");
+	}
+	
+	public void showEditGroceryItem(GroceryItem item){
+		EditGroceryItem p4 = new EditGroceryItem(this, item);
+		this.add(p4, "EditItem");
+		this.card.show(this.getContentPane(), "EditItem");
 	}
 	
 	public static void main(String[] args){
