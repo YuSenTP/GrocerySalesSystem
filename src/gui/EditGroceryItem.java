@@ -53,8 +53,10 @@ public class EditGroceryItem extends JPanel{
 	private JLabel lblQuantity;
 	private JTextField quantityText;
 	private JLabel lblonlyAddSquare;
+	private JButton btnDeleteItem;
 	
-	public EditGroceryItem(MainFrame main, GroceryItem item){
+	//need create a current item variable fuckkkkkkk
+	public EditGroceryItem(MainFrame main, GroceryItem item){ //:(( Need change cannot edit item through gui fuckkkkk!!!!
 		this.main = main;
 		this.item = item;
 //		System.out.println(this.item.getName());
@@ -97,7 +99,7 @@ public class EditGroceryItem extends JPanel{
 			}
 		});
 		this.btnChangePic.setFont(new Font("Tahoma", Font.BOLD, 15));
-		this.btnChangePic.setBounds(134, 333, 166, 32);
+		this.btnChangePic.setBounds(134, 333, 166, 36);
 		this.middlePanel.add(this.btnChangePic);
 		
 		this.itemName = new JTextField(this.item.getName());
@@ -137,6 +139,12 @@ public class EditGroceryItem extends JPanel{
 		this.lblonlyAddSquare.setBounds(135, 313, 165, 16);
 		this.middlePanel.add(this.lblonlyAddSquare);
 		
+		this.btnDeleteItem = new JButton("Delete Item");
+		this.btnDeleteItem.setForeground(new Color(255, 0, 51));
+		this.btnDeleteItem.setFont(new Font("Tahoma", Font.BOLD, 15));
+		this.btnDeleteItem.setBounds(585, 330, 128, 39);
+		this.middlePanel.add(this.btnDeleteItem);
+		
 		this.bottomPanel = new JPanel();
 		this.bottomPanel.setBackground(Color.WHITE);
 		this.bottomPanel.setLayout(new BorderLayout(0, 0));
@@ -152,6 +160,11 @@ public class EditGroceryItem extends JPanel{
 		this.bottomPanel.add(this.backButton, BorderLayout.WEST);
 		
 		this.saveButton = new JButton("Save");
+		this.saveButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				save();
+			}
+		});
         this.saveButton.setFont(new Font("Tahoma", Font.BOLD, 15));
         this.saveButton.setPreferredSize(new Dimension(140, 40));
 		this.bottomPanel.add(this.saveButton, BorderLayout.EAST);
@@ -199,12 +212,11 @@ public class EditGroceryItem extends JPanel{
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
-			
+			}		
 		}
-		
-		
-		
+	}
+	
+	private void save(){
 		
 	}
 }
