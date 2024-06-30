@@ -9,8 +9,10 @@ import javax.swing.JFrame;
 
 import data.GroceryItem;
 import gui.EditGroceryItem;
+import gui.LoginScreen;
 import gui.ManagerHome;
 import gui.ManagerMenu;
+import gui.staffMenu;
 
 /**
  * @author Yu Sen
@@ -32,7 +34,7 @@ public class MainFrame extends JFrame {
 		this.setLayout(this.card);
 		
 		// Add first method (e.g. showLoginScreen)
-		showManagerHome();
+		showLoginScreen();
 		
 		this.setVisible(true);
 		
@@ -42,7 +44,10 @@ public class MainFrame extends JFrame {
 		return this.cont;
 	}
 	
-	public void showLoginScreen(){ //p1
+	public void showLoginScreen(){ 
+		LoginScreen p1 = new LoginScreen(this);
+		this.add(p1, "LoginScreen");
+		this.card.show(this.getContentPane(), "LoginScreen");//p1
 		
 	}
 	
@@ -66,6 +71,14 @@ public class MainFrame extends JFrame {
 	
 	public static void main(String[] args){
 		MainFrame gui = new MainFrame();
+	}
+
+	public void showStaffMenu() {
+		staffMenu p5 = new staffMenu(this);
+		this.add(p5, "StaffMenu");
+		this.card.show(this.getContentPane(), "StaffMenu");
+		// TODO Auto-generated method stub
+		
 	}
 
 }

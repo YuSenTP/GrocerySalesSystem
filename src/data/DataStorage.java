@@ -21,6 +21,7 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 	private Vector<Order> orders;
 	private Vector<Staff> staffs;
 	private Vector<Manager> managers;
+	Vector<User> storage = new Vector<User>();
 	
 	public DataStorage(){
 		this.inventory = new Vector<GroceryItem>();
@@ -97,6 +98,17 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 		} catch (IOException e) {
 			e.printStackTrace();
 		} 
+	}
+
+	public User getUser(String n) {
+		for (int i = 0 ; i <storage.size(); i++)
+		{
+			User temp = storage.get(i);
+			if (temp.getName().equals(n)){
+				return temp;
+			}
+		}
+		return null;
 	}
 
 }
