@@ -45,6 +45,7 @@ public class ManagerMenu extends JPanel{
 	private JPanel bottomPanel;
 	private JButton backButton;
 	private JButton createItemButton;
+	private GroceryItem currentItem;
 //	private String[][] items = {
 //            {"Tomato", "$33.48", "./img/tomato.jpg"},
 //            {"Lettuce", "$96.76", "./img/lettuce.jpg"},
@@ -78,7 +79,7 @@ public class ManagerMenu extends JPanel{
         this.gridPanel.setBackground(UIManager.getColor("OptionPane.background"));
         
         for (int i = 0; i < this.inventory.size(); i++) {
-        	GroceryItem currentItem = this.inventory.elementAt(i);
+        	this.currentItem = this.inventory.elementAt(i);
         	
             this.itemPanel = new JPanel(new BorderLayout());
             
@@ -89,8 +90,8 @@ public class ManagerMenu extends JPanel{
     		this.itemButton.setPreferredSize(new Dimension(213, 143));          
             
             //Item Action
-    		this.itemButton.setActionCommand(currentItem.getName());
-    		this.itemButton.putClientProperty("object", currentItem); //associate each button to each GroceryItem object
+    		this.itemButton.setActionCommand(this.currentItem.getName());
+    		this.itemButton.putClientProperty("object", this.currentItem); //associate each button to each GroceryItem object
         	this.itemButton.addActionListener(new ActionListener(){
         		@Override
         		public void actionPerformed(ActionEvent e){
@@ -102,24 +103,25 @@ public class ManagerMenu extends JPanel{
         			
         			String buttonName = e.getActionCommand();
         			showItemScreen(buttonName, object);
+//        			main.getController();
         		}
         	});
 
             //Item Pic
-            this.itemPic = new ImageIcon(currentItem.getPicFile());
+            this.itemPic = new ImageIcon(this.currentItem.getPicFile());
             Image img = this.itemPic.getImage() ;  
     		Image newimg = img.getScaledInstance( 90, 90,  java.awt.Image.SCALE_SMOOTH ) ;  
     		this.itemPic = new ImageIcon( newimg );
     		this.itemButton.setIcon(this.itemPic);
             
         	//Item Name
-            this.nameLabel = new JLabel(currentItem.getName());
+            this.nameLabel = new JLabel(this.currentItem.getName());
             this.nameLabel.setHorizontalAlignment(SwingConstants.CENTER);
             this.nameLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
             this.itemButton.add(this.nameLabel, BorderLayout.NORTH);
             
             //Item Price
-            this.priceLabel = new JLabel("$" + currentItem.getPrice().toString());
+            this.priceLabel = new JLabel("$" + this.currentItem.getPrice().toString());
             this.priceLabel.setHorizontalAlignment(SwingConstants.CENTER);
             this.priceLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
             this.itemButton.add(this.priceLabel, BorderLayout.SOUTH);

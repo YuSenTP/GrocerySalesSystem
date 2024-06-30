@@ -58,7 +58,7 @@ public class MainFrame extends JFrame {
 		this.card.show(this.getContentPane(), "ManagerMenu");
 	}
 	
-	public void showEditGroceryItem(GroceryItem item){
+	public void showEditGroceryItem(GroceryItem item){ //does this follow MVC?
 		EditGroceryItem p4 = new EditGroceryItem(this, item);
 		this.add(p4, "EditItem");
 		this.card.show(this.getContentPane(), "EditItem");

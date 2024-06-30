@@ -22,4 +22,18 @@ public class Controller {
 	public Vector<GroceryItem> getInventory(){
 		return ds.getInventory();
 	}
+	
+	
+//	public void setItemPrice(GroceryItem item, String price){
+//		int i = this.ds.getInventory().indexOf(item);
+//		
+//	}
+//	
+//	public void setItemQuantity(GroceryItem item, String num){
+//		
+//	}
+//	
+//	public void setItemName(GroceryItem item, String name){
+//		
+//	}
 }

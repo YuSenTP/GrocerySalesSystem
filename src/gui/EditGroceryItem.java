@@ -13,6 +13,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -29,6 +30,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 
@@ -55,8 +57,8 @@ public class EditGroceryItem extends JPanel{
 	private JLabel lblonlyAddSquare;
 	private JButton btnDeleteItem;
 	
-	//need create a current item variable fuckkkkkkk
-	public EditGroceryItem(MainFrame main, GroceryItem item){ //:(( Need change cannot edit item through gui fuckkkkk!!!!
+	
+	public EditGroceryItem(MainFrame main, GroceryItem item){ 
 		this.main = main;
 		this.item = item;
 //		System.out.println(this.item.getName());
@@ -217,6 +219,29 @@ public class EditGroceryItem extends JPanel{
 	}
 	
 	private void save(){
+//		System.out.println(this.item.getName());
+/*		this.main.getController().setItemName(this.item, this.itemName.getText());
+		this.main.getController().setItemPrice(this.item, this.priceText.getText());
+		this.main.getController().setItemQuantity(this.item, this.quantityText.getText());*/
 		
+		try{
+			this.item.setName(this.itemName.getText());
+			if (this.priceText.getText().startsWith("$")){
+				this.item.setPrice(new BigDecimal(this.priceText.getText().substring(1)));
+			}
+			else{
+				this.item.setPrice(new BigDecimal(this.priceText.getText()));
+			}
+			this.item.setQuantity(Integer.valueOf(this.quantityText.getText()));
+			JLabel label = new JLabel("Success!");
+			label.setFont(new Font("Tahoma", Font.BOLD, 15));
+			JOptionPane.showMessageDialog(this, label, "Save", JOptionPane.INFORMATION_MESSAGE);
+			this.main.showManagerMenu();
+		}catch (Exception e) {
+//			e.printStackTrace();
+			JLabel label = new JLabel("Error! Enter Correct Values!");
+			label.setFont(new Font("Tahoma", Font.BOLD, 14));
+			JOptionPane.showMessageDialog(this, label, "Save", JOptionPane.WARNING_MESSAGE);
+		}
 	}
 }
