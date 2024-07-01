@@ -24,7 +24,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
 
-public class staffMenu extends JPanel{
+public class StaffMenu extends JPanel{
     private MainFrame main;
     private Vector<GroceryItem> inventory;
     private JPanel gridPanel;
@@ -40,7 +40,7 @@ public class staffMenu extends JPanel{
     private JButton logoutButton;
     private JButton cartButton;
 
-    public staffMenu(MainFrame main){
+    public StaffMenu(MainFrame main){
         this.main = main;
         this.main.setTitle("Joy MiniMart - Staff Menu");
         this.inventory = this.main.getController().getInventory();
@@ -138,7 +138,7 @@ public class staffMenu extends JPanel{
             @Override
             public void actionPerformed(ActionEvent e){
                 JOptionPane.showMessageDialog(null, "Logged Out Successfully", "Notification", JOptionPane.INFORMATION_MESSAGE);
-                staffMenu.this.main.showLoginScreen();
+                StaffMenu.this.main.showLoginScreen();
             }
         });
         this.bottomPanel.add(this.logoutButton, BorderLayout.WEST);

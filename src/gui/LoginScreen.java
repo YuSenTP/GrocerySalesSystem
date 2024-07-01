@@ -74,7 +74,7 @@ public class LoginScreen extends JPanel{
 		add(this.managerSelect);
 		btnGroup.add(this.managerSelect);
 		
-		this.staffSelect.setSelected(true);
+		this.staffSelect.setSelected(true); //pre-select Staff radiobutton
 		
 		JCheckBox chckbxShowPassword = new JCheckBox("Show Password");
 		chckbxShowPassword.addActionListener(new ActionListener() {
