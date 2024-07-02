@@ -13,6 +13,7 @@ import gui.EditGroceryItem;
 import gui.LoginScreen;
 import gui.ManagerHome;
 import gui.ManagerMenu;
+import gui.ManagerSales;
 import gui.StaffMenu;
 
 /**
@@ -75,6 +76,12 @@ public class MainFrame extends JFrame {
 		CreateGroceryItem p6 = new CreateGroceryItem(this);
 		this.add(p6, "CreateItem");
 		this.card.show(this.getContentPane(), "CreateItem");
+	}
+	
+	public void showSales(){
+		ManagerSales p7 = new ManagerSales(this);
+		this.add(p7, "Sales");
+		this.card.show(this.getContentPane(), "Sales");
 	}
 	
 	public static void main(String[] args){

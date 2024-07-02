@@ -80,7 +80,7 @@ public class CreateGroceryItem extends JPanel{
 		this.add(this.lblEditItem, BorderLayout.NORTH);
 		
 		this.middlePanel = new JPanel();
-		add(this.middlePanel, BorderLayout.CENTER);
+		this.add(this.middlePanel, BorderLayout.CENTER);
 		this.middlePanel.setLayout(null);
 
 		
@@ -310,13 +310,20 @@ public class CreateGroceryItem extends JPanel{
 //	            
 				ImageIO.write(originalImage, "jpg", destinationFile);
 				this.filePath = "./img/" + fileName;
+				
+				this.main.getController().createGroceryItem(this.itemName.getText(), this.priceText.getText(), this.quantityText.getText(), this.filePath);
+				
+				JLabel label = new JLabel("Item Created!");
+				label.setFont(new Font("Tahoma", Font.BOLD, 14));
+				JOptionPane.showMessageDialog(this, label, "Update Item", JOptionPane.INFORMATION_MESSAGE);
+				this.main.showManagerMenu();
 			}catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
 			
-			this.main.getController().createGroceryItem(this.itemName.getText(), this.priceText.getText(), this.quantityText.getText(), this.filePath);
+			
 		}
 	}
 }

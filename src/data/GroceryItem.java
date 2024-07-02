@@ -18,7 +18,7 @@ public class GroceryItem {
 	}
 	
 	public GroceryItem(String name, String price, String quantity, String picFile) { 
-		this.price = new BigDecimal(price);
+		this.price = new BigDecimal(price); // Took in as a string as the double will truncate the .00 to .0
 		this.name = name;
 		this.quantity = Integer.valueOf(quantity);
 		this.picFile = picFile;
