@@ -142,6 +142,11 @@ public class EditGroceryItem extends JPanel{
 		this.middlePanel.add(this.lblonlyAddSquare);
 		
 		this.btnDeleteItem = new JButton("Delete Item");
+		this.btnDeleteItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				deleteItem();
+			}
+		});
 		this.btnDeleteItem.setForeground(new Color(255, 0, 51));
 		this.btnDeleteItem.setFont(new Font("Tahoma", Font.BOLD, 15));
 		this.btnDeleteItem.setBounds(585, 330, 128, 39);
@@ -191,7 +196,7 @@ public class EditGroceryItem extends JPanel{
 			
 			String selectedFile = fileChooser.getSelectedFile().getAbsolutePath();
 //			System.out.println(selectedFile);
-			String[] fileNameList = selectedFile.split("\\\\"); //f this shit
+			String[] fileNameList = selectedFile.split("\\\\"); 
 			String fileName = fileNameList[fileNameList.length-1];
 //			System.out.println(fileName);
 			
@@ -209,6 +214,10 @@ public class EditGroceryItem extends JPanel{
 	            
 				ImageIO.write(originalImage, "jpg", destinationFile);
 				this.item.setPicFile("./img/" + fileName);
+				
+				JLabel label = new JLabel("ItemPic Updated!");
+				label.setFont(new Font("Tahoma", Font.BOLD, 14));
+				JOptionPane.showMessageDialog(this, label, "Update Item", JOptionPane.INFORMATION_MESSAGE);
 				this.main.showEditGroceryItem(this.item);
 				
 			} catch (IOException e) {
@@ -223,19 +232,40 @@ public class EditGroceryItem extends JPanel{
 /*		this.main.getController().setItemName(this.item, this.itemName.getText());
 		this.main.getController().setItemPrice(this.item, this.priceText.getText());
 		this.main.getController().setItemQuantity(this.item, this.quantityText.getText());*/
-		
+		/*
 		try{
 			this.item.setName(this.itemName.getText());
 			if (this.priceText.getText().startsWith("$")){
 				this.item.setPrice(new BigDecimal(this.priceText.getText().substring(1)));
+				
 			}
 			else{
 				this.item.setPrice(new BigDecimal(this.priceText.getText()));
 			}
 			this.item.setQuantity(Integer.valueOf(this.quantityText.getText()));
-			JLabel label = new JLabel("Success!");
-			label.setFont(new Font("Tahoma", Font.BOLD, 15));
-			JOptionPane.showMessageDialog(this, label, "Save", JOptionPane.INFORMATION_MESSAGE);
+			JLabel label = new JLabel("Item Updated Successfully");
+			label.setFont(new Font("Tahoma", Font.BOLD, 14));
+			JOptionPane.showMessageDialog(this, label, "Update Item", JOptionPane.INFORMATION_MESSAGE);
+			this.main.showManagerMenu();
+		}catch (Exception e) {
+//			e.printStackTrace();
+			JLabel label = new JLabel("Error! Enter Correct Values!");
+			label.setFont(new Font("Tahoma", Font.BOLD, 14));
+			JOptionPane.showMessageDialog(this, label, "Save", JOptionPane.WARNING_MESSAGE);
+		}*/
+		try{
+			this.main.getController().editGroceryItemName(this.item, this.itemName.getText());;
+			if (this.priceText.getText().startsWith("$")){
+				this.main.getController().editGroceryItemPrice(this.item, this.priceText.getText().substring(1));
+				
+			}
+			else{
+				this.main.getController().editGroceryItemPrice(this.item, this.priceText.getText());
+			}
+			this.main.getController().editGroceryItemQuantity(this.item, this.quantityText.getText());
+			JLabel label = new JLabel("Item Updated Successfully");
+			label.setFont(new Font("Tahoma", Font.BOLD, 14));
+			JOptionPane.showMessageDialog(this, label, "Update Item", JOptionPane.INFORMATION_MESSAGE);
 			this.main.showManagerMenu();
 		}catch (Exception e) {
 //			e.printStackTrace();
@@ -243,5 +273,15 @@ public class EditGroceryItem extends JPanel{
 			label.setFont(new Font("Tahoma", Font.BOLD, 14));
 			JOptionPane.showMessageDialog(this, label, "Save", JOptionPane.WARNING_MESSAGE);
 		}
+		
+		
+	}
+	
+	private void deleteItem(){
+		this.main.getController().deleteGroceryItem(this.item);
+		JLabel label = new JLabel("Item Deleted Successfully");
+		label.setFont(new Font("Tahoma", Font.BOLD, 14));
+		JOptionPane.showMessageDialog(this, label, "Delete Item", JOptionPane.INFORMATION_MESSAGE);
+		this.main.showManagerMenu();
 	}
 }

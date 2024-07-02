@@ -169,6 +169,11 @@ public class ManagerMenu extends JPanel{
         this.bottomPanel.add(this.backButton, BorderLayout.WEST);
 
         this.createItemButton = new JButton("Create Item");
+        this.createItemButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		createItem();
+        	}
+        });
         this.createItemButton.setFont(new Font("Tahoma", Font.BOLD, 15));
         this.createItemButton.setPreferredSize(new Dimension(140, 40));
         this.bottomPanel.add(this.createItemButton, BorderLayout.EAST);
@@ -186,6 +191,10 @@ public class ManagerMenu extends JPanel{
 	
 	private void back(){
 		this.main.showManagerHome();
+	}
+	
+	private void createItem(){
+		this.main.showCreateItem();
 	}
 	
 

@@ -8,6 +8,7 @@ import java.awt.CardLayout;
 import javax.swing.JFrame;
 
 import data.GroceryItem;
+import gui.CreateGroceryItem;
 import gui.EditGroceryItem;
 import gui.LoginScreen;
 import gui.ManagerHome;
@@ -35,6 +36,7 @@ public class MainFrame extends JFrame {
 		
 		// Add first method (e.g. showLoginScreen)
 		showLoginScreen();
+//		showManagerHome();
 		
 		this.setVisible(true);
 		
@@ -67,6 +69,12 @@ public class MainFrame extends JFrame {
 		EditGroceryItem p4 = new EditGroceryItem(this, item);
 		this.add(p4, "EditItem");
 		this.card.show(this.getContentPane(), "EditItem");
+	}
+	
+	public void showCreateItem(){
+		CreateGroceryItem p6 = new CreateGroceryItem(this);
+		this.add(p6, "CreateItem");
+		this.card.show(this.getContentPane(), "CreateItem");
 	}
 	
 	public static void main(String[] args){

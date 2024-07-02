@@ -120,6 +120,7 @@ public class ManagerHome extends JPanel{
 	
 	private void logOut(){
 		System.out.println("LogOut");
+		this.main.showLoginScreen();
 	}
 
 }

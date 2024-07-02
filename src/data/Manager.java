@@ -14,33 +14,33 @@ public class Manager extends User {
 		super(name, password);
 	 }
 	
-	public void createGroceryItem(String itemName, double price, int quantity, String picFile) { 
-		GroceryItem temp = new GroceryItem(itemName, price, quantity, picFile);
-		Main.inventory.add(temp);
-	 }
-
-	public void editGroceryItem(GroceryItem item, double price) { 
-		int index = Main.inventory.indexOf(item);
-		GroceryItem temp = Main.inventory.get(index);
-		BigDecimal price1 = BigDecimal.valueOf(price);
-		temp.setPrice(price1);
-	 }
-	
-	public void editGroceryItem(GroceryItem item, String name) { 
-		int index = Main.inventory.indexOf(item);
-		GroceryItem temp = Main.inventory.get(index);
-		temp.setName(name);
-	 }
-	
-	public void editGroceryItem(GroceryItem item, int quantity) { 
-		int index = Main.inventory.indexOf(item);
-		GroceryItem temp = Main.inventory.get(index);
-		temp.setQuantity(quantity);
-	 }
-	
-	public void deleteGroceryItem(GroceryItem item) { 
-		Main.inventory.remove(item);
-	 }
+//	public void createGroceryItem(String itemName, double price, int quantity, String picFile) { 
+//		GroceryItem temp = new GroceryItem(itemName, price, quantity, picFile);
+//		Main.inventory.add(temp);
+//	 }
+//
+//	public void editGroceryItem(GroceryItem item, double price) { 
+//		int index = Main.inventory.indexOf(item);
+//		GroceryItem temp = Main.inventory.get(index);
+//		BigDecimal price1 = BigDecimal.valueOf(price);
+//		temp.setPrice(price1);
+//	 }
+//	
+//	public void editGroceryItem(GroceryItem item, String name) { 
+//		int index = Main.inventory.indexOf(item);
+//		GroceryItem temp = Main.inventory.get(index);
+//		temp.setName(name);
+//	 }
+//	
+//	public void editGroceryItem(GroceryItem item, int quantity) { 
+//		int index = Main.inventory.indexOf(item);
+//		GroceryItem temp = Main.inventory.get(index);
+//		temp.setQuantity(quantity);
+//	 }
+//	
+//	public void deleteGroceryItem(GroceryItem item) { 
+//		Main.inventory.remove(item);
+//	 }
 	
 	public void orderDetails(int orderNum) { 
 		// TODO Auto-generated method

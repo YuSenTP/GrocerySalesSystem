@@ -12,7 +12,7 @@ public class Main {
 	public static Vector<Staff> staffs = new Vector();
 	public static Vector<Manager> managers = new Vector();
 	
-	
+	/*
 	public static void main(String[] args){
 		// TODO Auto-generated method stub
 		ReadWriteFile.readFile();
@@ -80,6 +80,6 @@ public class Main {
 		}
 	}
 	
-	
+	*/
 
 }

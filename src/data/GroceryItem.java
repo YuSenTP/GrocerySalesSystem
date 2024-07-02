@@ -1,6 +1,7 @@
 package data;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
@@ -16,10 +17,10 @@ public class GroceryItem {
 		
 	}
 	
-	public GroceryItem(String name, double price, int quantity, String picFile) { 
-		this.price = BigDecimal.valueOf(price);
+	public GroceryItem(String name, String price, String quantity, String picFile) { 
+		this.price = new BigDecimal(price);
 		this.name = name;
-		this.quantity = quantity;
+		this.quantity = Integer.valueOf(quantity);
 		this.picFile = picFile;
 	 }
 	
