@@ -74,6 +74,8 @@ public class LoginScreen extends JPanel{
 		add(this.managerSelect);
 		btnGroup.add(this.managerSelect);
 		
+		this.staffSelect.setSelected(true); //pre-select Staff radiobutton
+		
 		JCheckBox chckbxShowPassword = new JCheckBox("Show Password");
 		chckbxShowPassword.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -101,9 +103,9 @@ public class LoginScreen extends JPanel{
 			else if (managerSelect.isSelected()) {
 				main.showManagerHome();
 		}
-			else{
-	            JOptionPane.showMessageDialog(null, " Login Unsuccessful, Please select Staff or Manager", "Notification", JOptionPane.ERROR_MESSAGE);
-			}
+//			else{
+//	            JOptionPane.showMessageDialog(null, " Login Unsuccessful, Please select Staff or Manager", "Notification", JOptionPane.ERROR_MESSAGE);
+//			}
 		}
 //		else {
 //            JOptionPane.showMessageDialog(null, " Login Unsuccessful ", "Notification", JOptionPane.ERROR_MESSAGE);

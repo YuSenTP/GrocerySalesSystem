@@ -13,7 +13,7 @@ import gui.EditGroceryItem;
 import gui.LoginScreen;
 import gui.ManagerHome;
 import gui.ManagerMenu;
-import gui.staffMenu;
+import gui.StaffMenu;
 
 /**
  * @author Yu Sen
@@ -82,7 +82,7 @@ public class MainFrame extends JFrame {
 	}
 
 	public void showStaffMenu() {
-		staffMenu p5 = new staffMenu(this);
+		StaffMenu p5 = new StaffMenu(this);
 		this.add(p5, "StaffMenu");
 		this.card.show(this.getContentPane(), "StaffMenu");
 		// TODO Auto-generated method stub
