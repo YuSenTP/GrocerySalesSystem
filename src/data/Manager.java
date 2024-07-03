@@ -78,7 +78,7 @@ public class Manager extends User {
 
 
 	public void saleSummary() { // show orders and each other total + total number of orders and total sales
-		BigDecimal totalSales = BigDecimal.ZERO;;
+		BigDecimal totalSales = BigDecimal.ZERO;
 		if (Main.orders.isEmpty()){
 			System.out.println("No Orders Recorded");
 		}

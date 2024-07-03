@@ -111,7 +111,7 @@ public class ManagerMenu extends JPanel{
             this.itemPic = new ImageIcon(this.currentItem.getPicFile());
             Image img = this.itemPic.getImage() ;  
     		Image newimg = img.getScaledInstance( 90, 90,  java.awt.Image.SCALE_SMOOTH ) ;  
-    		this.itemPic = new ImageIcon( newimg );
+    		this.itemPic = new ImageIcon(newimg);
     		this.itemButton.setIcon(this.itemPic);
             
         	//Item Name

@@ -4,16 +4,20 @@
 package controller;
 
 import java.awt.CardLayout;
+import java.awt.Image;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 
 import data.GroceryItem;
+import data.Order;
 import gui.CreateGroceryItem;
 import gui.EditGroceryItem;
 import gui.LoginScreen;
 import gui.ManagerHome;
 import gui.ManagerMenu;
 import gui.ManagerSales;
+import gui.OrderDetails;
 import gui.StaffMenu;
 
 /**
@@ -28,6 +32,8 @@ public class MainFrame extends JFrame {
 		this.setTitle("Joy MiniMart");
 		this.setSize(750, 550);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Image icon = Toolkit.getDefaultToolkit().getImage("./img/ShoppingCart.png");
+		this.setIconImage(icon);
 //		setResizable(false);
 		
 		// Instantiation of controller and card
@@ -38,6 +44,7 @@ public class MainFrame extends JFrame {
 		// Add first method (e.g. showLoginScreen)
 		showLoginScreen();
 //		showManagerHome();
+//		showSales();
 		
 		this.setVisible(true);
 		
@@ -82,6 +89,12 @@ public class MainFrame extends JFrame {
 		ManagerSales p7 = new ManagerSales(this);
 		this.add(p7, "Sales");
 		this.card.show(this.getContentPane(), "Sales");
+	}
+	
+	public void showOrderDetails(Order order){ //does this follow MVC?
+		OrderDetails p8 = new OrderDetails(this, order);
+		this.add(p8, "OrderDetails");
+		this.card.show(this.getContentPane(), "OrderDetails");
 	}
 	
 	public static void main(String[] args){

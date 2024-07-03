@@ -103,6 +103,7 @@ public class ManagerHome extends JPanel{
 		}
 		else if (name == "Sales"){
 			System.out.println("Sales");
+			this.main.showSales();
 		}
 		else if (name == "Inventory"){
 			System.out.println("Inventory");

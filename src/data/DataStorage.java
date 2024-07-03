@@ -68,7 +68,7 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 	         );
 	         
 	         this.orders = objectMapper.readValue(
-	                 new File("./src/JsonReadWrite/emptyorder.json"),
+	                 new File("./src/JsonReadWrite/order.json"),
 	                 new TypeReference<Vector<Order>>(){}
 	         );
 

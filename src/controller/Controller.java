@@ -9,6 +9,7 @@ import java.util.Vector;
 import data.DataStorage;
 import data.GroceryItem;
 import data.Main;
+import data.Order;
 import data.User;
 
 /**
@@ -22,37 +23,58 @@ public class Controller {
 		 this.ds = new DataStorage();
 	}
 	
+	public Vector<Order> getOrders(){
+		return ds.getOrders();
+	}
+	
 	public Vector<GroceryItem> getInventory(){
 		return ds.getInventory();
 	}
 	
-
+	//Manager
 	public void createGroceryItem(String itemName, String price, String quantity, String picFile) { 
 		GroceryItem temp = new GroceryItem(itemName, price, quantity, picFile);
 		this.getInventory().add(temp);
 	 }
-
+	//Manager
 	public void editGroceryItemPrice(GroceryItem item, String price) { 
 		int index = this.getInventory().indexOf(item);
 		GroceryItem temp = this.getInventory().get(index);
 		temp.setPrice(new BigDecimal(price));
 	 }
-	
+	//Manager
 	public void editGroceryItemName(GroceryItem item, String name) { 
 		int index = this.getInventory().indexOf(item);
 		GroceryItem temp = this.getInventory().get(index);
 		temp.setName(name);
 	 }
-	
+	//Manager
 	public void editGroceryItemQuantity(GroceryItem item, String quantity) { 
 		int index = this.getInventory().indexOf(item);
 		GroceryItem temp = this.getInventory().get(index);
 		temp.setQuantity(Integer.valueOf(quantity));
 	 }
-	
+	//Manager
 	public void deleteGroceryItem(GroceryItem item) { 
 		this.getInventory().remove(item);
 	 }
+	//Manager
+	public BigDecimal getTotalOrderCost(){
+		Vector<Order> tempOrders = this.getOrders();
+		BigDecimal totalSales = BigDecimal.ZERO;
+		
+		if (tempOrders.isEmpty()){
+			return BigDecimal.ZERO;
+		}
+		else{
+			for(int i = 0; i < tempOrders.size(); i++){
+				Order order = tempOrders.get(i);
+				totalSales = totalSales.add(order.getTotalCost());
+//				System.out.println(totalSales);
+			}
+			return totalSales;
+		}
+	}
 	
 	public boolean verifyUser(String n, String pwd) {
 		String real = pwd;

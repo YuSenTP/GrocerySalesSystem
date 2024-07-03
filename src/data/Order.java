@@ -52,7 +52,7 @@ public class Order {
 //		 this.counter = counter; 
 //	}
 
-	public BigDecimal calculateTotalCost() { 
+	public BigDecimal calculateTotalCost() { //Gab to change --> total cost to be calculated in controller and passed to this order via settotalcost (setter)
 		totalCost = BigDecimal.ZERO; //!
 		for(int i = 0; i < groceryItems.size(); i++){
 			BigDecimal groceryCost = groceryItems.get(i).getPrice().multiply(BigDecimal.valueOf(groceryItems.get(i).getQuantity()));

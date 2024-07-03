@@ -271,7 +271,7 @@ public class EditGroceryItem extends JPanel{
 //			e.printStackTrace();
 			JLabel label = new JLabel("Error! Enter Correct Values!");
 			label.setFont(new Font("Tahoma", Font.BOLD, 14));
-			JOptionPane.showMessageDialog(this, label, "Save", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(this, label, "Save", JOptionPane.ERROR_MESSAGE);
 		}
 		
 		

@@ -291,8 +291,19 @@ public class CreateGroceryItem extends JPanel{
 	private void save(){
 		if (this.filePath == null || this.itemName.getText().contentEquals("Enter Name") || this.priceText.getText().contentEquals("Enter Price") || this.quantityText.getText().contentEquals("Enter Quantity")){
 			System.out.println("Error");
+			JLabel label = new JLabel("Missing Values! Try Again!");
+			label.setFont(new Font("Tahoma", Font.BOLD, 14));
+			JOptionPane.showMessageDialog(this, label, "Update Item", JOptionPane.ERROR_MESSAGE);
 		}
 		else{
+			String finalPrice;
+			if (this.priceText.getText().startsWith("$")){
+				finalPrice = priceText.getText().substring(1);
+				
+			}
+			else{
+				finalPrice = priceText.getText();
+			}
 			System.out.println("Success");
 			String[] fileNameList = this.filePath.split("\\\\"); 
 			String fileName = fileNameList[fileNameList.length-1];
@@ -301,6 +312,7 @@ public class CreateGroceryItem extends JPanel{
 			String folder = ".\\img";
 //	        System.out.println(folder);
 			try{
+				
 				BufferedImage originalImage = ImageIO.read(new File(this.filePath));
 				File destinationFile = new File(folder, fileName);
 				
@@ -308,18 +320,22 @@ public class CreateGroceryItem extends JPanel{
 	            	destinationFile.getParentFile().mkdirs();
 	            }
 //	            
-				ImageIO.write(originalImage, "jpg", destinationFile);
-				this.filePath = "./img/" + fileName;
 				
-				this.main.getController().createGroceryItem(this.itemName.getText(), this.priceText.getText(), this.quantityText.getText(), this.filePath);
+				String finalPath = "./img/" + fileName;
+				
+				this.main.getController().createGroceryItem(this.itemName.getText(), finalPrice, this.quantityText.getText(), finalPath);
+				ImageIO.write(originalImage, "jpg", destinationFile);
 				
 				JLabel label = new JLabel("Item Created!");
 				label.setFont(new Font("Tahoma", Font.BOLD, 14));
 				JOptionPane.showMessageDialog(this, label, "Update Item", JOptionPane.INFORMATION_MESSAGE);
 				this.main.showManagerMenu();
-			}catch (IOException e) {
+			}catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				JLabel label = new JLabel("Invalid Inputs! Try Again!");
+				label.setFont(new Font("Tahoma", Font.BOLD, 14));
+				JOptionPane.showMessageDialog(this, label, "Update Item", JOptionPane.ERROR_MESSAGE);
 			}
 			
 			
