@@ -15,11 +15,11 @@ import data.Order;
  * @author Yu Sen
  *
  */
-public class OrderDetails extends JPanel{
+public class ManagerOrderDetails extends JPanel{
 	private MainFrame main;
 	private Order order;
 
-	public OrderDetails(MainFrame main, Order order){
+	public ManagerOrderDetails(MainFrame main, Order order){
 		this.main = main;
 		this.order = order;
 //		System.out.println(this.item.getName());

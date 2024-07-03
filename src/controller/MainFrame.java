@@ -17,7 +17,7 @@ import gui.LoginScreen;
 import gui.ManagerHome;
 import gui.ManagerMenu;
 import gui.ManagerSales;
-import gui.OrderDetails;
+import gui.ManagerOrderDetails;
 import gui.StaffMenu;
 
 /**
@@ -92,7 +92,7 @@ public class MainFrame extends JFrame {
 	}
 	
 	public void showOrderDetails(Order order){ //does this follow MVC?
-		OrderDetails p8 = new OrderDetails(this, order);
+		ManagerOrderDetails p8 = new ManagerOrderDetails(this, order);
 		this.add(p8, "OrderDetails");
 		this.card.show(this.getContentPane(), "OrderDetails");
 	}
