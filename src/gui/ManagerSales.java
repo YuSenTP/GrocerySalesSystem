@@ -46,6 +46,7 @@ public class ManagerSales extends JPanel{
 	private JLabel orderNumber;
 	private JLabel orderTotal;
 	private JLabel totalSales;
+	private JPanel gridPanel;
 	
 	public ManagerSales(MainFrame main){
 		this.main = main;
@@ -64,7 +65,9 @@ public class ManagerSales extends JPanel{
 		this.add(this.lblEditItem, BorderLayout.NORTH);
 		//Middle Panel
 
-		JPanel gridPanel = new JPanel(new GridBagLayout());
+		this.gridPanel = new JPanel(new GridBagLayout());
+		this.gridPanel.setBorder(new EmptyBorder(0, 5, 5, 5));// top, left, bottom, right
+        this.gridPanel.setBackground(UIManager.getColor("OptionPane.background"));
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
         gbc.gridx = 0;
@@ -119,18 +122,18 @@ public class ManagerSales extends JPanel{
             this.orderButton.add(this.orderTotal, BorderLayout.EAST);
         	
         	
-        	gridPanel.add(orderButton, gbc);
+        	this.gridPanel.add(orderButton, gbc);
         	gbc.gridy++;
         }
         //Container to push items up --> Filler Panel
         gbc.weightx = 1; // Extra space allocate to this Panel as weight > 0
         gbc.weighty = 1;
 //        gbc.fill = GridBagConstraints.BOTH;
-        gridPanel.add(new JPanel(), gbc);
+        this.gridPanel.add(new JPanel(), gbc);
         
         
         //Scroll Pane
-        this.scrollPane = new JScrollPane(gridPanel);
+        this.scrollPane = new JScrollPane(this.gridPanel);
         this.scrollPane.setBorder(new EmptyBorder(0, 2, 2, 2));
         this.scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         this.scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);

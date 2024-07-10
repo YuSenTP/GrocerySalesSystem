@@ -4,11 +4,13 @@
   "groceryItems" : [ {
     "name" : "Milk",
     "price" : 2.99,
-    "quantity" : 3
+    "quantity" : 3,
+    "picFile": "./img/milk1.jpg"
   }, {
     "name" : "Bread",
     "price" : 1.99,
-    "quantity" : 1
+    "quantity" : 1,
+    "picFile": "./img/bread2.jpg"
   } ]
 }, {
   "orderID" : 2,
@@ -16,7 +18,8 @@
   "groceryItems" : [ {
     "name" : "Bread",
     "price" : 1.99,
-    "quantity" : 2
+    "quantity" : 2,
+    "picFile": "./img/bread2.jpg"
   } ]
 }, {
   "orderID" : 3,
@@ -24,18 +27,21 @@
   "groceryItems" : [ {
     "name" : "Bread",
     "price" : 1.99,
-    "quantity" : 1
+    "quantity" : 1,
+    "picFile": "./img/bread2.jpg"
   }, {
     "name" : "Milk",
     "price" : 2.99,
-    "quantity" : 1
+    "quantity" : 1,
+    "picFile": "./img/milk1.jpg"
   } ]
 }, {
   "orderID" : 4,
-  "totalCost" : 2.33,
+  "totalCost" : 1.15,
   "groceryItems" : [ {
-    "name" : "Cookies",
-    "price" : 2.33,
-    "quantity" : 1
+    "name" : "Tomato",
+    "price" : 1.15,
+    "quantity" : 1,
+    "picFile": "./img/tomato.jpg"
   } ]
 } ]

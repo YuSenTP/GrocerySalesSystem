@@ -41,7 +41,7 @@ public class ManagerHome extends JPanel{
 
 		main.setTitle("Joy MiniMart - Manager Home");
 		
-		this.gridPanel = new JPanel(new GridLayout(0, 3, 40, 40)); // rows, cols, hgap, vgap
+		this.gridPanel = new JPanel(new GridLayout(0, 3, 30, 30)); // rows, cols, hgap, vgap
         this.gridPanel.setBorder(new EmptyBorder(20, 20, 20, 20)); // top, left, bottom, right
         
         //Func Buttons
