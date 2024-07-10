@@ -63,16 +63,16 @@ public class GroceryItem {
 		this.picFile = picFile;
 	}
 
-	public void subtractQuantity() { 
-		this.quantity--;
-	 }
-	
-	public void addQuantity() { 
-		this.quantity++;
-	 }
+//	public void subtractQuantity() { 
+//		this.quantity--;
+//	 }
+//	
+//	public void addQuantity() { 
+//		this.quantity++;
+//	 }
 
-	public GroceryItem copy() { 
-		return new GroceryItem(this.name, this.price, 1, this.picFile); //start from quantity 1
-	 } 
+//	public GroceryItem copy() { 
+//		return new GroceryItem(this.name, this.price, 1, this.picFile); //start from quantity 1
+//	 } 
 
 }

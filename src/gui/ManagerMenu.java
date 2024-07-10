@@ -90,7 +90,7 @@ public class ManagerMenu extends JPanel{
     		this.itemButton.setPreferredSize(new Dimension(213, 143));          
             
             //Item Action
-    		this.itemButton.setActionCommand(this.currentItem.getName());
+    		this.itemButton.setActionCommand(this.currentItem.getName()); // not need just nice to have
     		this.itemButton.putClientProperty("object", this.currentItem); //associate each button to each GroceryItem object
         	this.itemButton.addActionListener(new ActionListener(){
         		@Override

@@ -79,18 +79,76 @@ public class Controller {
 	public void editOrder(String choice, GroceryItem item) { 
 		Vector<GroceryItem> temp = this.ds.getCurrentOrder().getGroceryItems();
 		
-		if (choice == "add" && item.getQuantity() > 0){
+		System.out.println(item.getName());
+		System.out.println(item.getQuantity());
+		System.out.println(item.getPrice());
+		
+		boolean itemPresent = false;
+		int index = -1;
+		for (int i = 0; i < temp.size(); i++){
+			if(temp.get(i).getName().equals(item.getName())){
+				itemPresent = true;
+				index = i;
+			}
+		}
+		
+		//logic error, when staff logout I need to add items back to the inventory. TO Solve, Remove logout when there is items in the order
+		
+		if (choice == "add"){ // Item object is from inventory (IGNORE && item.getQuantity() > 0)
 //			System.out.println(item);
 //			this.order.addGroceryItem(item);
 			
+			item.setQuantity(item.getQuantity() - 1);// minus 1 from inventory
 			
-			item.subtractQuantity(); // minus 1 from inventory
+			
+			if (itemPresent == false){
+				GroceryItem toAdd = new GroceryItem(item.getName(), item.getPrice(), 1, item.getPicFile()); // n, p, q = 1, pic
+				this.ds.getCurrentOrder().addGroceryItem(toAdd);
+				System.out.println("Success");
+			}
+			else{
+				//add 1 to the grocery item
+				temp.get(index).setQuantity(temp.get(index).getQuantity()+1);
+			}
+
 		}
 		else if (choice == "delete"){
+			
+			temp.get(index).setQuantity(temp.get(index).getQuantity()-1); // remove quantity by 1
+			
+			
 //			this.order.deleteGroceryItem(item);
-			item.addQuantity();// add 1 to inventory
+			item.setQuantity(item.getQuantity()+1);;// add 1 to inventory
+			
+//			System.out.println("Quantity" + temp.get(index).getQuantity());
+			if (temp.get(index).getQuantity() == 0){
+				this.ds.getCurrentOrder().deleteGroceryItem(item);
+			}
 		}
+		
+		System.out.println("Order size: " + this.ds.getCurrentOrder().getGroceryItems().size());
 	 }
+	
+//	public void addGroceryItem(GroceryItem item) { 
+//		Vector<GroceryItem> temp = this.ds.getCurrentOrder().getGroceryItems();
+//		boolean itemPresent = false;
+//		int index = 0;
+//		for (int i = 0; i < temp.size(); i++){
+//			if(temp.get(i).getName() == item.getName()){
+//				itemPresent = true;
+//				index = i;
+//			}
+//		}
+//		if (itemPresent == false){
+//			temp.add(item.copy());
+//		}
+//		else{
+//			//add 1 to the grocery item
+//			temp.get(index).addQuantity(); 
+//		}
+//		
+//	 } 
+	
 	
 	public boolean verifyUser(String n, String pwd) {
 		String real = pwd;

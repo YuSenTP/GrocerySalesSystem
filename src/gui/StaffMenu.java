@@ -42,9 +42,10 @@ public class StaffMenu extends JPanel {
     private JPanel bottomPanel;
     private JButton logoutButton;
     private JButton cartButton;
-    private JTextField quantityField;
-	private JButton decreaseButton;
-	private JButton increaseButton;
+//    private JTextField quantityField;
+//    private JLabel quantityField;
+//	private JButton decreaseButton;
+//	private JButton increaseButton;
 
     public StaffMenu(MainFrame main) {
         this.main = main;
@@ -60,6 +61,10 @@ public class StaffMenu extends JPanel {
 
         for (int i = 0; i < this.inventory.size(); i++) {
             GroceryItem currentItem = this.inventory.elementAt(i);
+            
+            if (currentItem.getQuantity() == 0){
+            	continue;
+            }
 
             this.itemPanel = new JPanel(new BorderLayout());
 
@@ -69,15 +74,15 @@ public class StaffMenu extends JPanel {
             this.itemButton.setPreferredSize(new Dimension(213, 143));
 
             // Item Action
-            this.itemButton.setActionCommand(currentItem.getName());
-            this.itemButton.putClientProperty("object", currentItem); // associate each button to each GroceryItem object
-            this.itemButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    int quantity = Integer.valueOf(quantityField.getText());
-                    // Handle item button action
-                }
-            });
+//            this.itemButton.setActionCommand(currentItem.getName());
+//            this.itemButton.putClientProperty("object", currentItem); // associate each button to each GroceryItem object
+//            this.itemButton.addActionListener(new ActionListener() {
+//                @Override
+//                public void actionPerformed(ActionEvent e) {
+//                    int quantity = Integer.valueOf(quantityField.getText());
+//                    // Handle item button action
+//                }
+//            });
 
             // Item Pic
             this.itemPic = new ImageIcon(currentItem.getPicFile());
@@ -102,10 +107,11 @@ public class StaffMenu extends JPanel {
 
             // Add to Cart Button
             JButton addToCartButton = new JButton("Add to Cart");
+            addToCartButton.putClientProperty("object", currentItem);
             addToCartButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    showQuantityControls(currentItem, addToCartButton);
+                    showQuantityControls(addToCartButton, currentItem);
                 }
             });
             this.itemPanel.add(addToCartButton, BorderLayout.SOUTH);
@@ -134,6 +140,8 @@ public class StaffMenu extends JPanel {
         this.bottomPanel = new JPanel();
         this.bottomPanel.setBackground(Color.WHITE);
         this.bottomPanel.setLayout(new BorderLayout(0, 0));
+        
+        //Logout
         this.logoutButton = new JButton("Logout");
         this.logoutButton.setFont(new Font("Tahoma", Font.BOLD, 15));
         this.logoutButton.setPreferredSize(new Dimension(100, 40));
@@ -144,8 +152,10 @@ public class StaffMenu extends JPanel {
                 StaffMenu.this.main.showLoginScreen();
             }
         });
+        
         this.bottomPanel.add(this.logoutButton, BorderLayout.WEST);
 
+        //Cart
         this.cartButton = new JButton("Cart");
         cartButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
@@ -159,41 +169,70 @@ public class StaffMenu extends JPanel {
         this.add(this.bottomPanel, BorderLayout.SOUTH);
     }
 
-    private void showQuantityControls(GroceryItem currentItem, JButton addToCartButton) {
-        JPanel parentPanel = (JPanel) addToCartButton.getParent();
-        parentPanel.remove(addToCartButton);
+    private void showQuantityControls(JButton addToCartButton, GroceryItem currentItem) {
+        JPanel parentPanel = (JPanel) addToCartButton.getParent(); // Parent is itemPanel
+        parentPanel.remove(addToCartButton); // itemPanel to remove button
+//    	 itemPanel.remove(addToCartButton);
+//        GroceryItem currentItem = (GroceryItem) addToCartButton.getClientProperty("object");
+        
+        
 
         JPanel quantityPanel = new JPanel(new BorderLayout());
-        this.decreaseButton = new JButton("-");
-        this.increaseButton = new JButton("+");
-        this.quantityField = new JTextField("1", 3);
-        this.quantityField.setHorizontalAlignment(SwingConstants.CENTER);
-
+        JButton decreaseButton = new JButton("-");
+        decreaseButton.putClientProperty("object", currentItem);
+        JButton increaseButton = new JButton("+");
+        increaseButton.putClientProperty("object", currentItem);
+//        this.quantityField = new JTextField("1", 3);
+        JLabel quantityField = new JLabel("1");
+        quantityField.setHorizontalAlignment(SwingConstants.CENTER);
+        quantityField.setOpaque(true);
+        quantityField.setBackground(Color.WHITE);
+//        this.quantityField.setBorder(new Border()); TO ADD LATER
+        this.main.getController().editOrder("add", currentItem);
+        
+        //decrease button
         decreaseButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int quantity = Integer.parseInt(quantityField.getText());
+    			GroceryItem object = (GroceryItem) decreaseButton.getClientProperty("object");
+                int quantity = Integer.valueOf((quantityField.getText()));
+                main.getController().editOrder("delete", object);
                 if (quantity > 1) {
                     quantity--;
                     quantityField.setText(String.valueOf(quantity));
+                    
                 } else {
-                    parentPanel.remove(quantityPanel);
-                    parentPanel.add(addToCartButton, BorderLayout.SOUTH);
-                    parentPanel.revalidate();
-                    parentPanel.repaint();
+                	if (main.getController().ds.getCurrentOrder().getGroceryItems().size() == 0){
+                    	logoutButton.setVisible(true);
+                    }
+                	parentPanel.remove(quantityPanel);
+                	parentPanel.add(addToCartButton, BorderLayout.SOUTH);
+                	parentPanel.revalidate();
+                	parentPanel.repaint();
                 }
                 
             }
         });
 
+      //increase button
         increaseButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int quantity = Integer.parseInt(quantityField.getText());
-                quantity++;
-                quantityField.setText(String.valueOf(quantity));
+    			GroceryItem object = (GroceryItem) increaseButton.getClientProperty("object");
+            	int quantity = Integer.parseInt(quantityField.getText());
+            	if (object.getQuantity()>0){
+                    quantity++;
+                    quantityField.setText(String.valueOf(quantity));
+                    main.getController().editOrder("add", object);    		
+            	}
+                
+
             }
         });
+        
+
+        this.logoutButton.setVisible(false);
+
 
         quantityPanel.add(decreaseButton, BorderLayout.WEST);
         quantityPanel.add(quantityField, BorderLayout.CENTER);
@@ -204,13 +243,4 @@ public class StaffMenu extends JPanel {
         parentPanel.repaint();
     }
 
-    private void addToCart(GroceryItem item) {
-        // Add the item and quantity to the cart
-        main.getController().editOrder("add", item);
-    }
-    
-    private void deleteCart(GroceryItem item) {
-        // Add the item and quantity to the cart
-        main.getController().editOrder("delete", item);
-    }
 }

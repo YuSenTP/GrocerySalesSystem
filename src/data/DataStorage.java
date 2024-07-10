@@ -22,12 +22,14 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 	private Vector<Staff> staffs;
 	private Vector<Manager> managers;
 	Vector<User> storage = new Vector<User>();
+	private Order currentOrder;
 	
 	public DataStorage(){
 		this.inventory = new Vector<GroceryItem>();
 		this.orders = new Vector<Order>();
 		this.staffs = new Vector<Staff>();
 		this.managers = new Vector<Manager>();
+		this.currentOrder = new Order();
 		
 		this.readFile();
 	}
@@ -49,7 +51,11 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 	}
 	
 	public Order getCurrentOrder(){
-		return this.currentOrder();
+		return this.currentOrder;
+	}
+	
+	public void addItem(){
+		
 	}
 	
 	public void readFile(){ // Method to read from JSON file

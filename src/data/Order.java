@@ -23,6 +23,19 @@ public class Order {
 	public Vector<GroceryItem> getGroceryItems() {
 	 	 return groceryItems; 
 	}
+	
+	public void addGroceryItem(GroceryItem item){
+		this.groceryItems.add(item);
+	}
+	
+	public void deleteGroceryItem(GroceryItem item){
+		for (int i = 0; i < this.groceryItems.size(); i++){
+			if (this.groceryItems.get(i).getName().equals(item.getName())){
+				this.groceryItems.remove(i);
+			}
+		}
+		
+	}
 
 	public void setGroceryItems(Vector<GroceryItem> groceryItems) { 
 		 this.groceryItems = groceryItems; 
@@ -62,33 +75,33 @@ public class Order {
 		return totalCost;
 	 }
 
-	public void deleteGroceryItem(GroceryItem item) { //check this
-//		groceryItems.get(index)
-		for (int i = 0; i < groceryItems.size(); i++){
-			if(groceryItems.get(i).getName() == item.getName()){
-				groceryItems.get(i).subtractQuantity();
-			}
-		}
+//	public void deleteGroceryItem(GroceryItem item) { //check this
+////		groceryItems.get(index)
+//		for (int i = 0; i < groceryItems.size(); i++){
+//			if(groceryItems.get(i).getName() == item.getName()){
+//				groceryItems.get(i).subtractQuantity();
+//			}
+//		}
+//
+//	 }
 
-	 }
-
-	public void addGroceryItem(GroceryItem item) { 
-		boolean itemPresent = false;
-		int index = 0;
-		for (int i = 0; i < groceryItems.size(); i++){
-			if(groceryItems.get(i).getName() == item.getName()){
-				itemPresent = true;
-				index = i;
-			}
-		}
-		if (itemPresent == false){
-			groceryItems.add(item.copy());
-		}
-		else{
-			//add 1 to the grocery item
-			groceryItems.get(index).addQuantity(); 
-		}
-		
-	 } 
+//	public void addGroceryItem(GroceryItem item) { 
+//		boolean itemPresent = false;
+//		int index = 0;
+//		for (int i = 0; i < groceryItems.size(); i++){
+//			if(groceryItems.get(i).getName() == item.getName()){
+//				itemPresent = true;
+//				index = i;
+//			}
+//		}
+//		if (itemPresent == false){
+//			groceryItems.add(item.copy());
+//		}
+//		else{
+//			//add 1 to the grocery item
+//			groceryItems.get(index).addQuantity(); 
+//		}
+//		
+//	 } 
 
 }
