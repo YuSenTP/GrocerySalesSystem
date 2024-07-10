@@ -3,42 +3,64 @@ package gui;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
+
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
+
 import javax.swing.JTextField;
+
 
 import controller.MainFrame;
 
+
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+
 import java.awt.event.ActionEvent;
 import javax.swing.JCheckBox;
+
 import javax.swing.JPasswordField;
+import javax.swing.SwingConstants;
+import java.awt.Color;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class LoginScreen extends JPanel{
 	private MainFrame main; 
-	private JTextField textField;
-	private JTextField textField_1;
 	private JRadioButton staffSelect , managerSelect;
-	private JTextField name; 
-	private JPasswordField password; 
-	private JButton login; 
+	private JTextField textName; 
+	private JPasswordField textPassword; 
+	private JButton login;
+	private JLabel lblName;
+	private JLabel lblPassword;
+	private ButtonGroup btnGroup; 
+	private JLabel lblLogin;
+	private JLabel lblwrong;
+	private JCheckBox chckbxShowPassword;
+	private Image backgroundImage;
 
 	public LoginScreen(MainFrame main){
 		this.main = main; 
+		this.main.setTitle("Joy MiniMart - Login");
 		
-		setLayout(null);
+		this.setLayout(null);
 		
-		JLabel lblName = new JLabel("Name:");
-		lblName.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblName.setBounds(69, 110, 51, 33);
-		add(lblName);
+		this.backgroundImage = new ImageIcon("./img/loginbk2.jpg").getImage();
 		
-		this.name = new JTextField();
-		this.name.setBounds(129, 112, 192, 33);
-		add(this.name);
-		this.name.setColumns(10);
+		this.lblName = new JLabel("User Name:");
+		this.lblName.setFont(new Font("Tahoma", Font.BOLD, 17));
+		this.lblName.setBounds(442, 177, 125, 33);
+		this.add(this.lblName);
+		
+		this.textName = new JTextField();
+		this.textName.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		this.textName.setBounds(442, 210, 192, 33);
+		add(this.textName);
+		this.textName.setColumns(10);
 		
 		this.login = new JButton("Login");
 		login.addActionListener(new ActionListener() {
@@ -46,72 +68,114 @@ public class LoginScreen extends JPanel{
 				openPage();
 			}
 		});
-		this.login.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		this.login.setBounds(294, 272, 116, 42);
-		add(this.login);
+		this.login.setFont(new Font("Tahoma", Font.BOLD, 20));
+		this.login.setBounds(442, 367, 192, 42);
+		this.add(this.login);
 		
-		JLabel lblPassword = new JLabel("Password:");
-		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblPassword.setBounds(40, 170, 80, 33);
-		add(lblPassword);
+		this.lblPassword = new JLabel("Password:");
+		this.lblPassword.setFont(new Font("Tahoma", Font.BOLD, 17));
+		this.lblPassword.setBounds(442, 246, 99, 33);
+		this.add(this.lblPassword);
 				
-		this.password = new JPasswordField();
-		this.password.setColumns(10);
-		this.password.setBounds(129, 172, 192, 33);
-		add(this.password);
-		
-		ButtonGroup btnGroup = new ButtonGroup();
-		
-		this.staffSelect = new JRadioButton("Staff");
-		this.staffSelect.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		this.staffSelect.setBounds(57, 39, 127, 25);
-		add(this.staffSelect);
-		btnGroup.add(this.staffSelect);
-		
-		this.managerSelect = new JRadioButton("Manager");
-		this.managerSelect.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		this.managerSelect.setBounds(248, 39, 127, 25);
-		add(this.managerSelect);
-		btnGroup.add(this.managerSelect);
-		
-		this.staffSelect.setSelected(true); //pre-select Staff radiobutton
-		
-		JCheckBox chckbxShowPassword = new JCheckBox("Show Password");
-		chckbxShowPassword.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (chckbxShowPassword.isSelected()){
-					password.setEchoChar((char)0);
-				}
-				else {
-					password.setEchoChar('*');
+		this.textPassword = new JPasswordField();
+		this.textPassword.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		this.textPassword.setColumns(10);
+		this.textPassword.setBounds(442, 278, 192, 33);
+		this.textPassword.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					System.out.println("Login");
+					openPage();
 				}
 			}
 		});
-		chckbxShowPassword.setBounds(40, 227, 161, 25);
-		add(chckbxShowPassword);
+		this.add(this.textPassword);
 		
+		this.btnGroup = new ButtonGroup();
+		
+		this.staffSelect = new JRadioButton("Staff");
+		this.staffSelect.setFont(new Font("Tahoma", Font.BOLD, 20));
+		this.staffSelect.setBounds(415, 143, 92, 25);
+		this.staffSelect.setOpaque(false);
+		this.add(this.staffSelect);
+		this.btnGroup.add(this.staffSelect);
+		
+		this.managerSelect = new JRadioButton("Manager");
+		this.managerSelect.setFont(new Font("Tahoma", Font.BOLD, 20));
+		this.managerSelect.setBounds(547, 143, 134, 25);
+		this.managerSelect.setOpaque(false);
+		this.add(this.managerSelect);
+		this.btnGroup.add(this.managerSelect);
+		
+		this.staffSelect.setSelected(true); //pre-select Staff radiobutton
+		
+		this.chckbxShowPassword = new JCheckBox("Show Password");
+		this.chckbxShowPassword.setFont(new Font("Tahoma", Font.BOLD, 15));
+		this.chckbxShowPassword.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (chckbxShowPassword.isSelected()){
+					textPassword.setEchoChar((char)0);
+				}
+				else {
+					textPassword.setEchoChar('*');
+				}
+			}
+		});
+		this.chckbxShowPassword.setBounds(442, 333, 161, 25);
+		this.chckbxShowPassword.setOpaque(false);
+		this.add(this.chckbxShowPassword);
+		
+		this.lblLogin = new JLabel("Joy MiniMart");
+		this.lblLogin.setFont(new Font("Tahoma", Font.BOLD, 47));
+		this.lblLogin.setHorizontalAlignment(SwingConstants.CENTER);
+		this.lblLogin.setBounds(363, 43, 363, 106);
+		add(this.lblLogin);
+		
+		this.lblwrong = new JLabel("*Incorrect Username or Password");
+		this.lblwrong.setVisible(false);
+		this.lblwrong.setFont(new Font("Tahoma", Font.BOLD, 15));
+		this.lblwrong.setForeground(new Color(255, 0, 0));
+		this.lblwrong.setHorizontalAlignment(SwingConstants.CENTER);
+		this.lblwrong.setBounds(415, 414, 264, 25);
+		add(this.lblwrong);
+		
+		
+
+
 	}
 	
 	public void openPage(){
-		String n = name.getText();
-		String p = new String(password.getPassword());
-		boolean validity = main.getController().verifyUser(n, p);
-//		if (validity == true){
-			if (staffSelect.isSelected()){
-				main.showStaffMenu();
+		boolean testing = false;
+		String n = textName.getText();
+		String p = new String(textPassword.getPassword());
+		boolean validity;
+		if (staffSelect.isSelected()){
+			validity = this.main.getController().verifyUser(n, p, "staff");
+			if (validity || testing){
+				this.main.showStaffMenu();
+			}
+			else{
+				this.lblwrong.setVisible(true);
+			}
 		}
-			else if (managerSelect.isSelected()) {
-				main.showManagerHome();
-		}
-//			else{
-//	            JOptionPane.showMessageDialog(null, " Login Unsuccessful, Please select Staff or Manager", "Notification", JOptionPane.ERROR_MESSAGE);
-//			}
-		}
-//		else {
-//            JOptionPane.showMessageDialog(null, " Login Unsuccessful ", "Notification", JOptionPane.ERROR_MESSAGE);
-//		}
-//	}
+		else if (managerSelect.isSelected()) {
+			validity = this.main.getController().verifyUser(n, p, "manager");
+			if (validity || testing){
+				this.main.showManagerHome();;
+			}
+			else{
+				this.lblwrong.setVisible(true);
+			}
+		}	
+			
+	}
 	
 	
 	
+    @Override
+    protected void paintComponent(Graphics g) { // Over rides the command
+        super.paintComponent(g); //calls super class to execute default painting
+        g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this); // add my own painting
+    }
 }

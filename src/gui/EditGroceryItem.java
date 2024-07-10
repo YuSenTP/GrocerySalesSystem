@@ -213,7 +213,8 @@ public class EditGroceryItem extends JPanel{
 	            }
 	            
 				ImageIO.write(originalImage, "jpg", destinationFile);
-				this.item.setPicFile("./img/" + fileName); // TO CHANGE should not be able to edit?
+//				this.item.setPicFile("./img/" + fileName); // TO CHANGE should not be able to edit?
+				this.main.getController().changePicPath("./img/" + fileName, this.item);
 				
 				JLabel label = new JLabel("ItemPic Updated!");
 				label.setFont(new Font("Tahoma", Font.BOLD, 14));

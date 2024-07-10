@@ -18,6 +18,7 @@ import data.*;
  */
 
 public class ReadWriteFile {
+	/*
 	public static void readFile(){
    	 ObjectMapper objectMapper = new ObjectMapper();
      try {
@@ -72,5 +73,5 @@ public class ReadWriteFile {
 			e.printStackTrace();
 		} 
 	}
-
+*/
 }

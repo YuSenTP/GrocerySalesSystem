@@ -1,12 +1,10 @@
 [
     {
-        "order": null,
         "password": "1234",
         "name": "staff1",
         "userID": 2
     },
     {
-        "order": null,
         "password": "5678",
         "name": "Staff2",
         "userID": 3

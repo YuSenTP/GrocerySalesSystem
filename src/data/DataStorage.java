@@ -21,7 +21,7 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 	private Vector<Order> orders;
 	private Vector<Staff> staffs;
 	private Vector<Manager> managers;
-	Vector<User> storage = new Vector<User>();
+//	Vector<User> storage = new Vector<User>();
 	private Order currentOrder;
 	
 	public DataStorage(){
@@ -83,11 +83,11 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 	         );
 
 	         //Loops through staffs Vector and set each object index to staff
-	         for (Staff staff : this.staffs) { //set new instance of order to each staff -- current state of order: null
-//	             System.out.println(user.getName());
-	        	 staff.start();
+//	         for (Staff staff : this.staffs) { //set new instance of order to each staff -- current state of order: null
+////	             System.out.println(user.getName());
+//	        	 staff.start();
 	        	 
-	         } 
+//	         } 
 			
 		}catch (IOException e) {
 	         e.printStackTrace();
@@ -95,9 +95,9 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 	}
 	
 	public void writeFile(){  //Method to save to JSON file
-		for (int i = 0; i < this.staffs.size(); i++){ //Clear staff order object to null
-			this.staffs.get(i).setOrder(null);
-		}
+//		for (int i = 0; i < this.staffs.size(); i++){ //Clear staff order object to null
+//			this.staffs.get(i).setOrder(null);
+//		}
     	ObjectMapper objectMapper = new ObjectMapper(); 
     	try {
     		//! TO-CHANGE filePath
@@ -110,15 +110,15 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 		} 
 	}
 
-	public User getUser(String n) {
-		for (int i = 0 ; i <storage.size(); i++)
-		{
-			User temp = storage.get(i);
-			if (temp.getName().equals(n)){
-				return temp;
-			}
-		}
-		return null;
-	}
+//	public User getUser(String n) {
+//		for (int i = 0 ; i <storage.size(); i++)
+//		{
+//			User temp = storage.get(i);
+//			if (temp.getName().equals(n)){
+//				return temp;
+//			}
+//		}
+//		return null;
+//	}
 
 }

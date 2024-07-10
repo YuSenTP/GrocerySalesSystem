@@ -2,33 +2,33 @@ package data;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-@JsonPropertyOrder({"userID", "name", "password", "order"}) //To change the save order to json
+@JsonPropertyOrder({"userID", "name", "password"}) //To change the save order to json
 public class Staff extends User {
 
-	private Order order;
+//	private Order order;
 	
 	public Staff(){
 //		super();
 //		this.order = new Order();
 	}
 	
-	public Staff(String name, String password) { 
-		super(name, password);
-		this.order = new Order();
-	 }
-
-	public Order getOrder() {
-	 	 return order; 
-	}
-
-	public void setOrder(Order order) { 
-		 this.order = order; 
-	}
-
-	public void saveOrder() { 
-		Main.orders.add(this.order);
-		this.order = new Order();
-	 }
+//	public Staff(String name, String password) { 
+//		super(name, password);
+//		this.order = new Order();
+//	 }
+//
+//	public Order getOrder() {
+//	 	 return order; 
+//	}
+//
+//	public void setOrder(Order order) { 
+//		 this.order = order; 
+//	}
+//
+//	public void saveOrder() { 
+//		Main.orders.add(this.order);
+//		this.order = new Order();
+//	 }
 
 
 //	public void editOrder(String choice, GroceryItem item) { 
@@ -42,9 +42,9 @@ public class Staff extends User {
 //			item.addQuantity();// add 1 to inventory
 //		}
 //	 } 
-	
-	public void start(){
-		this.order = new Order();
-	}
+//	
+//	public void start(){
+//		this.order = new Order();
+//	}
 
 }

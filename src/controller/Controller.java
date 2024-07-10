@@ -9,7 +9,9 @@ import java.util.Vector;
 import data.DataStorage;
 import data.GroceryItem;
 import data.Main;
+import data.Manager;
 import data.Order;
+import data.Staff;
 import data.User;
 
 /**
@@ -74,6 +76,11 @@ public class Controller {
 			}
 			return totalSales;
 		}
+	}
+	
+	public void changePicPath(String path, GroceryItem item){
+		int index = this.ds.getInventory().indexOf(item);
+		this.ds.getInventory().get(index).setPicFile(path);
 	}
 	
 	public void editOrder(String choice, GroceryItem item) { 
@@ -150,19 +157,31 @@ public class Controller {
 //	 } 
 	
 	
-	public boolean verifyUser(String n, String pwd) {
-		String real = pwd;
-		String cc = "";
-		User t = ds.getUser(n);
-		if (t!=null)
-		{
-			cc = t.getPassword().toString();
-			if (real.equals(cc))
-				return true;
-			else 
-				return false;		
+	public boolean verifyUser(String n, String pwd, String role) {
+		if (role == "staff"){
+			Vector<Staff> staffs = this.ds.getStaffs();
+			for (Staff staff: staffs){
+				if (staff.getName().equals(n) && staff.getPassword().equals(pwd)){
+					return true;
+				}
+				else
+					return false;
+			}
 		}
-		else 
-			return false;
+		
+		else if (role == "manager"){
+			Vector<Manager> managers = this.ds.getManagers();
+			for (Manager manager: managers){
+				if (manager.getName().equals(n) && manager.getPassword().equals(pwd)){
+					return true;
+				}
+				else
+					return false;
+			}
+		}
+		
+		return false;
+		
 	}
+
 }
