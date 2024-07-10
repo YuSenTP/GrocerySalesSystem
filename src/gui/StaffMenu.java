@@ -148,8 +148,7 @@ public class StaffMenu extends JPanel {
         this.logoutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Logged Out Successfully", "Notification", JOptionPane.INFORMATION_MESSAGE);
-                StaffMenu.this.main.showLoginScreen();
+            	logOut();
             }
         });
         
@@ -167,6 +166,11 @@ public class StaffMenu extends JPanel {
         this.bottomPanel.add(this.cartButton, BorderLayout.EAST);
 
         this.add(this.bottomPanel, BorderLayout.SOUTH);
+    }
+    
+    private void logOut(){
+        JOptionPane.showMessageDialog(this, "Logged Out Successfully", "Notification", JOptionPane.INFORMATION_MESSAGE);
+        this.main.showLoginScreen();
     }
 
     private void showQuantityControls(JButton addToCartButton, GroceryItem currentItem) {
