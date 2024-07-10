@@ -48,6 +48,10 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 		return this.managers;
 	}
 	
+	public Order getCurrentOrder(){
+		return this.currentOrder();
+	}
+	
 	public void readFile(){ // Method to read from JSON file
 		ObjectMapper objectMapper = new ObjectMapper();
 		

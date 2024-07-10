@@ -76,6 +76,22 @@ public class Controller {
 		}
 	}
 	
+	public void editOrder(String choice, GroceryItem item) { 
+		Vector<GroceryItem> temp = this.ds.getCurrentOrder().getGroceryItems();
+		
+		if (choice == "add" && item.getQuantity() > 0){
+//			System.out.println(item);
+//			this.order.addGroceryItem(item);
+			
+			
+			item.subtractQuantity(); // minus 1 from inventory
+		}
+		else if (choice == "delete"){
+//			this.order.deleteGroceryItem(item);
+			item.addQuantity();// add 1 to inventory
+		}
+	 }
+	
 	public boolean verifyUser(String n, String pwd) {
 		String real = pwd;
 		String cc = "";

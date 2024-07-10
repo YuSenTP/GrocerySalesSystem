@@ -17,6 +17,7 @@ import gui.LoginScreen;
 import gui.ManagerHome;
 import gui.ManagerMenu;
 import gui.ManagerSales;
+import gui.StaffCart;
 import gui.ManagerOrderDetails;
 import gui.StaffMenu;
 
@@ -107,6 +108,13 @@ public class MainFrame extends JFrame {
 		this.card.show(this.getContentPane(), "StaffMenu");
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public void showStaffCart(){
+		StaffCart p9 = new StaffCart(this);
+		this.add(p9, "StaffCart");
+		this.card.show(this.getContentPane(), "StaffCart");
+		// TODO Auto-generated method stub
 	}
 
 }
