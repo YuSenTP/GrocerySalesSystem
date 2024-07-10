@@ -204,6 +204,7 @@ public class StaffMenu extends JPanel {
                 if (quantity > 1) {
                     quantity--;
                     quantityField.setText(String.valueOf(quantity));
+                    increaseButton.setEnabled(true);
                     
                 } else {
                 	if (main.getController().ds.getCurrentOrder().getGroceryItems().size() == 0){
@@ -227,7 +228,10 @@ public class StaffMenu extends JPanel {
             	if (object.getQuantity()>0){
                     quantity++;
                     quantityField.setText(String.valueOf(quantity));
-                    main.getController().editOrder("add", object);    		
+                    main.getController().editOrder("add", object);
+            	}
+            	else if (object.getQuantity() == 0){
+                	increaseButton.setEnabled(false);
             	}
                 
 
