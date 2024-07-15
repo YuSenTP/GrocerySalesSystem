@@ -20,6 +20,8 @@ import gui.ManagerSales;
 import gui.StaffCart;
 import gui.ManagerOrderDetails;
 import gui.StaffMenu;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 /**
  * @author Yu Sen
@@ -32,7 +34,7 @@ public class MainFrame extends JFrame {
 	public MainFrame(){
 		this.setTitle("Joy MiniMart");
 		this.setSize(750, 550);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		Image icon = Toolkit.getDefaultToolkit().getImage("./img/ShoppingCart.png");
 		this.setIconImage(icon);
 		setResizable(false);
@@ -40,12 +42,19 @@ public class MainFrame extends JFrame {
 		// Instantiation of controller and card
 		this.cont = new Controller();
 		this.card = new CardLayout();
-		this.setLayout(this.card);
+		getContentPane().setLayout(this.card);
 		
 		// Add first method (e.g. showLoginScreen)
 		showLoginScreen();
 //		showManagerHome();
 //		showSales();
+		this.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent arg0) {
+				cont.saveAll();
+				dispose();
+			}
+		});
 		
 		this.setVisible(true);
 		
@@ -57,44 +66,44 @@ public class MainFrame extends JFrame {
 	
 	public void showLoginScreen(){ 
 		LoginScreen p1 = new LoginScreen(this);
-		this.add(p1, "LoginScreen");
+		getContentPane().add(p1, "LoginScreen");
 		this.card.show(this.getContentPane(), "LoginScreen");//p1
 		
 	}
 	
 	public void showManagerHome(){
 		ManagerHome p2 = new ManagerHome(this);
-		this.add(p2, "ManagerHome");
+		getContentPane().add(p2, "ManagerHome");
 		this.card.show(this.getContentPane(), "ManagerHome");
 	}
 	
 	public void showManagerMenu(){
 		ManagerMenu p3 = new ManagerMenu(this);
-		this.add(p3, "ManagerMenu");
+		getContentPane().add(p3, "ManagerMenu");
 		this.card.show(this.getContentPane(), "ManagerMenu");
 	}
 	
 	public void showEditGroceryItem(GroceryItem item){ //does this follow MVC?
 		EditGroceryItem p4 = new EditGroceryItem(this, item);
-		this.add(p4, "EditItem");
+		getContentPane().add(p4, "EditItem");
 		this.card.show(this.getContentPane(), "EditItem");
 	}
 	
 	public void showCreateItem(){
 		CreateGroceryItem p6 = new CreateGroceryItem(this);
-		this.add(p6, "CreateItem");
+		getContentPane().add(p6, "CreateItem");
 		this.card.show(this.getContentPane(), "CreateItem");
 	}
 	
 	public void showSales(){
 		ManagerSales p7 = new ManagerSales(this);
-		this.add(p7, "Sales");
+		getContentPane().add(p7, "Sales");
 		this.card.show(this.getContentPane(), "Sales");
 	}
 	
 	public void showOrderDetails(Order order){ //does this follow MVC?
 		ManagerOrderDetails p8 = new ManagerOrderDetails(this, order);
-		this.add(p8, "OrderDetails");
+		getContentPane().add(p8, "OrderDetails");
 		this.card.show(this.getContentPane(), "OrderDetails");
 	}
 	
@@ -104,7 +113,7 @@ public class MainFrame extends JFrame {
 
 	public void showStaffMenu() {
 		StaffMenu p5 = new StaffMenu(this);
-		this.add(p5, "StaffMenu");
+		getContentPane().add(p5, "StaffMenu");
 		this.card.show(this.getContentPane(), "StaffMenu");
 		// TODO Auto-generated method stub
 		
@@ -112,7 +121,7 @@ public class MainFrame extends JFrame {
 	
 	public void showStaffCart(){
 		StaffCart p9 = new StaffCart(this);
-		this.add(p9, "StaffCart");
+		getContentPane().add(p9, "StaffCart");
 		this.card.show(this.getContentPane(), "StaffCart");
 		// TODO Auto-generated method stub
 	}

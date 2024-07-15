@@ -5,12 +5,16 @@
     "name" : "Milk",
     "price" : 2.99,
     "quantity" : 3,
-    "picFile": "./img/milk1.jpg"
+    "picFile" : "./img/milk1.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0
   }, {
     "name" : "Bread",
     "price" : 1.99,
     "quantity" : 1,
-    "picFile": "./img/bread2.jpg"
+    "picFile" : "./img/bread2.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0
   } ]
 }, {
   "orderID" : 2,
@@ -19,7 +23,9 @@
     "name" : "Bread",
     "price" : 1.99,
     "quantity" : 2,
-    "picFile": "./img/bread2.jpg"
+    "picFile" : "./img/bread2.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0
   } ]
 }, {
   "orderID" : 3,
@@ -28,12 +34,16 @@
     "name" : "Bread",
     "price" : 1.99,
     "quantity" : 1,
-    "picFile": "./img/bread2.jpg"
+    "picFile" : "./img/bread2.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0
   }, {
     "name" : "Milk",
     "price" : 2.99,
     "quantity" : 1,
-    "picFile": "./img/milk1.jpg"
+    "picFile" : "./img/milk1.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0
   } ]
 }, {
   "orderID" : 4,
@@ -42,6 +52,8 @@
     "name" : "Tomato",
     "price" : 1.15,
     "quantity" : 1,
-    "picFile": "./img/tomato.jpg"
+    "picFile" : "./img/tomato.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0
   } ]
 } ]

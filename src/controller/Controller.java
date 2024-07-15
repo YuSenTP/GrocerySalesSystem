@@ -33,6 +33,10 @@ public class Controller {
 		return ds.getInventory();
 	}
 	
+	public void saveAll(){
+		this.ds.writeFile();
+	}
+	
 	//Manager
 	public void createGroceryItem(String itemName, String price, String quantity, String picFile, boolean onSale, String percentOff) { 
 		GroceryItem temp = new GroceryItem(itemName, price, quantity, picFile, onSale, Double.valueOf(percentOff) / 100);

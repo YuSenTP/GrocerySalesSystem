@@ -1,11 +1,9 @@
 [ {
   "userID" : 2,
   "name" : "staff1",
-  "password" : "1234",
-  "order" : null
+  "password" : "1234"
 }, {
   "userID" : 3,
   "name" : "Staff2",
-  "password" : "5678",
-  "order" : null
+  "password" : "5678"
 } ]
