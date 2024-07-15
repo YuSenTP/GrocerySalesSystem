@@ -34,8 +34,8 @@ public class Controller {
 	}
 	
 	//Manager
-	public void createGroceryItem(String itemName, String price, String quantity, String picFile) { 
-		GroceryItem temp = new GroceryItem(itemName, price, quantity, picFile);
+	public void createGroceryItem(String itemName, String price, String quantity, String picFile, boolean onSale, String percentOff) { 
+		GroceryItem temp = new GroceryItem(itemName, price, quantity, picFile, onSale, Double.valueOf(percentOff) / 100);
 		this.getInventory().add(temp);
 	 }
 	//Manager
@@ -55,6 +55,19 @@ public class Controller {
 		int index = this.getInventory().indexOf(item);
 		GroceryItem temp = this.getInventory().get(index);
 		temp.setQuantity(Integer.valueOf(quantity));
+	 }
+	//Manager
+	public void editGroceryItemSale(GroceryItem item, boolean onSale, String percentOff) { 
+		int index = this.getInventory().indexOf(item);
+		GroceryItem temp = this.getInventory().get(index);
+		if (onSale){
+			temp.setOnSale(onSale);
+			temp.setPercentOff(Double.valueOf(percentOff)/100);
+		}
+		else{
+			temp.setOnSale(onSale);
+			temp.setPercentOff(0);
+		}
 	 }
 	//Manager
 	public void deleteGroceryItem(GroceryItem item) { 

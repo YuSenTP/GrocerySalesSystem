@@ -7,22 +7,23 @@ import java.awt.Graphics;
 import java.awt.Image;
 
 import javax.swing.JLabel;
-
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-
+import javax.swing.KeyStroke;
 
 import controller.MainFrame;
-
+import data.Manager;
+import data.Staff;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-
+import java.util.Vector;
 import java.awt.event.ActionEvent;
 import javax.swing.JCheckBox;
-
+import javax.swing.JComponent;
 import javax.swing.JPasswordField;
 import javax.swing.SwingConstants;
 import java.awt.Color;
@@ -146,7 +147,7 @@ public class LoginScreen extends JPanel{
 	}
 	
 	public void openPage(){
-		boolean testing = false;
+		boolean testing = true;
 		String n = textName.getText();
 		String p = new String(textPassword.getPassword());
 		boolean validity;

@@ -11,12 +11,16 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.font.TextAttribute;
+import java.math.BigDecimal;
+import java.util.Map;
 import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
@@ -64,6 +68,7 @@ public class ManagerMenu extends JPanel{
 //            {"Maracuya", "$9.46", "maracuya.png"},
 //            {"Cherry", "$23.16", "cherry.png"}
 //        };
+	private JPanel pricePanel;
 
 	
 	public ManagerMenu(MainFrame main){
@@ -81,8 +86,9 @@ public class ManagerMenu extends JPanel{
         for (int i = 0; i < this.inventory.size(); i++) {
         	this.currentItem = this.inventory.elementAt(i);
         	
-            this.itemPanel = new JPanel(new BorderLayout());
-            
+        	this.itemPanel = new JPanel(new BorderLayout());
+        	
+
             this.itemButton = new JButton();
 //            this.itemButton.setFocusable(false); //CAN USE
             this.itemButton.setLayout(new BorderLayout());
@@ -118,16 +124,48 @@ public class ManagerMenu extends JPanel{
             this.nameLabel = new JLabel(this.currentItem.getName());
             this.nameLabel.setHorizontalAlignment(SwingConstants.CENTER);
             this.nameLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
+            this.nameLabel.setOpaque(false);
             this.itemButton.add(this.nameLabel, BorderLayout.NORTH);
-            
+   
             //Item Price
+            
+            this.pricePanel = new JPanel();
+            this.pricePanel.setOpaque(false);
+            
             this.priceLabel = new JLabel("$" + this.currentItem.getPrice().toString());
             this.priceLabel.setHorizontalAlignment(SwingConstants.CENTER);
             this.priceLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
-            this.itemButton.add(this.priceLabel, BorderLayout.SOUTH);
             
+            // If On Sale
+            if (this.currentItem.getOnSale()){
+            	Map<TextAttribute, Object> attributes = (Map<TextAttribute, Object>) this.priceLabel.getFont().getAttributes(); // HashMap Something like a dictonary in python where data are stored as key value pair
+            	attributes.put(TextAttribute.STRIKETHROUGH, TextAttribute.STRIKETHROUGH_ON); // Add new attribute to HashMap
+            	this.priceLabel.setFont(new Font(attributes));
+            	this.priceLabel.setForeground(Color.GRAY);
+
+            	this.pricePanel.add(this.priceLabel);
+
+            	BigDecimal salePercent = new BigDecimal(1 - this.currentItem.getPercentOff());
+            	BigDecimal salePrice = this.currentItem.getPrice().multiply(salePercent);
+            	salePrice = salePrice.setScale(2, BigDecimal.ROUND_HALF_UP);
+            	JLabel saleLabel = new JLabel("$" + salePrice.toString());
+            	saleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+            	saleLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+            	saleLabel.setForeground(Color.RED);
+            	this.pricePanel.add(saleLabel);
+            }
+            else{
+            	this.pricePanel.add(this.priceLabel);
+            }
+            
+            
+            this.itemButton.add(this.pricePanel, BorderLayout.SOUTH);
+           
             this.itemPanel.add(this.itemButton, BorderLayout.CENTER);
+
             this.gridPanel.add(this.itemPanel);
+            
+            
         }
         
         //Scroll Pane

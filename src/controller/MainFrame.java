@@ -35,7 +35,7 @@ public class MainFrame extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Image icon = Toolkit.getDefaultToolkit().getImage("./img/ShoppingCart.png");
 		this.setIconImage(icon);
-//		setResizable(false);
+		setResizable(false);
 		
 		// Instantiation of controller and card
 		this.cont = new Controller();

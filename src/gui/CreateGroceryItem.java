@@ -37,6 +37,8 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JCheckBox;
+import javax.swing.JSpinner;
 
 /**
  * @author Yu Sen
@@ -61,6 +63,9 @@ public class CreateGroceryItem extends JPanel{
 	private JButton btnDeleteItem;
 	private String filePath;
 	private File selectedFile;
+	private JCheckBox chckbxOnSale;
+	private JSpinner spinner;
+	private JLabel lblOff;
 	
 	
 	public CreateGroceryItem(MainFrame main){
@@ -195,6 +200,32 @@ public class CreateGroceryItem extends JPanel{
 		this.lblonlyAddSquare.setBounds(135, 313, 165, 16);
 		this.middlePanel.add(this.lblonlyAddSquare);
 		
+		this.chckbxOnSale = new JCheckBox("On Sale");
+		this.chckbxOnSale.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (chckbxOnSale.isSelected()){
+					spinner.setEnabled(true);
+				}
+				else if (chckbxOnSale.isSelected() == false){
+					spinner.setEnabled(false);
+				}
+			}
+		});
+		this.chckbxOnSale.setFont(new Font("Tahoma", Font.BOLD, 18));
+		this.chckbxOnSale.setBounds(325, 225, 100, 25);
+		this.middlePanel.add(this.chckbxOnSale);
+		
+		this.spinner = new JSpinner();
+		this.spinner.setEnabled(false);
+		this.spinner.setFont(new Font("Tahoma", Font.BOLD, 15));
+		this.spinner.setBounds(437, 226, 50, 26);
+		this.middlePanel.add(this.spinner);
+		
+		this.lblOff = new JLabel("% Off");
+		this.lblOff.setFont(new Font("Tahoma", Font.BOLD, 16));
+		this.lblOff.setBounds(487, 225, 56, 26);
+		this.middlePanel.add(this.lblOff);
+		
 //		this.btnDeleteItem = new JButton("Delete Item");
 //		this.btnDeleteItem.addActionListener(new ActionListener() {
 //			public void actionPerformed(ActionEvent e) {
@@ -311,6 +342,7 @@ public class CreateGroceryItem extends JPanel{
 //			
 			String folder = ".\\img";
 //	        System.out.println(folder);
+			System.out.println(this.chckbxOnSale.isSelected());
 			try{
 				
 				BufferedImage originalImage = ImageIO.read(new File(this.filePath));
@@ -323,7 +355,7 @@ public class CreateGroceryItem extends JPanel{
 				
 				String finalPath = "./img/" + fileName;
 				
-				this.main.getController().createGroceryItem(this.itemName.getText(), finalPrice, this.quantityText.getText(), finalPath);
+				this.main.getController().createGroceryItem(this.itemName.getText(), finalPrice, this.quantityText.getText(), finalPath, this.chckbxOnSale.isSelected(), this.spinner.getValue().toString());
 				ImageIO.write(originalImage, "jpg", destinationFile);
 				
 				JLabel label = new JLabel("Item Created!");

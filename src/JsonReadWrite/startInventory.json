@@ -3,78 +3,104 @@
     "name": "Milk",
     "price": 2.99,
     "quantity": 5,
-    "picFile": "./img/milk1.jpg"
+    "picFile": "./img/milk1.jpg",
+    "onSale": true,
+    "percentOff": 0.3
   },
   {
     "name": "Bread",
     "price": 1.99,
     "quantity": 5,
-    "picFile": "./img/bread2.jpg"
+    "picFile": "./img/bread2.jpg",
+    "onSale": false,
+    "percentOff": 0
   },
   {
     "name": "Tomato",
     "price": 1.15,
     "quantity": 5,
-    "picFile": "./img/tomato.jpg"
+    "picFile": "./img/tomato.jpg",
+    "onSale": false,
+    "percentOff": 0
   },
   {
     "name": "Lettuce",
     "price": 2.10,
     "quantity": 5,
-    "picFile": "./img/lettuce.jpg"
+    "picFile": "./img/lettuce.jpg",
+    "onSale": false,
+    "percentOff": 0
   },
   {
     "name": "Watermelon",
     "price": 3.50,
     "quantity": 5,
-    "picFile": "./img/watermelon1.jpg"
+    "picFile": "./img/watermelon1.jpg",
+    "onSale": false,
+    "percentOff": 0
   },
   {
     "name": "Chicken Breast",
     "price": 3.00,
     "quantity": 5,
-    "picFile": "./img/bonelessChickenBreast.jpg"
+    "picFile": "./img/bonelessChickenBreast.jpg",
+    "onSale": false,
+    "percentOff": 0
   },
   {
     "name": "Eggs Carton",
     "price": 2.20,
     "quantity": 5,
-    "picFile": "./img/eggsCarton.jpg"
+    "picFile": "./img/eggsCarton.jpg",
+    "onSale": false,
+    "percentOff": 0
   },
   {
     "name": "Lays Classic",
     "price": 1.50,
     "quantity": 5,
-    "picFile": "./img/laysClassic.jpg"
+    "picFile": "./img/laysClassic.jpg",
+    "onSale": false,
+    "percentOff": 0
   },
   {
     "name": "Apple",
     "price": 0.50,
     "quantity": 100,
-    "picFile": "./img/apple.jpg"
+    "picFile": "./img/apple.jpg",
+    "onSale": false,
+    "percentOff": 0
   },
   {
     "name": "Banana",
     "price": 0.30,
     "quantity": 150,
-    "picFile": "./img/banana.jpg"
+    "picFile": "./img/banana.jpg",
+    "onSale": false,
+    "percentOff": 0
   },
   {
     "name": "Orange Juice",
     "price": 3.50,
     "quantity": 70,
-    "picFile": "./img/orangejuice.jpg"
+    "picFile": "./img/orangejuice.jpg",
+    "onSale": false,
+    "percentOff": 0
   },
   {
     "name": "Cheese",
     "price": 4.00,
     "quantity": 30,
-    "picFile": "./img/cheese.jpg"
+    "picFile": "./img/cheese.jpg",
+    "onSale": false,
+    "percentOff": 0
   },
   {
     "name": "Pasta",
     "price": 1.50,
     "quantity": 120,
-    "picFile": "./img/pasta.jpg"
+    "picFile": "./img/pasta.jpg",
+    "onSale": false,
+    "percentOff": 0
   }
 ]

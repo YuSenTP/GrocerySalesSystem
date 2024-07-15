@@ -33,6 +33,9 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
+import javax.swing.JCheckBox;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 
 /**
  * @author Yu Sen
@@ -56,6 +59,9 @@ public class EditGroceryItem extends JPanel{
 	private JTextField quantityText;
 	private JLabel lblonlyAddSquare;
 	private JButton btnDeleteItem;
+	private JCheckBox chckbxOnSale;
+	private JSpinner spinner;
+	private JLabel lblOff;
 	
 	
 	public EditGroceryItem(MainFrame main, GroceryItem item){ 
@@ -151,6 +157,42 @@ public class EditGroceryItem extends JPanel{
 		this.btnDeleteItem.setFont(new Font("Tahoma", Font.BOLD, 15));
 		this.btnDeleteItem.setBounds(585, 330, 128, 39);
 		this.middlePanel.add(this.btnDeleteItem);
+				
+		this.chckbxOnSale = new JCheckBox("On Sale");
+		this.chckbxOnSale.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (chckbxOnSale.isSelected()){
+					spinner.setEnabled(true);
+				}
+				else if (chckbxOnSale.isSelected() == false){
+					spinner.setEnabled(false);
+				}
+			}
+		});
+		this.chckbxOnSale.setFont(new Font("Tahoma", Font.BOLD, 18));
+		this.chckbxOnSale.setBounds(325, 236, 100, 25);
+		this.middlePanel.add(this.chckbxOnSale);
+		
+		this.spinner = new JSpinner();
+		this.spinner.setModel(new SpinnerNumberModel(1, 1, 100, 1)); // set limit for spinner min 1 max 100
+		this.spinner.setFont(new Font("Tahoma", Font.BOLD, 15));
+		this.spinner.setBounds(437, 237, 50, 26);
+		this.middlePanel.add(this.spinner);
+		
+		if (this.item.getOnSale()){
+			this.chckbxOnSale.setSelected(true);
+			this.spinner.setEnabled(true);
+			this.spinner.setValue(this.item.getPercentOff()*100);
+		}
+		else{
+			this.chckbxOnSale.setSelected(false);
+			this.spinner.setEnabled(false);
+		}
+		
+		this.lblOff = new JLabel("% Off");
+		this.lblOff.setFont(new Font("Tahoma", Font.BOLD, 16));
+		this.lblOff.setBounds(487, 236, 56, 26);
+		this.middlePanel.add(this.lblOff);
 		
 		this.bottomPanel = new JPanel();
 		this.bottomPanel.setBackground(Color.WHITE);
@@ -264,6 +306,7 @@ public class EditGroceryItem extends JPanel{
 				this.main.getController().editGroceryItemPrice(this.item, this.priceText.getText());
 			}
 			this.main.getController().editGroceryItemQuantity(this.item, this.quantityText.getText());
+			this.main.getController().editGroceryItemSale(this.item, this.chckbxOnSale.isSelected(), this.spinner.getValue().toString());
 			JLabel label = new JLabel("Item Updated Successfully");
 			label.setFont(new Font("Tahoma", Font.BOLD, 14));
 			JOptionPane.showMessageDialog(this, label, "Update Item", JOptionPane.INFORMATION_MESSAGE);
