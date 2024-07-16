@@ -37,6 +37,10 @@ public class Controller {
 		this.ds.writeFile();
 	}
 	
+	public String[] getCategory(){
+		return this.ds.getCategory();
+	}
+	
 	//Manager
 	public void createGroceryItem(String itemName, String price, String quantity, String picFile, boolean onSale, String percentOff) { 
 		GroceryItem temp = new GroceryItem(itemName, price, quantity, picFile, onSale, Double.valueOf(percentOff) / 100);

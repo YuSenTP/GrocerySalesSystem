@@ -5,7 +5,8 @@
     "quantity": 5,
     "picFile": "./img/milk1.jpg",
     "onSale": true,
-    "percentOff": 0.3
+    "percentOff": 0.3,
+    "category": "Dairy"
   },
   {
     "name": "Bread",
@@ -13,7 +14,8 @@
     "quantity": 5,
     "picFile": "./img/bread2.jpg",
     "onSale": false,
-    "percentOff": 0
+    "percentOff": 0,
+    "category": "Others"
   },
   {
     "name": "Tomato",
@@ -21,7 +23,8 @@
     "quantity": 5,
     "picFile": "./img/tomato.jpg",
     "onSale": false,
-    "percentOff": 0
+    "percentOff": 0,
+    "category": "Vegetables"
   },
   {
     "name": "Lettuce",
@@ -29,7 +32,8 @@
     "quantity": 5,
     "picFile": "./img/lettuce.jpg",
     "onSale": false,
-    "percentOff": 0
+    "percentOff": 0,
+    "category": "Vegetables"
   },
   {
     "name": "Watermelon",
@@ -37,7 +41,8 @@
     "quantity": 5,
     "picFile": "./img/watermelon1.jpg",
     "onSale": false,
-    "percentOff": 0
+    "percentOff": 0,
+    "category": "Fruits"
   },
   {
     "name": "Chicken Breast",
@@ -45,7 +50,8 @@
     "quantity": 5,
     "picFile": "./img/bonelessChickenBreast.jpg",
     "onSale": false,
-    "percentOff": 0
+    "percentOff": 0,
+    "category": "Meat"
   },
   {
     "name": "Eggs Carton",
@@ -53,7 +59,8 @@
     "quantity": 5,
     "picFile": "./img/eggsCarton.jpg",
     "onSale": false,
-    "percentOff": 0
+    "percentOff": 0,
+    "category": "Others"
   },
   {
     "name": "Lays Classic",
@@ -61,7 +68,8 @@
     "quantity": 5,
     "picFile": "./img/laysClassic.jpg",
     "onSale": false,
-    "percentOff": 0
+    "percentOff": 0,
+    "category": "Others"
   },
   {
     "name": "Apple",
@@ -69,7 +77,8 @@
     "quantity": 100,
     "picFile": "./img/apple.jpg",
     "onSale": false,
-    "percentOff": 0
+    "percentOff": 0,
+    "category": "Fruits"
   },
   {
     "name": "Banana",
@@ -77,7 +86,8 @@
     "quantity": 150,
     "picFile": "./img/banana.jpg",
     "onSale": false,
-    "percentOff": 0
+    "percentOff": 0,
+    "category": "Fruits"
   },
   {
     "name": "Orange Juice",
@@ -85,7 +95,8 @@
     "quantity": 70,
     "picFile": "./img/orangejuice.jpg",
     "onSale": false,
-    "percentOff": 0
+    "percentOff": 0,
+    "category": "Others"
   },
   {
     "name": "Cheese",
@@ -93,7 +104,8 @@
     "quantity": 30,
     "picFile": "./img/cheese.jpg",
     "onSale": false,
-    "percentOff": 0
+    "percentOff": 0,
+    "category": "Dairy"
   },
   {
     "name": "Pasta",
@@ -101,6 +113,7 @@
     "quantity": 120,
     "picFile": "./img/pasta.jpg",
     "onSale": false,
-    "percentOff": 0
+    "percentOff": 0,
+    "category": "Others"
   }
 ]

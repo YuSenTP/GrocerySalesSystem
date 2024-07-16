@@ -29,6 +29,9 @@ import javax.swing.border.EmptyBorder;
 
 import controller.MainFrame;
 import data.GroceryItem;
+import java.awt.FlowLayout;
+import javax.swing.BoxLayout;
+import java.awt.Component;
 
 /**
  * @author Yu Sen
@@ -69,12 +72,18 @@ public class ManagerMenu extends JPanel{
 //            {"Cherry", "$23.16", "cherry.png"}
 //        };
 	private JPanel pricePanel;
+	private JComboBox comboBox;
+	private JLabel lblFiller;
+	private JLabel lblView;
+	private String[] category;
+	private static String categorySele = "All";
 
 	
 	public ManagerMenu(MainFrame main){
 		this.main = main;
 		this.main.setTitle("Joy MiniMart - Manager Menu");
 		this.inventory = this.main.getController().getInventory();
+		this.category = this.main.getController().getCategory();
 		
 		this.setBackground(Color.WHITE);
 		this.setLayout(new BorderLayout(0, 0));
@@ -85,6 +94,12 @@ public class ManagerMenu extends JPanel{
         
         for (int i = 0; i < this.inventory.size(); i++) {
         	this.currentItem = this.inventory.elementAt(i);
+        	
+        	if (ManagerMenu.categorySele.equals("All") != true){
+        		if (this.currentItem.getCategory().equals(ManagerMenu.categorySele) != true){
+        			continue;
+        		}
+        	}
         	
         	this.itemPanel = new JPanel(new BorderLayout());
         	
@@ -178,18 +193,42 @@ public class ManagerMenu extends JPanel{
         
         //Top Panel
         this.topPanel = new JPanel();
+        this.topPanel.setPreferredSize(new Dimension(10, 70));
+        this.topPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        
+        this.lblFiller = new JLabel("");
+        this.lblFiller.setPreferredSize(new Dimension(140, 22));
+        this.topPanel.add(this.lblFiller);
 
         this.lblGroceryItems = new JLabel("Grocery Items");
+        this.lblGroceryItems.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.lblGroceryItems.setPreferredSize(new Dimension(200, 60));
         this.lblGroceryItems.setFont(new Font("Tahoma", Font.BOLD, 20));
         this.lblGroceryItems.setHorizontalAlignment(SwingConstants.CENTER);
         this.topPanel.add(this.lblGroceryItems);
+        
+        
 
-//        JComboBox comboBox = new JComboBox();
-//        panel_1.add(comboBox);
+        this.comboBox = new JComboBox(this.category);
+        this.comboBox.setSelectedItem(ManagerMenu.categorySele);
+        this.comboBox.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		ManagerMenu.categorySele = comboBox.getSelectedItem().toString();
+        		System.out.println(comboBox.getSelectedItem().toString());
+        		main.showManagerMenu();
+        	}
+        });;
+        
+        this.lblView = new JLabel("View:");
+        this.lblView.setFont(new Font("Tahoma", Font.BOLD, 17));
+        this.topPanel.add(this.lblView);
+        this.comboBox.setAlignmentX(Component.RIGHT_ALIGNMENT);
+        this.comboBox.setFont(new Font("Tahoma", Font.BOLD, 15));
+        this.comboBox.setFocusable(false);
+        this.topPanel.add(this.comboBox);
         
         this.add(this.topPanel, BorderLayout.NORTH);
-
+        
         //Bottom Panel
         this.bottomPanel = new JPanel();
         this.bottomPanel.setBackground(Color.WHITE);  
@@ -224,16 +263,16 @@ public class ManagerMenu extends JPanel{
     
 	private void showItemScreen(String name, GroceryItem item){
 		System.out.println(name);
+		System.out.println(item.getCategory());
 		this.main.showEditGroceryItem(item);
 	}
 	
 	private void back(){
+		ManagerMenu.categorySele = "All";
 		this.main.showManagerHome();
 	}
 	
 	private void createItem(){
 		this.main.showCreateItem();
 	}
-	
-
 }

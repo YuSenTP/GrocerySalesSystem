@@ -5,7 +5,7 @@ import java.text.DecimalFormat;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-@JsonPropertyOrder({"name", "price", "quantity", "picFile", "onSale", "percentOff"}) //To change the save order to json
+@JsonPropertyOrder({"name", "price", "quantity", "picFile", "onSale", "percentOff", "category"}) //To change the save order to json
 public class GroceryItem {
 
 	private String name;
@@ -14,6 +14,7 @@ public class GroceryItem {
 	private String picFile;
 	private boolean onSale;
 	private double percentOff; // how many percent off
+	private String category;
 	
 	public GroceryItem(){
 		
@@ -87,6 +88,14 @@ public class GroceryItem {
 
 	public void setPercentOff(double percentOff) {
 		this.percentOff = percentOff;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 //	public void subtractQuantity() { 
