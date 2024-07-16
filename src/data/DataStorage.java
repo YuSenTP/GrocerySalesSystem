@@ -23,7 +23,8 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 	private Vector<Manager> managers;
 //	Vector<User> storage = new Vector<User>();
 	private Order currentOrder;
-	private String[] category = {"All", "Fruits", "Vegetables", "Meat", "Dairy", "Others"};
+//	private String[] category = {"All", "Fruits", "Vegetables", "Meat", "Dairy", "Others"};
+	private Vector<String> category;
 	
 	public DataStorage(){
 		this.inventory = new Vector<GroceryItem>();
@@ -31,7 +32,15 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 		this.staffs = new Vector<Staff>();
 		this.managers = new Vector<Manager>();
 		this.currentOrder = new Order();
+		this.category = new Vector<String>();
 		
+		//To Delete
+		this.category.add("All");
+		this.category.add("Fruits");
+		this.category.add("Vegetables");
+		this.category.add("Meat");
+		this.category.add("Dairy");
+		this.category.add("Others");
 		
 		this.readFile();
 	}
@@ -57,12 +66,12 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 	}
 	
 	public String[] getCategory() {
-		return category;
+		return this.category.toArray(new String[this.category.size()]);
 	}
 
-	public void setCategory(String[] category) {
-		this.category = category;
-	}
+//	public void setCategory(String[] category) { //Not needed
+//		this.category = category;
+//	}
 
 	public void addItem(){
 		
