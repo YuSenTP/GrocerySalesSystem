@@ -1,0 +1,6 @@
+All;
+Fruits;
+Vegetables;
+Meat;
+Dairy;
+Other

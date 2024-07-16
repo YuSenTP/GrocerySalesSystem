@@ -3,7 +3,11 @@
  */
 package data;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Vector;
 
@@ -33,14 +37,6 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 		this.managers = new Vector<Manager>();
 		this.currentOrder = new Order();
 		this.category = new Vector<String>();
-		
-		//To Delete
-		this.category.add("All");
-		this.category.add("Fruits");
-		this.category.add("Vegetables");
-		this.category.add("Meat");
-		this.category.add("Dairy");
-		this.category.add("Others");
 		
 		this.readFile();
 	}
@@ -107,6 +103,18 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 //	        	 staff.start();
 	        	 
 //	         } 
+	         
+	         String temp = "", read = "";
+	         BufferedReader in = new BufferedReader(new FileReader("./src/JsonReadWrite/category.txt"));
+	         while ((read = in.readLine()) != null){
+	        	 temp += read;
+	         }
+	         in.close();
+	         String[] cc = temp.split(";");
+	         for (int i = 0; i < cc.length; i++){
+	        	 this.category.add(cc[i]);
+	         }
+	         
 			
 		}catch (IOException e) {
 	         e.printStackTrace();
@@ -124,6 +132,15 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 			objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File("./src/JsonReadWrite/manager.json"), this.managers);
 			objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File("./src/JsonReadWrite/staff.json"), this.staffs);
 			objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File("./src/JsonReadWrite/order.json"), this.orders);
+			
+			BufferedWriter out = new BufferedWriter(new FileWriter("src/JsonReadWrite/category.txt"));
+			for (int i = 0; i < this.category.size() - 1; i++){
+				out.write(this.category.get(i) + ";");
+				out.newLine();
+			}
+			out.write(this.category.get(this.category.size() - 1));
+			out.close();
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		} 

@@ -5,7 +5,7 @@
   "picFile" : "./img/milk1.jpg",
   "onSale" : true,
   "percentOff" : 0.3,
-  "category" : "Vegetables"
+  "category" : "Dairy"
 }, {
   "name" : "Bread",
   "price" : 1.99,
