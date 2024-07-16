@@ -25,9 +25,6 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.font.TextAttribute;
-import java.math.BigDecimal;
-import java.util.Map;
 import java.util.Vector;
 
 public class StaffMenu extends JPanel {
@@ -49,8 +46,6 @@ public class StaffMenu extends JPanel {
 //    private JLabel quantityField;
 //	private JButton decreaseButton;
 //	private JButton increaseButton;
-	private JPanel pricePanel;
-	private GroceryItem currentItem;
 
     public StaffMenu(MainFrame main) {
         this.main = main;
@@ -65,9 +60,9 @@ public class StaffMenu extends JPanel {
         this.gridPanel.setBackground(UIManager.getColor("OptionPane.background"));
 
         for (int i = 0; i < this.inventory.size(); i++) {
-            this.currentItem = this.inventory.elementAt(i);
+            GroceryItem currentItem = this.inventory.elementAt(i);
             
-            if (this.currentItem.getQuantity() == 0){
+            if (currentItem.getQuantity() == 0){
             	continue;
             }
 
@@ -90,61 +85,29 @@ public class StaffMenu extends JPanel {
 //            });
 
             // Item Pic
-            this.itemPic = new ImageIcon(this.currentItem.getPicFile());
+            this.itemPic = new ImageIcon(currentItem.getPicFile());
             Image img = this.itemPic.getImage();
             Image newimg = img.getScaledInstance(90, 90, java.awt.Image.SCALE_SMOOTH);
             this.itemPic = new ImageIcon(newimg);
             this.itemButton.setIcon(this.itemPic);
 
             // Item Name
-            this.nameLabel = new JLabel(this.currentItem.getName());
+            this.nameLabel = new JLabel(currentItem.getName());
             this.nameLabel.setHorizontalAlignment(SwingConstants.CENTER);
             this.nameLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
             this.itemButton.add(this.nameLabel, BorderLayout.NORTH);
 
             // Item Price
-//            this.priceLabel = new JLabel("$" + currentItem.getPrice().toString());
-//            this.priceLabel.setHorizontalAlignment(SwingConstants.CENTER);
-//            this.priceLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
-//            this.itemButton.add(this.priceLabel, BorderLayout.SOUTH);
-
-            this.pricePanel = new JPanel();
-            this.pricePanel.setOpaque(false);
-            
-            this.priceLabel = new JLabel("$" + this.currentItem.getPrice().toString());
+            this.priceLabel = new JLabel("$" + currentItem.getPrice().toString());
             this.priceLabel.setHorizontalAlignment(SwingConstants.CENTER);
             this.priceLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
-            
-            // If On Sale
-            if (this.currentItem.getOnSale()){
-            	Map<TextAttribute, Object> attributes = (Map<TextAttribute, Object>) this.priceLabel.getFont().getAttributes(); // HashMap Something like a dictonary in python where data are stored as key value pair
-            	attributes.put(TextAttribute.STRIKETHROUGH, TextAttribute.STRIKETHROUGH_ON); // Add new attribute to HashMap
-            	this.priceLabel.setFont(new Font(attributes));
-            	this.priceLabel.setForeground(Color.GRAY);
+            this.itemButton.add(this.priceLabel, BorderLayout.SOUTH);
 
-            	this.pricePanel.add(this.priceLabel);
-
-            	BigDecimal salePercent = new BigDecimal(1 - this.currentItem.getPercentOff());
-            	BigDecimal salePrice = this.currentItem.getPrice().multiply(salePercent);
-            	salePrice = salePrice.setScale(2, BigDecimal.ROUND_HALF_UP);
-            	JLabel saleLabel = new JLabel("$" + salePrice.toString());
-            	saleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-            	saleLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
-            	saleLabel.setForeground(Color.RED);
-            	this.pricePanel.add(saleLabel);
-            }
-            else{
-            	this.pricePanel.add(this.priceLabel);
-            }
-            
-            
-            this.itemButton.add(this.pricePanel, BorderLayout.SOUTH);
-            
             this.itemPanel.add(this.itemButton, BorderLayout.CENTER);
 
             // Add to Cart Button
             JButton addToCartButton = new JButton("Add to Cart");
-            addToCartButton.putClientProperty("object", this.currentItem);
+            addToCartButton.putClientProperty("object", currentItem);
             addToCartButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {

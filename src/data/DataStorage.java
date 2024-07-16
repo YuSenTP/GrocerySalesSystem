@@ -120,6 +120,11 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 		} 
 	}
 
+	public void setCurrentOrder(Order order) {
+		// TODO Auto-generated method stub
+        this.currentOrder = order;
+	}
+
 //	public User getUser(String n) {
 //		for (int i = 0 ; i <storage.size(); i++)
 //		{
