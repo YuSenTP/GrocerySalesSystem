@@ -48,7 +48,7 @@ public class Controller {
 	 }
 	//Manager
 	public void editGroceryItemPrice(GroceryItem item, String price) { 
-		int index = this.getInventory().indexOf(item);
+		int index = this.getInventory().indexOf(item); //IMPORTANT TO CHANGE This does not adhere to MVC, can only edit in data storage
 		GroceryItem temp = this.getInventory().get(index);
 		temp.setPrice(new BigDecimal(price));
 	 }
@@ -77,6 +77,15 @@ public class Controller {
 			temp.setPercentOff(0);
 		}
 	 }
+	//Manager
+	public void editGroceryItemCategory(GroceryItem item, String category) { 
+		int index = this.getInventory().indexOf(item);
+		GroceryItem temp = this.getInventory().get(index);
+//		System.out.println(category);
+		temp.setCategory(category);
+		
+	}
+	
 	//Manager
 	public void deleteGroceryItem(GroceryItem item) { 
 		this.getInventory().remove(item);

@@ -31,11 +31,13 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.JCheckBox;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.JComboBox;
 
 /**
  * @author Yu Sen
@@ -62,6 +64,8 @@ public class EditGroceryItem extends JPanel{
 	private JCheckBox chckbxOnSale;
 	private JSpinner spinner;
 	private JLabel lblOff;
+	private JLabel lblCategory;
+	private JComboBox comboBox;
 	
 	
 	public EditGroceryItem(MainFrame main, GroceryItem item){ 
@@ -194,6 +198,19 @@ public class EditGroceryItem extends JPanel{
 		this.lblOff.setBounds(487, 236, 56, 26);
 		this.middlePanel.add(this.lblOff);
 		
+		this.lblCategory = new JLabel("Category:");
+		this.lblCategory.setFont(new Font("Tahoma", Font.BOLD, 20));
+		this.lblCategory.setBounds(325, 298, 100, 26);
+		this.middlePanel.add(this.lblCategory);
+		
+		// Array Slicing to exclude "All"
+		this.comboBox = new JComboBox(Arrays.copyOfRange(this.main.getController().getCategory(), 1, this.main.getController().getCategory().length));
+		this.comboBox.setFont(new Font("Tahoma", Font.BOLD, 16));
+		this.comboBox.setBounds(437, 301, 128, 26);
+		this.comboBox.setFocusable(false);
+		this.comboBox.setSelectedItem(this.item.getCategory());
+		this.middlePanel.add(this.comboBox);
+		
 		this.bottomPanel = new JPanel();
 		this.bottomPanel.setBackground(Color.WHITE);
 		this.bottomPanel.setLayout(new BorderLayout(0, 0));
@@ -307,6 +324,7 @@ public class EditGroceryItem extends JPanel{
 			}
 			this.main.getController().editGroceryItemQuantity(this.item, this.quantityText.getText());
 			this.main.getController().editGroceryItemSale(this.item, this.chckbxOnSale.isSelected(), this.spinner.getValue().toString());
+			this.main.getController().editGroceryItemCategory(this.item, this.comboBox.getSelectedItem().toString());
 			JLabel label = new JLabel("Item Updated Successfully");
 			label.setFont(new Font("Tahoma", Font.BOLD, 14));
 			JOptionPane.showMessageDialog(this, label, "Update Item", JOptionPane.INFORMATION_MESSAGE);
