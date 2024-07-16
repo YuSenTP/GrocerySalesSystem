@@ -201,4 +201,24 @@ public class Controller {
 		
 	}
 
+	public Order getCurrentOrder() {
+		// TODO Auto-generated method stub
+        return this.ds.getCurrentOrder();
+	}
+
+	public int generateOrderNumber() {
+		// TODO Auto-generated method stub
+        return ds.getOrders().size() + 1;
+	}
+
+	public void confirmOrder() {
+		// TODO Auto-generated method stub
+		 Order currentOrder = this.ds.getCurrentOrder();
+	        if (!currentOrder.getGroceryItems().isEmpty()) {
+	            this.ds.getOrders().add(currentOrder);
+	            this.ds.setCurrentOrder(new Order());
+	        }
+	}
+
+
 }
