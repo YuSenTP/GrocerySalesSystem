@@ -102,4 +102,12 @@
   "onSale" : false,
   "percentOff" : 0.0,
   "category" : "Others"
+}, {
+  "name" : "ccd",
+  "price" : 2.30,
+  "quantity" : 24,
+  "picFile" : "./img/cubecrop.jpg",
+  "onSale" : true,
+  "percentOff" : 0.4,
+  "category" : "Vegetables"
 } ]

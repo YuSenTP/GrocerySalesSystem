@@ -20,8 +20,9 @@ public class GroceryItem {
 		
 	}
 	
-	public GroceryItem(String name, String price, String quantity, String picFile, boolean onSale, double percentOff) { 
-		this.price = new BigDecimal(price); // Took in as a string as the double will truncate the .00 to .0
+	public GroceryItem(String name, String price, String quantity, String picFile, boolean onSale, double percentOff, String category) { 
+		this.price = new BigDecimal(price); // Took in as a string as the double will truncate the .00 to .0 -- Nvm lol
+		this.price = this.price.setScale(2, BigDecimal.ROUND_HALF_UP); //Rounds and set to 2dp
 		this.name = name;
 		this.quantity = Integer.valueOf(quantity);
 		this.picFile = picFile;
@@ -32,6 +33,7 @@ public class GroceryItem {
 		else{
 			this.percentOff = 0;
 		}
+		this.category = category;
 		
 	 }
 	

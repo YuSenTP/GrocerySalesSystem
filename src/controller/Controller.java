@@ -42,8 +42,8 @@ public class Controller {
 	}
 	
 	//Manager
-	public void createGroceryItem(String itemName, String price, String quantity, String picFile, boolean onSale, String percentOff) { 
-		GroceryItem temp = new GroceryItem(itemName, price, quantity, picFile, onSale, Double.valueOf(percentOff) / 100);
+	public void createGroceryItem(String itemName, String price, String quantity, String picFile, boolean onSale, String percentOff, String category) { 
+		GroceryItem temp = new GroceryItem(itemName, price, quantity, picFile, onSale, Double.valueOf(percentOff) / 100, category);
 		this.getInventory().add(temp);
 	 }
 	//Manager

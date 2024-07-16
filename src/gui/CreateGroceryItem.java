@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -39,6 +40,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JCheckBox;
 import javax.swing.JSpinner;
+import javax.swing.JComboBox;
 
 /**
  * @author Yu Sen
@@ -66,6 +68,8 @@ public class CreateGroceryItem extends JPanel{
 	private JCheckBox chckbxOnSale;
 	private JSpinner spinner;
 	private JLabel lblOff;
+	private JLabel lblCategory;
+	private JComboBox comboBox;
 	
 	
 	public CreateGroceryItem(MainFrame main){
@@ -226,6 +230,17 @@ public class CreateGroceryItem extends JPanel{
 		this.lblOff.setBounds(487, 225, 56, 26);
 		this.middlePanel.add(this.lblOff);
 		
+		this.lblCategory = new JLabel("Category:");
+		this.lblCategory.setFont(new Font("Tahoma", Font.BOLD, 20));
+		this.lblCategory.setBounds(325, 285, 100, 26);
+		this.middlePanel.add(this.lblCategory);
+		
+		this.comboBox = new JComboBox(Arrays.copyOfRange(this.main.getController().getCategory(), 1, this.main.getController().getCategory().length));
+		this.comboBox.setFont(new Font("Tahoma", Font.BOLD, 16));
+		this.comboBox.setFocusable(false);
+		this.comboBox.setBounds(437, 288, 128, 26);
+		this.middlePanel.add(this.comboBox);
+		
 //		this.btnDeleteItem = new JButton("Delete Item");
 //		this.btnDeleteItem.addActionListener(new ActionListener() {
 //			public void actionPerformed(ActionEvent e) {
@@ -355,7 +370,7 @@ public class CreateGroceryItem extends JPanel{
 				
 				String finalPath = "./img/" + fileName;
 				
-				this.main.getController().createGroceryItem(this.itemName.getText(), finalPrice, this.quantityText.getText(), finalPath, this.chckbxOnSale.isSelected(), this.spinner.getValue().toString());
+				this.main.getController().createGroceryItem(this.itemName.getText(), finalPrice, this.quantityText.getText(), finalPath, this.chckbxOnSale.isSelected(), this.spinner.getValue().toString(), this.comboBox.getSelectedItem().toString());
 				ImageIO.write(originalImage, "jpg", destinationFile);
 				
 				JLabel label = new JLabel("Item Created!");
