@@ -156,6 +156,7 @@ public class StaffCart extends JPanel {
     	        main.getController().getCurrentOrder().calculateTotalCost();
     	        updateCartItems();
     	        updateTotalLabel();
+    	        System.out.println("Quantity Adjusted");
     	    } else {
     	        main.getController().getCurrentOrder().deleteGroceryItem(item);
     	        updateCartItems();
