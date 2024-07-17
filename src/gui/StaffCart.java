@@ -8,6 +8,8 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigDecimal;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
@@ -130,7 +132,7 @@ public class StaffCart extends JPanel {
 
             decreaseButton.addActionListener(e -> updateItemQuantity(currentItem, currentItem.getQuantity() - 1));
             increaseButton.addActionListener(e -> updateItemQuantity(currentItem, currentItem.getQuantity() + 1));
-
+            
             quantityPanel.add(decreaseButton, BorderLayout.WEST);
             quantityPanel.add(quantityLabel, BorderLayout.CENTER);
             quantityPanel.add(increaseButton, BorderLayout.EAST);
@@ -149,16 +151,21 @@ public class StaffCart extends JPanel {
     }
 
     private void updateItemQuantity(GroceryItem item, int newQuantity) {
-        if (newQuantity > item.getQuantity()) {
-            main.getController().editOrder("add", item);
-        } else if (newQuantity < item.getQuantity()) {
-            main.getController().editOrder("delete", item);
-        }
-        updateCartItems();
+    	 if (newQuantity > 0) {
+    	        item.setQuantity(newQuantity);
+    	        main.getController().getCurrentOrder().calculateTotalCost();
+    	        updateCartItems();
+    	        updateTotalLabel();
+    	    } else {
+    	        main.getController().getCurrentOrder().deleteGroceryItem(item);
+    	        updateCartItems();
+    	        updateTotalLabel();
+    	    }
     }
 
     private void updateTotalLabel() {
         Order currentOrder = main.getController().getCurrentOrder();
+        BigDecimal totalCost = currentOrder.calculateTotalCost();
         totalLabel.setText("Total: $" + currentOrder.getTotalCost());
     }
 
