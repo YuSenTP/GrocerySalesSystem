@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.Vector;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -41,37 +42,90 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 		this.readFile();
 	}
 	
-	public Vector<GroceryItem> getInventory(){
-		return this.inventory;
+	public GroceryItem[] getInventory(){
+		return this.inventory.toArray(new GroceryItem[this.inventory.size()]);
 	}
 	
-	public Vector<Order> getOrders(){
-		return this.orders;
+	public Order[] getOrders(){
+		return this.orders.toArray(new Order[this.orders.size()]);
 	}
 	
-	public Vector<Staff> getStaffs(){
-		return this.staffs;
+	public Staff[] getStaffs(){
+		return this.staffs.toArray(new Staff[this.staffs.size()]);
 	}
 	
-	public Vector<Manager> getManagers(){
-		return this.managers;
+	public Manager[] getManagers(){
+		return this.managers.toArray(new Manager[this.managers.size()]);
 	}
 	
 	public Order getCurrentOrder(){
 		return this.currentOrder;
 	}
 	
+	public void addOrder(Order order){
+		this.orders.add(order);
+	}
+	
 	public String[] getCategory() {
 		return this.category.toArray(new String[this.category.size()]);
 	}
 
-//	public void setCategory(String[] category) { //Not needed
-//		this.category = category;
-//	}
-
-	public void addItem(){
-		
+	public void addCategory(String category) {
+		this.category.add(this.category.size()-2, category);
 	}
+
+	public void createGroceryItem(GroceryItem item){
+		this.inventory.add(item);
+	}
+	
+	public void editGroceryItemPrice(GroceryItem item, String price){
+//		int index = this.inventory.indexOf(item);
+//		GroceryItem temp = this.inventory.get(index);
+		item.setPrice(new BigDecimal(price));
+	}
+	
+	public void editGroceryItemName(GroceryItem item, String name) { 
+//		int index = this.inventory.indexOf(item);
+//		GroceryItem temp = this.inventory.get(index);
+		item.setName(name);
+	 }
+	
+	public void editGroceryItemQuantity(GroceryItem item, String quantity) { 
+//		int index = this.inventory.indexOf(item);
+//		GroceryItem temp = this.inventory.get(index);
+		item.setQuantity(Integer.valueOf(quantity));
+	 }
+	
+	public void editGroceryItemSale(GroceryItem item, boolean onSale, String percentOff) { 
+//		int index = this.inventory.indexOf(item);
+//		GroceryItem temp = this.inventory.get(index);
+		if (onSale){
+			item.setOnSale(onSale);
+			item.setPercentOff(Double.valueOf(percentOff)/100);
+		}
+		else{
+			item.setOnSale(onSale);
+			item.setPercentOff(0);
+		}
+	 }
+	
+	public void editGroceryItemCategory(GroceryItem item, String category) { 
+//		int index = this.inventory.indexOf(item);
+//		GroceryItem temp = this.inventory.get(index);
+//		System.out.println(category);
+		item.setCategory(category);
+	}
+	
+	public void deleteGroceryItem(GroceryItem item) { 
+		this.inventory.remove(item);
+	 }
+	
+	public void changePicPath(String path, GroceryItem item){
+//		int index = this.inventory.indexOf(item);
+//		this.inventory.get(index).setPicFile(path);
+		item.setPicFile(path);
+	}
+	
 	
 	public void readFile(){ // Method to read from JSON file
 		ObjectMapper objectMapper = new ObjectMapper();

@@ -66,11 +66,13 @@ public class EditGroceryItem extends JPanel{
 	private JLabel lblOff;
 	private JLabel lblCategory;
 	private JComboBox comboBox;
+	private String[] category;
 	
 	
 	public EditGroceryItem(MainFrame main, GroceryItem item){ 
 		this.main = main;
 		this.item = item;
+		this.category = this.main.getController().getCategory();
 //		System.out.println(this.item.getName());
 		
 		this.main.setTitle("Joy MiniMart - Edit Item");
@@ -204,7 +206,38 @@ public class EditGroceryItem extends JPanel{
 		this.middlePanel.add(this.lblCategory);
 		
 		// Array Slicing to exclude "All"
-		this.comboBox = new JComboBox(Arrays.copyOfRange(this.main.getController().getCategory(), 1, this.main.getController().getCategory().length));
+		this.comboBox = new JComboBox(Arrays.copyOfRange(this.category, 1, this.category.length));
+		this.comboBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (comboBox.getSelectedItem().equals("Add New...")) {
+                	JLabel label = new JLabel("Enter new category:");
+    				label.setFont(new Font("Tahoma", Font.BOLD, 16));
+    				
+    				JTextField textField = new JTextField();
+                    textField.setFont(new Font("Tahoma", Font.PLAIN, 16));
+
+                    // Customize the input dialog
+                    Object[] message = {
+                        label, textField
+                    };
+                    int option = JOptionPane.showConfirmDialog(EditGroceryItem.this, message, "Add New Category", JOptionPane.OK_CANCEL_OPTION);
+                    if (option == JOptionPane.OK_OPTION) {
+                    	String newCat = textField.getText();
+                    	if (newCat != null && !newCat.trim().isEmpty()) { //If no input
+                    		comboBox.insertItemAt(newCat, comboBox.getItemCount() - 2);
+                    		comboBox.setSelectedItem(newCat);
+                    		main.getController().addCategory(newCat);
+                    	} else {
+                    		comboBox.setSelectedItem(item.getCategory());
+                    	}
+                    }
+                    else{ // If cancel
+                    	comboBox.setSelectedItem(item.getCategory());
+                    }
+                }
+            }
+        });
 		this.comboBox.setFont(new Font("Tahoma", Font.BOLD, 16));
 		this.comboBox.setBounds(437, 301, 128, 26);
 		this.comboBox.setFocusable(false);

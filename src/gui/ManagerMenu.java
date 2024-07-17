@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.font.TextAttribute;
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.Vector;
 
@@ -39,7 +40,7 @@ import java.awt.Component;
  */
 public class ManagerMenu extends JPanel{
 	private MainFrame main;
-	private Vector<GroceryItem> inventory;
+	private GroceryItem[] inventory;
 	private JPanel gridPanel;
 	private JPanel itemPanel;
 	private JButton itemButton;
@@ -92,8 +93,8 @@ public class ManagerMenu extends JPanel{
         this.gridPanel.setBorder(new EmptyBorder(0, 10, 10, 10));// top, left, bottom, right
         this.gridPanel.setBackground(UIManager.getColor("OptionPane.background"));
         
-        for (int i = 0; i < this.inventory.size(); i++) {
-        	this.currentItem = this.inventory.elementAt(i);
+        for (int i = 0; i < this.inventory.length; i++) {
+        	this.currentItem = this.inventory[i];
         	
         	if (ManagerMenu.categorySele.equals("All") != true){
         		if (this.currentItem.getCategory().equals(ManagerMenu.categorySele) != true){
@@ -209,7 +210,7 @@ public class ManagerMenu extends JPanel{
         
         
 
-        this.comboBox = new JComboBox(this.category);
+        this.comboBox = new JComboBox(Arrays.copyOfRange(this.category, 0, this.category.length - 1));
         this.comboBox.setSelectedItem(ManagerMenu.categorySele);
         this.comboBox.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {

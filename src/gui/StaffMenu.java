@@ -29,7 +29,7 @@ import java.util.Vector;
 
 public class StaffMenu extends JPanel {
     private MainFrame main;
-    private Vector<GroceryItem> inventory;
+    private GroceryItem[] inventory;
     private JPanel gridPanel;
     private JPanel itemPanel;
     private JButton itemButton;
@@ -59,8 +59,8 @@ public class StaffMenu extends JPanel {
         this.gridPanel.setBorder(new EmptyBorder(0, 10, 10, 10)); // top, left, bottom, right
         this.gridPanel.setBackground(UIManager.getColor("OptionPane.background"));
 
-        for (int i = 0; i < this.inventory.size(); i++) {
-            GroceryItem currentItem = this.inventory.elementAt(i);
+        for (int i = 0; i < this.inventory.length; i++) {
+            GroceryItem currentItem = this.inventory[i];
             
             if (currentItem.getQuantity() == 0){
             	continue;

@@ -3,4 +3,5 @@ Fruits;
 Vegetables;
 Meat;
 Dairy;
-Other
+Others;
+Add New...

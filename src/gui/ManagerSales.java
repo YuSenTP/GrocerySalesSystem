@@ -39,7 +39,7 @@ public class ManagerSales extends JPanel{
 	private JPanel bottomPanel;
 	private JButton backButton;
 	private JScrollPane scrollPane;
-	private Vector<Order> orders;
+	private Order[] orders;
 	private Order currentOrder;
 //	private JPanel orderPanel;
 	private JButton orderButton;
@@ -77,8 +77,8 @@ public class ManagerSales extends JPanel{
 //        System.out.println(this.orders.size());
         
         //for loop to create order buttons
-        for (int i = 0; i < this.orders.size(); i++) {
-        	this.currentOrder = this.orders.elementAt(i);
+        for (int i = 0; i < this.orders.length; i++) {
+        	this.currentOrder = this.orders[i];
         	
 //        	this.orderPanel = new JPanel(new BorderLayout());
         	//Button

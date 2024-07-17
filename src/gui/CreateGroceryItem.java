@@ -70,10 +70,11 @@ public class CreateGroceryItem extends JPanel{
 	private JLabel lblOff;
 	private JLabel lblCategory;
 	private JComboBox comboBox;
-	
+	private String[] category;
 	
 	public CreateGroceryItem(MainFrame main){
 		this.main = main;
+		this.category = this.main.getController().getCategory();
 		
 		this.main.setTitle("Joy MiniMart - Create Item");
 		
@@ -235,7 +236,7 @@ public class CreateGroceryItem extends JPanel{
 		this.lblCategory.setBounds(325, 285, 100, 26);
 		this.middlePanel.add(this.lblCategory);
 		
-		this.comboBox = new JComboBox(Arrays.copyOfRange(this.main.getController().getCategory(), 1, this.main.getController().getCategory().length));
+		this.comboBox = new JComboBox(Arrays.copyOfRange(this.category, 1, this.category.length));
 		this.comboBox.setFont(new Font("Tahoma", Font.BOLD, 16));
 		this.comboBox.setFocusable(false);
 		this.comboBox.setBounds(437, 288, 128, 26);
