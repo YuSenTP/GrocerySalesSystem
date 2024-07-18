@@ -107,6 +107,7 @@ public class ManagerHome extends JPanel{
 			this.main.showSales();
 		}
 		else if (name == "Inventory"){
+			this.main.showManagerInventory();
 			System.out.println("Inventory");
 		}
 		else if (name == "Add Account"){

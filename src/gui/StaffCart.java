@@ -150,7 +150,7 @@ public class StaffCart extends JPanel {
         updateTotalLabel();
     }
 
-    private void updateItemQuantity(GroceryItem item, int newQuantity) {
+    private void updateItemQuantity(GroceryItem item, int newQuantity) { //if quantity more than 0, adjust quantity. If lesser, delete the item from cart
     	 if (newQuantity > 0) {
     	        item.setQuantity(newQuantity);
     	        main.getController().getCurrentOrder().calculateTotalCost();

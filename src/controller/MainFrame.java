@@ -15,6 +15,7 @@ import gui.CreateGroceryItem;
 import gui.EditGroceryItem;
 import gui.LoginScreen;
 import gui.ManagerHome;
+import gui.ManagerInventory;
 import gui.ManagerMenu;
 import gui.ManagerSales;
 import gui.StaffCart;
@@ -116,7 +117,6 @@ public class MainFrame extends JFrame {
 		getContentPane().add(p5, "StaffMenu");
 		this.card.show(this.getContentPane(), "StaffMenu");
 		// TODO Auto-generated method stub
-		
 	}
 	
 	public void showStaffCart(){
@@ -124,6 +124,12 @@ public class MainFrame extends JFrame {
 		getContentPane().add(p9, "StaffCart");
 		this.card.show(this.getContentPane(), "StaffCart");
 		// TODO Auto-generated method stub
+	}
+	
+	public void showManagerInventory(){
+		ManagerInventory p10 = new ManagerInventory(this);
+		getContentPane().add(p10, "StaffCart");
+		this.card.show(this.getContentPane(), "StaffCart");
 	}
 
 }
