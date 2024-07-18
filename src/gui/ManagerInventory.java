@@ -1,9 +1,17 @@
 package gui;
 
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.JButton;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-import java.awt.*;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -63,14 +71,8 @@ public class ManagerInventory extends JPanel {
         GroceryItem[] inventory = main.getController().getInventory();
 
         // Populate table with inventory data
-        for (int i = 0; i < inventory.length; i++) {
-            GroceryItem item = inventory[i];
-            String onSaleStatus;
-            if (item.getOnSale()) {
-                onSaleStatus = "Yes";
-            } else {
-                onSaleStatus = "No";
-            }
+        for (GroceryItem item : inventory) {
+            String onSaleStatus = item.getOnSale() ? "Yes" : "No";
             Object[] row = {
                 item.getName(),
                 "$" + item.getPrice(),
