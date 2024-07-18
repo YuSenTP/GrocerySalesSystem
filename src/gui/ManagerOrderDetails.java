@@ -36,6 +36,7 @@ public class ManagerOrderDetails extends JPanel {
     private JScrollPane scrollPane;
     private JPanel boxPanel;
     private ImageIcon itemPic;
+	private JLabel totalCostLabel;
 
     public ManagerOrderDetails(MainFrame main, Order order) {
         this.main = main;
@@ -70,10 +71,11 @@ public class ManagerOrderDetails extends JPanel {
         });
         this.bottomPanel.add(this.backButton, BorderLayout.WEST);
         
-        JLabel totalCostLabel = new JLabel("Total Cost: $" + order.getTotalCost());
-        totalCostLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
-        totalCostLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-        this.bottomPanel.add(totalCostLabel, BorderLayout.EAST);
+        this.totalCostLabel = new JLabel("Total Cost: $" + order.getTotalCost());
+        this.totalCostLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
+        this.totalCostLabel.setBorder(new EmptyBorder(0, 0, 0, 20)); //t l b r
+        this.totalCostLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        this.bottomPanel.add(this.totalCostLabel, BorderLayout.EAST);
         
         this.add(this.bottomPanel, BorderLayout.SOUTH);
         
@@ -85,9 +87,9 @@ public class ManagerOrderDetails extends JPanel {
         this.boxPanel = new JPanel();
         this.boxPanel.setLayout(new BoxLayout(boxPanel, BoxLayout.Y_AXIS));
         
-        Vector<GroceryItem> temp = this.order.getGroceryItems();
-        for(int i = 0; i < temp.size(); i++) {
-            GroceryItem currentItem = temp.elementAt(i);
+        GroceryItem[] temp = this.order.getGroceryItems();
+        for(int i = 0; i < temp.length; i++) {
+            GroceryItem currentItem = temp[i];
             JPanel itemPanel = new JPanel(new BorderLayout(10, 0));
             itemPanel.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
             itemPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 100));

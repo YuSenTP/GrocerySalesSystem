@@ -1,6 +1,7 @@
 package gui;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -26,12 +27,15 @@ public class ManagerInventory extends JPanel {
         
         // Create table
         inventoryTable = new JTable(tableColumns);
-        scrollPane = new JScrollPane(inventoryTable);
-        add(scrollPane, BorderLayout.CENTER);
+        this.scrollPane = new JScrollPane(inventoryTable);
+        this.scrollPane.setBorder(new EmptyBorder(0, 2, 2, 2));
+        this.add(this.scrollPane, BorderLayout.CENTER);
         
         // Bottom Panel 
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(Color.WHITE);
+        buttonPanel.setLayout(new BorderLayout(0, 0));
+        
 
         // Back Button
         backButton = new JButton("Back");
@@ -40,12 +44,12 @@ public class ManagerInventory extends JPanel {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                main.showManagerMenu();
+                main.showManagerHome();
             }
         });
-        buttonPanel.add(backButton);
+        buttonPanel.add(backButton, BorderLayout.WEST);
 
-        add(buttonPanel, BorderLayout.SOUTH);
+        this.add(buttonPanel, BorderLayout.SOUTH);
 
         // Populate table
         updateInventoryTable();

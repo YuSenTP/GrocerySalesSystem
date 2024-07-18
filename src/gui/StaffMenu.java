@@ -207,7 +207,7 @@ public class StaffMenu extends JPanel {
                     increaseButton.setEnabled(true);
                     
                 } else {
-                	if (main.getController().ds.getCurrentOrder().getGroceryItems().size() == 0){
+                	if (main.getController().ds.getCurrentOrder().getGroceryItems().length == 0){
                     	logoutButton.setVisible(true);
                     }
                 	parentPanel.remove(quantityPanel);

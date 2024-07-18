@@ -62,4 +62,92 @@
     "percentOff" : 0.0,
     "category" : null
   } ]
+}, {
+  "orderID" : 5,
+  "totalCost" : 9.13,
+  "groceryItems" : [ {
+    "name" : "Milk",
+    "price" : 2.99,
+    "quantity" : 1,
+    "picFile" : "./img/milk1.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "category" : null
+  }, {
+    "name" : "Bread",
+    "price" : 1.99,
+    "quantity" : 1,
+    "picFile" : "./img/bread2.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "category" : null
+  }, {
+    "name" : "Tomato",
+    "price" : 1.15,
+    "quantity" : 1,
+    "picFile" : "./img/tomato.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "category" : null
+  }, {
+    "name" : "Chicken Breast",
+    "price" : 3.00,
+    "quantity" : 1,
+    "picFile" : "./img/bonelessChickenBreast.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "category" : null
+  } ]
+}, {
+  "orderID" : 6,
+  "totalCost" : 14.73,
+  "groceryItems" : [ {
+    "name" : "Bread",
+    "price" : 1.99,
+    "quantity" : 1,
+    "picFile" : "./img/bread2.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "category" : null
+  }, {
+    "name" : "Milk",
+    "price" : 2.99,
+    "quantity" : 1,
+    "picFile" : "./img/milk1.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "category" : null
+  }, {
+    "name" : "Lettuce",
+    "price" : 2.10,
+    "quantity" : 1,
+    "picFile" : "./img/lettuce.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "category" : null
+  }, {
+    "name" : "Watermelon",
+    "price" : 3.50,
+    "quantity" : 1,
+    "picFile" : "./img/watermelon1.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "category" : null
+  }, {
+    "name" : "Tomato",
+    "price" : 1.15,
+    "quantity" : 1,
+    "picFile" : "./img/tomato.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "category" : null
+  }, {
+    "name" : "Chicken Breast",
+    "price" : 3.00,
+    "quantity" : 1,
+    "picFile" : "./img/bonelessChickenBreast.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "category" : null
+  } ]
 } ]

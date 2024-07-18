@@ -20,8 +20,8 @@ public class Order {
 		this.orderID = counter++;
 	 }
 
-	public Vector<GroceryItem> getGroceryItems() {
-	 	 return groceryItems; 
+	public GroceryItem[] getGroceryItems() {
+	 	 return this.groceryItems.toArray(new GroceryItem[this.groceryItems.size()]); 
 	}
 	
 	public void addGroceryItem(GroceryItem item){

@@ -42,57 +42,57 @@ public class Manager extends User {
 //		Main.inventory.remove(item);
 //	 }
 	
-	public void orderDetails(int orderNum) { 
-		// TODO Auto-generated method
-//		System.out.println("Name Price Quantity\n" + item.getName() + " $" + item.getPrice() + " " + item.getQuantity());
+//	public void orderDetails(int orderNum) { 
+//		// TODO Auto-generated method
+////		System.out.println("Name Price Quantity\n" + item.getName() + " $" + item.getPrice() + " " + item.getQuantity());
+////		System.out.println();
+//		
+//		if (orderNum > Main.orders.size() || orderNum == 0){
+//			System.out.println("Invalid OrderNum!(ItemDetails)");
+//		}
+//		else{
+//			Order order = Main.orders.get(orderNum - 1);
+//			System.out.println("Order" + order.getOrderID());
+//			for(int i = 0; i < order.getGroceryItems().size(); i++){
+//				GroceryItem item = order.getGroceryItems().get(i);
+//				System.out.println(item.getName() + " $" + item.getPrice() + " " + item.getQuantity());
+//			}
+//			System.out.println("Total Cost: $" + order.calculateTotalCost());
+//			System.out.println();
+//		}
+//		
+//		
+//	 }
+//	
+//	public void viewInventory(){
+//		System.out.println("Inventory");
+//		System.out.println("Items | Cost | Quantity");
+//		for (int x = 0; x < Main.inventory.size(); x++){
+//			GroceryItem item = Main.inventory.get(x);
+//			System.out.println(item.getName() + " $" + item.getPrice() + " " + item.getQuantity());
+//		}
 //		System.out.println();
-		
-		if (orderNum > Main.orders.size() || orderNum == 0){
-			System.out.println("Invalid OrderNum!(ItemDetails)");
-		}
-		else{
-			Order order = Main.orders.get(orderNum - 1);
-			System.out.println("Order" + order.getOrderID());
-			for(int i = 0; i < order.getGroceryItems().size(); i++){
-				GroceryItem item = order.getGroceryItems().get(i);
-				System.out.println(item.getName() + " $" + item.getPrice() + " " + item.getQuantity());
-			}
-			System.out.println("Total Cost: $" + order.calculateTotalCost());
-			System.out.println();
-		}
-		
-		
-	 }
-	
-	public void viewInventory(){
-		System.out.println("Inventory");
-		System.out.println("Items | Cost | Quantity");
-		for (int x = 0; x < Main.inventory.size(); x++){
-			GroceryItem item = Main.inventory.get(x);
-			System.out.println(item.getName() + " $" + item.getPrice() + " " + item.getQuantity());
-		}
-		System.out.println();
-	}
-
-
-
-
-	public void saleSummary() { // show orders and each other total + total number of orders and total sales
-		BigDecimal totalSales = BigDecimal.ZERO;
-		if (Main.orders.isEmpty()){
-			System.out.println("No Orders Recorded");
-		}
-		else {
-			System.out.println("Sale Summary:");
-			for (int i = 0; i < Main.orders.size(); i++){
-				Order order = Main.orders.get(i);
-				System.out.println("Order " + order.getOrderID() + "   Cost $" + order.calculateTotalCost());
-//				System.out.println();
-				totalSales = totalSales.add(order.getTotalCost());
-			}
-			System.out.println("Total Orders: " + Main.orders.size());
-			System.out.println("Total Sales: $" + totalSales);
-		}
-	}
+//	}
+//
+//
+//
+//
+//	public void saleSummary() { // show orders and each other total + total number of orders and total sales
+//		BigDecimal totalSales = BigDecimal.ZERO;
+//		if (Main.orders.isEmpty()){
+//			System.out.println("No Orders Recorded");
+//		}
+//		else {
+//			System.out.println("Sale Summary:");
+//			for (int i = 0; i < Main.orders.size(); i++){
+//				Order order = Main.orders.get(i);
+//				System.out.println("Order " + order.getOrderID() + "   Cost $" + order.calculateTotalCost());
+////				System.out.println();
+//				totalSales = totalSales.add(order.getTotalCost());
+//			}
+//			System.out.println("Total Orders: " + Main.orders.size());
+//			System.out.println("Total Sales: $" + totalSales);
+//		}
+//	}
 
 }

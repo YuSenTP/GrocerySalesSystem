@@ -36,8 +36,8 @@ public class StaffCart extends JPanel {
         this.main = main;
         this.main.setTitle("Joy MiniMart - StaffCart");
 
-        setBackground(UIManager.getColor("OptionPane.background"));
-        setLayout(new BorderLayout(0, 0));
+        this.setBackground(UIManager.getColor("OptionPane.background"));
+        this.setLayout(new BorderLayout(0, 0));
 
         // Top Label
         this.lblEditItem = new JLabel("Staff Cart");
@@ -53,8 +53,12 @@ public class StaffCart extends JPanel {
         this.itemsPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
         this.scrollPane = new JScrollPane(itemsPanel);
-        this.scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        add(this.scrollPane, BorderLayout.CENTER);
+//        this.scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        this.scrollPane.setBorder(new EmptyBorder(0, 2, 2, 2));
+        this.scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        this.scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        this.scrollPane.getVerticalScrollBar().setUnitIncrement(15);
+        this.add(this.scrollPane, BorderLayout.CENTER);
 
         // Bottom Panel
         this.bottomPanel = new JPanel();
@@ -88,7 +92,7 @@ public class StaffCart extends JPanel {
         this.totalLabel.setHorizontalAlignment(SwingConstants.CENTER);
         this.bottomPanel.add(this.totalLabel, BorderLayout.CENTER);
 
-        add(this.bottomPanel, BorderLayout.SOUTH);
+        this.add(this.bottomPanel, BorderLayout.SOUTH);
 
         updateCartItems();
     }
@@ -96,10 +100,10 @@ public class StaffCart extends JPanel {
     public void updateCartItems() {
         itemsPanel.removeAll();
         Order currentOrder = main.getController().getCurrentOrder();
-        Vector<GroceryItem> cartItems = currentOrder.getGroceryItems();
+        GroceryItem[] cartItems = currentOrder.getGroceryItems();
 
-        for (int i = 0; i < cartItems.size(); i++) {
-            GroceryItem currentItem = cartItems.elementAt(i);
+        for (int i = 0; i < cartItems.length; i++) {
+            GroceryItem currentItem = cartItems[i];
             
             JPanel itemPanel = new JPanel(new BorderLayout(10, 0));
             itemPanel.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
@@ -172,7 +176,7 @@ public class StaffCart extends JPanel {
 
     private void confirmOrder() {
         Order currentOrder = main.getController().getCurrentOrder();
-        if (currentOrder.getGroceryItems().isEmpty()) {
+        if (currentOrder.getGroceryItems().length == 0) {
             JOptionPane.showMessageDialog(this, "Cart is empty!", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }

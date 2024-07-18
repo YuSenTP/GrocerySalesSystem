@@ -125,7 +125,7 @@ public class Controller {
 	}
 	
 	public void editOrder(String choice, GroceryItem item) { 
-		Vector<GroceryItem> temp = this.ds.getCurrentOrder().getGroceryItems();
+		GroceryItem[] temp = this.ds.getCurrentOrder().getGroceryItems();
 		
 		System.out.println(item.getName());
 		System.out.println(item.getQuantity());
@@ -133,8 +133,8 @@ public class Controller {
 		
 		boolean itemPresent = false;
 		int index = -1;
-		for (int i = 0; i < temp.size(); i++){
-			if(temp.get(i).getName().equals(item.getName())){
+		for (int i = 0; i < temp.length; i++){
+			if(temp[i].getName().equals(item.getName())){
 				itemPresent = true;
 				index = i;
 			}
@@ -156,25 +156,25 @@ public class Controller {
 			}
 			else{
 				//add 1 to the grocery item
-				temp.get(index).setQuantity(temp.get(index).getQuantity()+1);
+				temp[index].setQuantity(temp[index].getQuantity()+1);
 			}
 
 		}
 		else if (choice == "delete"){
 			
-			temp.get(index).setQuantity(temp.get(index).getQuantity()-1); // remove quantity by 1
+			temp[index].setQuantity(temp[index].getQuantity()-1); // remove quantity by 1
 			
 			
 //			this.order.deleteGroceryItem(item);
 			item.setQuantity(item.getQuantity()+1);;// add 1 to inventory
 			
 //			System.out.println("Quantity" + temp.get(index).getQuantity());
-			if (temp.get(index).getQuantity() == 0){
+			if (temp[index].getQuantity() == 0){
 				this.ds.getCurrentOrder().deleteGroceryItem(item);
 			}
 		}
 		
-		System.out.println("Order size: " + this.ds.getCurrentOrder().getGroceryItems().size());
+		System.out.println("Order size: " + this.ds.getCurrentOrder().getGroceryItems().length);
 	 }
 	
 //	public void addGroceryItem(GroceryItem item) { 
@@ -238,7 +238,7 @@ public class Controller {
 	public void confirmOrder() {
 		// TODO Auto-generated method stub
 		 Order currentOrder = this.ds.getCurrentOrder();
-	        if (!currentOrder.getGroceryItems().isEmpty()) {
+	        if (currentOrder.getGroceryItems().length != 0) {
 //	            this.ds.getOrders().add(currentOrder);
 	        	this.ds.addOrder(currentOrder);
 	            this.ds.setCurrentOrder(new Order());
