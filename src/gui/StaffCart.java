@@ -124,7 +124,7 @@ public class StaffCart extends JPanel {
             nameLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
             infoPanel.add(nameLabel);
 
-        JLabel priceLabel = new JLabel("$		" + currentItem.getPrice());
+            JLabel priceLabel = new JLabel("$		" + currentItem.getPrice());
             infoPanel.add(priceLabel);
             itemPanel.add(infoPanel, BorderLayout.CENTER);
 
