@@ -39,6 +39,13 @@ public class ManagerInventory extends JPanel {
         this.scrollPane.setBorder(new EmptyBorder(0, 2, 2, 2));
         this.add(this.scrollPane, BorderLayout.CENTER);
         
+        //Adjust Font Size
+        Font font = new Font("Tahoma", Font.PLAIN, 19);
+        inventoryTable.setFont(font);
+        inventoryTable.getTableHeader().setFont(font);
+        inventoryTable.setRowHeight(font.getSize() + 10); // Adjust row height for the new font size
+        
+        
         // Bottom Panel 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(Color.WHITE);
@@ -71,8 +78,14 @@ public class ManagerInventory extends JPanel {
         GroceryItem[] inventory = main.getController().getInventory();
 
         // Populate table with inventory data
-        for (GroceryItem item : inventory) {
-            String onSaleStatus = item.getOnSale() ? "Yes" : "No";
+        for (int i = 0; i < inventory.length; i++) {
+            GroceryItem item = inventory[i];
+            String onSaleStatus;
+            if (item.getOnSale()) {
+                onSaleStatus = "Yes";
+            } else {
+                onSaleStatus = "No";
+            }
             Object[] row = {
                 item.getName(),
                 "$" + item.getPrice(),
