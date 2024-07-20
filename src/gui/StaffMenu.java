@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 
 import controller.MainFrame;
 import data.GroceryItem;
+import data.Order;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -46,11 +47,16 @@ public class StaffMenu extends JPanel {
 //    private JLabel quantityField;
 //	private JButton decreaseButton;
 //	private JButton increaseButton;
+//    private boolean flag;
+    private GroceryItem cItem;
 
     public StaffMenu(MainFrame main) {
         this.main = main;
         this.main.setTitle("Joy MiniMart - Staff Menu");
         this.inventory = this.main.getController().getInventory();
+        
+        
+        GroceryItem[] cItems = this.main.getController().getCurrentOrder().getGroceryItems();
 
         this.setBackground(Color.WHITE);
         this.setLayout(new BorderLayout(0, 0));
@@ -58,11 +64,38 @@ public class StaffMenu extends JPanel {
         this.gridPanel = new JPanel(new GridLayout(0, 3, 10, 10)); // rows, cols, hgap, vgap
         this.gridPanel.setBorder(new EmptyBorder(0, 10, 10, 10)); // top, left, bottom, right
         this.gridPanel.setBackground(UIManager.getColor("OptionPane.background"));
+        
+        // Top Panel
+        this.topPanel = new JPanel();
+        this.lblGroceryItems = new JLabel("Grocery Items");
+        this.lblGroceryItems.setPreferredSize(new Dimension(200, 60));
+        this.lblGroceryItems.setFont(new Font("Tahoma", Font.BOLD, 20));
+        this.lblGroceryItems.setHorizontalAlignment(SwingConstants.CENTER);
+        this.topPanel.add(this.lblGroceryItems);
+        this.add(this.topPanel, BorderLayout.NORTH);
+
+        // Bottom Panel
+        this.bottomPanel = new JPanel();
+        this.bottomPanel.setBackground(Color.WHITE);
+        this.bottomPanel.setLayout(new BorderLayout(0, 0));
+        
+        //Logout
+        this.logoutButton = new JButton("Logout");
+        this.logoutButton.setFont(new Font("Tahoma", Font.BOLD, 15));
+        this.logoutButton.setPreferredSize(new Dimension(100, 40));
+        this.logoutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	logOut();
+            }
+        });
+        
+        this.bottomPanel.add(this.logoutButton, BorderLayout.WEST);
 
         for (int i = 0; i < this.inventory.length; i++) {
             GroceryItem currentItem = this.inventory[i];
             
-            if (currentItem.getQuantity() == 0){
+            if (currentItem.getQuantity() == 0 && cItems.length == 0){ // If item not in cart and no more in inventory then no show
             	continue;
             }
 
@@ -111,12 +144,26 @@ public class StaffMenu extends JPanel {
             addToCartButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    showQuantityControls(addToCartButton, currentItem);
+//                	flag = true;
+                    showQuantityControls(addToCartButton, currentItem, true);
                 }
             });
             this.itemPanel.add(addToCartButton, BorderLayout.SOUTH);
 
             this.gridPanel.add(this.itemPanel);
+//            System.out.println(currentItem);
+//            showQuantityControls(addToCartButton, currentItem);
+//            System.out.println(cItems.length);
+            for (int x = 0; x < cItems.length; x++){
+//            	System.out.println(cItems[x].getName());
+            	if(currentItem.getName().equals(cItems[x].getName())){
+            		cItem = cItems[x];
+            		showQuantityControls(addToCartButton, currentItem, false);
+            		
+            	}
+            }
+            
+            
         }
 
         // Scroll Pane
@@ -127,32 +174,32 @@ public class StaffMenu extends JPanel {
         this.scrollPane.getVerticalScrollBar().setUnitIncrement(15);
         this.add(this.scrollPane);
 
-        // Top Panel
-        this.topPanel = new JPanel();
-        this.lblGroceryItems = new JLabel("Grocery Items");
-        this.lblGroceryItems.setPreferredSize(new Dimension(200, 60));
-        this.lblGroceryItems.setFont(new Font("Tahoma", Font.BOLD, 20));
-        this.lblGroceryItems.setHorizontalAlignment(SwingConstants.CENTER);
-        this.topPanel.add(this.lblGroceryItems);
-        this.add(this.topPanel, BorderLayout.NORTH);
-
-        // Bottom Panel
-        this.bottomPanel = new JPanel();
-        this.bottomPanel.setBackground(Color.WHITE);
-        this.bottomPanel.setLayout(new BorderLayout(0, 0));
-        
-        //Logout
-        this.logoutButton = new JButton("Logout");
-        this.logoutButton.setFont(new Font("Tahoma", Font.BOLD, 15));
-        this.logoutButton.setPreferredSize(new Dimension(100, 40));
-        this.logoutButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            	logOut();
-            }
-        });
-        
-        this.bottomPanel.add(this.logoutButton, BorderLayout.WEST);
+//        // Top Panel
+//        this.topPanel = new JPanel();
+//        this.lblGroceryItems = new JLabel("Grocery Items");
+//        this.lblGroceryItems.setPreferredSize(new Dimension(200, 60));
+//        this.lblGroceryItems.setFont(new Font("Tahoma", Font.BOLD, 20));
+//        this.lblGroceryItems.setHorizontalAlignment(SwingConstants.CENTER);
+//        this.topPanel.add(this.lblGroceryItems);
+//        this.add(this.topPanel, BorderLayout.NORTH);
+//
+//        // Bottom Panel
+//        this.bottomPanel = new JPanel();
+//        this.bottomPanel.setBackground(Color.WHITE);
+//        this.bottomPanel.setLayout(new BorderLayout(0, 0));
+//        
+//        //Logout
+//        this.logoutButton = new JButton("Logout");
+//        this.logoutButton.setFont(new Font("Tahoma", Font.BOLD, 15));
+//        this.logoutButton.setPreferredSize(new Dimension(100, 40));
+//        this.logoutButton.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//            	logOut();
+//            }
+//        });
+//        
+//        this.bottomPanel.add(this.logoutButton, BorderLayout.WEST);
 
         //Cart
         this.cartButton = new JButton("Cart");
@@ -173,7 +220,7 @@ public class StaffMenu extends JPanel {
         this.main.showLoginScreen();
     }
 
-    private void showQuantityControls(JButton addToCartButton, GroceryItem currentItem) {
+    private void showQuantityControls(JButton addToCartButton, GroceryItem currentItem, boolean flag) {
         JPanel parentPanel = (JPanel) addToCartButton.getParent(); // Parent is itemPanel
         parentPanel.remove(addToCartButton); // itemPanel to remove button
 //    	 itemPanel.remove(addToCartButton);
@@ -192,7 +239,20 @@ public class StaffMenu extends JPanel {
         quantityField.setOpaque(true);
         quantityField.setBackground(Color.WHITE);
 //        this.quantityField.setBorder(new Border()); TO ADD LATER
-        this.main.getController().editOrder("add", currentItem);
+        if(flag == true){
+        	this.main.getController().editOrder("add", currentItem);
+//        	flag = false;
+        }
+        else{
+        	quantityField.setText(String.valueOf(this.cItem.getQuantity()));
+        }
+        
+        
+        //this is to set when back from cart
+        if (currentItem.getQuantity() == 0){
+        	increaseButton.setEnabled(false);
+        }
+        
         
         //decrease button
         decreaseButton.addActionListener(new ActionListener() {
@@ -224,15 +284,20 @@ public class StaffMenu extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
     			GroceryItem object = (GroceryItem) increaseButton.getClientProperty("object");
+    			System.out.println(object.getQuantity());
             	int quantity = Integer.parseInt(quantityField.getText());
             	if (object.getQuantity()>0){
                     quantity++;
                     quantityField.setText(String.valueOf(quantity));
                     main.getController().editOrder("add", object);
+                    
+                    if (object.getQuantity() == 0){
+                    	increaseButton.setEnabled(false);
+                    }
             	}
-            	else if (object.getQuantity() == 0){
-                	increaseButton.setEnabled(false);
-            	}
+//            	else if (object.getQuantity() == 0){
+//                	increaseButton.setEnabled(false);
+//            	}
                 
 
             }

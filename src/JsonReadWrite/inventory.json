@@ -1,7 +1,7 @@
 [ {
   "name" : "Milk",
   "price" : 2.99,
-  "quantity" : 5,
+  "quantity" : 4,
   "picFile" : "./img/milk1.jpg",
   "onSale" : true,
   "percentOff" : 0.3,
@@ -9,7 +9,7 @@
 }, {
   "name" : "Bread",
   "price" : 1.99,
-  "quantity" : 5,
+  "quantity" : 4,
   "picFile" : "./img/bread2.jpg",
   "onSale" : false,
   "percentOff" : 0.0,
@@ -17,7 +17,7 @@
 }, {
   "name" : "Tomato",
   "price" : 1.15,
-  "quantity" : 5,
+  "quantity" : 3,
   "picFile" : "./img/tomato.jpg",
   "onSale" : false,
   "percentOff" : 0.0,

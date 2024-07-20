@@ -124,7 +124,7 @@ public class StaffCart extends JPanel {
             nameLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
             infoPanel.add(nameLabel);
 
-        JLabel priceLabel = new JLabel("$		" + currentItem.getPrice());
+            JLabel priceLabel = new JLabel("$		" + currentItem.getPrice());
             infoPanel.add(priceLabel);
             itemPanel.add(infoPanel, BorderLayout.CENTER);
 
@@ -133,9 +133,14 @@ public class StaffCart extends JPanel {
             JButton decreaseButton = new JButton("-");
             JLabel quantityLabel = new JLabel(String.valueOf(currentItem.getQuantity()));
             JButton increaseButton = new JButton("+");
+            
+            boolean available = main.getController().checkInventoryAvaiblility(currentItem);
+            increaseButton.setEnabled(available);
+            
 
-            decreaseButton.addActionListener(e -> updateItemQuantity(currentItem, currentItem.getQuantity() - 1));
-            increaseButton.addActionListener(e -> updateItemQuantity(currentItem, currentItem.getQuantity() + 1));
+            decreaseButton.addActionListener(e -> updateItemQuantity(currentItem, currentItem.getQuantity() - 1, "delete", decreaseButton));
+            increaseButton.addActionListener(e -> updateItemQuantity(currentItem, currentItem.getQuantity() + 1, "add", increaseButton));
+
             
             quantityPanel.add(decreaseButton, BorderLayout.WEST);
             quantityPanel.add(quantityLabel, BorderLayout.CENTER);
@@ -154,14 +159,27 @@ public class StaffCart extends JPanel {
         updateTotalLabel();
     }
 
-    private void updateItemQuantity(GroceryItem item, int newQuantity) { //if quantity more than 0, adjust quantity. If lesser, delete the item from cart
+    //This GroceryItem is object of Current Order, Not inventory
+    private void updateItemQuantity(GroceryItem item, int newQuantity, String choice, JButton button) { //if quantity more than 0, adjust quantity. If lesser, delete the item from cart
     	 if (newQuantity > 0) {
     	        item.setQuantity(newQuantity);
+    		 	if (choice.equals("add")){
+    		 		main.getController().cartUpdateInventory("add", item);
+//    		 		boolean noMore = main.getController().cartUpdateInventory("add", item);
+//    		 		if (noMore){
+//    		 			System.out.println("Yes" + button.isEnabled());
+//    		 			button.setEnabled(false);
+//    		 		}
+    		 	}
+    		 	else{
+    		 		main.getController().cartUpdateInventory("delete", item);
+    		 	}
     	        main.getController().getCurrentOrder().calculateTotalCost();
     	        updateCartItems();
     	        updateTotalLabel();
     	        System.out.println("Quantity Adjusted");
     	    } else {
+    	    	main.getController().cartUpdateInventory("delete", item);
     	        main.getController().getCurrentOrder().deleteGroceryItem(item);
     	        updateCartItems();
     	        updateTotalLabel();

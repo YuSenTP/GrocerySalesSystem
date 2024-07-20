@@ -150,4 +150,32 @@
     "percentOff" : 0.0,
     "category" : null
   } ]
+}, {
+  "orderID" : 7,
+  "totalCost" : 7.28,
+  "groceryItems" : [ {
+    "name" : "Tomato",
+    "price" : 1.15,
+    "quantity" : 2,
+    "picFile" : "./img/tomato.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "category" : null
+  }, {
+    "name" : "Bread",
+    "price" : 1.99,
+    "quantity" : 1,
+    "picFile" : "./img/bread2.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "category" : null
+  }, {
+    "name" : "Milk",
+    "price" : 2.99,
+    "quantity" : 1,
+    "picFile" : "./img/milk1.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "category" : null
+  } ]
 } ]

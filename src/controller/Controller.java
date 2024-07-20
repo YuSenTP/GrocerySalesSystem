@@ -127,9 +127,9 @@ public class Controller {
 	public void editOrder(String choice, GroceryItem item) { 
 		GroceryItem[] temp = this.ds.getCurrentOrder().getGroceryItems();
 		
-		System.out.println(item.getName());
-		System.out.println(item.getQuantity());
-		System.out.println(item.getPrice());
+//		System.out.println(item.getName());
+//		System.out.println(item.getQuantity());
+//		System.out.println(item.getPrice());
 		
 		boolean itemPresent = false;
 		int index = -1;
@@ -147,6 +147,10 @@ public class Controller {
 //			this.order.addGroceryItem(item);
 			
 			item.setQuantity(item.getQuantity() - 1);// minus 1 from inventory
+			
+			System.out.println("Item Name:" + item.getName());
+			System.out.println("No. of Item in Inventory: " + item.getQuantity());
+			System.out.println("Item Price" + item.getPrice());
 			
 			
 			if (itemPresent == false){
@@ -168,6 +172,10 @@ public class Controller {
 //			this.order.deleteGroceryItem(item);
 			item.setQuantity(item.getQuantity()+1);;// add 1 to inventory
 			
+			System.out.println("Item Name:" + item.getName());
+			System.out.println("No. of Item in Inventory: " + item.getQuantity());
+			System.out.println("Item Price" + item.getPrice());
+			
 //			System.out.println("Quantity" + temp.get(index).getQuantity());
 			if (temp[index].getQuantity() == 0){
 				this.ds.getCurrentOrder().deleteGroceryItem(item);
@@ -176,6 +184,38 @@ public class Controller {
 		
 		System.out.println("Order size: " + this.ds.getCurrentOrder().getGroceryItems().length);
 	 }
+	
+	public void cartUpdateInventory(String choice, GroceryItem item){
+		GroceryItem[] inventoryItems = this.ds.getInventory();
+		for(int i = 0; i < inventoryItems.length; i++){
+			if (item.getName().equals(inventoryItems[i].getName())){
+				if (choice == "add"){
+					inventoryItems[i].setQuantity(inventoryItems[i].getQuantity()-1);
+					if (inventoryItems[i].getQuantity() == 0){
+//						return true;
+					}
+				}
+				else if (choice == "delete"){
+					inventoryItems[i].setQuantity(inventoryItems[i].getQuantity()+1);
+				}
+			}
+		}
+//		return false;
+	}
+	
+	public boolean checkInventoryAvaiblility(GroceryItem item){
+		GroceryItem[] inventoryItems = this.ds.getInventory();
+		for(int i = 0; i < inventoryItems.length; i++){
+			if (item.getName().equals(inventoryItems[i].getName())){
+				if(inventoryItems[i].getQuantity() == 0){
+					return false;
+				}
+			}
+		}
+		
+		return true;
+		
+	}
 	
 //	public void addGroceryItem(GroceryItem item) { 
 //		Vector<GroceryItem> temp = this.ds.getCurrentOrder().getGroceryItems();
