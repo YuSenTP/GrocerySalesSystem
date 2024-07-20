@@ -26,6 +26,9 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.font.TextAttribute;
+import java.math.BigDecimal;
+import java.util.Map;
 import java.util.Vector;
 
 public class StaffMenu extends JPanel {
@@ -49,6 +52,7 @@ public class StaffMenu extends JPanel {
 //	private JButton increaseButton;
 //    private boolean flag;
     private GroceryItem cItem;
+	private JPanel pricePanel;
 
     public StaffMenu(MainFrame main) {
         this.main = main;
@@ -131,10 +135,38 @@ public class StaffMenu extends JPanel {
             this.itemButton.add(this.nameLabel, BorderLayout.NORTH);
 
             // Item Price
+            
+            this.pricePanel = new JPanel();
+            this.pricePanel.setOpaque(false);
+            
             this.priceLabel = new JLabel("$" + currentItem.getPrice().toString());
             this.priceLabel.setHorizontalAlignment(SwingConstants.CENTER);
             this.priceLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
-            this.itemButton.add(this.priceLabel, BorderLayout.SOUTH);
+            
+            // If On Sale
+            if (currentItem.getOnSale()){
+            	Map<TextAttribute, Object> attributes = (Map<TextAttribute, Object>) this.priceLabel.getFont().getAttributes(); // HashMap Something like a dictonary in python where data are stored as key value pair
+            	attributes.put(TextAttribute.STRIKETHROUGH, TextAttribute.STRIKETHROUGH_ON); // Add new attribute to HashMap
+            	this.priceLabel.setFont(new Font(attributes));
+            	this.priceLabel.setForeground(Color.GRAY);
+
+            	this.pricePanel.add(this.priceLabel);
+
+            	BigDecimal salePercent = new BigDecimal(1 - currentItem.getPercentOff());
+            	BigDecimal salePrice = currentItem.getPrice().multiply(salePercent);
+            	salePrice = salePrice.setScale(2, BigDecimal.ROUND_HALF_UP);
+            	JLabel saleLabel = new JLabel("$" + salePrice.toString());
+            	saleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+            	saleLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+            	saleLabel.setForeground(Color.RED);
+            	this.pricePanel.add(saleLabel);
+            }
+            else{
+            	this.pricePanel.add(this.priceLabel);
+            }
+            
+            
+            this.itemButton.add(this.pricePanel, BorderLayout.SOUTH);
 
             this.itemPanel.add(this.itemButton, BorderLayout.CENTER);
 

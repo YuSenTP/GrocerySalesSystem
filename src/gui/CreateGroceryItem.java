@@ -342,6 +342,13 @@ public class CreateGroceryItem extends JPanel{
 			label.setFont(new Font("Tahoma", Font.BOLD, 14));
 			JOptionPane.showMessageDialog(this, label, "Update Item", JOptionPane.ERROR_MESSAGE);
 		}
+		
+		else if(Integer.valueOf(this.quantityText.getText()) < 0){
+			JLabel label = new JLabel("Error! Quantity must be positive!");
+			label.setFont(new Font("Tahoma", Font.BOLD, 14));
+			JOptionPane.showMessageDialog(this, label, "Save", JOptionPane.ERROR_MESSAGE);
+		}
+		
 		else{
 			String finalPrice;
 			if (this.priceText.getText().startsWith("$")){

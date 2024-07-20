@@ -355,7 +355,17 @@ public class EditGroceryItem extends JPanel{
 			else{
 				this.main.getController().editGroceryItemPrice(this.item, this.priceText.getText());
 			}
-			this.main.getController().editGroceryItemQuantity(this.item, this.quantityText.getText());
+			if (Integer.valueOf(this.quantityText.getText()) > 0){
+				this.main.getController().editGroceryItemQuantity(this.item, this.quantityText.getText());
+			}
+			else{
+				JLabel label = new JLabel("Error! Quantity must be positive!");
+				label.setFont(new Font("Tahoma", Font.BOLD, 14));
+				JOptionPane.showMessageDialog(this, label, "Save", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			
+//			this.main.getController().editGroceryItemQuantity(this.item, this.quantityText.getText());
 			this.main.getController().editGroceryItemSale(this.item, this.chckbxOnSale.isSelected(), this.spinner.getValue().toString());
 			this.main.getController().editGroceryItemCategory(this.item, this.comboBox.getSelectedItem().toString());
 			JLabel label = new JLabel("Item Updated Successfully");
