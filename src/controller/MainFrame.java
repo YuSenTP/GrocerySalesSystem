@@ -4,10 +4,13 @@
 package controller;
 
 import java.awt.CardLayout;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import data.GroceryItem;
 import data.Order;
@@ -52,15 +55,35 @@ public class MainFrame extends JFrame {
 		this.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent arg0) {
-				cont.saveAll();
-				dispose();
+				
+				if (cont.getCurrentOrder().getGroceryItems().length > 0){
+//					System.out.println("NOT allowed to close");
+					JLabel label = new JLabel("Items in cart! Confirm Exit?");
+					label.setFont(new Font("Tahoma", Font.BOLD, 14));
+//					JOptionPane.showMessageDialog(MainFrame.this, label, "Error" ,JOptionPane.ERROR_MESSAGE);
+					int response = JOptionPane.showConfirmDialog(MainFrame.this, label, "Confirm Exit", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE );
+					
+					if (response == JOptionPane.YES_OPTION) {
+						cont.clearCurrentOrder();
+						cont.saveAll();
+						dispose();
+					}
+
+					
+				}
+				else{
+					cont.saveAll();
+					dispose();
+				}
+				
+
 			}
 		});
 		
 		this.setVisible(true);
 		
 	}
-	
+		
 	public Controller getController(){
 		return this.cont;
 	}

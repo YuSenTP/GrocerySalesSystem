@@ -53,6 +53,7 @@ public class StaffMenu extends JPanel {
 //    private boolean flag;
     private GroceryItem cItem;
 	private JPanel pricePanel;
+	private GroceryItem[] cItems;
 
     public StaffMenu(MainFrame main) {
         this.main = main;
@@ -60,7 +61,7 @@ public class StaffMenu extends JPanel {
         this.inventory = this.main.getController().getInventory();
         
         
-        GroceryItem[] cItems = this.main.getController().getCurrentOrder().getGroceryItems();
+        this.cItems = this.main.getController().getCurrentOrder().getGroceryItems();
 
         this.setBackground(Color.WHITE);
         this.setLayout(new BorderLayout(0, 0));
@@ -99,7 +100,7 @@ public class StaffMenu extends JPanel {
         for (int i = 0; i < this.inventory.length; i++) {
             GroceryItem currentItem = this.inventory[i];
             
-            if (currentItem.getQuantity() == 0 && cItems.length == 0){ // If item not in cart and no more in inventory then no show
+            if (currentItem.getQuantity() == 0 && this.cItems.length == 0){ // If item not in cart and no more in inventory then no show
             	continue;
             }
 
@@ -186,10 +187,10 @@ public class StaffMenu extends JPanel {
 //            System.out.println(currentItem);
 //            showQuantityControls(addToCartButton, currentItem);
 //            System.out.println(cItems.length);
-            for (int x = 0; x < cItems.length; x++){
+            for (int x = 0; x < this.cItems.length; x++){
 //            	System.out.println(cItems[x].getName());
-            	if(currentItem.getName().equals(cItems[x].getName())){
-            		cItem = cItems[x];
+            	if(currentItem.getName().equals(this.cItems[x].getName())){
+            		this.cItem = this.cItems[x];
             		showQuantityControls(addToCartButton, currentItem, false);
             		
             	}
@@ -248,8 +249,23 @@ public class StaffMenu extends JPanel {
     }
     
     private void logOut(){
-        JOptionPane.showMessageDialog(this, "Logged Out Successfully", "Notification", JOptionPane.INFORMATION_MESSAGE);
-        this.main.showLoginScreen();
+    	if (this.main.getController().getCurrentOrder().getGroceryItems().length > 0){ //can not use this.cItems as it is not updated... need get latest version
+    		JLabel label = new JLabel("Items in cart! Confirm Logout?");
+			label.setFont(new Font("Tahoma", Font.BOLD, 14));
+//			JOptionPane.showMessageDialog(MainFrame.this, label, "Error" ,JOptionPane.ERROR_MESSAGE);
+			int response = JOptionPane.showConfirmDialog(this, label, "Confirm Logout", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE );
+			
+			if (response == JOptionPane.YES_OPTION) {
+				this.main.getController().clearCurrentOrder();
+		        JOptionPane.showMessageDialog(this, "Logged Out Successfully", "Notification", JOptionPane.INFORMATION_MESSAGE);
+		        this.main.showLoginScreen();
+			}
+    	}
+    	else{
+    		JOptionPane.showMessageDialog(this, "Logged Out Successfully", "Notification", JOptionPane.INFORMATION_MESSAGE);
+	        this.main.showLoginScreen();
+    	}
+
     }
 
     private void showQuantityControls(JButton addToCartButton, GroceryItem currentItem, boolean flag) {
@@ -299,9 +315,9 @@ public class StaffMenu extends JPanel {
                     increaseButton.setEnabled(true);
                     
                 } else {
-                	if (main.getController().ds.getCurrentOrder().getGroceryItems().length == 0){
-                    	logoutButton.setVisible(true);
-                    }
+//                	if (main.getController().ds.getCurrentOrder().getGroceryItems().length == 0){
+//                    	logoutButton.setVisible(true);
+//                    }
                 	parentPanel.remove(quantityPanel);
                 	parentPanel.add(addToCartButton, BorderLayout.SOUTH);
                 	parentPanel.revalidate();
@@ -336,7 +352,7 @@ public class StaffMenu extends JPanel {
         });
         
 
-        this.logoutButton.setVisible(false);
+//        this.logoutButton.setVisible(false);
 
 
         quantityPanel.add(decreaseButton, BorderLayout.WEST);

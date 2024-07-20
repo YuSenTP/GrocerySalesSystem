@@ -150,7 +150,7 @@ public class Controller {
 			
 			System.out.println("Item Name:" + item.getName());
 			System.out.println("No. of Item in Inventory: " + item.getQuantity());
-			System.out.println("Item Price" + item.getPrice());
+			System.out.println("Item Price: " + item.getPrice());
 			
 			
 			if (itemPresent == false){
@@ -174,7 +174,7 @@ public class Controller {
 			
 			System.out.println("Item Name:" + item.getName());
 			System.out.println("No. of Item in Inventory: " + item.getQuantity());
-			System.out.println("Item Price" + item.getPrice());
+			System.out.println("Item Price: " + item.getPrice());
 			
 //			System.out.println("Quantity" + temp.get(index).getQuantity());
 			if (temp[index].getQuantity() == 0){
@@ -215,6 +215,15 @@ public class Controller {
 		
 		return true;
 		
+	}
+	
+	public void clearCurrentOrder(){
+		GroceryItem[] items = this.ds.getCurrentOrder().getGroceryItems();
+		for (GroceryItem item: items){
+			for (int i = 0; i < item.getQuantity(); i++)
+				cartUpdateInventory("delete", item);
+		}
+		this.ds.clearCurrentOrderItems();;
 	}
 	
 //	public void addGroceryItem(GroceryItem item) { 
