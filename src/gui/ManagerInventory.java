@@ -27,6 +27,7 @@ public class ManagerInventory extends JPanel {
 
     public ManagerInventory(MainFrame main) {
         this.main = main;
+        this.main.setTitle("Joy MiniMart - Inventory");
         setLayout(new BorderLayout());
 
         // Create table columns

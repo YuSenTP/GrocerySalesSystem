@@ -178,4 +178,56 @@
     "percentOff" : 0.0,
     "category" : null
   } ]
+}, {
+  "orderID" : 8,
+  "totalCost" : 20.71,
+  "groceryItems" : [ {
+    "name" : "Milk",
+    "price" : 2.99,
+    "quantity" : 3,
+    "picFile" : "./img/milk1.jpg",
+    "onSale" : true,
+    "percentOff" : 0.3,
+    "category" : "Dairy"
+  }, {
+    "name" : "Bread",
+    "price" : 1.99,
+    "quantity" : 1,
+    "picFile" : "./img/bread2.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "category" : "Others"
+  }, {
+    "name" : "Tomato",
+    "price" : 1.15,
+    "quantity" : 1,
+    "picFile" : "./img/tomato.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "category" : "Vegetables"
+  }, {
+    "name" : "Chicken Breast",
+    "price" : 3.00,
+    "quantity" : 1,
+    "picFile" : "./img/bonelessChickenBreast.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "category" : "Meat"
+  }, {
+    "name" : "Watermelon",
+    "price" : 3.50,
+    "quantity" : 1,
+    "picFile" : "./img/watermelon1.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "category" : "Fruits"
+  }, {
+    "name" : "Lettuce",
+    "price" : 2.10,
+    "quantity" : 1,
+    "picFile" : "./img/lettuce.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "category" : "Vegetables"
+  } ]
 } ]
