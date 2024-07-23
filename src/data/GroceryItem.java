@@ -16,6 +16,7 @@ public class GroceryItem {
 	private double percentOff; // how many percent off
 	private String category;
 	
+	//DO NOT Delete jackson needs this...
 	public GroceryItem(){
 		
 	}
@@ -37,12 +38,12 @@ public class GroceryItem {
 		
 	 }
 	
-	public GroceryItem(String name, BigDecimal price, int quantity, String picFile) { 
-		this.price = price;
-		this.name = name;
-		this.quantity = quantity;
-		this.picFile = picFile;
-	 }
+//	public GroceryItem(String name, BigDecimal price, int quantity, String picFile) { 
+//		this.price = price;
+//		this.name = name;
+//		this.quantity = quantity;
+//		this.picFile = picFile;
+//	 }
 
 	public String getName() {
 	 	 return name; 

@@ -154,7 +154,7 @@ public class Controller {
 			
 			
 			if (itemPresent == false){
-				GroceryItem toAdd = new GroceryItem(item.getName(), item.getPrice(), 1, item.getPicFile()); // n, p, q = 1, pic
+				GroceryItem toAdd = new GroceryItem(item.getName(), item.getPrice().toString(), "1", item.getPicFile(), item.getOnSale(), item.getPercentOff(), item.getCategory()); // n, p, q = 1, pic
 				this.ds.getCurrentOrder().addGroceryItem(toAdd);
 				System.out.println("Success");
 			}
