@@ -81,7 +81,15 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 	public void editGroceryItemPrice(GroceryItem item, String price){
 //		int index = this.inventory.indexOf(item);
 //		GroceryItem temp = this.inventory.get(index);
-		item.setPrice(new BigDecimal(price));
+		
+		BigDecimal tempPrice = new BigDecimal(price);
+		tempPrice = tempPrice.setScale(2, BigDecimal.ROUND_HALF_UP); //Rounds and set to 2dp
+		item.setPrice(tempPrice);
+		
+//		this.price = new BigDecimal(price); // Took in as a string as the double will truncate the .00 to .0 -- Nvm lol
+//		this.price = this.price.setScale(2, BigDecimal.ROUND_HALF_UP); //Rounds and set to 2dp
+		
+//		item.setPrice(new BigDecimal(price));
 	}
 	
 	public void editGroceryItemName(GroceryItem item, String name) { 

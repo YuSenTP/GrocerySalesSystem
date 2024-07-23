@@ -19,7 +19,7 @@ import data.User;
  *
  */
 public class Controller {
-	public DataStorage ds; //private or public?
+	public DataStorage ds; 
 	
 	public Controller(){
 		 this.ds = new DataStorage();
@@ -191,9 +191,9 @@ public class Controller {
 			if (item.getName().equals(inventoryItems[i].getName())){
 				if (choice == "add"){
 					inventoryItems[i].setQuantity(inventoryItems[i].getQuantity()-1);
-					if (inventoryItems[i].getQuantity() == 0){
-//						return true;
-					}
+//					if (inventoryItems[i].getQuantity() == 0){
+////						return true;
+//					}
 				}
 				else if (choice == "delete"){
 					inventoryItems[i].setQuantity(inventoryItems[i].getQuantity()+1);
@@ -225,28 +225,7 @@ public class Controller {
 		}
 		this.ds.clearCurrentOrderItems();;
 	}
-	
-//	public void addGroceryItem(GroceryItem item) { 
-//		Vector<GroceryItem> temp = this.ds.getCurrentOrder().getGroceryItems();
-//		boolean itemPresent = false;
-//		int index = 0;
-//		for (int i = 0; i < temp.size(); i++){
-//			if(temp.get(i).getName() == item.getName()){
-//				itemPresent = true;
-//				index = i;
-//			}
-//		}
-//		if (itemPresent == false){
-//			temp.add(item.copy());
-//		}
-//		else{
-//			//add 1 to the grocery item
-//			temp.get(index).addQuantity(); 
-//		}
-//		
-//	 } 
-	
-	
+		
 	public boolean verifyUser(String n, String pwd, String role) {
 		if (role == "staff"){
 			Staff[] staffs = this.ds.getStaffs();
@@ -269,23 +248,18 @@ public class Controller {
 					return false;
 			}
 		}
-		
-		return false;
-		
+		return false;	
 	}
 
 	public Order getCurrentOrder() {
-		// TODO Auto-generated method stub
         return this.ds.getCurrentOrder();
 	}
 
 	public int generateOrderNumber() {
-		// TODO Auto-generated method stub
         return ds.getOrders().length + 1;
 	}
 
 	public void confirmOrder() {
-		// TODO Auto-generated method stub
 		 Order currentOrder = this.ds.getCurrentOrder();
 	        if (currentOrder.getGroceryItems().length != 0) {
 //	            this.ds.getOrders().add(currentOrder);

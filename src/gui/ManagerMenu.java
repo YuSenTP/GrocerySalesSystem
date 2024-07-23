@@ -54,29 +54,12 @@ public class ManagerMenu extends JPanel{
 	private JButton backButton;
 	private JButton createItemButton;
 	private GroceryItem currentItem;
-//	private String[][] items = {
-//            {"Tomato", "$33.48", "./img/tomato.jpg"},
-//            {"Lettuce", "$96.76", "./img/lettuce.jpg"},
-//            {"Watermelon", "$14.03", "./img/watermelon1.jpg"},
-//            {"Apple", "$24.26", "green_apple.png"},
-//            {"Orange", "$90.86", "orange.png"},
-//            {"Lime", "$98.32", "lime.png"},
-//            {"Cucumber", "$8.46", "cucumber.png"},
-//            {"Peach", "$14.73", "peach.png"},
-//            {"Apple", "$12.24", "red_apple.png"},
-//            {"Avocado", "$18.76", "avocado.png"},
-//            {"Carrot", "$10.11", "carrot.png"},
-//            {"Lemon", "$68.99", "lemon.png"},
-//            {"Carrot", "$45.53", "carrot.png"},
-//            {"Banana", "$5.83", "banana.png"},
-//            {"Maracuya", "$9.46", "maracuya.png"},
-//            {"Cherry", "$23.16", "cherry.png"}
-//        };
 	private JPanel pricePanel;
 	private JComboBox comboBox;
 	private JLabel lblFiller;
 	private JLabel lblView;
 	private String[] category;
+	
 	private static String categorySele = "All";
 
 	
@@ -256,9 +239,7 @@ public class ManagerMenu extends JPanel{
         this.createItemButton.setPreferredSize(new Dimension(140, 40));
         this.bottomPanel.add(this.createItemButton, BorderLayout.EAST);
         
-        this.add(this.bottomPanel, BorderLayout.SOUTH);
-        
-        
+        this.add(this.bottomPanel, BorderLayout.SOUTH);   
 
 	}
     
