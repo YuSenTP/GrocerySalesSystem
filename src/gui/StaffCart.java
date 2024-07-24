@@ -138,9 +138,19 @@ public class StaffCart extends JPanel {
             increaseButton.setEnabled(available);
             
 
-            decreaseButton.addActionListener(e -> updateItemQuantity(currentItem, currentItem.getQuantity() - 1, "delete", decreaseButton));
-            increaseButton.addActionListener(e -> updateItemQuantity(currentItem, currentItem.getQuantity() + 1, "add", increaseButton));
+            decreaseButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    updateItemQuantity(currentItem, currentItem.getQuantity() - 1, "delete", decreaseButton);
+                }
+            });
 
+            increaseButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    updateItemQuantity(currentItem, currentItem.getQuantity() + 1, "add", increaseButton);
+                }
+            });
             
             quantityPanel.add(decreaseButton, BorderLayout.WEST);
             quantityPanel.add(quantityLabel, BorderLayout.CENTER);
