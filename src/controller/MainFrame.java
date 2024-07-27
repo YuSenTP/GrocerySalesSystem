@@ -11,6 +11,8 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import data.GroceryItem;
 import data.Order;
@@ -28,7 +30,12 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 /**
- * @author Yu Sen
+ * @author Yu Sen & Gabriel
+ * 1x MainFrame
+ * 1x Controller
+ * 1x DataStorage
+ * 5x Entities
+ * 10x GUI/Panel
  *
  */
 public class MainFrame extends JFrame {
@@ -74,6 +81,14 @@ public class MainFrame extends JFrame {
 				}
 			}
 		});
+		
+//		try {
+//			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+//		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+//				| UnsupportedLookAndFeelException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		
 		this.setVisible(true);
 		

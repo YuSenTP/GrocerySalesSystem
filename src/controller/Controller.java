@@ -51,49 +51,56 @@ public class Controller {
 //		this.getInventory().add(temp);
 		this.ds.createGroceryItem(temp);
 	 }
+	
 	//Manager
-	public void editGroceryItemPrice(GroceryItem item, String price) { 
-//		int index = this.getInventory().indexOf(item); //IMPORTANT TO CHANGE This does not adhere to MVC, can only edit in data storage
-//		GroceryItem temp = this.getInventory().get(index);
-//		temp.setPrice(new BigDecimal(price));
-		this.ds.editGroceryItemPrice(item, price);
-	 }
-	//Manager
-	public void editGroceryItemName(GroceryItem item, String name) { 
-//		int index = this.getInventory().indexOf(item);
-//		GroceryItem temp = this.getInventory().get(index);
-//		temp.setName(name);
-		this.ds.editGroceryItemName(item, name);
-	 }
-	//Manager
-	public void editGroceryItemQuantity(GroceryItem item, String quantity) { 
-//		int index = this.getInventory().indexOf(item);
-//		GroceryItem temp = this.getInventory().get(index);
-//		temp.setQuantity(Integer.valueOf(quantity));
-		this.ds.editGroceryItemQuantity(item, quantity);
-	 }
-	//Manager
-	public void editGroceryItemSale(GroceryItem item, boolean onSale, String percentOff) { 
-//		int index = this.getInventory().indexOf(item);
-//		GroceryItem temp = this.getInventory().get(index);
-//		if (onSale){
-//			temp.setOnSale(onSale);
-//			temp.setPercentOff(Double.valueOf(percentOff)/100);
-//		}
-//		else{
-//			temp.setOnSale(onSale);
-//			temp.setPercentOff(0);
-//		}
-		this.ds.editGroceryItemSale(item, onSale, percentOff);
-	 }
-	//Manager
-	public void editGroceryItemCategory(GroceryItem item, String category) { 
-//		int index = this.getInventory().indexOf(item);
-//		GroceryItem temp = this.getInventory().get(index);
-////		System.out.println(category);
-//		temp.setCategory(category);
-		this.ds.editGroceryItemCategory(item, category);
+	public void editGroceryItem(GroceryItem item, String name, String price, String quantity, String picFile, boolean onSale, String percentOff, String category){
+		this.ds.editGroceryItem(item, name, price, quantity, picFile, onSale, percentOff, category);
 	}
+	
+//	
+//	//Manager
+//	public void editGroceryItemPrice(GroceryItem item, String price) { 
+////		int index = this.getInventory().indexOf(item); //IMPORTANT TO CHANGE This does not adhere to MVC, can only edit in data storage
+////		GroceryItem temp = this.getInventory().get(index);
+////		temp.setPrice(new BigDecimal(price));
+//		this.ds.editGroceryItemPrice(item, price);
+//	 }
+//	//Manager
+//	public void editGroceryItemName(GroceryItem item, String name) { 
+////		int index = this.getInventory().indexOf(item);
+////		GroceryItem temp = this.getInventory().get(index);
+////		temp.setName(name);
+//		this.ds.editGroceryItemName(item, name);
+//	 }
+//	//Manager
+//	public void editGroceryItemQuantity(GroceryItem item, String quantity) { 
+////		int index = this.getInventory().indexOf(item);
+////		GroceryItem temp = this.getInventory().get(index);
+////		temp.setQuantity(Integer.valueOf(quantity));
+//		this.ds.editGroceryItemQuantity(item, quantity);
+//	 }
+//	//Manager
+//	public void editGroceryItemSale(GroceryItem item, boolean onSale, String percentOff) { 
+////		int index = this.getInventory().indexOf(item);
+////		GroceryItem temp = this.getInventory().get(index);
+////		if (onSale){
+////			temp.setOnSale(onSale);
+////			temp.setPercentOff(Double.valueOf(percentOff)/100);
+////		}
+////		else{
+////			temp.setOnSale(onSale);
+////			temp.setPercentOff(0);
+////		}
+//		this.ds.editGroceryItemSale(item, onSale, percentOff);
+//	 }
+//	//Manager
+//	public void editGroceryItemCategory(GroceryItem item, String category) { 
+////		int index = this.getInventory().indexOf(item);
+////		GroceryItem temp = this.getInventory().get(index);
+//////		System.out.println(category);
+////		temp.setCategory(category);
+//		this.ds.editGroceryItemCategory(item, category);
+//	}
 	
 	//Manager
 	public void deleteGroceryItem(GroceryItem item) { 
@@ -118,11 +125,11 @@ public class Controller {
 		}
 	}
 	
-	public void changePicPath(String path, GroceryItem item){
-//		int index = this.ds.getInventory().indexOf(item);
-//		this.ds.getInventory().get(index).setPicFile(path);
-		this.ds.changePicPath(path, item);
-	}
+//	public void changePicPath(String path, GroceryItem item){
+////		int index = this.ds.getInventory().indexOf(item);
+////		this.ds.getInventory().get(index).setPicFile(path);
+//		this.ds.changePicPath(path, item);
+//	}
 	
 	public void editOrder(String choice, GroceryItem item) { 
 		GroceryItem[] temp = this.ds.getCurrentOrder().getGroceryItems();

@@ -71,6 +71,8 @@ public class CreateGroceryItem extends JPanel{
 	private JLabel lblCategory;
 	private JComboBox comboBox;
 	private String[] category;
+	private JLabel PicFileName;
+	private JTextField FileNameText;
 	
 	public CreateGroceryItem(MainFrame main){
 		this.main = main;
@@ -173,7 +175,7 @@ public class CreateGroceryItem extends JPanel{
 		
 		this.lblQuantity = new JLabel("Quantity:");
 		this.lblQuantity.setFont(new Font("Tahoma", Font.BOLD, 20));
-		this.lblQuantity.setBounds(325, 169, 100, 26);
+		this.lblQuantity.setBounds(325, 163, 100, 26);
 		this.middlePanel.add(this.lblQuantity);
 		
 		this.quantityText = new JTextField("Enter Quantity");
@@ -196,7 +198,7 @@ public class CreateGroceryItem extends JPanel{
 		this.quantityText.setHorizontalAlignment(SwingConstants.CENTER);
 		this.quantityText.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		this.quantityText.setColumns(10);
-		this.quantityText.setBounds(437, 169, 156, 32);
+		this.quantityText.setBounds(437, 163, 156, 32);
 		this.middlePanel.add(this.quantityText);
 		
 		this.lblonlyAddSquare = new JLabel("*Only Add Square Picture");
@@ -217,30 +219,61 @@ public class CreateGroceryItem extends JPanel{
 			}
 		});
 		this.chckbxOnSale.setFont(new Font("Tahoma", Font.BOLD, 18));
-		this.chckbxOnSale.setBounds(325, 225, 100, 25);
+		this.chckbxOnSale.setBounds(325, 220, 100, 25);
 		this.middlePanel.add(this.chckbxOnSale);
 		
 		this.spinner = new JSpinner();
 		this.spinner.setEnabled(false);
 		this.spinner.setFont(new Font("Tahoma", Font.BOLD, 15));
-		this.spinner.setBounds(437, 226, 50, 26);
+		this.spinner.setBounds(437, 221, 50, 26);
 		this.middlePanel.add(this.spinner);
 		
 		this.lblOff = new JLabel("% Off");
 		this.lblOff.setFont(new Font("Tahoma", Font.BOLD, 16));
-		this.lblOff.setBounds(487, 225, 56, 26);
+		this.lblOff.setBounds(487, 220, 56, 26);
 		this.middlePanel.add(this.lblOff);
 		
 		this.lblCategory = new JLabel("Category:");
 		this.lblCategory.setFont(new Font("Tahoma", Font.BOLD, 20));
-		this.lblCategory.setBounds(325, 285, 100, 26);
+		this.lblCategory.setBounds(325, 271, 100, 26);
 		this.middlePanel.add(this.lblCategory);
 		
 		this.comboBox = new JComboBox(Arrays.copyOfRange(this.category, 1, this.category.length));
 		this.comboBox.setFont(new Font("Tahoma", Font.BOLD, 16));
 		this.comboBox.setFocusable(false);
-		this.comboBox.setBounds(437, 288, 128, 26);
+		this.comboBox.setBounds(437, 274, 128, 26);
 		this.middlePanel.add(this.comboBox);
+		
+		this.PicFileName = new JLabel("FileName:");
+		this.PicFileName.setFont(new Font("Tahoma", Font.BOLD, 20));
+		this.PicFileName.setBounds(325, 327, 101, 26);
+		this.middlePanel.add(this.PicFileName);
+		
+		this.FileNameText = new JTextField("No Pic Selected");
+		this.FileNameText.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				if(FileNameText.getText().contentEquals("Enter FileName")){
+					FileNameText.setText("");
+				}
+			}
+		});
+		this.FileNameText.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent arg0) {
+				if(FileNameText.getText().contentEquals("") && selectedFile != null){
+					FileNameText.setText("Enter FileName");
+				}
+				else if (FileNameText.getText().contentEquals("") && selectedFile == null){
+					FileNameText.setText("No Pic Selected");
+				}
+			}
+		});
+		this.FileNameText.setHorizontalAlignment(SwingConstants.CENTER);
+		this.FileNameText.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		this.FileNameText.setColumns(10);
+		this.FileNameText.setBounds(437, 325, 156, 32);
+		this.middlePanel.add(this.FileNameText);
 		
 //		this.btnDeleteItem = new JButton("Delete Item");
 //		this.btnDeleteItem.addActionListener(new ActionListener() {
@@ -303,6 +336,10 @@ public class CreateGroceryItem extends JPanel{
 ////			System.out.println(selectedFile);
 //			String[] fileNameList = selectedFile.split("\\\\"); 
 //			String fileName = fileNameList[fileNameList.length-1];
+			String[] fileNameList = this.filePath.split("\\\\"); 
+			String fileName = fileNameList[fileNameList.length-1];
+			String[] temp = fileName.split("\\."); 
+			this.FileNameText.setText(temp[temp.length-2]); //take from back incase there is "." in front
 ////			System.out.println(fileName);
 //			
 //			String folder = ".\\img";
@@ -336,65 +373,97 @@ public class CreateGroceryItem extends JPanel{
 	}
 	
 	private void save(){
-		if (this.filePath == null || this.itemName.getText().contentEquals("Enter Name") || this.priceText.getText().contentEquals("Enter Price") || this.quantityText.getText().contentEquals("Enter Quantity")){
+		// Check if filled
+		if (this.filePath == null || this.FileNameText.getText().trim().contentEquals("") || this.itemName.getText().trim().contentEquals("Enter Name") || this.priceText.getText().trim().contentEquals("Enter Price") || this.quantityText.getText().trim().contentEquals("Enter Quantity")){
 			System.out.println("Error");
 			JLabel label = new JLabel("Missing Values! Try Again!");
 			label.setFont(new Font("Tahoma", Font.BOLD, 14));
-			JOptionPane.showMessageDialog(this, label, "Update Item", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, label, "Error", JOptionPane.ERROR_MESSAGE);
+			return;
 		}
 		
-		else if(Integer.valueOf(this.quantityText.getText()) < 0){
-			JLabel label = new JLabel("Error! Quantity must be positive!");
-			label.setFont(new Font("Tahoma", Font.BOLD, 14));
-			JOptionPane.showMessageDialog(this, label, "Save", JOptionPane.ERROR_MESSAGE);
+		//Check Price
+		String finalPrice;
+		if (this.priceText.getText().trim().startsWith("$")){
+			finalPrice = priceText.getText().trim().substring(1);
+			
 		}
-		
 		else{
-			String finalPrice;
-			if (this.priceText.getText().startsWith("$")){
-				finalPrice = priceText.getText().substring(1);
-				
-			}
-			else{
-				finalPrice = priceText.getText();
-			}
-			System.out.println("Success");
-			String[] fileNameList = this.filePath.split("\\\\"); 
-			String fileName = fileNameList[fileNameList.length-1];
-//			System.out.println(fileName);
-//			
-			String folder = ".\\img";
-//	        System.out.println(folder);
-			System.out.println(this.chckbxOnSale.isSelected());
-			try{
-				
-				BufferedImage originalImage = ImageIO.read(new File(this.filePath));
-				File destinationFile = new File(folder, fileName);
-				
-				if (!destinationFile.getParentFile().exists()) {
-	            	destinationFile.getParentFile().mkdirs();
-	            }
-//	            
-				
-				String finalPath = "./img/" + fileName;
-				
-				this.main.getController().createGroceryItem(this.itemName.getText(), finalPrice, this.quantityText.getText(), finalPath, this.chckbxOnSale.isSelected(), this.spinner.getValue().toString(), this.comboBox.getSelectedItem().toString());
-				ImageIO.write(originalImage, "jpg", destinationFile);
-				
-				JLabel label = new JLabel("Item Created!");
-				label.setFont(new Font("Tahoma", Font.BOLD, 14));
-				JOptionPane.showMessageDialog(this, label, "Update Item", JOptionPane.INFORMATION_MESSAGE);
-				this.main.showManagerMenu();
-			}catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				JLabel label = new JLabel("Invalid Inputs! Try Again!");
-				label.setFont(new Font("Tahoma", Font.BOLD, 14));
-				JOptionPane.showMessageDialog(this, label, "Update Item", JOptionPane.ERROR_MESSAGE);
-			}
-			
-			
-			
+			finalPrice = priceText.getText().trim();
 		}
+		try{
+			if (Double.valueOf(finalPrice) < 0){
+				JLabel label = new JLabel("Error! Price must be positive!");
+				label.setFont(new Font("Tahoma", Font.BOLD, 14));
+				JOptionPane.showMessageDialog(this, label, "Error", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			
+		}catch (Exception e){
+//			e.printStackTrace();
+			JLabel label = new JLabel("Error! Price must be numeric!");
+			label.setFont(new Font("Tahoma", Font.BOLD, 14));
+			JOptionPane.showMessageDialog(this, label, "Error", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		
+		//Check Quantity
+		try{
+			if (Integer.valueOf(this.quantityText.getText().trim()) < 0){
+				JLabel label = new JLabel("Error! Quantity must be positive!");
+				label.setFont(new Font("Tahoma", Font.BOLD, 14));
+				JOptionPane.showMessageDialog(this, label, "Error", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+		}catch (Exception e){
+			JLabel label = new JLabel("Error! Quantity must be numeric!");
+			label.setFont(new Font("Tahoma", Font.BOLD, 14));
+			JOptionPane.showMessageDialog(this, label, "Error", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+			
+		//Check Image - if pass create item
+		try{
+			String fileName = this.FileNameText.getText().trim() + ".jpg";
+			String folder = ".\\img";
+			String finalPath = "./img/" + fileName; //filepath saved in object attribute
+			BufferedImage originalImage = ImageIO.read(new File(this.filePath));
+			File destinationFile = new File(folder, fileName);
+			
+			//creates img file if doesn't exist
+			if (!destinationFile.getParentFile().exists()) {
+				destinationFile.getParentFile().mkdirs();
+			}
+			
+			//Checks is file name exists. Prevents saving if exists.
+			if (destinationFile.exists()){ 
+				System.out.println("File Exits");
+				JLabel label = new JLabel("PicFile name exists! Try another one!");
+				label.setFont(new Font("Tahoma", Font.BOLD, 14));
+				JOptionPane.showMessageDialog(this, label, "Error", JOptionPane.INFORMATION_MESSAGE);
+				return;
+			}
+
+			//Saving
+			System.out.println("Creating Item...");
+			ImageIO.write(originalImage, "jpg", destinationFile);
+			this.main.getController().createGroceryItem(this.itemName.getText().trim(), finalPrice, this.quantityText.getText().trim(), finalPath, this.chckbxOnSale.isSelected(), this.spinner.getValue().toString(), this.comboBox.getSelectedItem().toString());
+
+			//Success Message
+			JLabel label = new JLabel("Item Created!");
+			label.setFont(new Font("Tahoma", Font.BOLD, 14));
+			JOptionPane.showMessageDialog(this, label, "Create Item", JOptionPane.INFORMATION_MESSAGE);
+			System.out.println("Item created successfully");
+
+			//Redirect to Menu
+			this.main.showManagerMenu();
+
+		}catch (Exception e) { //If created Item failed
+			e.printStackTrace();
+			JLabel label = new JLabel("Invalid Inputs! Try Again!");
+			label.setFont(new Font("Tahoma", Font.BOLD, 14));
+			JOptionPane.showMessageDialog(this, label, "Error", JOptionPane.ERROR_MESSAGE);
+		}
+
 	}
 }

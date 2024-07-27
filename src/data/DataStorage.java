@@ -78,35 +78,22 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 		this.inventory.add(item);
 	}
 	
-	public void editGroceryItemPrice(GroceryItem item, String price){
-//		int index = this.inventory.indexOf(item);
-//		GroceryItem temp = this.inventory.get(index);
+	public void editGroceryItem(GroceryItem item, String name, String price, String quantity, String picFile, boolean onSale, String percentOff, String category){
+		//Name
+		item.setName(name);
 		
+		//Price
 		BigDecimal tempPrice = new BigDecimal(price);
 		tempPrice = tempPrice.setScale(2, BigDecimal.ROUND_HALF_UP); //Rounds and set to 2dp
 		item.setPrice(tempPrice);
 		
-//		this.price = new BigDecimal(price); // Took in as a string as the double will truncate the .00 to .0 -- Nvm lol
-//		this.price = this.price.setScale(2, BigDecimal.ROUND_HALF_UP); //Rounds and set to 2dp
-		
-//		item.setPrice(new BigDecimal(price));
-	}
-	
-	public void editGroceryItemName(GroceryItem item, String name) { 
-//		int index = this.inventory.indexOf(item);
-//		GroceryItem temp = this.inventory.get(index);
-		item.setName(name);
-	 }
-	
-	public void editGroceryItemQuantity(GroceryItem item, String quantity) { 
-//		int index = this.inventory.indexOf(item);
-//		GroceryItem temp = this.inventory.get(index);
+		//Quantity
 		item.setQuantity(Integer.valueOf(quantity));
-	 }
-	
-	public void editGroceryItemSale(GroceryItem item, boolean onSale, String percentOff) { 
-//		int index = this.inventory.indexOf(item);
-//		GroceryItem temp = this.inventory.get(index);
+		
+		//PicFile
+		item.setPicFile(picFile);
+		
+		//Sale
 		if (onSale){
 			item.setOnSale(onSale);
 			item.setPercentOff(Double.valueOf(percentOff)/100);
@@ -115,24 +102,68 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 			item.setOnSale(onSale);
 			item.setPercentOff(0);
 		}
-	 }
-	
-	public void editGroceryItemCategory(GroceryItem item, String category) { 
-//		int index = this.inventory.indexOf(item);
-//		GroceryItem temp = this.inventory.get(index);
-//		System.out.println(category);
+		
+		//Category
 		item.setCategory(category);
 	}
 	
+//	public void editGroceryItemPrice(GroceryItem item, String price){
+////		int index = this.inventory.indexOf(item);
+////		GroceryItem temp = this.inventory.get(index);
+//		
+//		BigDecimal tempPrice = new BigDecimal(price);
+//		tempPrice = tempPrice.setScale(2, BigDecimal.ROUND_HALF_UP); //Rounds and set to 2dp
+//		item.setPrice(tempPrice);
+//		
+////		this.price = new BigDecimal(price); // Took in as a string as the double will truncate the .00 to .0 -- Nvm lol
+////		this.price = this.price.setScale(2, BigDecimal.ROUND_HALF_UP); //Rounds and set to 2dp
+//		
+////		item.setPrice(new BigDecimal(price));
+//	}
+//	
+//	public void editGroceryItemName(GroceryItem item, String name) { 
+////		int index = this.inventory.indexOf(item);
+////		GroceryItem temp = this.inventory.get(index);
+//		item.setName(name);
+//	 }
+//	
+//	public void editGroceryItemQuantity(GroceryItem item, String quantity) { 
+////		int index = this.inventory.indexOf(item);
+////		GroceryItem temp = this.inventory.get(index);
+//		item.setQuantity(Integer.valueOf(quantity));
+//	 }
+//	
+//	public void editGroceryItemSale(GroceryItem item, boolean onSale, String percentOff) { 
+////		int index = this.inventory.indexOf(item);
+////		GroceryItem temp = this.inventory.get(index);
+//		if (onSale){
+//			item.setOnSale(onSale);
+//			item.setPercentOff(Double.valueOf(percentOff)/100);
+//		}
+//		else{
+//			item.setOnSale(onSale);
+//			item.setPercentOff(0);
+//		}
+//	 }
+//	
+//	public void editGroceryItemCategory(GroceryItem item, String category) { 
+////		int index = this.inventory.indexOf(item);
+////		GroceryItem temp = this.inventory.get(index);
+////		System.out.println(category);
+//		item.setCategory(category);
+//	}
+	
 	public void deleteGroceryItem(GroceryItem item) { 
+		File picFile = new File(item.getPicFile());
+		picFile.delete();
 		this.inventory.remove(item);
 	 }
 	
-	public void changePicPath(String path, GroceryItem item){
-//		int index = this.inventory.indexOf(item);
-//		this.inventory.get(index).setPicFile(path);
-		item.setPicFile(path);
-	}
+//	public void changePicPath(String path, GroceryItem item){
+////		int index = this.inventory.indexOf(item);
+////		this.inventory.get(index).setPicFile(path);
+//		item.setPicFile(path);
+//	}
 	
 	
 	public void readFile(){ // Method to read from JSON file
