@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -30,6 +31,7 @@ public class StaffCart extends JPanel {
     private JPanel itemsPanel;
     private JLabel totalLabel;
 	private ImageIcon itemPic;
+	private JButton clearCartButton;
 
 
     public StaffCart(MainFrame main) {
@@ -39,14 +41,31 @@ public class StaffCart extends JPanel {
         this.setBackground(UIManager.getColor("OptionPane.background"));
         this.setLayout(new BorderLayout(0, 0));
 
-        // Top Label
+        // Top Panel
+        JPanel topPanel = new JPanel();
+        topPanel.setBackground(UIManager.getColor("Button.background"));
+        topPanel.setPreferredSize(new Dimension(getWidth(), 60));
+        topPanel.setLayout(new BorderLayout());
+        
+        //Top label
         this.lblEditItem = new JLabel("Staff Cart");
-        this.lblEditItem.setBackground(UIManager.getColor("Button.background"));
-        this.lblEditItem.setPreferredSize(new Dimension(87, 60));
         this.lblEditItem.setFont(new Font("Tahoma", Font.BOLD, 20));
         this.lblEditItem.setHorizontalAlignment(SwingConstants.CENTER);
-        add(this.lblEditItem, BorderLayout.NORTH);
+        topPanel.add(this.lblEditItem, BorderLayout.CENTER);
 
+        add(topPanel, BorderLayout.NORTH);
+        
+        //clear cart button
+        this.clearCartButton = new JButton("Clear Cart");
+        this.clearCartButton.setFont(new Font("Tahoma", Font.BOLD, 14));
+        this.clearCartButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                clearCart();
+            }
+        });
+        topPanel.add(this.clearCartButton, BorderLayout.EAST);
+        
         // Middle Panel (Scrollable)
         this.itemsPanel = new JPanel();
         this.itemsPanel.setLayout(new BoxLayout(itemsPanel, BoxLayout.Y_AXIS)); //box layout instead of grid layout
@@ -75,6 +94,8 @@ public class StaffCart extends JPanel {
             }
         });
         this.bottomPanel.add(this.backButton, BorderLayout.WEST);
+        
+        // Move the totalLabel to the left of the confirmButton
 
         this.confirmButton = new JButton("Confirm Order");
         this.confirmButton.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -95,6 +116,16 @@ public class StaffCart extends JPanel {
         this.add(this.bottomPanel, BorderLayout.SOUTH);
 
         updateCartItems();
+    }
+    
+    private void clearCart() {
+        int result = JOptionPane.showConfirmDialog(this, "Are you sure you want to clear the cart?", "Clear Cart", JOptionPane.YES_NO_OPTION);
+        if (result == JOptionPane.YES_OPTION) {
+            main.getController().clearCartItems();
+            updateCartItems();
+            updateTotalLabel();
+            JOptionPane.showMessageDialog(this, "Cart has been cleared.", "Cart Cleared", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 
     public void updateCartItems() {
