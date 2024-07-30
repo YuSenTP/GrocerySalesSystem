@@ -2,7 +2,10 @@ package gui;
 
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
@@ -24,12 +27,21 @@ public class ManagerInventory extends JPanel {
     private DefaultTableModel tableColumns;
     private JButton backButton;
     private JScrollPane scrollPane;
+	private JLabel lblInventory;
 
     public ManagerInventory(MainFrame main) {
         this.main = main;
         this.main.setTitle("Joy MiniMart - Inventory");
         setLayout(new BorderLayout());
-
+        
+        //Top Inventory Label
+        this.lblInventory = new JLabel("Inventory");
+        this.lblInventory.setBackground(UIManager.getColor("Button.background"));
+        this.lblInventory.setPreferredSize(new Dimension(200, 60));
+        this.lblInventory.setFont(new Font("Tahoma", Font.BOLD, 20));
+        this.lblInventory.setHorizontalAlignment(SwingConstants.CENTER);
+        this.add(this.lblInventory, BorderLayout.NORTH);
+        
         // Create table columns
         String[] columnNames = {"Item Name", "Price", "Quantity", "Category", "On Sale"};
         tableColumns = new DefaultTableModel(columnNames, 0);
@@ -46,6 +58,13 @@ public class ManagerInventory extends JPanel {
         inventoryTable.getTableHeader().setFont(font);
         inventoryTable.setRowHeight(font.getSize() + 10); // Adjust row height for the new font size
         
+        //Create scrollPane	
+        this.scrollPane = new JScrollPane(inventoryTable);
+        this.scrollPane.setBorder(new EmptyBorder(0, 2, 2, 2));
+        this.scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        this.scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        this.scrollPane.getVerticalScrollBar().setUnitIncrement(15);
+        this.add(this.scrollPane, BorderLayout.CENTER);
         
         // Bottom Panel 
         JPanel buttonPanel = new JPanel();

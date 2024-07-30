@@ -12,6 +12,7 @@ import data.Order;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -20,6 +21,7 @@ import javax.swing.event.DocumentListener;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -28,6 +30,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.font.TextAttribute;
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.Vector;
 
@@ -54,12 +57,19 @@ public class StaffMenu extends JPanel {
     private GroceryItem cItem;
 	private JPanel pricePanel;
 	private GroceryItem[] cItems;
+	private JComboBox comboBox;
+	private JLabel lblView;
+	private String[] category;
+	private GroceryItem currentItem;
+	
+	private static String categorySele = "All";
 
     public StaffMenu(MainFrame main) {
         this.main = main;
         this.main.setTitle("Joy MiniMart - Staff Menu");
         this.inventory = this.main.getController().getInventory();
-        
+		this.category = this.main.getController().getCategory();
+
         
         this.cItems = this.main.getController().getCurrentOrder().getGroceryItems();
 
@@ -72,11 +82,49 @@ public class StaffMenu extends JPanel {
         
         // Top Panel
         this.topPanel = new JPanel();
+        this.topPanel.setPreferredSize(new Dimension(10, 70));
+        this.topPanel.setLayout(null);
+
         this.lblGroceryItems = new JLabel("Grocery Items");
+        this.lblGroceryItems.setBounds(275, 5, 200, 60);
+        this.lblGroceryItems.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.lblGroceryItems.setPreferredSize(new Dimension(200, 60));
         this.lblGroceryItems.setFont(new Font("Tahoma", Font.BOLD, 20));
         this.lblGroceryItems.setHorizontalAlignment(SwingConstants.CENTER);
         this.topPanel.add(this.lblGroceryItems);
+        
+        
+
+        this.comboBox = new JComboBox(Arrays.copyOfRange(this.category, 0, this.category.length - 1));
+        this.comboBox.setBounds(588, 24, 111, 25);
+        this.comboBox.setSelectedItem(StaffMenu.categorySele);
+        this.comboBox.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		StaffMenu.categorySele = comboBox.getSelectedItem().toString();
+        		System.out.println(comboBox.getSelectedItem().toString());
+        		main.showStaffMenu();
+        	}
+        });;
+        
+        this.lblView = new JLabel("View:");
+        this.lblView.setBounds(529, 25, 47, 21);
+        this.lblView.setFont(new Font("Tahoma", Font.BOLD, 17));
+        this.topPanel.add(this.lblView);
+        this.comboBox.setAlignmentX(Component.RIGHT_ALIGNMENT);
+        this.comboBox.setFont(new Font("Tahoma", Font.BOLD, 15));
+        this.comboBox.setFocusable(false);
+        this.topPanel.add(this.comboBox);
+        
+        this.add(this.topPanel, BorderLayout.NORTH);
+        
+        this.lblView = new JLabel("View:");
+        this.lblView.setFont(new Font("Tahoma", Font.BOLD, 17));
+        this.topPanel.add(this.lblView);
+        this.comboBox.setAlignmentX(Component.RIGHT_ALIGNMENT);
+        this.comboBox.setFont(new Font("Tahoma", Font.BOLD, 15));
+        this.comboBox.setFocusable(false);
+        this.topPanel.add(this.comboBox);
+        
         this.add(this.topPanel, BorderLayout.NORTH);
 
         // Bottom Panel
@@ -98,8 +146,13 @@ public class StaffMenu extends JPanel {
         this.bottomPanel.add(this.logoutButton, BorderLayout.WEST);
 
         for (int i = 0; i < this.inventory.length; i++) {
-            GroceryItem currentItem = this.inventory[i];
+            this.currentItem = this.inventory[i];
             
+            if (StaffMenu.categorySele.equals("All") != true){
+        		if (this.currentItem.getCategory().equals(StaffMenu.categorySele) != true){
+        			continue;
+        		}
+        	}
             if (currentItem.getQuantity() == 0 && this.cItems.length == 0){ // If item not in cart and no more in inventory then no show
             	continue;
             }
