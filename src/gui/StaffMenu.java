@@ -60,7 +60,6 @@ public class StaffMenu extends JPanel {
 	private JComboBox comboBox;
 	private JLabel lblView;
 	private String[] category;
-	private GroceryItem currentItem;
 	
 	private static String categorySele = "All";
 
@@ -116,16 +115,7 @@ public class StaffMenu extends JPanel {
         this.topPanel.add(this.comboBox);
         
         this.add(this.topPanel, BorderLayout.NORTH);
-        
-        this.lblView = new JLabel("View:");
-        this.lblView.setFont(new Font("Tahoma", Font.BOLD, 17));
-        this.topPanel.add(this.lblView);
-        this.comboBox.setAlignmentX(Component.RIGHT_ALIGNMENT);
-        this.comboBox.setFont(new Font("Tahoma", Font.BOLD, 15));
-        this.comboBox.setFocusable(false);
-        this.topPanel.add(this.comboBox);
-        
-        this.add(this.topPanel, BorderLayout.NORTH);
+   
 
         // Bottom Panel
         this.bottomPanel = new JPanel();
@@ -146,10 +136,10 @@ public class StaffMenu extends JPanel {
         this.bottomPanel.add(this.logoutButton, BorderLayout.WEST);
 
         for (int i = 0; i < this.inventory.length; i++) {
-            this.currentItem = this.inventory[i];
+        	GroceryItem currentItem = this.inventory[i];
             
             if (StaffMenu.categorySele.equals("All") != true){
-        		if (this.currentItem.getCategory().equals(StaffMenu.categorySele) != true){
+        		if (currentItem.getCategory().equals(StaffMenu.categorySele) != true){
         			continue;
         		}
         	}
