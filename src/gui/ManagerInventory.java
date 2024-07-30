@@ -42,12 +42,20 @@ public class ManagerInventory extends JPanel {
         this.lblInventory.setHorizontalAlignment(SwingConstants.CENTER);
         this.add(this.lblInventory, BorderLayout.NORTH);
         
-        // Create table columns
+        // Set Model and Create Columns
         String[] columnNames = {"Item Name", "Price", "Quantity", "Category", "On Sale"};
         tableColumns = new DefaultTableModel(columnNames, 0);
         
         // Create table
-        inventoryTable = new JTable(tableColumns);
+        inventoryTable = new JTable(tableColumns) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+            	//all cells false
+                return false;
+            } 
+        };
+        
+        
         this.scrollPane = new JScrollPane(inventoryTable);
         this.scrollPane.setBorder(new EmptyBorder(0, 2, 2, 2));
         this.add(this.scrollPane, BorderLayout.CENTER);
