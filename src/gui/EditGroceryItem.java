@@ -22,6 +22,7 @@ import java.awt.Font;
 import java.awt.Image;
 
 import javax.imageio.ImageIO;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -42,6 +43,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.JComboBox;
+import javax.swing.border.EmptyBorder;
 
 /**
  * @author Yu Sen
@@ -74,6 +76,7 @@ public class EditGroceryItem extends JPanel{
 	private JLabel PicFileName;
 	private JTextField FileNameText;
 	private String selectedFile;
+	private boolean picChanged;
 	
 	
 	public EditGroceryItem(MainFrame main, GroceryItem item){ 
@@ -176,7 +179,7 @@ public class EditGroceryItem extends JPanel{
 		
 		this.lblQuantity = new JLabel("Quantity:");
 		this.lblQuantity.setFont(new Font("Tahoma", Font.BOLD, 20));
-		this.lblQuantity.setBounds(325, 169, 100, 26);
+		this.lblQuantity.setBounds(325, 163, 100, 26);
 		this.middlePanel.add(this.lblQuantity);
 		
 		this.quantityText = new JTextField(Integer.toString(this.item.getQuantity()));
@@ -199,7 +202,7 @@ public class EditGroceryItem extends JPanel{
 		this.quantityText.setHorizontalAlignment(SwingConstants.CENTER);
 		this.quantityText.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		this.quantityText.setColumns(10);
-		this.quantityText.setBounds(437, 169, 156, 32);
+		this.quantityText.setBounds(437, 161, 156, 32);
 		this.middlePanel.add(this.quantityText);
 		
 		this.lblonlyAddSquare = new JLabel("*Only Add Square Picture");
@@ -216,7 +219,7 @@ public class EditGroceryItem extends JPanel{
 		});
 		this.btnDeleteItem.setForeground(new Color(255, 0, 51));
 		this.btnDeleteItem.setFont(new Font("Tahoma", Font.BOLD, 15));
-		this.btnDeleteItem.setBounds(597, 349, 128, 39);
+		this.btnDeleteItem.setBounds(598, 332, 128, 39);
 		this.middlePanel.add(this.btnDeleteItem);
 				
 		this.chckbxOnSale = new JCheckBox("On Sale");
@@ -231,13 +234,13 @@ public class EditGroceryItem extends JPanel{
 			}
 		});
 		this.chckbxOnSale.setFont(new Font("Tahoma", Font.BOLD, 18));
-		this.chckbxOnSale.setBounds(325, 231, 100, 25);
+		this.chckbxOnSale.setBounds(325, 220, 100, 25);
 		this.middlePanel.add(this.chckbxOnSale);
 		
 		this.spinner = new JSpinner();
 		this.spinner.setModel(new SpinnerNumberModel(1, 1, 100, 1)); // set limit for spinner min 1 max 100
 		this.spinner.setFont(new Font("Tahoma", Font.BOLD, 15));
-		this.spinner.setBounds(437, 232, 50, 26);
+		this.spinner.setBounds(437, 221, 50, 26);
 		this.middlePanel.add(this.spinner);
 		
 		if (this.item.getOnSale()){
@@ -252,12 +255,12 @@ public class EditGroceryItem extends JPanel{
 		
 		this.lblOff = new JLabel("% Off");
 		this.lblOff.setFont(new Font("Tahoma", Font.BOLD, 16));
-		this.lblOff.setBounds(487, 231, 56, 26);
+		this.lblOff.setBounds(487, 220, 56, 26);
 		this.middlePanel.add(this.lblOff);
 		
 		this.lblCategory = new JLabel("Category:");
 		this.lblCategory.setFont(new Font("Tahoma", Font.BOLD, 20));
-		this.lblCategory.setBounds(325, 286, 100, 26);
+		this.lblCategory.setBounds(325, 271, 100, 26);
 		this.middlePanel.add(this.lblCategory);
 		
 		// Array Slicing to exclude "All"
@@ -294,14 +297,14 @@ public class EditGroceryItem extends JPanel{
             }
         });
 		this.comboBox.setFont(new Font("Tahoma", Font.BOLD, 16));
-		this.comboBox.setBounds(437, 289, 128, 26);
+		this.comboBox.setBounds(437, 273, 128, 26);
 		this.comboBox.setFocusable(false);
 		this.comboBox.setSelectedItem(this.item.getCategory());
 		this.middlePanel.add(this.comboBox);
 		
 		this.PicFileName = new JLabel("FileName:");
 		this.PicFileName.setFont(new Font("Tahoma", Font.BOLD, 20));
-		this.PicFileName.setBounds(325, 349, 111, 26);
+		this.PicFileName.setBounds(325, 327, 111, 26);
 		this.middlePanel.add(this.PicFileName);
 		
 		String[] picPath = this.item.getPicFile().split("/");
@@ -327,10 +330,11 @@ public class EditGroceryItem extends JPanel{
 		this.FileNameText.setHorizontalAlignment(SwingConstants.CENTER);
 		this.FileNameText.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		this.FileNameText.setColumns(10);
-		this.FileNameText.setBounds(437, 349, 156, 32);
+		this.FileNameText.setBounds(437, 325, 156, 32);
 		this.middlePanel.add(this.FileNameText);
 		
 		this.bottomPanel = new JPanel();
+		this.bottomPanel.setBorder(new EmptyBorder(10, 20, 10, 20));
 		this.bottomPanel.setBackground(Color.WHITE);
 		this.bottomPanel.setLayout(new BorderLayout(0, 0));
 		
@@ -358,10 +362,78 @@ public class EditGroceryItem extends JPanel{
 	}
 	
 	private void back(){
-		this.main.showManagerMenu();
+		
+		//Name
+		boolean nameChanged = !(this.itemName.getText().trim().equals(this.item.getName()));
+		
+		//Price
+		String finalPrice;
+	
+		if (this.priceText.getText().trim().startsWith("$")){
+			finalPrice = priceText.getText().trim().substring(1);
+		}
+		else{
+			finalPrice = priceText.getText().trim();
+		}
+		boolean priceChanged = !finalPrice.equals(this.item.getPrice().toString());
+		
+		//Quantity
+		boolean quantityChanged = !this.quantityText.getText().trim().equals(String.valueOf(this.item.getQuantity()));
+		
+		//OnSale
+		boolean onSaleChanged = !(this.chckbxOnSale.isSelected() == this.item.getOnSale());
+		
+		//PercentOff
+		boolean percentOffChanged;
+		if (this.item.getOnSale()){
+			percentOffChanged = !(this.spinner.getValue().toString().equals(String.valueOf(this.item.getPercentOff()*100)));
+		}
+		else{
+			percentOffChanged = false;
+		}
+		
+		//Category
+		boolean categoryChanged = !(this.comboBox.getSelectedItem().toString().equals(this.item.getCategory()));
+		
+		//FileName
+		String[] fileNameList = this.item.getPicFile().split("/"); 
+		String fileName = fileNameList[fileNameList.length-1];
+		String pFinalName = fileName.split("\\.")[0];
+		boolean fileNameChanged = !(this.FileNameText.getText().trim().equals(pFinalName));
+		
+		//ItemPic
+		boolean picChanged = this.picChanged;
+		
+//		System.out.println("price"+priceChanged);
+//		System.out.println("quantity"+quantityChanged);
+//		System.out.println("onSale"+onSaleChanged);
+//		System.out.println("percentOff"+percentOffChanged);
+//		System.out.println("category"+categoryChanged);
+//		System.out.println("fileName"+fileNameChanged);
+		
+		//Checks if values have been edited
+		if (nameChanged || priceChanged || quantityChanged || onSaleChanged || percentOffChanged || categoryChanged || fileNameChanged || picChanged){
+			System.out.println("Value Changed");
+			
+			JLabel label = new JLabel("Save Changes?");
+			label.setFont(new Font("Tahoma", Font.BOLD, 14));
+			int response = JOptionPane.showConfirmDialog(this, label, "Back", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE );
+			
+			if (response == JOptionPane.YES_OPTION) {
+				save();
+			}
+			
+			else{
+				this.main.showManagerMenu();
+			}
+		}
+		else{
+			this.main.showManagerMenu();
+		}
+		
+		
 	}
 	
-	//! Need Change to not save. Only save when save button is pressed.
 	private void changePic(){
 		JFileChooser fileChooser = new JFileChooser();
 		//Only allow jpg
@@ -372,6 +444,7 @@ public class EditGroceryItem extends JPanel{
 		int r = fileChooser.showSaveDialog(this);
 		
 		if (r == JFileChooser.APPROVE_OPTION){
+			this.picChanged = true;
 			
 			this.selectedFile = fileChooser.getSelectedFile().getAbsolutePath();
 //			System.out.println(selectedFile);

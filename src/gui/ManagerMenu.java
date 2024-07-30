@@ -56,7 +56,6 @@ public class ManagerMenu extends JPanel{
 	private GroceryItem currentItem;
 	private JPanel pricePanel;
 	private JComboBox comboBox;
-	private JLabel lblFiller;
 	private JLabel lblView;
 	private String[] category;
 	
@@ -178,13 +177,10 @@ public class ManagerMenu extends JPanel{
         //Top Panel
         this.topPanel = new JPanel();
         this.topPanel.setPreferredSize(new Dimension(10, 70));
-        this.topPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-        
-        this.lblFiller = new JLabel("");
-        this.lblFiller.setPreferredSize(new Dimension(140, 22));
-        this.topPanel.add(this.lblFiller);
+        this.topPanel.setLayout(null);
 
         this.lblGroceryItems = new JLabel("Grocery Items");
+        this.lblGroceryItems.setBounds(275, 5, 200, 60);
         this.lblGroceryItems.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.lblGroceryItems.setPreferredSize(new Dimension(200, 60));
         this.lblGroceryItems.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -194,6 +190,7 @@ public class ManagerMenu extends JPanel{
         
 
         this.comboBox = new JComboBox(Arrays.copyOfRange(this.category, 0, this.category.length - 1));
+        this.comboBox.setBounds(588, 24, 111, 25);
         this.comboBox.setSelectedItem(ManagerMenu.categorySele);
         this.comboBox.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
@@ -204,6 +201,7 @@ public class ManagerMenu extends JPanel{
         });;
         
         this.lblView = new JLabel("View:");
+        this.lblView.setBounds(529, 25, 47, 21);
         this.lblView.setFont(new Font("Tahoma", Font.BOLD, 17));
         this.topPanel.add(this.lblView);
         this.comboBox.setAlignmentX(Component.RIGHT_ALIGNMENT);
@@ -217,8 +215,10 @@ public class ManagerMenu extends JPanel{
         this.bottomPanel = new JPanel();
         this.bottomPanel.setBackground(Color.WHITE);  
         this.bottomPanel.setLayout(new BorderLayout(0, 0));
+        this.bottomPanel.setBorder(new EmptyBorder(10, 20, 10, 20)); //Used to create white space
 
         this.backButton = new JButton("Back");
+//        this.backButton.setPreferredSize(new Dimension(90, 50));
         this.backButton.setFont(new Font("Tahoma", Font.BOLD, 15));
         this.backButton.setPreferredSize(new Dimension(100, 40));
     	this.backButton.addActionListener(new ActionListener(){

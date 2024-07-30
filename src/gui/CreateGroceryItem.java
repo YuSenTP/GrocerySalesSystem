@@ -198,7 +198,7 @@ public class CreateGroceryItem extends JPanel{
 		this.quantityText.setHorizontalAlignment(SwingConstants.CENTER);
 		this.quantityText.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		this.quantityText.setColumns(10);
-		this.quantityText.setBounds(437, 163, 156, 32);
+		this.quantityText.setBounds(437, 161, 156, 32);
 		this.middlePanel.add(this.quantityText);
 		
 		this.lblonlyAddSquare = new JLabel("*Only Add Square Picture");
@@ -241,7 +241,7 @@ public class CreateGroceryItem extends JPanel{
 		this.comboBox = new JComboBox(Arrays.copyOfRange(this.category, 1, this.category.length));
 		this.comboBox.setFont(new Font("Tahoma", Font.BOLD, 16));
 		this.comboBox.setFocusable(false);
-		this.comboBox.setBounds(437, 274, 128, 26);
+		this.comboBox.setBounds(437, 273, 128, 26);
 		this.middlePanel.add(this.comboBox);
 		
 		this.PicFileName = new JLabel("FileName:");
@@ -287,6 +287,7 @@ public class CreateGroceryItem extends JPanel{
 //		this.middlePanel.add(this.btnDeleteItem);
 		
 		this.bottomPanel = new JPanel();
+		this.bottomPanel.setBorder(new EmptyBorder(10, 20, 10, 20));
 		this.bottomPanel.setBackground(Color.WHITE);
 		this.bottomPanel.setLayout(new BorderLayout(0, 0));
 		
