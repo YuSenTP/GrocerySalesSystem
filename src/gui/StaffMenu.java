@@ -1,5 +1,5 @@
 package gui;
-
+//THINGS TO DO: PUT ORDER HISTORY 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;

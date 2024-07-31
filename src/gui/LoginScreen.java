@@ -147,31 +147,23 @@ public class LoginScreen extends JPanel{
 	}
 	
 	public void openPage(){
-		boolean testing = true;
+		boolean testing = false; //set to true for easy login
 		String n = textName.getText();
-		String p = new String(textPassword.getPassword());
-		boolean validity;
-		if (staffSelect.isSelected()){
-			validity = this.main.getController().verifyUser(n, p, "staff");
-			if (validity || testing){
-				this.main.showStaffMenu();
-			}
-			else{
-				this.lblwrong.setVisible(true);
-			}
+		String pwd = new String(textPassword.getPassword());
+		String validity;
+		validity = this.main.getController().verifyUser(n , pwd);
+		System.out.println(validity);
+		if ("Staff".equals(validity)|| testing){ //use .equals instead of == to prevent it from accessing memory, but the string
+			this.main.showStaffMenu();
 		}
-		else if (managerSelect.isSelected()) {
-			validity = this.main.getController().verifyUser(n, p, "manager");
-			if (validity || testing){
-				this.main.showManagerHome();;
-			}
-			else{
-				this.lblwrong.setVisible(true);
-			}
-		}	
-			
+		else if("Manager".equals(validity)|| testing){
+			this.main.showManagerHome();
+		}		
+		else{
+			this.lblwrong.setVisible(true);
+
+		}
 	}
-	
 	
 	
     @Override

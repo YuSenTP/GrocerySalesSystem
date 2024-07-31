@@ -1,4 +1,16 @@
-[
-    { "name": "user1", "password": 2.99, "userID": 1 },
-    { "name": "user2", "password": 1.99, "userID": 2 }
-  ]
+[ {
+  "password" : "Password",
+  "name" : "John",
+  "userID" : 1,
+  "role" : "Manager"
+}, {
+  "password" : "1234",
+  "name" : "Jerry",
+  "userID" : 2,
+  "role" : "Staff"
+}, {
+  "password" : "5678",
+  "name" : "Jenny",
+  "userID" : 3,
+  "role" : "Staff"
+} ]

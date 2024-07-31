@@ -9,6 +9,8 @@ public class User {
 	private String name;
 	@JsonProperty("userID")
 	private int userID;
+	@JsonProperty("role")
+	private String role;
 	
 	public User(){
 		
@@ -42,6 +44,16 @@ public class User {
 	public void setUserID(int userID) { 
 		 this.userID = userID; 
 	}
+	
+	public String getRole(){
+		return role;
+	}
+	
+	public void setRole(String role){
+		this.role = role; 
+	}
+	
+	
 
 	public void login() { 
 		// TODO Auto-generated method

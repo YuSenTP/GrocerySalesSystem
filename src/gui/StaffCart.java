@@ -19,7 +19,7 @@ import data.GroceryItem;
 import data.Order;
 
 import java.util.Vector;
-
+//ADD STUFF - WHEN CART IS EMPTY AND CLEAR CART BUTTON IS PRESSED, DIALOGUE OPENS THAT CART IS ALREADY CLEARED. 
 public class StaffCart extends JPanel {
     private MainFrame main;
     private JLabel lblEditItem;

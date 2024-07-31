@@ -249,30 +249,17 @@ public class Controller {
 		
 	}
 		
-	public boolean verifyUser(String n, String pwd, String role) {
-		if (role == "staff"){
-			Staff[] staffs = this.ds.getStaffs();
-			for (Staff staff: staffs){
-				if (staff.getName().equals(n) && staff.getPassword().equals(pwd)){
-					return true;
-				}
-				else
-					return false;
-			}
-		}
-		
-		else if (role == "manager"){
-			Manager[] managers = this.ds.getManagers();
-			for (Manager manager: managers){
-				if (manager.getName().equals(n) && manager.getPassword().equals(pwd)){
-					return true;
-				}
-				else
-					return false;
-			}
-		}
-		return false;	
+	public String verifyUser(String n, String pwd) {
+	    User[] users = this.ds.getUsers();
+	    for (int i = 0; i < users.length; i++) {
+	        User user = users[i];
+	        if (user.getName().equals(n) && user.getPassword().equals(pwd)) {
+	            return user.getRole(); //role will return only if name, password matches
+	        } //returned role will be used to determine if go to Staff or Manager in LoginScreen
+	    }
+	    return null; //otherwise, return null
 	}
+		
 
 	public Order getCurrentOrder() {
         return this.ds.getCurrentOrder();

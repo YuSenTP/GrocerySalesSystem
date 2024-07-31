@@ -1,6 +1,3 @@
-/**
- * 
- */
 package data;
 
 import java.io.BufferedReader;
@@ -24,8 +21,7 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 	
 	private Vector<GroceryItem> inventory;
 	private Vector<Order> orders;
-	private Vector<Staff> staffs;
-	private Vector<Manager> managers;
+	private Vector<User> users;
 //	Vector<User> storage = new Vector<User>();
 	private Order currentOrder;
 //	private String[] category = {"All", "Fruits", "Vegetables", "Meat", "Dairy", "Others"};
@@ -34,8 +30,7 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 	public DataStorage(){
 		this.inventory = new Vector<GroceryItem>();
 		this.orders = new Vector<Order>();
-		this.staffs = new Vector<Staff>();
-		this.managers = new Vector<Manager>();
+		this.users = new Vector<User>();
 		this.currentOrder = new Order();
 		this.category = new Vector<String>();
 		
@@ -50,12 +45,8 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 		return this.orders.toArray(new Order[this.orders.size()]);
 	}
 	
-	public Staff[] getStaffs(){
-		return this.staffs.toArray(new Staff[this.staffs.size()]);
-	}
-	
-	public Manager[] getManagers(){
-		return this.managers.toArray(new Manager[this.managers.size()]);
+	public User[] getUsers(){
+		return this.users.toArray(new User[this.users.size()]);
 	}
 	
 	public Order getCurrentOrder(){
@@ -217,14 +208,9 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 		ObjectMapper objectMapper = new ObjectMapper();
 		
 		try{
-			this.managers = objectMapper.readValue(
-	                 new File("./src/JsonReadWrite/startManager.json"),
-	                 new TypeReference<Vector<Manager>>(){}
-	         );
-			
-			this.staffs = objectMapper.readValue(
-	                 new File("./src/JsonReadWrite/startStaff.json"),
-	                 new TypeReference<Vector<Staff>>(){}
+			this.users = objectMapper.readValue(
+	                 new File("./src/JsonReadWrite/startuser.json"),
+	                 new TypeReference<Vector<User>>(){}
 	         );
 	        
 	         this.inventory = objectMapper.readValue(
@@ -268,9 +254,8 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
     	ObjectMapper objectMapper = new ObjectMapper(); 
     	try {
     		//! TO-CHANGE filePath
-			objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File("./src/JsonReadWrite/inventory.json"), this.inventory);
-			objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File("./src/JsonReadWrite/manager.json"), this.managers);
-			objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File("./src/JsonReadWrite/staff.json"), this.staffs);
+    		objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File("./src/JsonReadWrite/inventory.json"), this.inventory);
+			objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File("./src/JsonReadWrite/user.json"), this.users);
 			objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File("./src/JsonReadWrite/order.json"), this.orders);
 			
 			BufferedWriter out = new BufferedWriter(new FileWriter("src/JsonReadWrite/category.txt"));
