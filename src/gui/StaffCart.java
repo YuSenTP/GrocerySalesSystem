@@ -27,6 +27,7 @@ public class StaffCart extends JPanel {
     private JPanel bottomPanel;
     private JButton backButton; 
     private JButton confirmButton;
+    private JButton deleteItemButton; 
     private JScrollPane scrollPane;
     private JPanel itemsPanel;
     private JLabel totalLabel;
@@ -41,30 +42,31 @@ public class StaffCart extends JPanel {
         this.setBackground(UIManager.getColor("OptionPane.background"));
         this.setLayout(new BorderLayout(0, 0));
 
-        // Top Panel
+        /// Top Panel
         JPanel topPanel = new JPanel();
         topPanel.setBackground(UIManager.getColor("Button.background"));
-        topPanel.setPreferredSize(new Dimension(getWidth(), 60));
-        topPanel.setLayout(new BorderLayout());
-        
-        //Top label
+        topPanel.setPreferredSize(new Dimension(getWidth(), 70)); // Increased height to 70
+        topPanel.setLayout(null); // Set to null layout for absolute positioning
+
+        // Top label
         this.lblEditItem = new JLabel("Staff Cart");
         this.lblEditItem.setFont(new Font("Tahoma", Font.BOLD, 20));
-        this.lblEditItem.setHorizontalAlignment(SwingConstants.CENTER);
-        topPanel.add(this.lblEditItem, BorderLayout.CENTER);
+        this.lblEditItem.setBounds(275, 5, 200, 60); // Set specific bounds
+        topPanel.add(this.lblEditItem);
 
-        add(topPanel, BorderLayout.NORTH);
-        
-        //clear cart button
+        // Clear cart button
         this.clearCartButton = new JButton("Clear Cart");
         this.clearCartButton.setFont(new Font("Tahoma", Font.BOLD, 14));
+        this.clearCartButton.setBounds(588, 30, 111, 30); // Set specific bounds
         this.clearCartButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 clearCart();
             }
         });
-        topPanel.add(this.clearCartButton, BorderLayout.EAST);
+        topPanel.add(this.clearCartButton);
+
+        add(topPanel, BorderLayout.NORTH);
         
         // Middle Panel (Scrollable)
         this.itemsPanel = new JPanel();
@@ -186,8 +188,21 @@ public class StaffCart extends JPanel {
             quantityPanel.add(decreaseButton, BorderLayout.WEST);
             quantityPanel.add(quantityLabel, BorderLayout.CENTER);
             quantityPanel.add(increaseButton, BorderLayout.EAST);
+            
+            this.deleteItemButton = new JButton("Delete");
+            this.deleteItemButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    deleteItem(currentItem);
+                }
+            });
 
-            itemPanel.add(quantityPanel, BorderLayout.EAST);
+            itemPanel.add(this.deleteItemButton, BorderLayout.EAST);
+            
+            JPanel rightPanel = new JPanel(new BorderLayout(5, 0)); //Move quantity panel next to delete button
+            rightPanel.add(quantityPanel, BorderLayout.CENTER);
+            rightPanel.add(this.deleteItemButton, BorderLayout.EAST);
+            itemPanel.add(rightPanel, BorderLayout.EAST);
 
             itemsPanel.add(itemPanel);
             itemsPanel.add(Box.createRigidArea(new Dimension(0, 10))); // Add some space between the items
@@ -231,6 +246,34 @@ public class StaffCart extends JPanel {
         Order currentOrder = main.getController().getCurrentOrder();
         BigDecimal totalCost = currentOrder.calculateTotalCost();
         totalLabel.setText("Total: $" + currentOrder.getTotalCost());
+    }
+    
+    private void deleteItem(GroceryItem item) {
+        int result = JOptionPane.showConfirmDialog(this, 
+            "Are you sure you want to delete this item?", 
+            "Delete Item", 
+            JOptionPane.YES_NO_OPTION);
+        if (result == JOptionPane.YES_OPTION) {
+            main.getController().cartUpdateInventory("delete", item);
+            main.getController().getCurrentOrder().deleteGroceryItem(item);
+            updateCartItems();
+            updateTotalLabel();
+        }
+    }
+    
+    private void resetItemQuantity(GroceryItem item) {
+        int currentQuantity = item.getQuantity();
+        if (currentQuantity > 1) {
+            // Remove the excess quantity from the cart
+            for (int i = currentQuantity; i > 1; i--) {
+                main.getController().cartUpdateInventory("delete", item);
+            }
+            // Set the quantity to 1
+            item.setQuantity(1);
+            main.getController().getCurrentOrder().calculateTotalCost();
+            updateCartItems();
+            updateTotalLabel();
+        }
     }
 
     private void confirmOrder() {
