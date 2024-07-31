@@ -32,13 +32,11 @@ import java.awt.event.KeyEvent;
 
 public class LoginScreen extends JPanel{
 	private MainFrame main; 
-	private JRadioButton staffSelect , managerSelect;
 	private JTextField textName; 
 	private JPasswordField textPassword; 
 	private JButton login;
 	private JLabel lblName;
 	private JLabel lblPassword;
-	private ButtonGroup btnGroup; 
 	private JLabel lblLogin;
 	private JLabel lblwrong;
 	private JCheckBox chckbxShowPassword;
@@ -93,24 +91,6 @@ public class LoginScreen extends JPanel{
 		});
 		this.add(this.textPassword);
 		
-		this.btnGroup = new ButtonGroup();
-		
-		this.staffSelect = new JRadioButton("Staff");
-		this.staffSelect.setFont(new Font("Tahoma", Font.BOLD, 20));
-		this.staffSelect.setBounds(415, 143, 92, 25);
-		this.staffSelect.setOpaque(false);
-		this.add(this.staffSelect);
-		this.btnGroup.add(this.staffSelect);
-		
-		this.managerSelect = new JRadioButton("Manager");
-		this.managerSelect.setFont(new Font("Tahoma", Font.BOLD, 20));
-		this.managerSelect.setBounds(547, 143, 134, 25);
-		this.managerSelect.setOpaque(false);
-		this.add(this.managerSelect);
-		this.btnGroup.add(this.managerSelect);
-		
-		this.staffSelect.setSelected(true); //pre-select Staff radiobutton
-		
 		this.chckbxShowPassword = new JCheckBox("Show Password");
 		this.chckbxShowPassword.setFont(new Font("Tahoma", Font.BOLD, 15));
 		this.chckbxShowPassword.addActionListener(new ActionListener() {
@@ -147,7 +127,7 @@ public class LoginScreen extends JPanel{
 	}
 	
 	public void openPage(){
-		boolean testing = false; //set to true for easy login
+		boolean testing = false; //set to true for easy login for Staff. Switch "Staff" and "Manager" if want Manager
 		String n = textName.getText();
 		String pwd = new String(textPassword.getPassword());
 		String validity;
