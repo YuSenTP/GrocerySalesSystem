@@ -127,17 +127,20 @@ public class LoginScreen extends JPanel{
 	}
 	
 	public void openPage(){
-		boolean testing = false; //set to true for easy login for Staff. Switch main.showStaffMenu or ManagerHome if want Manager
+		boolean testing = true; //set to true for easy login for Staff. Switch main.showStaffMenu or ManagerHome if want Manager
 		String n = textName.getText();
 		String pwd = new String(textPassword.getPassword());
 		String validity;
 		validity = this.main.getController().verifyUser(n , pwd);
 		System.out.println(validity);
-		if ("Staff".equals(validity)|| testing){ //use .equals instead of == to prevent it from accessing memory, but the string
+		if ("Staff".equals(validity)||testing){ //use .equals instead of == to prevent it from accessing memory, but the string
 			this.main.showStaffMenu();
+
+
 		}
 		else if("Manager".equals(validity)|| testing){
 			this.main.showManagerHome();
+
 		}		
 		else{
 			this.lblwrong.setVisible(true);

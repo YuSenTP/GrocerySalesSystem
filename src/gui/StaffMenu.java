@@ -49,6 +49,7 @@ public class StaffMenu extends JPanel {
     private JPanel bottomPanel;
     private JButton logoutButton;
     private JButton cartButton;
+	private JButton viewSalesHistory;
 //    private JTextField quantityField;
 //    private JLabel quantityField;
 //	private JButton decreaseButton;
@@ -113,6 +114,17 @@ public class StaffMenu extends JPanel {
         this.comboBox.setFont(new Font("Tahoma", Font.BOLD, 15));
         this.comboBox.setFocusable(false);
         this.topPanel.add(this.comboBox);
+        
+        this.viewSalesHistory = new JButton("View Sales History");
+        this.viewSalesHistory.setBounds(27, 24, 180, 25); 
+        this.viewSalesHistory.setFont(new Font("Tahoma", Font.BOLD, 14));
+        this.viewSalesHistory.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                main.showStaffSales();
+            }
+        });
+        this.topPanel.add(this.viewSalesHistory);
         
         this.add(this.topPanel, BorderLayout.NORTH);
    
