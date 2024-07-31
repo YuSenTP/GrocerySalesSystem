@@ -127,7 +127,7 @@ public class LoginScreen extends JPanel{
 	}
 	
 	public void openPage(){
-		boolean testing = false; //set to true for easy login for Staff. Switch "Staff" and "Manager" if want Manager
+		boolean testing = false; //set to true for easy login for Staff. Switch main.showStaffMenu or ManagerHome if want Manager
 		String n = textName.getText();
 		String pwd = new String(textPassword.getPassword());
 		String validity;
