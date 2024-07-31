@@ -219,9 +219,7 @@ public class Controller {
 				}
 			}
 		}
-		
-		return true;
-		
+		return true;	
 	}
 	
 	public void clearCurrentOrder(){
@@ -238,7 +236,6 @@ public class Controller {
 		    Order currentOrder = this.ds.getCurrentOrder();
 		    GroceryItem[] items = currentOrder.getGroceryItems();
 
-		    // Return items to inventory
 		    for (int i = 0; i < items.length; i++) {
 		        cartUpdateInventory("delete", items[i]);
 		    }
