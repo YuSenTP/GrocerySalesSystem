@@ -232,6 +232,24 @@ public class Controller {
 		}
 		this.ds.clearCurrentOrderItems();;
 	}
+	
+	public void clearCartItems() {
+	
+		    Order currentOrder = this.ds.getCurrentOrder();
+		    GroceryItem[] items = currentOrder.getGroceryItems();
+
+		    // Return items to inventory
+		    for (int i = 0; i < items.length; i++) {
+		        cartUpdateInventory("delete", items[i]);
+		    }
+
+		    // Clear the current order
+		    this.ds.clearCurrentOrderItems();
+
+		    // Reset the total cost of the current order
+		    currentOrder.calculateTotalCost();
+		
+	}
 		
 	public boolean verifyUser(String n, String pwd, String role) {
 		if (role == "staff"){
