@@ -143,6 +143,7 @@ public class ManagerSales extends JPanel{
 		this.bottomPanel = new JPanel();
         this.bottomPanel.setBackground(Color.WHITE);  
         this.bottomPanel.setLayout(new BorderLayout(0, 0));
+        this.bottomPanel.setBorder(new EmptyBorder(10, 20, 10, 20));
 
         this.backButton = new JButton("Back");
         this.backButton.setFont(new Font("Tahoma", Font.BOLD, 15));

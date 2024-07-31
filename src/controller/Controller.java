@@ -275,5 +275,10 @@ public class Controller {
 	        }
 	}
 
+	public void editCategory(int originalIndex, int endIndex, String Name) {
+		this.ds.editCategory(originalIndex, endIndex, Name);
+		
+	}
+
 
 }

@@ -28,7 +28,7 @@ import controller.MainFrame;
 public class ManagerHome extends JPanel{
 	private MainFrame main;
 	private JPanel gridPanel;
-	private String[] buttonNames = {"Grocery Menu", "Sales", "Inventory", "Add Account", "Edit Profile", "Delete Account"};
+	private String[] buttonNames = {"Grocery Menu", "Sales", "Inventory", "Edit Category", "Edit Profile", "Manage Accounts"};
 	private JLabel nameLabel;
 	private JButton button;
 	private JLabel frameName;
@@ -110,14 +110,15 @@ public class ManagerHome extends JPanel{
 			this.main.showManagerInventory();
 			System.out.println("Inventory");
 		}
-		else if (name == "Add Account"){
-			System.out.println("Add Account");
+		else if (name == "Edit Category"){
+			this.main.showEditCategory();
+			System.out.println("Edit Category");
 		}
 		else if (name == "Edit Profile"){
 			System.out.println("Edit Profile");
 		}
-		else if (name == "Delete Account"){
-			System.out.println("Delete Account");
+		else if (name == "Manage Accounts"){
+			System.out.println("Manage Accounts");
 		}
 	}
 	

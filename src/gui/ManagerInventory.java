@@ -51,6 +51,7 @@ public class ManagerInventory extends JPanel {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(Color.WHITE);
         buttonPanel.setLayout(new BorderLayout(0, 0));
+        buttonPanel.setBorder(new EmptyBorder(10, 20, 10, 20));
         
 
         // Back Button

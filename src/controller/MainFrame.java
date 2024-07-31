@@ -17,6 +17,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import data.GroceryItem;
 import data.Order;
 import gui.CreateGroceryItem;
+import gui.EditCategory;
 import gui.EditGroceryItem;
 import gui.LoginScreen;
 import gui.ManagerHome;
@@ -67,7 +68,7 @@ public class MainFrame extends JFrame {
 					JLabel label = new JLabel("Items in cart! Confirm Exit?");
 					label.setFont(new Font("Tahoma", Font.BOLD, 14));
 //					JOptionPane.showMessageDialog(MainFrame.this, label, "Error" ,JOptionPane.ERROR_MESSAGE);
-					int response = JOptionPane.showConfirmDialog(MainFrame.this, label, "Confirm Exit", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE );
+					int response = JOptionPane.showConfirmDialog(MainFrame.this, label, "Confirm Exit", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE );
 					
 					if (response == JOptionPane.YES_OPTION) {
 						cont.clearCurrentOrder();
@@ -156,6 +157,12 @@ public class MainFrame extends JFrame {
 		ManagerInventory p10 = new ManagerInventory(this);
 		getContentPane().add(p10, "StaffCart");
 		this.card.show(this.getContentPane(), "StaffCart");
+	}
+	
+	public void showEditCategory(){
+		EditCategory p11 = new EditCategory(this); //P11
+		getContentPane().add(p11, "EditCategory");
+		this.card.show(this.getContentPane(), "EditCategory");
 	}
 	
 	public static void main(String[] args){

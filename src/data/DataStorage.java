@@ -165,6 +165,24 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 //		item.setPicFile(path);
 //	}
 	
+	public void editCategory(int originalIndex, int endIndex, String Name){
+		String originalCat = this.category.get(originalIndex + 1);
+		if (originalIndex == endIndex){
+			this.category.set(originalIndex + 1, Name); //Account for "All" at index 0
+		}
+		else{
+			this.category.remove(originalIndex + 1);
+			this.category.add(endIndex + 1, Name);
+		}
+		
+		for (GroceryItem g: this.inventory){
+//			System.out.println(c);
+			if (g.getCategory().equals(originalCat)){
+				g.setCategory(Name);
+			}
+		}
+	}
+	
 	
 	public void readFile(){ // Method to read from JSON file
 		ObjectMapper objectMapper = new ObjectMapper();
