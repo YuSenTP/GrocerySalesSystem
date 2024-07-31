@@ -169,7 +169,6 @@ public class Controller {
 				//add 1 to the grocery item
 				temp[index].setQuantity(temp[index].getQuantity()+1);
 			}
-
 		}
 		else if (choice == "delete"){
 			
@@ -219,18 +218,35 @@ public class Controller {
 				}
 			}
 		}
-		
-		return true;
-		
+		return true;	
 	}
 	
-	public void clearCurrentOrder(){
-		GroceryItem[] items = this.ds.getCurrentOrder().getGroceryItems();
-		for (GroceryItem item: items){
-			for (int i = 0; i < item.getQuantity(); i++)
-				cartUpdateInventory("delete", item);
-		}
-		this.ds.clearCurrentOrderItems();;
+	public void clearCurrentOrder() {
+	    GroceryItem[] items = this.ds.getCurrentOrder().getGroceryItems();
+	    for (int i = 0; i < items.length; i++) {
+	        GroceryItem item = items[i];
+	        for (int j = 0; j < item.getQuantity(); j++) {
+	            cartUpdateInventory("delete", item);
+	        }
+	    }
+	    this.ds.clearCurrentOrderItems();
+	}
+	
+	public void clearCartItems() {
+	
+		    Order currentOrder = this.ds.getCurrentOrder();
+		    GroceryItem[] items = currentOrder.getGroceryItems();
+
+		    for (int i = 0; i < items.length; i++) {
+		        cartUpdateInventory("delete", items[i]);
+		    }
+
+		    // Clear the current order
+		    this.ds.clearCurrentOrderItems();
+
+		    // Reset the total cost of the current order
+		    currentOrder.calculateTotalCost();
+		
 	}
 		
 	public boolean verifyUser(String n, String pwd, String role) {
