@@ -151,6 +151,66 @@ public class EditCategory extends JPanel{
             deleteButton.setPreferredSize(new Dimension(50, 50));
             deleteButton.setBackground(Color.WHITE);
             
+          //Delete Action
+            deleteButton.setActionCommand(currentCategory);
+            deleteButton.addActionListener(new ActionListener(){
+         		@Override
+         		public void actionPerformed(ActionEvent e){
+         			String originalCategory = e.getActionCommand();
+         			
+         			boolean inUse = main.getController().categoryInUse(originalCategory);
+         			System.out.println(inUse);
+         			
+         			if (inUse){
+         				
+         				JPanel panel = new JPanel(new GridLayout(2, 1, 5, 5));
+         				JLabel qLabel = new JLabel("Category In Use! Reassign Items!");
+             			qLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
+             			
+             			String[] newCat = new String[category.length - 1];
+             			
+             			int i = 0;
+             			for (String cat: category){
+             				if (cat.equals(originalCategory)){
+             					continue;
+             				}
+             				else{
+             					newCat[i] = cat;
+             					i++;
+             				}
+             			}
+             			JComboBox<String> catComboBox = new JComboBox<>(newCat);
+             			catComboBox.setFont(new Font("Tahoma", Font.BOLD, 14));
+             			
+             			panel.add(qLabel);
+             			panel.add(catComboBox);
+             			int response = JOptionPane.showConfirmDialog(EditCategory.this, panel, "Delete Category", JOptionPane.OK_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
+             			
+             			if (response == JOptionPane.YES_OPTION){
+             				String selectedCat = (String) catComboBox.getSelectedItem();
+//             				System.out.println(selectedCat);
+             				main.getController().reassignCategory(originalCategory, selectedCat);
+             				main.getController().deleteCategory(originalCategory);
+             				
+             				//Success Message
+             				JLabel label = new JLabel("Category Deleted!");
+             				label.setFont(new Font("Tahoma", Font.BOLD, 14));
+             				JOptionPane.showMessageDialog(EditCategory.this, label, "Edit Category", JOptionPane.INFORMATION_MESSAGE);
+             			}
+         				
+         			}
+         			else{
+         				main.getController().deleteCategory(originalCategory);
+         				//Success Message
+         				JLabel label = new JLabel("Category Deleted!");
+         				label.setFont(new Font("Tahoma", Font.BOLD, 14));
+         				JOptionPane.showMessageDialog(EditCategory.this, label, "Edit Category", JOptionPane.INFORMATION_MESSAGE);
+         			}
+         			
+         			main.showEditCategory();
+         		}
+            });
+            
             JPanel buttonPanel = new JPanel();
             buttonPanel.setBackground(Color.WHITE);
             buttonPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -240,7 +300,10 @@ public class EditCategory extends JPanel{
 		//Dialog
 		int response = JOptionPane.showConfirmDialog(EditCategory.this, panel, "New Category", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 		if (response == JOptionPane.YES_OPTION) {
-
+			String cName = nameField.getText().trim();
+			int cIndex = placingComboBox.getSelectedIndex();
+			main.getController().newCategory(cIndex, cName);
+			main.showEditCategory();
 		}
 	}
 }

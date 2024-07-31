@@ -183,6 +183,35 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 		}
 	}
 	
+	public void newCategory(int cIndex, String name) {
+		this.category.add(cIndex + 1, name);
+		
+	}
+	
+	public void deleteCategory(String name){
+		this.category.removeElement(name);
+	}
+	
+	public boolean categoryInUse(String name) {
+		for (GroceryItem g: this.inventory){
+//			System.out.println(c);
+			if (g.getCategory().equals(name)){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public void reassignCategory(String originalCategory, String selectedCat) {
+		for (GroceryItem g: this.inventory){
+//			System.out.println(c);
+			if (g.getCategory().equals(originalCategory)){
+				g.setCategory(selectedCat);
+			}
+		}
+		
+	}
+	
 	
 	public void readFile(){ // Method to read from JSON file
 		ObjectMapper objectMapper = new ObjectMapper();
@@ -265,6 +294,12 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 	public void clearCurrentOrderItems(){
 		this.currentOrder.setGroceryItems(new Vector<GroceryItem>());
 	}
+
+
+
+
+
+
 
 //	public User getUser(String n) {
 //		for (int i = 0 ; i <storage.size(); i++)

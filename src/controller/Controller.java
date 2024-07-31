@@ -296,5 +296,23 @@ public class Controller {
 		
 	}
 
+	public void newCategory(int cIndex, String name) {
+		this.ds.newCategory(cIndex, name);
+		
+	}
+	
+	public void deleteCategory(String name){
+		this.ds.deleteCategory(name);
+	}
+
+	public boolean categoryInUse(String name) {
+		return this.ds.categoryInUse(name);
+	}
+
+	public void reassignCategory(String originalCategory, String selectedCat) {
+		this.ds.reassignCategory(originalCategory, selectedCat);
+		
+	}
+
 
 }
