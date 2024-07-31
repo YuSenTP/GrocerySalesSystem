@@ -300,6 +300,7 @@ public class StaffMenu extends JPanel {
 			
 			if (response == JOptionPane.YES_OPTION) {
 				this.main.getController().clearCurrentOrder();
+				StaffMenu.categorySele = "All";
 		        JOptionPane.showMessageDialog(this, "Logged Out Successfully", "Notification", JOptionPane.INFORMATION_MESSAGE);
 		        this.main.showLoginScreen();
 			}
