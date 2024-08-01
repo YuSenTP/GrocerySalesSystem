@@ -29,6 +29,10 @@ public class Controller {
 		return ds.getOrders();
 	}
 	
+	public User[] getUsers(){
+		return ds.getUsers();
+	}
+	
 	public GroceryItem[] getInventory(){
 		return ds.getInventory();
 	}
@@ -250,7 +254,7 @@ public class Controller {
 	}
 		
 	public String verifyUser(String n, String pwd) {
-	    User[] users = this.ds.getUsers();
+	    User[] users = getUsers();
 	    for (int i = 0; i < users.length; i++) {
 	        User user = users[i];
 	        if (user.getName().equals(n) && user.getPassword().equals(pwd)) {

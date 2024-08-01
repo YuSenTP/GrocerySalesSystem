@@ -20,6 +20,7 @@ import gui.CreateGroceryItem;
 import gui.EditCategory;
 import gui.EditGroceryItem;
 import gui.LoginScreen;
+import gui.ManageAccounts;
 import gui.ManagerHome;
 import gui.ManagerInventory;
 import gui.ManagerMenu;
@@ -168,9 +169,15 @@ public class MainFrame extends JFrame {
 	}
 	
 	public void showStaffSales(){
-		StaffSales p12 = new StaffSales(this); //P11
+		StaffSales p12 = new StaffSales(this); //P12
 		getContentPane().add(p12, "StaffSales");
 		this.card.show(this.getContentPane(), "StaffSales");
+	}
+	
+	public void showManageAccounts(){
+		ManageAccounts p12 = new ManageAccounts(this); //P13
+		getContentPane().add(p12, "ManageAccounts");
+		this.card.show(this.getContentPane(), "ManageAccounts");
 	}
 	
 	public static void main(String[] args){
