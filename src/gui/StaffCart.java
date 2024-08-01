@@ -329,7 +329,9 @@ public class StaffCart extends JPanel {
             "Delete Item", 
             JOptionPane.YES_NO_OPTION);
         if (result == JOptionPane.YES_OPTION) {
-            main.getController().cartUpdateInventory("delete", item);
+        	for (int i = 0; i < item.getQuantity(); i++) {
+                main.getController().cartUpdateInventory("delete", item);
+            }
             main.getController().getCurrentOrder().deleteGroceryItem(item);
             updateCartItems();
             updateTotalLabel();
