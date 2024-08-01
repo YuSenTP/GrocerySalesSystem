@@ -33,6 +33,7 @@ public class StaffCart extends JPanel {
     private JLabel totalLabel;
 	private ImageIcon itemPic;
 	private JButton clearCartButton;
+	private JButton resetAllButton;
 
 
     public StaffCart(MainFrame main) {
@@ -65,6 +66,18 @@ public class StaffCart extends JPanel {
             }
         });
         topPanel.add(this.clearCartButton);
+        
+     // Reset All button
+        this.resetAllButton = new JButton("Reset All");
+        this.resetAllButton.setFont(new Font("Tahoma", Font.BOLD, 14));
+        this.resetAllButton.setBounds(10, 30, 111, 30); // Same size and vertical position as Clear Cart button
+        this.resetAllButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                resetAllItems();
+            }
+        });
+        topPanel.add(this.resetAllButton);
 
         add(topPanel, BorderLayout.NORTH);
         
@@ -121,12 +134,59 @@ public class StaffCart extends JPanel {
     }
     
     private void clearCart() {
-        int result = JOptionPane.showConfirmDialog(this, "Are you sure you want to clear the cart?", "Clear Cart", JOptionPane.YES_NO_OPTION);
+        // Check if the cart is empty
+        if (main.getController().getCurrentOrder().getGroceryItems().length == 0) {
+            JOptionPane.showMessageDialog(this, "The cart is already empty.", "Cart Empty", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            int result = JOptionPane.showConfirmDialog(this, "Are you sure you want to clear the cart?", "Clear Cart", JOptionPane.YES_NO_OPTION);
+            if (result == JOptionPane.YES_OPTION) {
+                main.getController().clearCartItems();
+                updateCartItems();
+                updateTotalLabel();
+                JOptionPane.showMessageDialog(this, "Cart has been cleared.", "Cart Cleared", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+    }
+    
+    private void resetAllItems() {
+        Order currentOrder = main.getController().getCurrentOrder();
+        GroceryItem[] cartItems = currentOrder.getGroceryItems();
+        
+        if (cartItems.length == 0) {
+            JOptionPane.showMessageDialog(this, "The cart is empty. Nothing to reset.", "Cart Empty", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        boolean alreadyResetted = true;
+        for (int i = 0; i < cartItems.length; i++) {
+            if (cartItems[i].getQuantity() > 1) {
+            	alreadyResetted = false;
+                break;
+            }
+        }
+
+        if (alreadyResetted) {
+            JOptionPane.showMessageDialog(this, "All items are already set to 1.", "Already Reset", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        int result = JOptionPane.showConfirmDialog(this, "Are you sure you want to reset all items to quantity 1?", "Reset All Items", JOptionPane.YES_NO_OPTION);
         if (result == JOptionPane.YES_OPTION) {
-            main.getController().clearCartItems();
+            for (GroceryItem item : cartItems) {
+                int currentQuantity = item.getQuantity();
+                if (currentQuantity > 1) {
+                    // Remove the excess quantity from the cart
+                    for (int i = currentQuantity; i > 1; i--) {
+                        main.getController().cartUpdateInventory("delete", item);
+                    }
+                    // Set the quantity to 1
+                    item.setQuantity(1);
+                }
+            }
+            main.getController().getCurrentOrder().calculateTotalCost();
             updateCartItems();
             updateTotalLabel();
-            JOptionPane.showMessageDialog(this, "Cart has been cleared.", "Cart Cleared", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "All items have been reset to quantity 1.", "Reset Complete", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
@@ -199,9 +259,24 @@ public class StaffCart extends JPanel {
 
             itemPanel.add(this.deleteItemButton, BorderLayout.EAST);
             
-            JPanel rightPanel = new JPanel(new BorderLayout(5, 0)); //Move quantity panel next to delete button
+         // Right Panel
+            JPanel rightPanel = new JPanel(new BorderLayout(5, 0));
+
+            // Reset Button
+            JButton resetButton = new JButton("Reset");
+            resetButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    resetItemQuantity(currentItem);
+                }
+            });
+
+            // Add components to the right panel
+            rightPanel.add(resetButton, BorderLayout.WEST);
             rightPanel.add(quantityPanel, BorderLayout.CENTER);
             rightPanel.add(this.deleteItemButton, BorderLayout.EAST);
+
+            // Add the right panel to the item panel
             itemPanel.add(rightPanel, BorderLayout.EAST);
 
             itemsPanel.add(itemPanel);
