@@ -133,14 +133,11 @@ public class LoginScreen extends JPanel{
 		String validity;
 		validity = this.main.getController().verifyUser(n , pwd);
 		System.out.println(validity);
-		if ("Staff".equals(validity)||testing){ //use .equals instead of == to prevent it from accessing memory, but the string
-			this.main.showStaffMenu();
-
-
-		}
-		else if("Manager".equals(validity)|| testing){
+		if ("staff".equals(validity)||testing){ //use .equals instead of == to prevent it from accessing memory, but the string
 			this.main.showManagerHome();
-
+		}
+		else if("Manager".equals((validity))|| testing){
+			this.main.showStaffMenu();
 		}		
 		else{
 			this.lblwrong.setVisible(true);

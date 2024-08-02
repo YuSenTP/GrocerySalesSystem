@@ -118,7 +118,7 @@ public class ManagerHome extends JPanel{
 			System.out.println("Edit Profile");
 		}
 		else if (name == "Manage Accounts"){
-			System.out.println("Manage Accounts");
+			this.main.showManageAccounts();
 		}
 	}
 	

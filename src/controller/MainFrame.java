@@ -16,10 +16,12 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 import data.GroceryItem;
 import data.Order;
+import gui.AddAccount;
 import gui.CreateGroceryItem;
 import gui.EditCategory;
 import gui.EditGroceryItem;
 import gui.LoginScreen;
+import gui.ManageAccounts;
 import gui.ManagerHome;
 import gui.ManagerInventory;
 import gui.ManagerMenu;
@@ -168,9 +170,21 @@ public class MainFrame extends JFrame {
 	}
 	
 	public void showStaffSales(){
-		StaffSales p12 = new StaffSales(this); //P11
+		StaffSales p12 = new StaffSales(this); //P12
 		getContentPane().add(p12, "StaffSales");
 		this.card.show(this.getContentPane(), "StaffSales");
+	}
+	
+	public void showManageAccounts(){
+		ManageAccounts p13 = new ManageAccounts(this); //P13
+		getContentPane().add(p13, "ManageAccounts");
+		this.card.show(this.getContentPane(), "ManageAccounts");
+	}
+	
+	public void showAddAccount(){
+		AddAccount p14 = new AddAccount(this); //P14
+		getContentPane().add(p14, "AddAccount");
+		this.card.show(this.getContentPane(), "AddAccount");
 	}
 	
 	public static void main(String[] args){
