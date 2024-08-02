@@ -5,6 +5,7 @@ import java.util.Vector;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+
 @JsonPropertyOrder({"orderID", "totalCost", "groceryItems"}) //To change the save order to json
 public class Order {
 
@@ -12,12 +13,13 @@ public class Order {
 	private BigDecimal totalCost;
 	private int orderID;
 	
-	private static int counter = Main.orders.size() + 1;
+////	private static int counter =  + 1;
+//	private static int counter;
 	
 	public Order() { 
 		this.groceryItems= new Vector<GroceryItem>();
 		this.totalCost = BigDecimal.ZERO;
-		this.orderID = counter++;
+//		this.orderID = counter++;
 	 }
 
 	public GroceryItem[] getGroceryItems() {

@@ -7,10 +7,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
@@ -32,7 +29,6 @@ import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
 import controller.MainFrame;
-import data.Order;
 
 /**
  * @author Yu Sen
@@ -45,15 +41,13 @@ public class EditCategory extends JPanel{
 	private JButton backButton;
 	private JButton createButton;
 	private JScrollPane scrollPane;
-	private JPanel itemsPanel;
 	private String[] category;
-	private JPanel gridPanel;
 	private JPanel middlePanel;
 	private JPanel boxPanel;
 	
 	public EditCategory(MainFrame main){
 		this.main = main;
-        this.main.setTitle("Joy MiniMart - EditCategory");
+        this.main.setTitle("Joy MiniMart - Edit Category");
         this.category = this.main.getController().getCategory();
         this.category = Arrays.copyOfRange(this.category, 1, this.category.length - 1);
 //        
