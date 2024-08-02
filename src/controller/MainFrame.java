@@ -70,7 +70,7 @@ public class MainFrame extends JFrame {
 					JLabel label = new JLabel("Items in cart! Confirm Exit?");
 					label.setFont(new Font("Tahoma", Font.BOLD, 14));
 //					JOptionPane.showMessageDialog(MainFrame.this, label, "Error" ,JOptionPane.ERROR_MESSAGE);
-					int response = JOptionPane.showConfirmDialog(MainFrame.this, label, "Confirm Exit", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE );
+					int response = JOptionPane.showConfirmDialog(MainFrame.this, label, "Confirm Exit", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE );
 					
 					if (response == JOptionPane.YES_OPTION) {
 						cont.clearCurrentOrder();
