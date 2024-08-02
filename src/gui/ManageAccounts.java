@@ -28,6 +28,7 @@ public class ManageAccounts extends JPanel {
     private JPanel gridPanel;
     private JPanel bottomPanel;
     private JButton backButton;
+    private JButton addAccountButton; 
     private JScrollPane scrollPane;
     private User[] users;
     private JButton userButton;
@@ -65,7 +66,7 @@ public class ManageAccounts extends JPanel {
         for (int i = 0; i < this.users.length; i++) {
             User currentUser = this.users[i];
 
-            // Button
+            // User buttons
             this.userButton = new JButton();
             this.userButton.setPreferredSize(new Dimension(0, 70));
             this.userButton.setBackground(Color.WHITE);
@@ -119,7 +120,8 @@ public class ManageAccounts extends JPanel {
         this.bottomPanel.setBackground(Color.WHITE);
         this.bottomPanel.setLayout(new BorderLayout(0, 0));
         this.bottomPanel.setBorder(new EmptyBorder(10, 20, 10, 20));
-
+        
+        //Back Nutton
         this.backButton = new JButton("Back");
         this.backButton.setFont(new Font("Tahoma", Font.BOLD, 15));
         this.backButton.setPreferredSize(new Dimension(100, 40));
@@ -130,6 +132,17 @@ public class ManageAccounts extends JPanel {
             }
         });
         this.bottomPanel.add(this.backButton, BorderLayout.WEST);
+        
+        this.addAccountButton = new JButton("Add Account");
+        this.addAccountButton.setFont(new Font("Tahoma", Font.BOLD, 15));
+        this.addAccountButton.setPreferredSize(new Dimension(150, 40));
+        this.addAccountButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                main.showAddAccount();
+            }
+        });
+        this.bottomPanel.add(this.addAccountButton, BorderLayout.EAST);
 
         this.add(bottomPanel, BorderLayout.SOUTH);
     }
