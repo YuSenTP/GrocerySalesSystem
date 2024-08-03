@@ -4,20 +4,25 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.font.TextAttribute;
 import java.math.BigDecimal;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.MatteBorder;
 
 import controller.MainFrame;
 import data.GroceryItem;
 import data.Order;
 
+import java.util.Map;
 import java.util.Vector;
 //ADD STUFF - WHEN CART IS EMPTY AND CLEAR CART BUTTON IS PRESSED, DIALOGUE OPENS THAT CART IS ALREADY CLEARED. 
 public class StaffCart extends JPanel {
@@ -27,7 +32,7 @@ public class StaffCart extends JPanel {
     private JPanel bottomPanel;
     private JButton backButton; 
     private JButton confirmButton;
-    private JButton deleteItemButton; 
+//    private JButton deleteItemButton; 
     private JScrollPane scrollPane;
     private JPanel itemsPanel;
     private JLabel totalLabel;
@@ -51,6 +56,7 @@ public class StaffCart extends JPanel {
 
         // Top label
         this.lblEditItem = new JLabel("Staff Cart");
+        this.lblEditItem.setHorizontalAlignment(SwingConstants.CENTER);
         this.lblEditItem.setFont(new Font("Tahoma", Font.BOLD, 20));
         this.lblEditItem.setBounds(275, 5, 200, 60); // Set specific bounds
         topPanel.add(this.lblEditItem);
@@ -98,6 +104,7 @@ public class StaffCart extends JPanel {
         this.bottomPanel = new JPanel();
         this.bottomPanel.setBackground(Color.WHITE);  
         this.bottomPanel.setLayout(new BorderLayout(0, 0));
+        this.bottomPanel.setBorder(new EmptyBorder(10, 20, 10, 20)); //Used to create white space
 
         this.backButton = new JButton("Back");
         this.backButton.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -183,7 +190,7 @@ public class StaffCart extends JPanel {
                     item.setQuantity(1);
                 }
             }
-            main.getController().getCurrentOrder().calculateTotalCost();
+            main.getController().calculateTotalCost();
             updateCartItems();
             updateTotalLabel();
             JOptionPane.showMessageDialog(this, "All items have been reset to quantity 1.", "Reset Complete", JOptionPane.INFORMATION_MESSAGE);
@@ -201,6 +208,7 @@ public class StaffCart extends JPanel {
             JPanel itemPanel = new JPanel(new BorderLayout(10, 0));
             itemPanel.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
             itemPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 100)); // Set fixed height
+//            itemPanel.setBackground(Color.WHITE);
 
             // Item Pic
             JLabel picLabel = new JLabel();
@@ -209,61 +217,154 @@ public class StaffCart extends JPanel {
             Image newimg = img.getScaledInstance(90, 90, java.awt.Image.SCALE_SMOOTH);
             this.itemPic = new ImageIcon(newimg);
             picLabel.setIcon(this.itemPic);
+            picLabel.setBorder(new EmptyBorder(0,5,0,5));
             itemPanel.add(picLabel, BorderLayout.WEST);
 
             // Item Info Panel
             JPanel infoPanel = new JPanel(new GridLayout(2, 1));
+            infoPanel.setBorder(new EmptyBorder(0,15,0,25));
+//            infoPanel.setBackground(Color.WHITE);
+            
+            //Name
             JLabel nameLabel = new JLabel(currentItem.getName());
-            nameLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+            nameLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
+            nameLabel.setVerticalAlignment(SwingConstants.CENTER);
+//            nameLabel.setBorder(BorderFactory.createLineBorder(Color.black, 1));
             infoPanel.add(nameLabel);
 
-            JLabel priceLabel = new JLabel("$		" + currentItem.getPrice());
-            infoPanel.add(priceLabel);
+            //Price Panel  -- starts from left and zero h&v gap
+            JPanel pricePanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
+//            pricePanel.setBorder(new EmptyBorder(10,0,0,0));
+//            pricePanel.setAlignmentX(SwingConstants.CENTER);
+//            pricePanel.setBackground(Color.WHITE);
+            
+            //Price
+            JLabel priceLabel = new JLabel("$" + currentItem.getPrice());
+            priceLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+            // If On Sale
+            if (currentItem.getOnSale()){
+            	Map<TextAttribute, Object> attributes = (Map<TextAttribute, Object>) priceLabel.getFont().getAttributes(); // HashMap Something like a dictonary in python where data are stored as key value pair
+            	attributes.put(TextAttribute.STRIKETHROUGH, TextAttribute.STRIKETHROUGH_ON); // Add new attribute to HashMap
+            	priceLabel.setFont(new Font(attributes));
+            	priceLabel.setForeground(Color.GRAY);
+            	pricePanel.add(priceLabel);
+
+            	JLabel saleLabel = new JLabel(" $" + currentItem.getOnSalePrice());
+            	saleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+            	saleLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+            	saleLabel.setForeground(Color.RED);
+            	pricePanel.add(saleLabel);
+            }
+            else{
+            	pricePanel.add(priceLabel);
+            }
+            
+            infoPanel.add(pricePanel);
+            
+            
             itemPanel.add(infoPanel, BorderLayout.CENTER);
+            
 
-            // Quantity Panel
-            JPanel quantityPanel = new JPanel(new BorderLayout(5, 0));
-            JButton decreaseButton = new JButton("-");
+
+            
+            //Quantity
             JLabel quantityLabel = new JLabel(String.valueOf(currentItem.getQuantity()));
-            JButton increaseButton = new JButton("+");
+//            quantityLabel.setMinimumSize(new Dimension(50, 50));
+//            quantityLabel.setBorder(new EmptyBorder(0, 20, 0, 20));
+            quantityLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
+            quantityLabel.setBackground(Color.WHITE);
+            quantityLabel.setOpaque(true);
+//            increaseButton.setFont(new Font("Tahoma", Font.BOLD, 14));
+//            quantityLabel.setBorder(BorderFactory.createLineBorder(Color.black));
+            quantityLabel.setBorder(new MatteBorder(0, 1, 0, 1, Color.black));
+            quantityLabel.setPreferredSize(new Dimension(50, 50));
+            quantityLabel.setHorizontalAlignment(SwingConstants.CENTER);
+//            quantityPanel.add(quantityLabel, BorderLayout.CENTER);
             
-            boolean available = main.getController().checkInventoryAvaiblility(currentItem);
-            increaseButton.setEnabled(available);
-            
-
+            //Minus Button
+            JButton decreaseButton = new JButton("-");
+//            Icon mIcon = new ImageIcon("./img/Subtract.png");
+//            JButton decreaseButton = new JButton(mIcon);
+            decreaseButton.setBackground(Color.WHITE);
+            decreaseButton.setFont(new Font("Tahoma", Font.BOLD, 18));
+            decreaseButton.setBorder(BorderFactory.createLineBorder(Color.black, 0));
+//            decreaseButton.setBorder(new EmptyBorder(0,0,0,0));
+//            decreaseButton.setPreferredSize(new Dimension(20, 10));
+//            decreaseButton.setBorder(BorderFactory.createEmptyBorder(12, 0, 12, 0));
+//            decreaseButton.setMargin(new Insets(0, 2, 0, 2)); // Set small margins
+//            JButton decreaseButton = new JButton("-");
+            decreaseButton.setPreferredSize(new Dimension(50, 50));
             decreaseButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     updateItemQuantity(currentItem, currentItem.getQuantity() - 1, "delete", decreaseButton);
                 }
             });
-
+//            quantityPanel.add(decreaseButton, BorderLayout.WEST);
+            
+            //Plus Button
+            boolean available = main.getController().checkInventoryAvaiblility(currentItem);
+            JButton increaseButton = new JButton("+");
+//            Icon iIcon = new ImageIcon("./img/PlusMath.png");
+//            JButton increaseButton = new JButton(iIcon);
+            increaseButton.setBackground(Color.WHITE);
+            increaseButton.setFont(new Font("Tahoma", Font.BOLD, 18));
+            increaseButton.setBorder(BorderFactory.createLineBorder(Color.black, 0));
+//            increaseButton.setBorder(new EmptyBorder(0,0,0,0));
+            increaseButton.setEnabled(available);
+            increaseButton.setPreferredSize(new Dimension(50, 50));
             increaseButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     updateItemQuantity(currentItem, currentItem.getQuantity() + 1, "add", increaseButton);
                 }
             });
+//            quantityPanel.add(increaseButton, BorderLayout.EAST);
             
-            quantityPanel.add(decreaseButton, BorderLayout.WEST);
-            quantityPanel.add(quantityLabel, BorderLayout.CENTER);
-            quantityPanel.add(increaseButton, BorderLayout.EAST);
             
-            this.deleteItemButton = new JButton("Delete");
-            this.deleteItemButton.addActionListener(new ActionListener() {
+            //Delete Button
+//            JButton deleteItemButton = new JButton("Delete");
+            
+//            
+//            this.itemPic = new ImageIcon(currentItem.getPicFile());
+//            Image img = this.itemPic.getImage();
+//            Image newimg = img.getScaledInstance(90, 90, java.awt.Image.SCALE_SMOOTH);
+//            this.itemPic = new ImageIcon(newimg);
+            
+            ImageIcon dIcon = new ImageIcon("./img/Trash.png");
+
+            Image dimg = dIcon.getImage();
+            Image newdimg = dimg.getScaledInstance(25, 25, java.awt.Image.SCALE_SMOOTH);
+//            this.itemPic = new ImageIcon(newimg);
+            
+            JButton deleteItemButton = new JButton(new ImageIcon(newdimg));
+            deleteItemButton.setBackground(Color.WHITE);
+//            deleteItemButton.setBorder(new EmptyBorder(0,0,0,0));
+            deleteItemButton.setBorder(BorderFactory.createLineBorder(Color.RED, 1));
+            deleteItemButton.setPreferredSize(new Dimension(50, 50));
+            deleteItemButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     deleteItem(currentItem);
                 }
             });
 
-            itemPanel.add(this.deleteItemButton, BorderLayout.EAST);
+//            itemPanel.add(deleteItemButton, BorderLayout.EAST);
             
-         // Right Panel
-            JPanel rightPanel = new JPanel(new BorderLayout(5, 0));
+
 
             // Reset Button
-            JButton resetButton = new JButton("Reset");
+//            JButton resetButton = new JButton("Reset");
+            ImageIcon rIcon = new ImageIcon("./img/ResetG.png");
+            
+            Image rimg = rIcon.getImage();
+            Image newrimg = rimg.getScaledInstance(25, 25, java.awt.Image.SCALE_SMOOTH);
+            
+            JButton resetButton = new JButton(new ImageIcon(newrimg));
+            
+            resetButton.setBorder(BorderFactory.createLineBorder(new Color(50, 205, 50), 1));
+            resetButton.setBackground(Color.WHITE);
+            resetButton.setPreferredSize(new Dimension(50, 50));
             resetButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -271,13 +372,47 @@ public class StaffCart extends JPanel {
                 }
             });
 
+            // Right Panel
+//            JPanel rightPanel = new JPanel(new BorderLayout(5, 0));
             // Add components to the right panel
-            rightPanel.add(resetButton, BorderLayout.WEST);
-            rightPanel.add(quantityPanel, BorderLayout.CENTER);
-            rightPanel.add(this.deleteItemButton, BorderLayout.EAST);
+//            rightPanel.add(resetButton, BorderLayout.WEST);
+//            rightPanel.add(quantityPanel, BorderLayout.CENTER);
+//            rightPanel.add(deleteItemButton, BorderLayout.EAST);
 
             // Add the right panel to the item panel
-            itemPanel.add(rightPanel, BorderLayout.EAST);
+//            itemPanel.add(rightPanel, BorderLayout.EAST);
+            
+            // Quantity Panel
+//          JPanel quantityPanel = new JPanel(new BorderLayout(5, 0));
+//            JPanel itemControlPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 0));
+//            itemControlPanel.setBorder(new EmptyBorder(25, 10, 25, 10));
+////          itemControlPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+////          itemControlPanel.setBackground(Color.WHITE);
+////          itemControlPanel
+//            
+//            itemControlPanel.add(resetButton);
+//            itemControlPanel.add(decreaseButton);
+//            itemControlPanel.add(quantityLabel);
+//            itemControlPanel.add(increaseButton);
+//            itemControlPanel.add(deleteItemButton);
+            
+            
+            JPanel quantityPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+            quantityPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+            quantityPanel.add(decreaseButton);
+            quantityPanel.add(quantityLabel);
+            quantityPanel.add(increaseButton);
+            
+            JPanel controlPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 25, 0));
+            controlPanel.setBorder(new EmptyBorder(25, 0, 25, 0));
+            controlPanel.add(quantityPanel);
+            
+            controlPanel.add(resetButton);
+            
+            controlPanel.add(deleteItemButton);
+            
+//            itemPanel.add(itemControlPanel, BorderLayout.EAST);
+            itemPanel.add(controlPanel, BorderLayout.EAST);
 
             itemsPanel.add(itemPanel);
             itemsPanel.add(Box.createRigidArea(new Dimension(0, 10))); // Add some space between the items
@@ -305,7 +440,7 @@ public class StaffCart extends JPanel {
     		 	else{
     		 		main.getController().cartUpdateInventory("delete", item);
     		 	}
-    	        main.getController().getCurrentOrder().calculateTotalCost();
+    	        main.getController().calculateTotalCost();
     	        updateCartItems();
     	        updateTotalLabel();
     	        System.out.println("Quantity Adjusted");
@@ -318,9 +453,10 @@ public class StaffCart extends JPanel {
     }
 
     private void updateTotalLabel() {
-        Order currentOrder = main.getController().getCurrentOrder();
-        BigDecimal totalCost = currentOrder.calculateTotalCost();
-        totalLabel.setText("Total: $" + currentOrder.getTotalCost());
+//        Order currentOrder = main.getController().getCurrentOrder();
+//        BigDecimal totalCost = currentOrder.calculateTotalCost();
+        BigDecimal totalCost = main.getController().calculateTotalCost();
+        totalLabel.setText("Total: $" + totalCost);
     }
     
     private void deleteItem(GroceryItem item) {
@@ -347,7 +483,7 @@ public class StaffCart extends JPanel {
             }
             // Set the quantity to 1
             item.setQuantity(1);
-            main.getController().getCurrentOrder().calculateTotalCost();
+            main.getController().calculateTotalCost();
             updateCartItems();
             updateTotalLabel();
         }

@@ -143,10 +143,11 @@ public class ManagerMenu extends JPanel{
 
             	this.pricePanel.add(this.priceLabel);
 
-            	BigDecimal salePercent = new BigDecimal(1 - this.currentItem.getPercentOff());
-            	BigDecimal salePrice = this.currentItem.getPrice().multiply(salePercent);
-            	salePrice = salePrice.setScale(2, BigDecimal.ROUND_HALF_UP);
-            	JLabel saleLabel = new JLabel("$" + salePrice.toString());
+//            	BigDecimal salePercent = new BigDecimal(1 - this.currentItem.getPercentOff());
+//            	BigDecimal salePrice = this.currentItem.getPrice().multiply(salePercent);
+//            	salePrice = salePrice.setScale(2, BigDecimal.ROUND_HALF_UP);
+//            	JLabel saleLabel = new JLabel("$" + salePrice.toString());
+            	JLabel saleLabel = new JLabel("$" + this.currentItem.getOnSalePrice());
             	saleLabel.setHorizontalAlignment(SwingConstants.CENTER);
             	saleLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
             	saleLabel.setForeground(Color.RED);

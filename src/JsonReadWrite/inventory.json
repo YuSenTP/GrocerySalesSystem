@@ -5,6 +5,7 @@
   "picFile" : "./img/milk1.jpg",
   "onSale" : true,
   "percentOff" : 0.3,
+  "onSalePrice" : 2.09,
   "category" : "Dairy"
 }, {
   "name" : "Bread",
@@ -13,6 +14,7 @@
   "picFile" : "./img/bread2.jpg",
   "onSale" : false,
   "percentOff" : 0.0,
+  "onSalePrice" : 0,
   "category" : "Others"
 }, {
   "name" : "Tomato",
@@ -21,6 +23,7 @@
   "picFile" : "./img/tomato.jpg",
   "onSale" : false,
   "percentOff" : 0.0,
+  "onSalePrice" : 0,
   "category" : "Vegetables"
 }, {
   "name" : "Lettuce",
@@ -29,6 +32,7 @@
   "picFile" : "./img/lettuce.jpg",
   "onSale" : false,
   "percentOff" : 0.0,
+  "onSalePrice" : 0,
   "category" : "Vegetables"
 }, {
   "name" : "Watermelon",
@@ -37,6 +41,7 @@
   "picFile" : "./img/watermelon1.jpg",
   "onSale" : false,
   "percentOff" : 0.0,
+  "onSalePrice" : 0,
   "category" : "Fruits"
 }, {
   "name" : "Chicken Breast",
@@ -45,6 +50,7 @@
   "picFile" : "./img/bonelessChickenBreast.jpg",
   "onSale" : false,
   "percentOff" : 0.0,
+  "onSalePrice" : 0,
   "category" : "Meat"
 }, {
   "name" : "Eggs Carton",
@@ -53,6 +59,7 @@
   "picFile" : "./img/eggsCarton.jpg",
   "onSale" : false,
   "percentOff" : 0.0,
+  "onSalePrice" : 0,
   "category" : "Others"
 }, {
   "name" : "Lays Classic",
@@ -61,6 +68,7 @@
   "picFile" : "./img/laysClassic.jpg",
   "onSale" : false,
   "percentOff" : 0.0,
+  "onSalePrice" : 0,
   "category" : "Others"
 }, {
   "name" : "Apple",
@@ -69,6 +77,7 @@
   "picFile" : "./img/apple.jpg",
   "onSale" : false,
   "percentOff" : 0.0,
+  "onSalePrice" : 0,
   "category" : "Fruits"
 }, {
   "name" : "Banana",
@@ -77,6 +86,7 @@
   "picFile" : "./img/banana.jpg",
   "onSale" : false,
   "percentOff" : 0.0,
+  "onSalePrice" : 0,
   "category" : "Fruits"
 }, {
   "name" : "Orange Juice",
@@ -85,6 +95,7 @@
   "picFile" : "./img/orangejuice.jpg",
   "onSale" : false,
   "percentOff" : 0.0,
+  "onSalePrice" : 0,
   "category" : "Others"
 }, {
   "name" : "Cheese",
@@ -93,6 +104,7 @@
   "picFile" : "./img/cheese.jpg",
   "onSale" : false,
   "percentOff" : 0.0,
+  "onSalePrice" : 0,
   "category" : "Dairy"
 }, {
   "name" : "Pasta",
@@ -101,5 +113,6 @@
   "picFile" : "./img/pasta.jpg",
   "onSale" : false,
   "percentOff" : 0.0,
+  "onSalePrice" : 0,
   "category" : "Others"
 } ]

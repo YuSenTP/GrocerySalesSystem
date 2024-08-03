@@ -88,10 +88,16 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 		if (onSale){
 			item.setOnSale(onSale);
 			item.setPercentOff(Double.valueOf(percentOff)/100);
+			
+			BigDecimal salePercent = new BigDecimal(1 - item.getPercentOff());
+			BigDecimal onSalePrice = item.getPrice().multiply(salePercent); 
+			onSalePrice = onSalePrice.setScale(2, BigDecimal.ROUND_HALF_UP); //Rounds and set to 2dp
+			item.setOnSalePrice(onSalePrice);
 		}
 		else{
 			item.setOnSale(onSale);
 			item.setPercentOff(0);
+			item.setOnSalePrice(BigDecimal.ZERO);
 		}
 		
 		//Category

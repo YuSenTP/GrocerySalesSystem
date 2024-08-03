@@ -80,11 +80,13 @@ public class EditCategory extends JPanel{
             categoryPanel.setMaximumSize(new Dimension(600, 100));
             categoryPanel.setBackground(Color.WHITE);
             
+            //Category Name
             JLabel categoryName = new JLabel(currentCategory);
             categoryName.setFont(new Font("Tahoma", Font.BOLD, 18));
             categoryName.setBorder(new EmptyBorder(0, 20, 0, 20));
             categoryPanel.add(categoryName, BorderLayout.WEST);
             
+            //Edit Button
             Icon eIcon = new ImageIcon("./img/Edit.png");
             JButton editButton = new JButton(eIcon);
             editButton.setPreferredSize(new Dimension(50, 50));
@@ -139,13 +141,13 @@ public class EditCategory extends JPanel{
             });
             
             
-            
+            //Delete Button
             Icon dIcon = new ImageIcon("./img/Delete.png");
             JButton deleteButton = new JButton(dIcon);
             deleteButton.setPreferredSize(new Dimension(50, 50));
             deleteButton.setBackground(Color.WHITE);
             
-          //Delete Action
+            //Delete Action
             deleteButton.setActionCommand(currentCategory);
             deleteButton.addActionListener(new ActionListener(){
          		@Override

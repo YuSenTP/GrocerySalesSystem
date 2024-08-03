@@ -1,31 +1,63 @@
-[{
-    "orderID": 1,
-    "totalCost": 12.95,
-    "groceryItems": [
-      {
-        "name": "Milk",
-        "price": 2.99,
-        "quantity": 5
-      },
-      {
-        "name": "Bread",
-        "price": 1.99,
-        "quantity": 5
-      },
-      {
-        "name": "Milk",
-        "price": 2.99,
-        "quantity": 4
-      },
-      {
-        "name": "Bread",
-        "price": 1.99,
-        "quantity": 4
-      },
-      {
-        "name": "Milk",
-        "price": 2.99,
-        "quantity": 3
-      }
-    ]
-  }]
+[ {
+  "orderID" : 1,
+  "totalCost" : 5.23,
+  "groceryItems" : [ {
+    "name" : "Milk",
+    "price" : 2.99,
+    "quantity" : 1,
+    "picFile" : "./img/milk1.jpg",
+    "onSale" : true,
+    "percentOff" : 0.3,
+    "onSalePrice" : 2.09,
+    "category" : "Dairy"
+  }, {
+    "name" : "Bread",
+    "price" : 1.99,
+    "quantity" : 1,
+    "picFile" : "./img/bread2.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "onSalePrice" : 0,
+    "category" : "Others"
+  }, {
+    "name" : "Tomato",
+    "price" : 1.15,
+    "quantity" : 1,
+    "picFile" : "./img/tomato.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "onSalePrice" : 0,
+    "category" : "Vegetables"
+  } ]
+}, {
+  "orderID" : 2,
+  "totalCost" : 5.23,
+  "groceryItems" : [ {
+    "name" : "Milk",
+    "price" : 2.99,
+    "quantity" : 1,
+    "picFile" : "./img/milk1.jpg",
+    "onSale" : true,
+    "percentOff" : 0.3,
+    "onSalePrice" : 2.09,
+    "category" : "Dairy"
+  }, {
+    "name" : "Bread",
+    "price" : 1.99,
+    "quantity" : 1,
+    "picFile" : "./img/bread2.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "onSalePrice" : 0,
+    "category" : "Others"
+  }, {
+    "name" : "Tomato",
+    "price" : 1.15,
+    "quantity" : 1,
+    "picFile" : "./img/tomato.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "onSalePrice" : 0,
+    "category" : "Vegetables"
+  } ]
+} ]

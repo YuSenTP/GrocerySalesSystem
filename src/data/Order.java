@@ -67,15 +67,15 @@ public class Order {
 //		 this.counter = counter; 
 //	}
 
-	public BigDecimal calculateTotalCost() { //Gab to change --> total cost to be calculated in controller and passed to this order via settotalcost (setter)
-		totalCost = BigDecimal.ZERO; //!
-		for(int i = 0; i < groceryItems.size(); i++){
-			BigDecimal groceryCost = groceryItems.get(i).getPrice().multiply(BigDecimal.valueOf(groceryItems.get(i).getQuantity()));
-			totalCost = totalCost.add(groceryCost);
-//			totalCost = totalCost.add(groceryItems.get(i).getPrice() * BigDecimal.valueOf(groceryItems.get(i).getQuantity())); // BigDecimal is Immutable
-		}
-		return totalCost;
-	 }
+//	public BigDecimal calculateTotalCost() { //Gab to change --> total cost to be calculated in controller and passed to this order via settotalcost (setter)
+//		totalCost = BigDecimal.ZERO; //!
+//		for(int i = 0; i < groceryItems.size(); i++){
+//			BigDecimal groceryCost = groceryItems.get(i).getPrice().multiply(BigDecimal.valueOf(groceryItems.get(i).getQuantity()));
+//			totalCost = totalCost.add(groceryCost);
+////			totalCost = totalCost.add(groceryItems.get(i).getPrice() * BigDecimal.valueOf(groceryItems.get(i).getQuantity())); // BigDecimal is Immutable
+//		}
+//		return totalCost;
+//	 }
 
 //	public void deleteGroceryItem(GroceryItem item) { //check this
 ////		groceryItems.get(index)

@@ -3,11 +3,14 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.font.TextAttribute;
+import java.util.Map;
 import java.util.Vector;
 
 import javax.swing.BorderFactory;
@@ -60,6 +63,7 @@ public class ManagerOrderDetails extends JPanel {
         this.bottomPanel = new JPanel();
         this.bottomPanel.setBackground(Color.WHITE);
         this.bottomPanel.setLayout(new BorderLayout(0, 0));
+        this.bottomPanel.setBorder(new EmptyBorder(10, 20, 10, 20)); //Used to create white space
         
         this.backButton = new JButton("Back");
         this.backButton.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -106,13 +110,43 @@ public class ManagerOrderDetails extends JPanel {
             // Item Info Panel
             JPanel infoPanel = new JPanel(new GridLayout(3, 1));
             JLabel nameLabel = new JLabel(currentItem.getName());
-            nameLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+            nameLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
             infoPanel.add(nameLabel);
 
-            JLabel priceLabel = new JLabel("Price: $" + currentItem.getPrice());
-            infoPanel.add(priceLabel);
+            
+          //Price Panel starts from left and zero h&v gap
+            JPanel pricePanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
+            pricePanel.setBorder(new EmptyBorder(9, 0, 0, 0));
+            JLabel priceheader = new JLabel("Price:");
+            priceheader.setFont(new Font("Tahoma", Font.BOLD, 14));
+            pricePanel.add(priceheader);
+            
+            JLabel priceLabel = new JLabel(" $" + currentItem.getPrice());
+            priceLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+            // If On Sale
+            if (currentItem.getOnSale()){
+            	Map<TextAttribute, Object> attributes = (Map<TextAttribute, Object>) priceLabel.getFont().getAttributes(); // HashMap Something like a dictonary in python where data are stored as key value pair
+            	attributes.put(TextAttribute.STRIKETHROUGH, TextAttribute.STRIKETHROUGH_ON); // Add new attribute to HashMap
+            	priceLabel.setFont(new Font(attributes));
+            	priceLabel.setForeground(Color.GRAY);
+            	pricePanel.add(priceLabel);
+
+            	JLabel saleLabel = new JLabel(" $" + currentItem.getOnSalePrice());
+            	saleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+            	saleLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+            	saleLabel.setForeground(Color.RED);
+            	pricePanel.add(saleLabel);
+            }
+            else{
+            	pricePanel.add(priceLabel);
+            }
+            
+            infoPanel.add(pricePanel);
+            
+//            infoPanel.add(priceLabel);
 
             JLabel quantityLabel = new JLabel("Quantity: " + currentItem.getQuantity());
+            quantityLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
             infoPanel.add(quantityLabel);
 
             itemPanel.add(infoPanel, BorderLayout.CENTER);

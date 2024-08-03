@@ -165,7 +165,7 @@ public class Controller {
 			
 			
 			if (itemPresent == false){
-				GroceryItem toAdd = new GroceryItem(item.getName(), item.getPrice().toString(), "1", item.getPicFile(), item.getOnSale(), item.getPercentOff(), item.getCategory()); // n, p, q = 1, pic
+				GroceryItem toAdd = new GroceryItem(item.getName(), item.getPrice().toString(), "1", item.getPicFile(), item.getOnSale(), item.getPercentOff(),item.getCategory()); // n, p, q = 1, pic
 				this.ds.getCurrentOrder().addGroceryItem(toAdd);
 				System.out.println("Success");
 			}
@@ -249,7 +249,7 @@ public class Controller {
 		    this.ds.clearCurrentOrderItems();
 
 		    // Reset the total cost of the current order
-		    currentOrder.calculateTotalCost();
+		    this.calculateTotalCost();
 		
 	}
 		
@@ -272,6 +272,28 @@ public class Controller {
 	public int generateOrderNumber() {
         return ds.getOrders().length + 1;
 	}
+	
+	public BigDecimal calculateTotalCost() {
+		BigDecimal totalCost = BigDecimal.ZERO; //!
+		BigDecimal groceryCost;
+		GroceryItem[] items = this.ds.getCurrentOrder().getGroceryItems();
+		//Loop through all items and add to total cost
+		for(int i = 0; i < items.length; i++){
+			//If Onsale
+			if (items[i].getOnSalePrice() != BigDecimal.ZERO){
+				groceryCost = items[i].getOnSalePrice().multiply(BigDecimal.valueOf(items[i].getQuantity()));
+			}
+			else{
+				groceryCost = items[i].getPrice().multiply(BigDecimal.valueOf(items[i].getQuantity()));
+			}
+			//Add to total cost
+			totalCost = totalCost.add(groceryCost);
+		}
+		totalCost = totalCost.setScale(2, BigDecimal.ROUND_HALF_UP);
+		this.ds.getCurrentOrder().setTotalCost(totalCost);
+		return totalCost;
+	 }
+	
 
 	public void confirmOrder() {
 		 Order currentOrder = this.ds.getCurrentOrder();

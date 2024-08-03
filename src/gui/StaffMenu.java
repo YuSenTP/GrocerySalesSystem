@@ -133,6 +133,7 @@ public class StaffMenu extends JPanel {
         this.bottomPanel = new JPanel();
         this.bottomPanel.setBackground(Color.WHITE);
         this.bottomPanel.setLayout(new BorderLayout(0, 0));
+        this.bottomPanel.setBorder(new EmptyBorder(10, 20, 10, 20)); //Used to create white space
         
         //Logout
         this.logoutButton = new JButton("Logout");
@@ -208,10 +209,11 @@ public class StaffMenu extends JPanel {
 
             	this.pricePanel.add(this.priceLabel);
 
-            	BigDecimal salePercent = new BigDecimal(1 - currentItem.getPercentOff());
-            	BigDecimal salePrice = currentItem.getPrice().multiply(salePercent);
-            	salePrice = salePrice.setScale(2, BigDecimal.ROUND_HALF_UP);
-            	JLabel saleLabel = new JLabel("$" + salePrice.toString());
+//            	BigDecimal salePercent = new BigDecimal(1 - currentItem.getPercentOff());
+//            	BigDecimal salePrice = currentItem.getPrice().multiply(salePercent);
+//            	salePrice = salePrice.setScale(2, BigDecimal.ROUND_HALF_UP);
+//            	JLabel saleLabel = new JLabel("$" + salePrice.toString());
+            	JLabel saleLabel = new JLabel("$" + currentItem.getOnSalePrice());
             	saleLabel.setHorizontalAlignment(SwingConstants.CENTER);
             	saleLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
             	saleLabel.setForeground(Color.RED);

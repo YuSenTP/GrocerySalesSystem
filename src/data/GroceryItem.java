@@ -5,7 +5,7 @@ import java.text.DecimalFormat;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-@JsonPropertyOrder({"name", "price", "quantity", "picFile", "onSale", "percentOff", "category"}) //To change the save order to json
+@JsonPropertyOrder({"name", "price", "quantity", "picFile", "onSale", "percentOff","onSalePrice", "category"}) //To change the save order to json
 public class GroceryItem {
 
 	private String name;
@@ -14,6 +14,7 @@ public class GroceryItem {
 	private String picFile;
 	private boolean onSale;
 	private double percentOff; // how many percent off
+	private BigDecimal onSalePrice;
 	private String category;
 	
 	//DO NOT Delete jackson needs this...
@@ -30,9 +31,14 @@ public class GroceryItem {
 		this.onSale = onSale;
 		if (onSale){
 			this.percentOff = percentOff;
+
+			BigDecimal salePercent = new BigDecimal(1 - this.percentOff);
+			this.onSalePrice = this.price.multiply(salePercent); 
+			this.onSalePrice = this.onSalePrice.setScale(2, BigDecimal.ROUND_HALF_UP); //Rounds and set to 2dp
 		}
 		else{
 			this.percentOff = 0;
+			this.onSalePrice = BigDecimal.ZERO;
 		}
 		this.category = category;
 		
@@ -91,6 +97,14 @@ public class GroceryItem {
 
 	public void setPercentOff(double percentOff) {
 		this.percentOff = percentOff;
+	}
+
+	public BigDecimal getOnSalePrice() {
+		return onSalePrice;
+	}
+
+	public void setOnSalePrice(BigDecimal onSalePrice) {
+		this.onSalePrice = onSalePrice;
 	}
 
 	public String getCategory() {
