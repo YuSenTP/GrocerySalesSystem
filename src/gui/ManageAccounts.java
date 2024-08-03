@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,6 +22,7 @@ import javax.swing.border.EmptyBorder;
 import controller.MainFrame;
 import data.User;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 public class ManageAccounts extends JPanel {
@@ -32,8 +35,8 @@ public class ManageAccounts extends JPanel {
     private JScrollPane scrollPane;
     private User[] users;
     private JButton userButton;
-    private JLabel userName;
-    private JLabel userRole;
+    private JLabel name;
+    private JLabel role;
 
     public ManageAccounts(MainFrame main) {
         this.main = main;
@@ -83,20 +86,44 @@ public class ManageAccounts extends JPanel {
                     editAccount(user);
                 }
             });
+            
+            //User Pic
+            JLabel picLabel = new JLabel();
+            ImageIcon userPic = new ImageIcon(currentUser.getPicFile());
+            System.out.println("Loading image from: " + currentUser.getPicFile());
+            Image img = userPic.getImage();
+            Image newimg = img.getScaledInstance(60, 60, java.awt.Image.SCALE_SMOOTH);
+            userPic = new ImageIcon(newimg);
+            picLabel.setIcon(userPic);
+            picLabel.setBorder(new EmptyBorder(5, 5, 5, 5));
+            this.userButton.add(picLabel, BorderLayout.WEST);
+
+         // User Info Panel
+            JPanel infoPanel = new JPanel(new BorderLayout());
+            infoPanel.setOpaque(false);
+
+            // Left panel for Name and ID
+            JPanel leftPanel = new JPanel(new GridLayout(2, 1));
+            leftPanel.setOpaque(false);
 
             // User Name and ID
-            this.userName = new JLabel(currentUser.getName() + " (ID: " + currentUser.getUserID() + ")");
-            this.userName.setHorizontalAlignment(SwingConstants.CENTER);
-            this.userName.setFont(new Font("Tahoma", Font.BOLD, 16));
-            this.userName.setBorder(new EmptyBorder(0, 10, 0, 0));
-            this.userButton.add(this.userName, BorderLayout.WEST);
+            this.name = new JLabel(currentUser.getName() + " (ID: " + currentUser.getUserID() + ")");
+            this.name.setHorizontalAlignment(SwingConstants.LEFT);
+            this.name.setFont(new Font("Tahoma", Font.BOLD, 14));
+            leftPanel.add(this.name);
 
-            // User Role
-            this.userRole = new JLabel("Role: " + currentUser.getRole());
-            this.userRole.setHorizontalAlignment(SwingConstants.CENTER);
-            this.userRole.setFont(new Font("Tahoma", Font.BOLD, 16));
-            this.userRole.setBorder(new EmptyBorder(0, 0, 0, 10));
-            this.userButton.add(this.userRole, BorderLayout.EAST);
+            // Empty label for spacing
+            leftPanel.add(new JLabel());
+
+            infoPanel.add(leftPanel, BorderLayout.WEST);
+
+            // User Role (on the right)
+            this.role = new JLabel("Role: " + currentUser.getRole());
+            this.role.setHorizontalAlignment(SwingConstants.RIGHT);
+            this.role.setFont(new Font("Tahoma", Font.BOLD, 14));
+            infoPanel.add(this.role, BorderLayout.EAST);
+
+            this.userButton.add(infoPanel, BorderLayout.CENTER);
 
             this.gridPanel.add(userButton, gbc);
             gbc.gridy++;

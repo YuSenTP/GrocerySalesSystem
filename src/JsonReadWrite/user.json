@@ -1,16 +1,19 @@
 [ {
-  "userID" : 1,
-  "name" : "John",
   "password" : "Password",
-  "role" : "Manager"
+  "name" : "John",
+  "userID" : 1,
+  "role" : "Manager",
+  "picFile" : "./img/yusen.jpg"
 }, {
-  "userID" : 2,
-  "name" : "Jerry",
   "password" : "1234",
-  "role" : "Staff"
+  "name" : "Jerry",
+  "userID" : 2,
+  "role" : "Staff",
+  "picFile" : "./img/surya.jpg"
 }, {
-  "userID" : 3,
-  "name" : "Jenny",
   "password" : "5678",
-  "role" : "Staff"
+  "name" : "Jenny",
+  "userID" : 3,
+  "role" : "Staff",
+  "picFile" : "./img/sammy.jpg"
 } ]
