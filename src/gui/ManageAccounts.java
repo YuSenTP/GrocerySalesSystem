@@ -71,7 +71,7 @@ public class ManageAccounts extends JPanel {
 
             // User buttons
             this.userButton = new JButton();
-            this.userButton.setPreferredSize(new Dimension(0, 70));
+            this.userButton.setPreferredSize(new Dimension(0, 100));
             this.userButton.setBackground(Color.WHITE);
             this.userButton.setLayout(new BorderLayout());
 
@@ -92,7 +92,7 @@ public class ManageAccounts extends JPanel {
             ImageIcon userPic = new ImageIcon(currentUser.getPicFile());
             System.out.println("Loading image from: " + currentUser.getPicFile());
             Image img = userPic.getImage();
-            Image newimg = img.getScaledInstance(60, 60, java.awt.Image.SCALE_SMOOTH);
+            Image newimg = img.getScaledInstance(95, 95, java.awt.Image.SCALE_SMOOTH);
             userPic = new ImageIcon(newimg);
             picLabel.setIcon(userPic);
             picLabel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -109,7 +109,7 @@ public class ManageAccounts extends JPanel {
             // User Name and ID
             this.name = new JLabel(currentUser.getName() + " (ID: " + currentUser.getUserID() + ")");
             this.name.setHorizontalAlignment(SwingConstants.LEFT);
-            this.name.setFont(new Font("Tahoma", Font.BOLD, 14));
+            this.name.setFont(new Font("Tahoma", Font.BOLD, 20));
             leftPanel.add(this.name);
 
             // Empty label for spacing
@@ -120,7 +120,7 @@ public class ManageAccounts extends JPanel {
             // User Role (on the right)
             this.role = new JLabel("Role: " + currentUser.getRole());
             this.role.setHorizontalAlignment(SwingConstants.RIGHT);
-            this.role.setFont(new Font("Tahoma", Font.BOLD, 14));
+            this.role.setFont(new Font("Tahoma", Font.BOLD, 20));
             infoPanel.add(this.role, BorderLayout.EAST);
 
             this.userButton.add(infoPanel, BorderLayout.CENTER);
