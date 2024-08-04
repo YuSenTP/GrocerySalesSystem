@@ -1,7 +1,9 @@
 package data;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+@JsonPropertyOrder({"userID", "name", "password", "role", "picFile"}) //To change the save order to json
 public class User {
 	@JsonProperty("password")
 	private String password;

@@ -99,7 +99,7 @@ public class LoginScreen extends JPanel{
 					textPassword.setEchoChar((char)0);
 				}
 				else {
-					textPassword.setEchoChar('*');
+					textPassword.setEchoChar('\u2022');
 				}
 			}
 		});

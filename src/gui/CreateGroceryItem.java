@@ -96,7 +96,7 @@ public class CreateGroceryItem extends JPanel{
 		this.picLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		this.picLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		this.picLabel.setBackground(Color.WHITE);
-		this.picLabel.setBounds(0, 0, 300, 300);
+		this.picLabel.setBounds(12, 0, 300, 300);
 		this.middlePanel.add(this.picLabel);
 		
 		//Add Pic Button
@@ -107,7 +107,7 @@ public class CreateGroceryItem extends JPanel{
 			}
 		});
 		this.btnChangePic.setFont(new Font("Tahoma", Font.BOLD, 15));
-		this.btnChangePic.setBounds(134, 333, 166, 36);
+		this.btnChangePic.setBounds(144, 333, 166, 36);
 		this.middlePanel.add(this.btnChangePic);
 		
 		//Name TextField
@@ -198,7 +198,7 @@ public class CreateGroceryItem extends JPanel{
 		this.lblonlyAddSquare = new JLabel("*Only Add Square Picture");
 		this.lblonlyAddSquare.setForeground(new Color(255, 0, 51));
 		this.lblonlyAddSquare.setFont(new Font("Tahoma", Font.BOLD, 12));
-		this.lblonlyAddSquare.setBounds(135, 313, 165, 16);
+		this.lblonlyAddSquare.setBounds(145, 313, 165, 16);
 		this.middlePanel.add(this.lblonlyAddSquare);
 		
 		//OnSale CheckBox

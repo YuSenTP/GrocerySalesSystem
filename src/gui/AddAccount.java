@@ -34,7 +34,7 @@ public class AddAccount extends JPanel {
     private JButton addAccountButton;
     private JButton btnChangePic;
     private JTextField nameField;
-    private JTextField passwordField;
+    private JPasswordField passwordField;
     private JRadioButton staffRadioButton;
     private JRadioButton managerRadioButton;
     private ButtonGroup roleButtonGroup;
@@ -45,6 +45,8 @@ public class AddAccount extends JPanel {
     private File selectedFile;
     private JLabel PicFileName;
     private JTextField FileNameText;
+    private JLabel label_1;
+	private JCheckBox chckbxShowPassword;
 
     public AddAccount(MainFrame main) {
         this.main = main;
@@ -55,6 +57,7 @@ public class AddAccount extends JPanel {
 
         // Top Label
         this.lblAddAccount = new JLabel("Add New Account");
+        this.lblAddAccount.setPreferredSize(new Dimension(87, 60));
         this.lblAddAccount.setFont(new Font("Tahoma", Font.BOLD, 20));
         this.lblAddAccount.setHorizontalAlignment(SwingConstants.CENTER);
         this.add(this.lblAddAccount, BorderLayout.NORTH);
@@ -69,7 +72,7 @@ public class AddAccount extends JPanel {
         this.picLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         this.picLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
         this.picLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        this.picLabel.setBounds(50, 20, 200, 200);
+        this.picLabel.setBounds(48, 20, 280, 280);
         this.middlePanel.add(this.picLabel);
 
         this.btnChangePic = new JButton("Upload Picture");
@@ -78,35 +81,36 @@ public class AddAccount extends JPanel {
                 addPic();
             }
         });
-        this.btnChangePic.setFont(new Font("Tahoma", Font.BOLD, 14));
-        this.btnChangePic.setBounds(50, 230, 200, 30);
+        this.btnChangePic.setFont(new Font("Tahoma", Font.BOLD, 16));
+        this.btnChangePic.setBounds(163, 337, 165, 30);
         this.middlePanel.add(this.btnChangePic);
 
         // Add Name 
         this.lblName = new JLabel("Name:");
-        this.lblName.setFont(new Font("Tahoma", Font.BOLD, 16));
-        this.lblName.setBounds(300, 90, 100, 30);
+        this.lblName.setFont(new Font("Tahoma", Font.BOLD, 20));
+        this.lblName.setBounds(377, 98, 100, 30);
         this.middlePanel.add(this.lblName);
 
         this.nameField = new JTextField();
-        this.nameField.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        this.nameField.setBounds(300, 120, 200, 30);
+        this.nameField.setHorizontalAlignment(SwingConstants.LEFT);
+        this.nameField.setFont(new Font("Tahoma", Font.PLAIN, 20));
+        this.nameField.setBounds(377, 134, 200, 32);
         this.middlePanel.add(this.nameField);
         
      // Add Role Selection
         JLabel lblRole = new JLabel("Role:");
-        lblRole.setFont(new Font("Tahoma", Font.BOLD, 16));
-        lblRole.setBounds(300, 20, 100, 30);
+        lblRole.setFont(new Font("Tahoma", Font.BOLD, 20));
+        lblRole.setBounds(377, 20, 100, 30);
         this.middlePanel.add(lblRole);
 
         this.staffRadioButton = new JRadioButton("Staff");
-        this.staffRadioButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        this.staffRadioButton.setBounds(300, 50, 100, 30);
+        this.staffRadioButton.setFont(new Font("Tahoma", Font.BOLD, 16));
+        this.staffRadioButton.setBounds(377, 59, 100, 30);
         this.middlePanel.add(this.staffRadioButton);
 
         this.managerRadioButton = new JRadioButton("Manager");
-        this.managerRadioButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        this.managerRadioButton.setBounds(400, 50, 100, 30);
+        this.managerRadioButton.setFont(new Font("Tahoma", Font.BOLD, 16));
+        this.managerRadioButton.setBounds(477, 59, 100, 30);
         this.middlePanel.add(this.managerRadioButton);
 
         this.roleButtonGroup = new ButtonGroup();
@@ -118,19 +122,37 @@ public class AddAccount extends JPanel {
 
         // Add Password
         this.lblPassword = new JLabel("Password:");
-        this.lblPassword.setFont(new Font("Tahoma", Font.BOLD, 16));
-        this.lblPassword.setBounds(300, 160, 100, 30);
+        this.lblPassword.setFont(new Font("Tahoma", Font.BOLD, 20));
+        this.lblPassword.setBounds(377, 180, 135, 30);
         this.middlePanel.add(this.lblPassword);
 
         this.passwordField = new JPasswordField();
-        this.passwordField.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        this.passwordField.setBounds(300, 190, 200, 30);
+        this.passwordField.setHorizontalAlignment(SwingConstants.LEFT);
+        this.passwordField.setFont(new Font("Tahoma", Font.PLAIN, 20));
+        this.passwordField.setBounds(377, 216, 200, 32);
         this.middlePanel.add(this.passwordField);
+        
+        
+        this.chckbxShowPassword = new JCheckBox("Show Password");
+		this.chckbxShowPassword.setFont(new Font("Tahoma", Font.BOLD, 15));
+		this.chckbxShowPassword.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (chckbxShowPassword.isSelected()){
+					passwordField.setEchoChar((char)0);
+				}
+				else {
+					passwordField.setEchoChar('\u2022');
+				}
+			}
+		});
+		this.chckbxShowPassword.setBounds(377, 253, 161, 25);
+		this.chckbxShowPassword.setOpaque(false);
+		this.middlePanel.add(this.chckbxShowPassword);
 
         // File Name
         this.PicFileName = new JLabel("File Name:");
-        this.PicFileName.setFont(new Font("Tahoma", Font.BOLD, 16));
-        this.PicFileName.setBounds(300, 230, 100, 30);
+        this.PicFileName.setFont(new Font("Tahoma", Font.BOLD, 20));
+        this.PicFileName.setBounds(377, 299, 124, 30);
         this.middlePanel.add(this.PicFileName);
 
         this.FileNameText = new JTextField("No Pic Selected");
@@ -156,8 +178,14 @@ public class AddAccount extends JPanel {
 		this.FileNameText.setHorizontalAlignment(SwingConstants.CENTER);
 		this.FileNameText.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		this.FileNameText.setColumns(10);
-		this.FileNameText.setBounds(300, 260, 200, 30);
+		this.FileNameText.setBounds(377, 335, 200, 32);
 		this.middlePanel.add(this.FileNameText);
+		
+		this.label_1 = new JLabel("*Only Add Square Picture");
+		this.label_1.setForeground(new Color(255, 0, 51));
+		this.label_1.setFont(new Font("Tahoma", Font.BOLD, 12));
+		this.label_1.setBounds(163, 313, 165, 16);
+		this.middlePanel.add(this.label_1);
         // Bottom Panel 
         this.bottomPanel = new JPanel();
         this.bottomPanel.setBorder(new EmptyBorder(10, 20, 10, 20));
@@ -174,7 +202,7 @@ public class AddAccount extends JPanel {
         });
         this.bottomPanel.add(this.backButton, BorderLayout.WEST);
 
-        this.addAccountButton = new JButton("Add Account");
+        this.addAccountButton = new JButton("Save");
         this.addAccountButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 addAccount();
@@ -203,11 +231,17 @@ public class AddAccount extends JPanel {
         if (r == JFileChooser.APPROVE_OPTION) {
             this.selectedFile = fileChooser.getSelectedFile();
             this.filePath = fileChooser.getSelectedFile().getAbsolutePath();
-            String fileName = selectedFile.getName();
-            this.FileNameText.setText(fileName);
+            
+            String[] fileNameList = this.filePath.split("\\\\"); 
+			String fileName = fileNameList[fileNameList.length-1];
+			String[] temp = fileName.split("\\."); 
+			this.FileNameText.setText(temp[temp.length-2]); //take from back incase there is "." in front
+            
+//            String fileName = selectedFile.getName();
+//            this.FileNameText.setText(fileName);
 
             try {
-                ImageIcon imageIcon = new ImageIcon(ImageIO.read(selectedFile).getScaledInstance(200, 200, Image.SCALE_SMOOTH));
+                ImageIcon imageIcon = new ImageIcon(ImageIO.read(selectedFile).getScaledInstance(280, 280, Image.SCALE_SMOOTH));
                 this.picLabel.setIcon(imageIcon);
                 this.picLabel.setText("");
             } catch (IOException e) {
