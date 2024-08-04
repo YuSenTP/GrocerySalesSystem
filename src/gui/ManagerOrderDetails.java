@@ -114,7 +114,7 @@ public class ManagerOrderDetails extends JPanel {
             infoPanel.add(nameLabel);
 
             
-          //Price Panel starts from left and zero h&v gap
+            //Price Panel starts from left and zero h&v gap
             JPanel pricePanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
             pricePanel.setBorder(new EmptyBorder(9, 0, 0, 0));
             JLabel priceheader = new JLabel("Price:");
@@ -143,8 +143,6 @@ public class ManagerOrderDetails extends JPanel {
             
             infoPanel.add(pricePanel);
             
-//            infoPanel.add(priceLabel);
-
             JLabel quantityLabel = new JLabel("Quantity: " + currentItem.getQuantity());
             quantityLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
             infoPanel.add(quantityLabel);

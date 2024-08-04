@@ -71,22 +71,26 @@ public class ManagerMenu extends JPanel{
 		this.setBackground(Color.WHITE);
 		this.setLayout(new BorderLayout(0, 0));
 		
+		//Creates gridlayout
         this.gridPanel = new JPanel(new GridLayout(0, 3, 10, 10));// rows, cols, hgap, vgap
         this.gridPanel.setBorder(new EmptyBorder(0, 10, 10, 10));// top, left, bottom, right
         this.gridPanel.setBackground(UIManager.getColor("OptionPane.background"));
         
+        //Loops through inventory
         for (int i = 0; i < this.inventory.length; i++) {
         	this.currentItem = this.inventory[i];
         	
+        	//Checks if item's category is selected
         	if (ManagerMenu.categorySele.equals("All") != true){
         		if (this.currentItem.getCategory().equals(ManagerMenu.categorySele) != true){
         			continue;
         		}
         	}
         	
+        	//Creates itemPanel
         	this.itemPanel = new JPanel(new BorderLayout());
         	
-
+        	//Creates itemButton
             this.itemButton = new JButton();
 //            this.itemButton.setFocusable(false); //CAN USE
             this.itemButton.setLayout(new BorderLayout());
@@ -99,15 +103,11 @@ public class ManagerMenu extends JPanel{
         	this.itemButton.addActionListener(new ActionListener(){
         		@Override
         		public void actionPerformed(ActionEvent e){
-        			//TO CHANGE
-//        			System.out.println(e.getSource());
+        			//Get the source of the action
         			JButton sourceBtn = (JButton) e.getSource();
         			GroceryItem object = (GroceryItem) sourceBtn.getClientProperty("object");
-//        			System.out.println(object);
-        			
         			String buttonName = e.getActionCommand();
         			showItemScreen(buttonName, object);
-//        			main.getController();
         		}
         	});
 
@@ -126,27 +126,25 @@ public class ManagerMenu extends JPanel{
             this.itemButton.add(this.nameLabel, BorderLayout.NORTH);
    
             //Item Price
-            
             this.pricePanel = new JPanel();
             this.pricePanel.setOpaque(false);
             
+            //Original Price
             this.priceLabel = new JLabel("$" + this.currentItem.getPrice().toString());
             this.priceLabel.setHorizontalAlignment(SwingConstants.CENTER);
             this.priceLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
             
             // If On Sale
             if (this.currentItem.getOnSale()){
+            	//Sets original price with strike through and grayed
             	Map<TextAttribute, Object> attributes = (Map<TextAttribute, Object>) this.priceLabel.getFont().getAttributes(); // HashMap Something like a dictonary in python where data are stored as key value pair
             	attributes.put(TextAttribute.STRIKETHROUGH, TextAttribute.STRIKETHROUGH_ON); // Add new attribute to HashMap
             	this.priceLabel.setFont(new Font(attributes));
             	this.priceLabel.setForeground(Color.GRAY);
 
             	this.pricePanel.add(this.priceLabel);
-
-//            	BigDecimal salePercent = new BigDecimal(1 - this.currentItem.getPercentOff());
-//            	BigDecimal salePrice = this.currentItem.getPrice().multiply(salePercent);
-//            	salePrice = salePrice.setScale(2, BigDecimal.ROUND_HALF_UP);
-//            	JLabel saleLabel = new JLabel("$" + salePrice.toString());
+            	
+            	//Sale Price
             	JLabel saleLabel = new JLabel("$" + this.currentItem.getOnSalePrice());
             	saleLabel.setHorizontalAlignment(SwingConstants.CENTER);
             	saleLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -180,6 +178,7 @@ public class ManagerMenu extends JPanel{
         this.topPanel.setPreferredSize(new Dimension(10, 70));
         this.topPanel.setLayout(null);
 
+        //Grocery Item Label
         this.lblGroceryItems = new JLabel("Grocery Items");
         this.lblGroceryItems.setBounds(275, 5, 200, 60);
         this.lblGroceryItems.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -189,7 +188,7 @@ public class ManagerMenu extends JPanel{
         this.topPanel.add(this.lblGroceryItems);
         
         
-
+        //Combobox to select category
         this.comboBox = new JComboBox(Arrays.copyOfRange(this.category, 0, this.category.length - 1));
         this.comboBox.setBounds(588, 24, 111, 25);
         this.comboBox.setSelectedItem(ManagerMenu.categorySele);
@@ -201,6 +200,7 @@ public class ManagerMenu extends JPanel{
         	}
         });;
         
+        //View label
         this.lblView = new JLabel("View:");
         this.lblView.setBounds(529, 25, 47, 21);
         this.lblView.setFont(new Font("Tahoma", Font.BOLD, 17));
@@ -218,8 +218,8 @@ public class ManagerMenu extends JPanel{
         this.bottomPanel.setLayout(new BorderLayout(0, 0));
         this.bottomPanel.setBorder(new EmptyBorder(10, 20, 10, 20)); //Used to create white space
 
+        //Back button
         this.backButton = new JButton("Back");
-//        this.backButton.setPreferredSize(new Dimension(90, 50));
         this.backButton.setFont(new Font("Tahoma", Font.BOLD, 15));
         this.backButton.setPreferredSize(new Dimension(100, 40));
     	this.backButton.addActionListener(new ActionListener(){
@@ -230,6 +230,7 @@ public class ManagerMenu extends JPanel{
     	});
         this.bottomPanel.add(this.backButton, BorderLayout.WEST);
 
+        //Create Item button
         this.createItemButton = new JButton("Create Item");
         this.createItemButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
@@ -244,17 +245,20 @@ public class ManagerMenu extends JPanel{
 
 	}
     
+	//Show Item Details
 	private void showItemScreen(String name, GroceryItem item){
 		System.out.println(name);
 		System.out.println(item.getCategory());
 		this.main.showEditGroceryItem(item);
 	}
 	
+	//Back to Manger Home
 	private void back(){
 		ManagerMenu.categorySele = "All";
 		this.main.showManagerHome();
 	}
 	
+	//Show Create item page
 	private void createItem(){
 		this.main.showCreateItem();
 	}

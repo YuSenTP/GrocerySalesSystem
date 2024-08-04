@@ -60,4 +60,35 @@
     "onSalePrice" : 0,
     "category" : "Vegetables"
   } ]
+}, {
+  "orderID" : 3,
+  "totalCost" : 10.56,
+  "groceryItems" : [ {
+    "name" : "Bread",
+    "price" : 1.99,
+    "quantity" : 1,
+    "picFile" : "./img/bread2.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "onSalePrice" : 0,
+    "category" : "Others"
+  }, {
+    "name" : "Milk",
+    "price" : 2.99,
+    "quantity" : 3,
+    "picFile" : "./img/milk1.jpg",
+    "onSale" : true,
+    "percentOff" : 0.3,
+    "onSalePrice" : 2.09,
+    "category" : "Dairy"
+  }, {
+    "name" : "Tomato",
+    "price" : 1.15,
+    "quantity" : 2,
+    "picFile" : "./img/tomato.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "onSalePrice" : 0,
+    "category" : "Vegetables"
+  } ]
 } ]

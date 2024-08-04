@@ -404,19 +404,14 @@ public class EditGroceryItem extends JPanel{
 		//ItemPic
 		boolean picChanged = this.picChanged;
 		
-//		System.out.println("price"+priceChanged);
-//		System.out.println("quantity"+quantityChanged);
-//		System.out.println("onSale"+onSaleChanged);
-//		System.out.println("percentOff"+percentOffChanged);
-//		System.out.println("category"+categoryChanged);
-//		System.out.println("fileName"+fileNameChanged);
-		
 		//Checks if values have been edited
 		if (nameChanged || priceChanged || quantityChanged || onSaleChanged || percentOffChanged || categoryChanged || fileNameChanged || picChanged){
 			System.out.println("Value Changed");
 			
 			JLabel label = new JLabel("Save Changes?");
 			label.setFont(new Font("Tahoma", Font.BOLD, 14));
+			
+			//Ask User if they want to save changes
 			int response = JOptionPane.showConfirmDialog(this, label, "Back", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE );
 			
 			if (response == JOptionPane.YES_OPTION) {
@@ -460,8 +455,7 @@ public class EditGroceryItem extends JPanel{
 				this.picLabel.setIcon(new ImageIcon(this.itemPic));
 				this.FileNameText.setText(pFinalName);
 
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
+			} catch (IOException e) { //If error occurs -- prevents app from crashing
 				e.printStackTrace();
 				JLabel label = new JLabel("An Error Occured! Try Again!");
 				label.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -481,7 +475,7 @@ public class EditGroceryItem extends JPanel{
 			return;
 		}
 		
-		//Check Price
+		//Checking for "$" in price
 		String finalPrice;
 		if (this.priceText.getText().trim().startsWith("$")){
 			finalPrice = priceText.getText().trim().substring(1);
@@ -491,6 +485,7 @@ public class EditGroceryItem extends JPanel{
 			finalPrice = priceText.getText().trim();
 		}
 		try{
+			//Check if price entered is more than 0
 			if (Double.valueOf(finalPrice) < 0){
 				JLabel label = new JLabel("Error! Price must be positive!");
 				label.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -579,7 +574,6 @@ public class EditGroceryItem extends JPanel{
 			//Saving
 			System.out.println("Saving Item...");
 			this.main.getController().editGroceryItem(this.item, this.itemName.getText().trim(), finalPrice, this.quantityText.getText().trim(), savePath, this.chckbxOnSale.isSelected(), this.spinner.getValue().toString(), this.comboBox.getSelectedItem().toString());
-//			this.main.getController().createGroceryItem(this.itemName.getText().trim(), finalPrice, this.quantityText.getText().trim(), finalPath, this.chckbxOnSale.isSelected(), this.spinner.getValue().toString(), this.comboBox.getSelectedItem().toString());
 
 			//Success Message
 			JLabel label = new JLabel("Item Saved!");
@@ -599,12 +593,24 @@ public class EditGroceryItem extends JPanel{
 		
 	}
 	
+	//Delete Grocery Item
 	private void deleteItem(){
-		this.main.getController().deleteGroceryItem(this.item);
+		JLabel clabel = new JLabel("Confirm Delete?");
+		clabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+		//Asking for confirmation
+		int response = JOptionPane.showConfirmDialog(this, clabel, "Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE );
 		
-		JLabel label = new JLabel("Item Deleted Successfully");
-		label.setFont(new Font("Tahoma", Font.BOLD, 14));
-		JOptionPane.showMessageDialog(this, label, "Delete Item", JOptionPane.INFORMATION_MESSAGE);
-		this.main.showManagerMenu();
+		if (response == JOptionPane.YES_OPTION) {
+			this.main.getController().deleteGroceryItem(this.item);
+			
+			JLabel label = new JLabel("Item Deleted Successfully");
+			label.setFont(new Font("Tahoma", Font.BOLD, 14));
+			JOptionPane.showMessageDialog(this, label, "Delete Item", JOptionPane.INFORMATION_MESSAGE);
+			this.main.showManagerMenu();
+		}
+
+		
+		
+
 	}
 }

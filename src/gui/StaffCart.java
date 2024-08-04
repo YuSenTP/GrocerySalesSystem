@@ -32,7 +32,6 @@ public class StaffCart extends JPanel {
     private JPanel bottomPanel;
     private JButton backButton; 
     private JButton confirmButton;
-//    private JButton deleteItemButton; 
     private JScrollPane scrollPane;
     private JPanel itemsPanel;
     private JLabel totalLabel;
@@ -73,7 +72,7 @@ public class StaffCart extends JPanel {
         });
         topPanel.add(this.clearCartButton);
         
-     // Reset All button
+        // Reset All button
         this.resetAllButton = new JButton("Reset All");
         this.resetAllButton.setFont(new Font("Tahoma", Font.BOLD, 14));
         this.resetAllButton.setBounds(10, 30, 111, 30); // Same size and vertical position as Clear Cart button
@@ -93,7 +92,6 @@ public class StaffCart extends JPanel {
         this.itemsPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
         this.scrollPane = new JScrollPane(itemsPanel);
-//        this.scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         this.scrollPane.setBorder(new EmptyBorder(0, 2, 2, 2));
         this.scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         this.scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -202,13 +200,29 @@ public class StaffCart extends JPanel {
         Order currentOrder = main.getController().getCurrentOrder();
         GroceryItem[] cartItems = currentOrder.getGroceryItems();
 
+
         for (int i = 0; i < cartItems.length; i++) {
+            /*Structure for each item
+             * itemPanel
+             * 	- picLabel
+             * 	- infoPanel
+             * 		- name
+             * 		- pricePanel
+             * 			- priceLabel
+             * 			- onSalePrice (if onsale)
+             * 	- controlPanel
+             * 		- quantityPanel
+             * 			- decreaseButton
+             * 			- quantityLabel
+             * 			- increaseButton
+             * 		- resetButton
+             * 		- deleteItemButton
+             */
             GroceryItem currentItem = cartItems[i];
             
             JPanel itemPanel = new JPanel(new BorderLayout(10, 0));
             itemPanel.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
             itemPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 100)); // Set fixed height
-//            itemPanel.setBackground(Color.WHITE);
 
             // Item Pic
             JLabel picLabel = new JLabel();
@@ -223,24 +237,20 @@ public class StaffCart extends JPanel {
             // Item Info Panel
             JPanel infoPanel = new JPanel(new GridLayout(2, 1));
             infoPanel.setBorder(new EmptyBorder(0,15,0,25));
-//            infoPanel.setBackground(Color.WHITE);
             
             //Name
             JLabel nameLabel = new JLabel(currentItem.getName());
             nameLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
             nameLabel.setVerticalAlignment(SwingConstants.CENTER);
-//            nameLabel.setBorder(BorderFactory.createLineBorder(Color.black, 1));
             infoPanel.add(nameLabel);
 
             //Price Panel  -- starts from left and zero h&v gap
             JPanel pricePanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
-//            pricePanel.setBorder(new EmptyBorder(10,0,0,0));
-//            pricePanel.setAlignmentX(SwingConstants.CENTER);
-//            pricePanel.setBackground(Color.WHITE);
-            
+
             //Price
             JLabel priceLabel = new JLabel("$" + currentItem.getPrice());
             priceLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+            
             // If On Sale
             if (currentItem.getOnSale()){
             	Map<TextAttribute, Object> attributes = (Map<TextAttribute, Object>) priceLabel.getFont().getAttributes(); // HashMap Something like a dictonary in python where data are stored as key value pair
@@ -260,39 +270,24 @@ public class StaffCart extends JPanel {
             }
             
             infoPanel.add(pricePanel);
-            
-            
+
             itemPanel.add(infoPanel, BorderLayout.CENTER);
             
-
-
             
             //Quantity
             JLabel quantityLabel = new JLabel(String.valueOf(currentItem.getQuantity()));
-//            quantityLabel.setMinimumSize(new Dimension(50, 50));
-//            quantityLabel.setBorder(new EmptyBorder(0, 20, 0, 20));
             quantityLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
             quantityLabel.setBackground(Color.WHITE);
             quantityLabel.setOpaque(true);
-//            increaseButton.setFont(new Font("Tahoma", Font.BOLD, 14));
-//            quantityLabel.setBorder(BorderFactory.createLineBorder(Color.black));
             quantityLabel.setBorder(new MatteBorder(0, 1, 0, 1, Color.black));
             quantityLabel.setPreferredSize(new Dimension(50, 50));
             quantityLabel.setHorizontalAlignment(SwingConstants.CENTER);
-//            quantityPanel.add(quantityLabel, BorderLayout.CENTER);
             
             //Minus Button
             JButton decreaseButton = new JButton("-");
-//            Icon mIcon = new ImageIcon("./img/Subtract.png");
-//            JButton decreaseButton = new JButton(mIcon);
             decreaseButton.setBackground(Color.WHITE);
             decreaseButton.setFont(new Font("Tahoma", Font.BOLD, 18));
             decreaseButton.setBorder(BorderFactory.createLineBorder(Color.black, 0));
-//            decreaseButton.setBorder(new EmptyBorder(0,0,0,0));
-//            decreaseButton.setPreferredSize(new Dimension(20, 10));
-//            decreaseButton.setBorder(BorderFactory.createEmptyBorder(12, 0, 12, 0));
-//            decreaseButton.setMargin(new Insets(0, 2, 0, 2)); // Set small margins
-//            JButton decreaseButton = new JButton("-");
             decreaseButton.setPreferredSize(new Dimension(50, 50));
             decreaseButton.addActionListener(new ActionListener() {
                 @Override
@@ -300,17 +295,13 @@ public class StaffCart extends JPanel {
                     updateItemQuantity(currentItem, currentItem.getQuantity() - 1, "delete", decreaseButton);
                 }
             });
-//            quantityPanel.add(decreaseButton, BorderLayout.WEST);
             
             //Plus Button
             boolean available = main.getController().checkInventoryAvaiblility(currentItem);
             JButton increaseButton = new JButton("+");
-//            Icon iIcon = new ImageIcon("./img/PlusMath.png");
-//            JButton increaseButton = new JButton(iIcon);
             increaseButton.setBackground(Color.WHITE);
             increaseButton.setFont(new Font("Tahoma", Font.BOLD, 18));
             increaseButton.setBorder(BorderFactory.createLineBorder(Color.black, 0));
-//            increaseButton.setBorder(new EmptyBorder(0,0,0,0));
             increaseButton.setEnabled(available);
             increaseButton.setPreferredSize(new Dimension(50, 50));
             increaseButton.addActionListener(new ActionListener() {
@@ -319,27 +310,13 @@ public class StaffCart extends JPanel {
                     updateItemQuantity(currentItem, currentItem.getQuantity() + 1, "add", increaseButton);
                 }
             });
-//            quantityPanel.add(increaseButton, BorderLayout.EAST);
             
-            
-            //Delete Button
-//            JButton deleteItemButton = new JButton("Delete");
-            
-//            
-//            this.itemPic = new ImageIcon(currentItem.getPicFile());
-//            Image img = this.itemPic.getImage();
-//            Image newimg = img.getScaledInstance(90, 90, java.awt.Image.SCALE_SMOOTH);
-//            this.itemPic = new ImageIcon(newimg);
-            
+            //Delete all item Button
             ImageIcon dIcon = new ImageIcon("./img/Trash.png");
-
             Image dimg = dIcon.getImage();
             Image newdimg = dimg.getScaledInstance(25, 25, java.awt.Image.SCALE_SMOOTH);
-//            this.itemPic = new ImageIcon(newimg);
-            
             JButton deleteItemButton = new JButton(new ImageIcon(newdimg));
             deleteItemButton.setBackground(Color.WHITE);
-//            deleteItemButton.setBorder(new EmptyBorder(0,0,0,0));
             deleteItemButton.setBorder(BorderFactory.createLineBorder(Color.RED, 1));
             deleteItemButton.setPreferredSize(new Dimension(50, 50));
             deleteItemButton.addActionListener(new ActionListener() {
@@ -349,19 +326,11 @@ public class StaffCart extends JPanel {
                 }
             });
 
-//            itemPanel.add(deleteItemButton, BorderLayout.EAST);
-            
-
-
             // Reset Button
-//            JButton resetButton = new JButton("Reset");
             ImageIcon rIcon = new ImageIcon("./img/ResetG.png");
-            
             Image rimg = rIcon.getImage();
             Image newrimg = rimg.getScaledInstance(25, 25, java.awt.Image.SCALE_SMOOTH);
-            
             JButton resetButton = new JButton(new ImageIcon(newrimg));
-            
             resetButton.setBorder(BorderFactory.createLineBorder(new Color(50, 205, 50), 1));
             resetButton.setBackground(Color.WHITE);
             resetButton.setPreferredSize(new Dimension(50, 50));
@@ -372,46 +341,21 @@ public class StaffCart extends JPanel {
                 }
             });
 
-            // Right Panel
-//            JPanel rightPanel = new JPanel(new BorderLayout(5, 0));
-            // Add components to the right panel
-//            rightPanel.add(resetButton, BorderLayout.WEST);
-//            rightPanel.add(quantityPanel, BorderLayout.CENTER);
-//            rightPanel.add(deleteItemButton, BorderLayout.EAST);
-
-            // Add the right panel to the item panel
-//            itemPanel.add(rightPanel, BorderLayout.EAST);
-            
-            // Quantity Panel
-//          JPanel quantityPanel = new JPanel(new BorderLayout(5, 0));
-//            JPanel itemControlPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 0));
-//            itemControlPanel.setBorder(new EmptyBorder(25, 10, 25, 10));
-////          itemControlPanel.setBorder(BorderFactory.createLineBorder(Color.black));
-////          itemControlPanel.setBackground(Color.WHITE);
-////          itemControlPanel
-//            
-//            itemControlPanel.add(resetButton);
-//            itemControlPanel.add(decreaseButton);
-//            itemControlPanel.add(quantityLabel);
-//            itemControlPanel.add(increaseButton);
-//            itemControlPanel.add(deleteItemButton);
-            
-            
+            //Quantity Panel - holds Plus button, Quantity Label and Minus button
             JPanel quantityPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
             quantityPanel.setBorder(BorderFactory.createLineBorder(Color.black));
             quantityPanel.add(decreaseButton);
             quantityPanel.add(quantityLabel);
             quantityPanel.add(increaseButton);
             
+            //Control Panel Holds Quantity Panel, reset button and delete button
             JPanel controlPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 25, 0));
             controlPanel.setBorder(new EmptyBorder(25, 0, 25, 0));
             controlPanel.add(quantityPanel);
-            
             controlPanel.add(resetButton);
-            
             controlPanel.add(deleteItemButton);
             
-//            itemPanel.add(itemControlPanel, BorderLayout.EAST);
+            
             itemPanel.add(controlPanel, BorderLayout.EAST);
 
             itemsPanel.add(itemPanel);
@@ -431,11 +375,6 @@ public class StaffCart extends JPanel {
     	        item.setQuantity(newQuantity);
     		 	if (choice.equals("add")){
     		 		main.getController().cartUpdateInventory("add", item);
-//    		 		boolean noMore = main.getController().cartUpdateInventory("add", item);
-//    		 		if (noMore){
-//    		 			System.out.println("Yes" + button.isEnabled());
-//    		 			button.setEnabled(false);
-//    		 		}
     		 	}
     		 	else{
     		 		main.getController().cartUpdateInventory("delete", item);
@@ -453,8 +392,6 @@ public class StaffCart extends JPanel {
     }
 
     private void updateTotalLabel() {
-//        Order currentOrder = main.getController().getCurrentOrder();
-//        BigDecimal totalCost = currentOrder.calculateTotalCost();
         BigDecimal totalCost = main.getController().calculateTotalCost();
         totalLabel.setText("Total: $" + totalCost);
     }
