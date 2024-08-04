@@ -34,6 +34,7 @@ public class ManageAccounts extends JPanel {
     private JButton addAccountButton; 
     private JScrollPane scrollPane;
     private User[] users;
+    private User currentUser;
     private JButton userButton;
     private JLabel name;
     private JLabel role;
@@ -42,6 +43,7 @@ public class ManageAccounts extends JPanel {
         this.main = main;
         this.main.setTitle("Joy MiniMart - Manage Accounts");
         this.users = this.main.getController().getUsers();
+        currentUser = this.main.getController().getCurrentUser(); 
 
         this.setBackground(UIManager.getColor("OptionPane.background"));
         this.setLayout(new BorderLayout(0, 0));
@@ -67,8 +69,12 @@ public class ManageAccounts extends JPanel {
 
         // For loop to create user buttons
         for (int i = 0; i < this.users.length; i++) {
-            User currentUser = this.users[i];
-
+            User user = this.users[i];
+            
+            if (user.getUserID() == currentUser.getUserID()) {
+                continue;
+            }
+            
             // User buttons
             this.userButton = new JButton();
             this.userButton.setPreferredSize(new Dimension(0, 100));
@@ -76,7 +82,7 @@ public class ManageAccounts extends JPanel {
             this.userButton.setLayout(new BorderLayout());
 
             // User Action
-            this.userButton.setActionCommand(String.valueOf(currentUser.getUserID()));
+            this.userButton.setActionCommand(String.valueOf(user.getUserID()));
             this.userButton.putClientProperty("object", currentUser);
             this.userButton.addActionListener(new ActionListener() {
                 @Override
@@ -84,13 +90,18 @@ public class ManageAccounts extends JPanel {
                     JButton sourceBtn = (JButton) e.getSource();
                     User user = (User) sourceBtn.getClientProperty("object");
                     editAccount(user);
+                    int userId = Integer.parseInt(sourceBtn.getActionCommand());
+                    User selectedUser = findUserById(userId);
+                    if (selectedUser != null) {
+                        editAccount(selectedUser);
+                    }
                 }
             });
             
             //User Pic
             JLabel picLabel = new JLabel();
-            ImageIcon userPic = new ImageIcon(currentUser.getPicFile());
-            System.out.println("Loading image from: " + currentUser.getPicFile());
+            ImageIcon userPic = new ImageIcon(user.getPicFile());
+            System.out.println("Loading image from: " + user.getPicFile());
             Image img = userPic.getImage();
             Image newimg = img.getScaledInstance(95, 95, java.awt.Image.SCALE_SMOOTH);
             userPic = new ImageIcon(newimg);
@@ -107,7 +118,7 @@ public class ManageAccounts extends JPanel {
             leftPanel.setOpaque(false);
 
             // User Name and ID
-            this.name = new JLabel(currentUser.getName() + " (ID: " + currentUser.getUserID() + ")");
+            this.name = new JLabel(user.getName() + " (ID: " + user.getUserID() + ")");
             this.name.setHorizontalAlignment(SwingConstants.LEFT);
             this.name.setFont(new Font("Tahoma", Font.BOLD, 20));
             leftPanel.add(this.name);
@@ -118,7 +129,7 @@ public class ManageAccounts extends JPanel {
             infoPanel.add(leftPanel, BorderLayout.WEST);
 
             // User Role (on the right)
-            this.role = new JLabel("Role: " + currentUser.getRole());
+            this.role = new JLabel("Role: " + user.getRole());
             this.role.setHorizontalAlignment(SwingConstants.RIGHT);
             this.role.setFont(new Font("Tahoma", Font.BOLD, 20));
             infoPanel.add(this.role, BorderLayout.EAST);
@@ -174,7 +185,16 @@ public class ManageAccounts extends JPanel {
         this.add(bottomPanel, BorderLayout.SOUTH);
     }
 
-    private void back() {
+    private User findUserById(int userId) {
+    	for (int i = 0; i < users.length; i++) {
+    	    if (users[i].getUserID() == userId) {
+    	        return users[i];
+    	    }
+    	}
+    	return null;
+	}
+
+	private void back() {
         this.main.showManagerHome();
     }
 

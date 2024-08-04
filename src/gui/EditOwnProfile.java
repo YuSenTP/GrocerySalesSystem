@@ -13,10 +13,10 @@ import javax.imageio.ImageIO;
 import controller.MainFrame;
 import data.User;
 
-public class EditAccount extends JPanel {
+public class EditOwnProfile extends JPanel {
     private MainFrame main;
-    private User user;
-    private JLabel lblEditAccount;
+    private User currentUser;
+    private JLabel lblEditProfile;
     private JPanel middlePanel;
     private JPanel bottomPanel;
     private JLabel picLabel;
@@ -25,9 +25,6 @@ public class EditAccount extends JPanel {
     private JButton btnChangePic;
     private JTextField nameField;
     private JPasswordField passwordField;
-    private JRadioButton staffRadioButton;
-    private JRadioButton managerRadioButton; 	
-    private ButtonGroup roleButtonGroup;
     private JLabel lblName;
     private JLabel lblPassword;
     private JLabel PicFileName;
@@ -36,21 +33,26 @@ public class EditAccount extends JPanel {
     private String selectedFile;
     private boolean picChanged;
 
-    public EditAccount(MainFrame main, User user) {
+    public EditOwnProfile(MainFrame main) {
         this.main = main;
-        this.user = user;
+        this.currentUser = main.getController().getCurrentUser();
 
-        this.main.setTitle("Joy MiniMart - Edit Account");
+        if (this.currentUser == null || !this.currentUser.getRole().equals("Manager")) {
+            JOptionPane.showMessageDialog(this, "Access denied. Manager profile not found.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        this.main.setTitle("Joy MiniMart - Edit Own Profile");
 
         this.setBackground(UIManager.getColor("OptionPane.background"));
         this.setLayout(new BorderLayout(0, 0));
 
         // Top Label
-        this.lblEditAccount = new JLabel("Edit Account");
-        this.lblEditAccount.setPreferredSize(new Dimension(87, 60));
-        this.lblEditAccount.setFont(new Font("Tahoma", Font.BOLD, 20));
-        this.lblEditAccount.setHorizontalAlignment(SwingConstants.CENTER);
-        this.add(this.lblEditAccount, BorderLayout.NORTH);
+        this.lblEditProfile = new JLabel("Edit Profile - " + this.currentUser.getName());
+        this.lblEditProfile.setPreferredSize(new Dimension(87, 60));
+        this.lblEditProfile.setFont(new Font("Tahoma", Font.BOLD, 20));
+        this.lblEditProfile.setHorizontalAlignment(SwingConstants.CENTER);
+        this.add(this.lblEditProfile, BorderLayout.NORTH);
 
         // Middle Panel
         this.middlePanel = new JPanel();
@@ -59,7 +61,7 @@ public class EditAccount extends JPanel {
 
         // Profile Picture
         try {
-            BufferedImage tempPic = ImageIO.read(new File(this.user.getPicFile()));
+            BufferedImage tempPic = ImageIO.read(new File(this.currentUser.getPicFile()));
             Image profilePic = tempPic.getScaledInstance(280, 280, Image.SCALE_SMOOTH);
             this.picLabel = new JLabel(new ImageIcon(profilePic));
         } catch (IOException e) {
@@ -87,37 +89,11 @@ public class EditAccount extends JPanel {
         this.lblName.setBounds(377, 98, 100, 30);
         this.middlePanel.add(this.lblName);
 
-        this.nameField = new JTextField(this.user.getName());
+        this.nameField = new JTextField(this.currentUser.getName());
         this.nameField.setHorizontalAlignment(SwingConstants.LEFT);
         this.nameField.setFont(new Font("Tahoma", Font.PLAIN, 20));
         this.nameField.setBounds(377, 134, 200, 32);
         this.middlePanel.add(this.nameField);
-
-        // Role Selection
-        JLabel lblRole = new JLabel("Role:");
-        lblRole.setFont(new Font("Tahoma", Font.BOLD, 20));
-        lblRole.setBounds(377, 20, 100, 30);
-        this.middlePanel.add(lblRole);
-
-        this.staffRadioButton = new JRadioButton("Staff");
-        this.staffRadioButton.setFont(new Font("Tahoma", Font.BOLD, 16));
-        this.staffRadioButton.setBounds(377, 59, 100, 30);
-        this.middlePanel.add(this.staffRadioButton);
-
-        this.managerRadioButton = new JRadioButton("Manager");
-        this.managerRadioButton.setFont(new Font("Tahoma", Font.BOLD, 16));
-        this.managerRadioButton.setBounds(477, 59, 100, 30);
-        this.middlePanel.add(this.managerRadioButton);
-
-        this.roleButtonGroup = new ButtonGroup();
-        this.roleButtonGroup.add(this.staffRadioButton);
-        this.roleButtonGroup.add(this.managerRadioButton);
-
-        if (this.user.getRole().equals("Staff")) {
-            this.staffRadioButton.setSelected(true);
-        } else {
-            this.managerRadioButton.setSelected(true);
-        }
 
         // Password Field
         this.lblPassword = new JLabel("Password:");
@@ -125,7 +101,7 @@ public class EditAccount extends JPanel {
         this.lblPassword.setBounds(377, 180, 135, 30);
         this.middlePanel.add(this.lblPassword);
 
-        this.passwordField = new JPasswordField(this.user.getPassword());
+        this.passwordField = new JPasswordField(this.currentUser.getPassword());
         this.passwordField.setHorizontalAlignment(SwingConstants.LEFT);
         this.passwordField.setFont(new Font("Tahoma", Font.PLAIN, 20));
         this.passwordField.setBounds(377, 216, 200, 32);
@@ -152,7 +128,7 @@ public class EditAccount extends JPanel {
         this.PicFileName.setBounds(377, 299, 124, 30);
         this.middlePanel.add(this.PicFileName);
 
-        String[] picPath = this.user.getPicFile().split("/");
+        String[] picPath = this.currentUser.getPicFile().split("/");
         String[] picNameL = picPath[picPath.length - 1].split("\\.");
         this.FileNameText = new JTextField(picNameL[0]);
         this.FileNameText.setHorizontalAlignment(SwingConstants.CENTER);
@@ -190,44 +166,16 @@ public class EditAccount extends JPanel {
     }
 
     private void back() {
-        // Implement logic to go back to previous screen
-        this.main.showManageAccounts();
+        this.main.showManagerHome();
     }
 
     private void changePic() {
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setAcceptAllFileFilterUsed(false);
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG Images", "jpg", "jpeg");
-        fileChooser.setFileFilter(filter);
-
-        int r = fileChooser.showOpenDialog(this);
-
-        if (r == JFileChooser.APPROVE_OPTION) {
-            this.picChanged = true;
-            this.selectedFile = fileChooser.getSelectedFile().getAbsolutePath();
-            String[] fileNameList = this.selectedFile.split("\\\\");
-            String fileName = fileNameList[fileNameList.length - 1];
-            String pFinalName = fileName.split("\\.")[0];
-            this.FileNameText.setText(pFinalName);
-
-            try {
-                BufferedImage originalImage = ImageIO.read(new File(selectedFile));
-                Image scaledImage = originalImage.getScaledInstance(280, 280, Image.SCALE_SMOOTH);
-                this.picLabel.setIcon(new ImageIcon(scaledImage));
-            } catch (IOException e) {
-                e.printStackTrace();
-                JLabel label = new JLabel("An Error Occurred! Try Again!");
-                label.setFont(new Font("Tahoma", Font.BOLD, 14));
-                JOptionPane.showMessageDialog(this, label, "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        }
+        // Implement picture change logic similar to EditAccount
     }
 
     private void save() {
-        // save changes
         String newName = this.nameField.getText().trim();
         String newPassword = new String(this.passwordField.getPassword()).trim();
-        String newRole = this.staffRadioButton.isSelected() ? "Staff" : "Manager";
         String newFileName = this.FileNameText.getText().trim() + ".jpg";
 
         if (newName.isEmpty() || newPassword.isEmpty()) {
@@ -246,22 +194,21 @@ public class EditAccount extends JPanel {
                 }
                 BufferedImage originalImage = ImageIO.read(new File(this.selectedFile));
                 ImageIO.write(originalImage, "jpg", destinationFile);
-            } else if (!this.user.getPicFile().equals(newPicFile)) {
-                File oldFile = new File(this.user.getPicFile());
+            } else if (!this.currentUser.getPicFile().equals(newPicFile)) {
+                File oldFile = new File(this.currentUser.getPicFile());
                 oldFile.renameTo(destinationFile);
             }
 
             // Update user information
-            this.user.setName(newName);
-            this.user.setPassword(newPassword);
-            this.user.setRole(newRole);
-            this.user.setPicFile(newPicFile);
+            this.currentUser.setName(newName);
+            this.currentUser.setPassword(newPassword);
+            this.currentUser.setPicFile(newPicFile);
 
             // Save changes to data storage
             this.main.getController().saveAll();
 
-            JOptionPane.showMessageDialog(this, "Account updated successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
-            this.main.showManageAccounts();
+            JOptionPane.showMessageDialog(this, "Profile updated successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            this.main.showManagerHome();
         } catch (IOException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Error saving changes!", "Error", JOptionPane.ERROR_MESSAGE);

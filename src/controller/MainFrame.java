@@ -22,6 +22,7 @@ import gui.CreateGroceryItem;
 import gui.EditAccount;
 import gui.EditCategory;
 import gui.EditGroceryItem;
+import gui.EditOwnProfile;
 import gui.LoginScreen;
 import gui.ManageAccounts;
 import gui.ManagerHome;
@@ -197,8 +198,14 @@ public class MainFrame extends JFrame {
 	}
 	
 	public void showEditAccount(User user){
-		EditAccount p15 = new EditAccount(this, user);
-		getContentPane().add(p15, "staffOrderDetails");
+		EditAccount p16 = new EditAccount(this, user);
+		getContentPane().add(p16, "staffOrderDetails");
+		this.card.show(this.getContentPane(), "staffOrderDetails");
+	}
+	
+	public void showEditOwnProfile(){
+		EditOwnProfile p17 = new EditOwnProfile(this);
+		getContentPane().add(p17, "staffOrderDetails");
 		this.card.show(this.getContentPane(), "staffOrderDetails");
 	}
 	

@@ -115,6 +115,7 @@ public class ManagerHome extends JPanel{
 			System.out.println("Edit Category");
 		}
 		else if (name == "Edit Profile"){
+			this.main.showEditOwnProfile();
 			System.out.println("Edit Profile");
 		}
 		else if (name == "Manage Accounts"){

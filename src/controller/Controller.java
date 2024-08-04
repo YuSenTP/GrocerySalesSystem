@@ -297,7 +297,8 @@ public class Controller {
 	
 	public void setCurrentUserName(String username) {
 	    User[] users = getUsers();
-	    for (User user : users) {
+	    for (int i = 0; i < users.length; i++) {
+	        User user = users[i];
 	        if (user.getName().equals(username)) {
 	            this.ds.setCurrentUser(user);
 	            System.out.println("Current user set: " + user.getName() + ", Role: " + user.getRole());

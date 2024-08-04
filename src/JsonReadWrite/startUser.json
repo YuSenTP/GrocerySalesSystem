@@ -19,4 +19,11 @@
   "role" : "Staff",  
   "picFile" : "./img/sammy.jpg"
   
-} ]
+}, {
+  "userID" : 4,
+  "name" : "Jordan",
+  "password" : "Nigga",
+  "role" : "Manager",  
+  "picFile" : "./img/jordan.jpg"
+  
+}]
