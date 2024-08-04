@@ -50,10 +50,6 @@ public class EditCategory extends JPanel{
         this.main.setTitle("Joy MiniMart - Edit Category");
         this.category = this.main.getController().getCategory();
         this.category = Arrays.copyOfRange(this.category, 1, this.category.length - 1);
-//        
-//        for(String cat: category){
-//        	System.out.println(cat);
-//        }
 
         this.setBackground(UIManager.getColor("OptionPane.background"));
         this.setLayout(new BorderLayout(0, 0));

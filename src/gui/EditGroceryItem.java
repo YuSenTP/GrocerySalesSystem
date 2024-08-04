@@ -22,7 +22,6 @@ import java.awt.Font;
 import java.awt.Image;
 
 import javax.imageio.ImageIO;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -35,7 +34,6 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.Arrays;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
@@ -83,7 +81,6 @@ public class EditGroceryItem extends JPanel{
 		this.main = main;
 		this.item = item;
 		this.category = this.main.getController().getCategory();
-//		System.out.println(this.item.getName());
 		
 		this.main.setTitle("Joy MiniMart - Edit Item");
 		
@@ -98,9 +95,10 @@ public class EditGroceryItem extends JPanel{
 		this.lblEditItem.setHorizontalAlignment(SwingConstants.CENTER);
 		this.add(this.lblEditItem, BorderLayout.NORTH);
 		
+		//Middle Panel
 		this.middlePanel = new JPanel();
-		add(this.middlePanel, BorderLayout.CENTER);
 		this.middlePanel.setLayout(null);
+		this.add(this.middlePanel, BorderLayout.CENTER);
 		
 		
 		//Item Pic
@@ -108,7 +106,6 @@ public class EditGroceryItem extends JPanel{
 			BufferedImage tempPic = ImageIO.read(new File(this.item.getPicFile()));
 			this.itemPic = tempPic.getScaledInstance(300, 300, java.awt.Image.SCALE_SMOOTH);
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		this.picLabel = new JLabel(new ImageIcon(this.itemPic));
@@ -116,6 +113,7 @@ public class EditGroceryItem extends JPanel{
 		this.picLabel.setBounds(0, 0, 300, 300);
 		this.middlePanel.add(this.picLabel);
 		
+		//Change Picture Button
 		this.btnChangePic = new JButton("Change Picture");
 		this.btnChangePic.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -126,6 +124,7 @@ public class EditGroceryItem extends JPanel{
 		this.btnChangePic.setBounds(134, 333, 166, 36);
 		this.middlePanel.add(this.btnChangePic);
 		
+		//Name TextField
 		this.itemName = new JTextField(this.item.getName());
 		this.itemName.addMouseListener(new MouseAdapter() {
 			@Override
@@ -149,11 +148,13 @@ public class EditGroceryItem extends JPanel{
 		this.itemName.setColumns(10);
 		this.middlePanel.add(this.itemName);
 		
+		//Price Label
 		this.lblPrice = new JLabel("Price:");
 		this.lblPrice.setFont(new Font("Tahoma", Font.BOLD, 20));
 		this.lblPrice.setBounds(360, 106, 65, 26);
 		this.middlePanel.add(this.lblPrice);
 		
+		//Price TextField
 		this.priceText = new JTextField("$" + this.item.getPrice().toString());
 		this.priceText.addMouseListener(new MouseAdapter() {
 			@Override
@@ -177,11 +178,13 @@ public class EditGroceryItem extends JPanel{
 		this.priceText.setColumns(10);
 		this.middlePanel.add(this.priceText);
 		
+		//Quantity Label
 		this.lblQuantity = new JLabel("Quantity:");
 		this.lblQuantity.setFont(new Font("Tahoma", Font.BOLD, 20));
 		this.lblQuantity.setBounds(325, 163, 100, 26);
 		this.middlePanel.add(this.lblQuantity);
 		
+		//Quantity TextField
 		this.quantityText = new JTextField(Integer.toString(this.item.getQuantity()));
 		this.quantityText.addMouseListener(new MouseAdapter() {
 			@Override
@@ -205,12 +208,14 @@ public class EditGroceryItem extends JPanel{
 		this.quantityText.setBounds(437, 161, 156, 32);
 		this.middlePanel.add(this.quantityText);
 		
+		//Add square pic Label
 		this.lblonlyAddSquare = new JLabel("*Only Add Square Picture");
 		this.lblonlyAddSquare.setForeground(new Color(255, 0, 51));
 		this.lblonlyAddSquare.setFont(new Font("Tahoma", Font.BOLD, 12));
 		this.lblonlyAddSquare.setBounds(135, 313, 165, 16);
 		this.middlePanel.add(this.lblonlyAddSquare);
 		
+		//Delete Item Button
 		this.btnDeleteItem = new JButton("Delete Item");
 		this.btnDeleteItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -221,7 +226,8 @@ public class EditGroceryItem extends JPanel{
 		this.btnDeleteItem.setFont(new Font("Tahoma", Font.BOLD, 15));
 		this.btnDeleteItem.setBounds(598, 332, 128, 39);
 		this.middlePanel.add(this.btnDeleteItem);
-				
+		
+		//OnSale CheckBox
 		this.chckbxOnSale = new JCheckBox("On Sale");
 		this.chckbxOnSale.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -237,12 +243,14 @@ public class EditGroceryItem extends JPanel{
 		this.chckbxOnSale.setBounds(325, 220, 100, 25);
 		this.middlePanel.add(this.chckbxOnSale);
 		
+		//Percentage Off Spinner
 		this.spinner = new JSpinner();
 		this.spinner.setModel(new SpinnerNumberModel(1, 1, 100, 1)); // set limit for spinner min 1 max 100
 		this.spinner.setFont(new Font("Tahoma", Font.BOLD, 15));
 		this.spinner.setBounds(437, 221, 50, 26);
 		this.middlePanel.add(this.spinner);
 		
+		//Enable or disable spinner based on onSale
 		if (this.item.getOnSale()){
 			this.chckbxOnSale.setSelected(true);
 			this.spinner.setEnabled(true);
@@ -253,16 +261,19 @@ public class EditGroceryItem extends JPanel{
 			this.spinner.setEnabled(false);
 		}
 		
+		//Percentage Off Label
 		this.lblOff = new JLabel("% Off");
 		this.lblOff.setFont(new Font("Tahoma", Font.BOLD, 16));
 		this.lblOff.setBounds(487, 220, 56, 26);
 		this.middlePanel.add(this.lblOff);
 		
+		//Category Label
 		this.lblCategory = new JLabel("Category:");
 		this.lblCategory.setFont(new Font("Tahoma", Font.BOLD, 20));
 		this.lblCategory.setBounds(325, 271, 100, 26);
 		this.middlePanel.add(this.lblCategory);
 		
+		//Category ComboBox
 		// Array Slicing to exclude "All"
 		this.comboBox = new JComboBox(Arrays.copyOfRange(this.category, 1, this.category.length));
 		this.comboBox.addActionListener(new ActionListener() {
@@ -302,14 +313,16 @@ public class EditGroceryItem extends JPanel{
 		this.comboBox.setSelectedItem(this.item.getCategory());
 		this.middlePanel.add(this.comboBox);
 		
+		//FileName Label
 		this.PicFileName = new JLabel("FileName:");
 		this.PicFileName.setFont(new Font("Tahoma", Font.BOLD, 20));
 		this.PicFileName.setBounds(325, 327, 111, 26);
 		this.middlePanel.add(this.PicFileName);
 		
+		//FileName TextField
 		String[] picPath = this.item.getPicFile().split("/");
 		String[] picNameL = picPath[picPath.length-1].split("\\.");
-		System.out.println(picNameL[0]);
+//		System.out.println(picNameL[0]);
 		this.FileNameText = new JTextField(picNameL[0]);
 		this.FileNameText.addMouseListener(new MouseAdapter() {
 			@Override
@@ -333,11 +346,13 @@ public class EditGroceryItem extends JPanel{
 		this.FileNameText.setBounds(437, 325, 156, 32);
 		this.middlePanel.add(this.FileNameText);
 		
+		//Bottom Panel
 		this.bottomPanel = new JPanel();
 		this.bottomPanel.setBorder(new EmptyBorder(10, 20, 10, 20));
 		this.bottomPanel.setBackground(Color.WHITE);
 		this.bottomPanel.setLayout(new BorderLayout(0, 0));
 		
+		//Back Button
 		this.backButton = new JButton("Back");
 		this.backButton.setFont(new Font("Tahoma", Font.BOLD, 15));
         this.backButton.setPreferredSize(new Dimension(100, 40));
@@ -348,6 +363,7 @@ public class EditGroceryItem extends JPanel{
 		});
 		this.bottomPanel.add(this.backButton, BorderLayout.WEST);
 		
+		//Save Button
 		this.saveButton = new JButton("Save");
 		this.saveButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -362,6 +378,7 @@ public class EditGroceryItem extends JPanel{
 	}
 	
 	private void back(){
+		//Checks if name parameters have changed, if yes asked user if they want to save
 		
 		//Name
 		boolean nameChanged = !(this.itemName.getText().trim().equals(this.item.getName()));
@@ -608,9 +625,5 @@ public class EditGroceryItem extends JPanel{
 			JOptionPane.showMessageDialog(this, label, "Delete Item", JOptionPane.INFORMATION_MESSAGE);
 			this.main.showManagerMenu();
 		}
-
-		
-		
-
 	}
 }

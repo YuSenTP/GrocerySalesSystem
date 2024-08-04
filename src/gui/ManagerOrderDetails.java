@@ -75,6 +75,7 @@ public class ManagerOrderDetails extends JPanel {
         });
         this.bottomPanel.add(this.backButton, BorderLayout.WEST);
         
+        // Total Label
         this.totalCostLabel = new JLabel("Total Cost: $" + order.getTotalCost());
         this.totalCostLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
         this.totalCostLabel.setBorder(new EmptyBorder(0, 0, 0, 20)); //t l b r
@@ -121,16 +122,19 @@ public class ManagerOrderDetails extends JPanel {
             priceheader.setFont(new Font("Tahoma", Font.BOLD, 14));
             pricePanel.add(priceheader);
             
+            //Price Label
             JLabel priceLabel = new JLabel(" $" + currentItem.getPrice());
             priceLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
             // If On Sale
             if (currentItem.getOnSale()){
+            	//Sets regular price to gray and strike through
             	Map<TextAttribute, Object> attributes = (Map<TextAttribute, Object>) priceLabel.getFont().getAttributes(); // HashMap Something like a dictonary in python where data are stored as key value pair
             	attributes.put(TextAttribute.STRIKETHROUGH, TextAttribute.STRIKETHROUGH_ON); // Add new attribute to HashMap
             	priceLabel.setFont(new Font(attributes));
             	priceLabel.setForeground(Color.GRAY);
             	pricePanel.add(priceLabel);
-
+            	
+            	//OnSale Price Label
             	JLabel saleLabel = new JLabel(" $" + currentItem.getOnSalePrice());
             	saleLabel.setHorizontalAlignment(SwingConstants.CENTER);
             	saleLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -143,6 +147,7 @@ public class ManagerOrderDetails extends JPanel {
             
             infoPanel.add(pricePanel);
             
+            //Quantity Label
             JLabel quantityLabel = new JLabel("Quantity: " + currentItem.getQuantity());
             quantityLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
             infoPanel.add(quantityLabel);
