@@ -21,6 +21,7 @@ import javax.swing.border.EmptyBorder;
 import controller.MainFrame;
 import data.GroceryItem;
 import data.Order;
+import data.User;
 
 import javax.swing.JButton;
 import javax.swing.JTextPane;
@@ -36,7 +37,7 @@ public class StaffSales extends JPanel{
 	private JPanel bottomPanel;
 	private JButton backButton;
 	private JScrollPane scrollPane;
-	private Order[] orders;
+//	private Order[] orders;
 	private Order currentOrder;
 //	private JPanel orderPanel;
 	private JButton orderButton;
@@ -44,11 +45,17 @@ public class StaffSales extends JPanel{
 	private JLabel orderTotal;
 	private JLabel totalSales;
 	private JPanel gridPanel;
+	private User currentUser;
+	private Order[] staffOrders;
 	
 	public StaffSales(MainFrame main){
 		this.main = main;
 		this.main.setTitle("Joy MiniMart - Staff Sales History");
-		this.orders = this.main.getController().getOrders();
+//		this.orders = this.main.getController().getOrders();
+		this.staffOrders = main.getController().getCurrentStaffOrders();
+	    User currentUser = main.getController().getCurrentUser();
+	    System.out.println("Current user in StaffSales: " + (currentUser != null ? currentUser.getName() : "null"));
+
 		
 		
 		this.setBackground(UIManager.getColor("OptionPane.background"));
@@ -74,8 +81,8 @@ public class StaffSales extends JPanel{
 //        System.out.println(this.orders.size());
         
         //for loop to create order buttons
-        for (int i = 0; i < this.orders.length; i++) {
-        	this.currentOrder = this.orders[i];
+        for (int i = 0; i < this.staffOrders.length; i++) {
+        	this.currentOrder = this.staffOrders[i];
         	
 //        	this.orderPanel = new JPanel(new BorderLayout());
         	//Button
@@ -153,7 +160,7 @@ public class StaffSales extends JPanel{
     	});
         this.bottomPanel.add(this.backButton, BorderLayout.WEST);
         
-        this.totalSales = new JLabel("Total Sales: $" + this.main.getController().getTotalOrderCost());
+        this.totalSales = new JLabel("Total Sales: $" + this.main.getController().getCurrentStaffTotalSales());
         this.totalSales.setHorizontalAlignment(SwingConstants.CENTER);
         this.totalSales.setFont(new Font("Tahoma", Font.BOLD, 18));
         this.totalSales.setBorder(new EmptyBorder(0, 0, 0, 20)); //t l b r

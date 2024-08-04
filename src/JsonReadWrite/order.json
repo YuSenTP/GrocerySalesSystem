@@ -1,94 +1,321 @@
 [ {
   "orderID" : 1,
-  "totalCost" : 5.23,
+  "totalCost" : 10.96,
   "groceryItems" : [ {
-    "name" : "Milk",
-    "price" : 2.99,
-    "quantity" : 1,
-    "picFile" : "./img/milk1.jpg",
-    "onSale" : true,
-    "percentOff" : 0.3,
-    "onSalePrice" : 2.09,
-    "category" : "Dairy"
-  }, {
-    "name" : "Bread",
-    "price" : 1.99,
-    "quantity" : 1,
-    "picFile" : "./img/bread2.jpg",
-    "onSale" : false,
-    "percentOff" : 0.0,
-    "onSalePrice" : 0,
-    "category" : "Others"
-  }, {
-    "name" : "Tomato",
-    "price" : 1.15,
-    "quantity" : 1,
-    "picFile" : "./img/tomato.jpg",
-    "onSale" : false,
-    "percentOff" : 0.0,
-    "onSalePrice" : 0,
-    "category" : "Vegetables"
-  } ]
-}, {
-  "orderID" : 2,
-  "totalCost" : 5.23,
-  "groceryItems" : [ {
-    "name" : "Milk",
-    "price" : 2.99,
-    "quantity" : 1,
-    "picFile" : "./img/milk1.jpg",
-    "onSale" : true,
-    "percentOff" : 0.3,
-    "onSalePrice" : 2.09,
-    "category" : "Dairy"
-  }, {
-    "name" : "Bread",
-    "price" : 1.99,
-    "quantity" : 1,
-    "picFile" : "./img/bread2.jpg",
-    "onSale" : false,
-    "percentOff" : 0.0,
-    "onSalePrice" : 0,
-    "category" : "Others"
-  }, {
-    "name" : "Tomato",
-    "price" : 1.15,
-    "quantity" : 1,
-    "picFile" : "./img/tomato.jpg",
-    "onSale" : false,
-    "percentOff" : 0.0,
-    "onSalePrice" : 0,
-    "category" : "Vegetables"
-  } ]
-}, {
-  "orderID" : 3,
-  "totalCost" : 10.56,
-  "groceryItems" : [ {
-    "name" : "Bread",
-    "price" : 1.99,
-    "quantity" : 1,
-    "picFile" : "./img/bread2.jpg",
-    "onSale" : false,
-    "percentOff" : 0.0,
-    "onSalePrice" : 0,
-    "category" : "Others"
-  }, {
     "name" : "Milk",
     "price" : 2.99,
     "quantity" : 3,
     "picFile" : "./img/milk1.jpg",
-    "onSale" : true,
-    "percentOff" : 0.3,
-    "onSalePrice" : 2.09,
-    "category" : "Dairy"
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "onSalePrice" : null,
+    "category" : null
   }, {
+    "name" : "Bread",
+    "price" : 1.99,
+    "quantity" : 1,
+    "picFile" : "./img/bread2.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "onSalePrice" : null,
+    "category" : null
+  } ],
+  "staffName" : "Jerry"
+}, {
+  "orderID" : 2,
+  "totalCost" : 3.98,
+  "groceryItems" : [ {
+    "name" : "Bread",
+    "price" : 1.99,
+    "quantity" : 2,
+    "picFile" : "./img/bread2.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "onSalePrice" : null,
+    "category" : null
+  } ],
+  "staffName" : "Jenny"
+}, {
+  "orderID" : 3,
+  "totalCost" : 4.98,
+  "groceryItems" : [ {
+    "name" : "Bread",
+    "price" : 1.99,
+    "quantity" : 1,
+    "picFile" : "./img/bread2.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "onSalePrice" : null,
+    "category" : null
+  }, {
+    "name" : "Milk",
+    "price" : 2.99,
+    "quantity" : 1,
+    "picFile" : "./img/milk1.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "onSalePrice" : null,
+    "category" : null
+  } ],
+  "staffName" : "Jerry"
+}, {
+  "orderID" : 4,
+  "totalCost" : 1.15,
+  "groceryItems" : [ {
+    "name" : "Tomato",
+    "price" : 1.15,
+    "quantity" : 1,
+    "picFile" : "./img/tomato.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "onSalePrice" : null,
+    "category" : null
+  } ],
+  "staffName" : "Jenny"
+}, {
+  "orderID" : 5,
+  "totalCost" : 9.13,
+  "groceryItems" : [ {
+    "name" : "Milk",
+    "price" : 2.99,
+    "quantity" : 1,
+    "picFile" : "./img/milk1.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "onSalePrice" : null,
+    "category" : null
+  }, {
+    "name" : "Bread",
+    "price" : 1.99,
+    "quantity" : 1,
+    "picFile" : "./img/bread2.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "onSalePrice" : null,
+    "category" : null
+  }, {
+    "name" : "Tomato",
+    "price" : 1.15,
+    "quantity" : 1,
+    "picFile" : "./img/tomato.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "onSalePrice" : null,
+    "category" : null
+  }, {
+    "name" : "Chicken Breast",
+    "price" : 3.00,
+    "quantity" : 1,
+    "picFile" : "./img/bonelessChickenBreast.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "onSalePrice" : null,
+    "category" : null
+  } ],
+  "staffName" : "Jerry"
+}, {
+  "orderID" : 6,
+  "totalCost" : 14.73,
+  "groceryItems" : [ {
+    "name" : "Bread",
+    "price" : 1.99,
+    "quantity" : 1,
+    "picFile" : "./img/bread2.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "onSalePrice" : null,
+    "category" : null
+  }, {
+    "name" : "Milk",
+    "price" : 2.99,
+    "quantity" : 1,
+    "picFile" : "./img/milk1.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "onSalePrice" : null,
+    "category" : null
+  }, {
+    "name" : "Lettuce",
+    "price" : 2.10,
+    "quantity" : 1,
+    "picFile" : "./img/lettuce.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "onSalePrice" : null,
+    "category" : null
+  }, {
+    "name" : "Watermelon",
+    "price" : 3.50,
+    "quantity" : 1,
+    "picFile" : "./img/watermelon1.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "onSalePrice" : null,
+    "category" : null
+  }, {
+    "name" : "Tomato",
+    "price" : 1.15,
+    "quantity" : 1,
+    "picFile" : "./img/tomato.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "onSalePrice" : null,
+    "category" : null
+  }, {
+    "name" : "Chicken Breast",
+    "price" : 3.00,
+    "quantity" : 1,
+    "picFile" : "./img/bonelessChickenBreast.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "onSalePrice" : null,
+    "category" : null
+  } ],
+  "staffName" : "Jenny"
+}, {
+  "orderID" : 7,
+  "totalCost" : 7.28,
+  "groceryItems" : [ {
     "name" : "Tomato",
     "price" : 1.15,
     "quantity" : 2,
     "picFile" : "./img/tomato.jpg",
     "onSale" : false,
     "percentOff" : 0.0,
-    "onSalePrice" : 0,
+    "onSalePrice" : null,
+    "category" : null
+  }, {
+    "name" : "Bread",
+    "price" : 1.99,
+    "quantity" : 1,
+    "picFile" : "./img/bread2.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "onSalePrice" : null,
+    "category" : null
+  }, {
+    "name" : "Milk",
+    "price" : 2.99,
+    "quantity" : 1,
+    "picFile" : "./img/milk1.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "onSalePrice" : null,
+    "category" : null
+  } ],
+  "staffName" : "Jerry"
+}, {
+  "orderID" : 8,
+  "totalCost" : 20.71,
+  "groceryItems" : [ {
+    "name" : "Milk",
+    "price" : 2.99,
+    "quantity" : 3,
+    "picFile" : "./img/milk1.jpg",
+    "onSale" : true,
+    "percentOff" : 0.3,
+    "onSalePrice" : null,
+    "category" : "Dairy"
+  }, {
+    "name" : "Bread",
+    "price" : 1.99,
+    "quantity" : 1,
+    "picFile" : "./img/bread2.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "onSalePrice" : null,
+    "category" : "Others"
+  }, {
+    "name" : "Tomato",
+    "price" : 1.15,
+    "quantity" : 1,
+    "picFile" : "./img/tomato.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "onSalePrice" : null,
     "category" : "Vegetables"
-  } ]
+  }, {
+    "name" : "Chicken Breast",
+    "price" : 3.00,
+    "quantity" : 1,
+    "picFile" : "./img/bonelessChickenBreast.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "onSalePrice" : null,
+    "category" : "Meat"
+  }, {
+    "name" : "Watermelon",
+    "price" : 3.50,
+    "quantity" : 1,
+    "picFile" : "./img/watermelon1.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "onSalePrice" : null,
+    "category" : "Fruits"
+  }, {
+    "name" : "Lettuce",
+    "price" : 2.10,
+    "quantity" : 1,
+    "picFile" : "./img/lettuce.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "onSalePrice" : null,
+    "category" : "Vegetables"
+  } ],
+  "staffName" : "Jenny"
+}, {
+  "orderID" : 9,
+  "totalCost" : 7.65,
+  "groceryItems" : [ {
+    "name" : "Chicken Breast",
+    "price" : 3.00,
+    "quantity" : 1,
+    "picFile" : "./img/bonelessChickenBreast.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "onSalePrice" : null,
+    "category" : "Meat"
+  }, {
+    "name" : "Watermelon",
+    "price" : 3.50,
+    "quantity" : 1,
+    "picFile" : "./img/watermelon1.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "onSalePrice" : null,
+    "category" : "Fruits"
+  }, {
+    "name" : "Tomato",
+    "price" : 1.15,
+    "quantity" : 1,
+    "picFile" : "./img/tomato.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "onSalePrice" : null,
+    "category" : "Vegetables"
+  } ],
+  "staffName" : "Jerry"
+}, {
+  "orderID" : 10,
+  "totalCost" : 4.99,
+  "groceryItems" : [ {
+    "name" : "Bread",
+    "price" : 1.99,
+    "quantity" : 1,
+    "picFile" : "./img/bread2.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "onSalePrice" : null,
+    "category" : "Others"
+  }, {
+    "name" : "Chicken Breast",
+    "price" : 3.00,
+    "quantity" : 1,
+    "picFile" : "./img/bonelessChickenBreast.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "onSalePrice" : null,
+    "category" : "Meat"
+  } ],
+  "staffName" : "Jenny"
 } ]

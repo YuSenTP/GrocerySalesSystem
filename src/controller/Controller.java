@@ -129,6 +129,23 @@ public class Controller {
 		}
 	}
 	
+	public BigDecimal getCurrentStaffTotalSales() {
+	    User currentUser = this.getCurrentUser();
+	    if (currentUser == null || !currentUser.getRole().equals("Staff")) {
+	        return BigDecimal.ZERO;
+	    }
+
+	    Order[] staffOrders = this.getCurrentStaffOrders();
+	    BigDecimal totalSales = BigDecimal.ZERO;
+
+	    for (int i = 0; i < staffOrders.length; i++) {
+	        Order order = staffOrders[i];
+	        totalSales = totalSales.add(order.getTotalCost());
+	    }
+
+	    return totalSales;
+	}
+	
 //	public void changePicPath(String path, GroceryItem item){
 ////		int index = this.ds.getInventory().indexOf(item);
 ////		this.ds.getInventory().get(index).setPicFile(path);
@@ -194,6 +211,20 @@ public class Controller {
 		
 		System.out.println("Order size: " + this.ds.getCurrentOrder().getGroceryItems().length);
 	 }
+	
+	public Order[] getCurrentStaffOrders() {
+	    User currentUser = this.getCurrentUser();
+	    System.out.println("Current user: " + (currentUser != null ? currentUser.getName() : "null"));
+	    if (currentUser != null) {
+	        System.out.println("Current user role: " + currentUser.getRole());
+	    }
+	    if (currentUser != null && currentUser.getRole().equals("Staff")) {
+	        Order[] orders = this.ds.getStaffOrders(currentUser.getName());
+	        System.out.println("Number of orders for staff: " + orders.length);
+	        return orders;
+	    }
+	    return new Order[0];
+	}
 	
 	public void cartUpdateInventory(String choice, GroceryItem item){
 		GroceryItem[] inventoryItems = this.ds.getInventory();
@@ -264,6 +295,18 @@ public class Controller {
 	    return null; //otherwise, return null
 	}
 	
+	public void setCurrentUserName(String username) {
+	    User[] users = getUsers();
+	    for (User user : users) {
+	        if (user.getName().equals(username)) {
+	            this.ds.setCurrentUser(user);
+	            System.out.println("Current user set: " + user.getName() + ", Role: " + user.getRole());
+	            return;
+	        }
+	    }
+	    System.out.println("User not found: " + username);
+	}
+	
 	public void addUser(String n, String pwd, String r, String pic, int id) {
 		User u = new User();
 		// setting info
@@ -321,6 +364,7 @@ public class Controller {
 		 Order currentOrder = this.ds.getCurrentOrder();
 	        if (currentOrder.getGroceryItems().length != 0) {
 //	            this.ds.getOrders().add(currentOrder);
+	        	currentOrder.setStaffName(this.getCurrentUser().getName());
 	        	this.ds.addOrder(currentOrder);
 	            this.ds.setCurrentOrder(new Order());
 	        }

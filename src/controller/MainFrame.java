@@ -29,6 +29,7 @@ import gui.ManagerSales;
 import gui.StaffCart;
 import gui.ManagerOrderDetails;
 import gui.StaffMenu;
+import gui.StaffOrderDetails;
 import gui.StaffSales;
 
 import java.awt.event.WindowAdapter;
@@ -185,6 +186,12 @@ public class MainFrame extends JFrame {
 		AddAccount p14 = new AddAccount(this); //P14
 		getContentPane().add(p14, "AddAccount");
 		this.card.show(this.getContentPane(), "AddAccount");
+	}
+	
+	public void showStaffOrderDetails(Order order){
+		StaffOrderDetails p15 = new StaffOrderDetails(this, order);
+		getContentPane().add(p15, "staffOrderDetails");
+		this.card.show(this.getContentPane(), "staffOrderDetails");
 	}
 	
 	public static void main(String[] args){

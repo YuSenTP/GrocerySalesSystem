@@ -21,6 +21,7 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 	
 	private Vector<GroceryItem> inventory;
 	private Vector<Order> orders;
+	private Vector<Order> staffOrders;
 	private Vector<User> users;
 //	Vector<User> storage = new Vector<User>();
 	private Order currentOrder;
@@ -68,6 +69,24 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 
 	public void createGroceryItem(GroceryItem item){
 		this.inventory.add(item);
+	}
+	
+	public Order[] getStaffOrders(String staffName) {
+	    // Initialize staffOrders if it's null
+	    if (this.staffOrders == null) {
+	        this.staffOrders = new Vector<Order>();
+	    }
+	    
+	    // Clear previous contents
+	    this.staffOrders.clear();
+	    
+	    for (int i = 0; i < this.orders.size(); i++) {
+	        Order order = this.orders.get(i);
+	        if (order.getStaffName() != null && order.getStaffName().equals(staffName)) {
+	            staffOrders.add(order);
+	        }
+	    }
+	    return staffOrders.toArray(new Order[staffOrders.size()]);
 	}
 	
 	public void editGroceryItem(GroceryItem item, String name, String price, String quantity, String picFile, boolean onSale, String percentOff, String category){
@@ -298,6 +317,11 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 	
 	public User getCurrentUser(){
 		return this.currentUser;
+	}
+	
+	
+	public void setCurrentUser(User user) {
+	    this.currentUser = user;
 	}
 
 
