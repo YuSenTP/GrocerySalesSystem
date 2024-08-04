@@ -22,6 +22,7 @@ import java.awt.Font;
 import java.awt.Image;
 
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -109,8 +110,9 @@ public class EditGroceryItem extends JPanel{
 			e1.printStackTrace();
 		}
 		this.picLabel = new JLabel(new ImageIcon(this.itemPic));
+		this.picLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		this.picLabel.setBackground(Color.WHITE);
-		this.picLabel.setBounds(0, 0, 300, 300);
+		this.picLabel.setBounds(12, 0, 300, 300);
 		this.middlePanel.add(this.picLabel);
 		
 		//Change Picture Button
@@ -121,7 +123,7 @@ public class EditGroceryItem extends JPanel{
 			}
 		});
 		this.btnChangePic.setFont(new Font("Tahoma", Font.BOLD, 15));
-		this.btnChangePic.setBounds(134, 333, 166, 36);
+		this.btnChangePic.setBounds(146, 333, 166, 36);
 		this.middlePanel.add(this.btnChangePic);
 		
 		//Name TextField
@@ -212,7 +214,7 @@ public class EditGroceryItem extends JPanel{
 		this.lblonlyAddSquare = new JLabel("*Only Add Square Picture");
 		this.lblonlyAddSquare.setForeground(new Color(255, 0, 51));
 		this.lblonlyAddSquare.setFont(new Font("Tahoma", Font.BOLD, 12));
-		this.lblonlyAddSquare.setBounds(135, 313, 165, 16);
+		this.lblonlyAddSquare.setBounds(147, 313, 165, 16);
 		this.middlePanel.add(this.lblonlyAddSquare);
 		
 		//Delete Item Button
