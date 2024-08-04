@@ -21,6 +21,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import controller.MainFrame;
+import data.Order;
+import data.User;
 
 public class AddAccount extends JPanel {
     private MainFrame main;
@@ -32,7 +34,10 @@ public class AddAccount extends JPanel {
     private JButton addAccountButton;
     private JButton btnChangePic;
     private JTextField nameField;
-    private JPasswordField passwordField;
+    private JTextField passwordField;
+    private JRadioButton staffRadioButton;
+    private JRadioButton managerRadioButton;
+    private ButtonGroup roleButtonGroup;
     private JLabel lblName;
     private JLabel lblPassword;
     private JLabel lblPicture;
@@ -80,37 +85,79 @@ public class AddAccount extends JPanel {
         // Add Name 
         this.lblName = new JLabel("Name:");
         this.lblName.setFont(new Font("Tahoma", Font.BOLD, 16));
-        this.lblName.setBounds(300, 20, 100, 30);
+        this.lblName.setBounds(300, 90, 100, 30);
         this.middlePanel.add(this.lblName);
 
         this.nameField = new JTextField();
         this.nameField.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        this.nameField.setBounds(300, 50, 200, 30);
+        this.nameField.setBounds(300, 120, 200, 30);
         this.middlePanel.add(this.nameField);
+        
+     // Add Role Selection
+        JLabel lblRole = new JLabel("Role:");
+        lblRole.setFont(new Font("Tahoma", Font.BOLD, 16));
+        lblRole.setBounds(300, 20, 100, 30);
+        this.middlePanel.add(lblRole);
+
+        this.staffRadioButton = new JRadioButton("Staff");
+        this.staffRadioButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        this.staffRadioButton.setBounds(300, 50, 100, 30);
+        this.middlePanel.add(this.staffRadioButton);
+
+        this.managerRadioButton = new JRadioButton("Manager");
+        this.managerRadioButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        this.managerRadioButton.setBounds(400, 50, 100, 30);
+        this.middlePanel.add(this.managerRadioButton);
+
+        this.roleButtonGroup = new ButtonGroup();
+        this.roleButtonGroup.add(this.staffRadioButton);
+        this.roleButtonGroup.add(this.managerRadioButton);
+
+        // Set Staff as default selection
+        this.staffRadioButton.setSelected(true);
 
         // Add Password
         this.lblPassword = new JLabel("Password:");
         this.lblPassword.setFont(new Font("Tahoma", Font.BOLD, 16));
-        this.lblPassword.setBounds(300, 90, 100, 30);
+        this.lblPassword.setBounds(300, 160, 100, 30);
         this.middlePanel.add(this.lblPassword);
 
         this.passwordField = new JPasswordField();
         this.passwordField.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        this.passwordField.setBounds(300, 120, 200, 30);
+        this.passwordField.setBounds(300, 190, 200, 30);
         this.middlePanel.add(this.passwordField);
 
         // File Name
         this.PicFileName = new JLabel("File Name:");
         this.PicFileName.setFont(new Font("Tahoma", Font.BOLD, 16));
-        this.PicFileName.setBounds(300, 160, 100, 30);
+        this.PicFileName.setBounds(300, 230, 100, 30);
         this.middlePanel.add(this.PicFileName);
 
-        this.FileNameText = new JTextField("No Picture Selected");
-        this.FileNameText.setEditable(false);
-        this.FileNameText.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        this.FileNameText.setBounds(300, 190, 200, 30);
-        this.middlePanel.add(this.FileNameText);
-
+        this.FileNameText = new JTextField("No Pic Selected");
+		this.FileNameText.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				if(FileNameText.getText().contentEquals("Enter FileName")){
+					FileNameText.setText("");
+				}
+			}
+		});
+		this.FileNameText.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent arg0) {
+				if(FileNameText.getText().contentEquals("") && selectedFile != null){
+					FileNameText.setText("Enter FileName");
+				}
+				else if (FileNameText.getText().contentEquals("") && selectedFile == null){
+					FileNameText.setText("No Pic Selected");
+				}
+			}
+		});
+		this.FileNameText.setHorizontalAlignment(SwingConstants.CENTER);
+		this.FileNameText.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		this.FileNameText.setColumns(10);
+		this.FileNameText.setBounds(300, 260, 200, 30);
+		this.middlePanel.add(this.FileNameText);
         // Bottom Panel 
         this.bottomPanel = new JPanel();
         this.bottomPanel.setBorder(new EmptyBorder(10, 20, 10, 20));
@@ -170,10 +217,31 @@ public class AddAccount extends JPanel {
     }
 
     private void addAccount() {
-        String name = this.nameField.getText().trim();
-        String password = new String(this.passwordField.getPassword()).trim();
+        User currentUser = main.getController().getCurrentUser();
+        String n = this.nameField.getText().trim();
+        String pwd = new String(this.passwordField.getText()).trim();
+        String r = "";
+        
+        String fileName = this.FileNameText.getText().trim() + ".jpg";
+		String folder = ".\\img";
+		String pic = "./img/" + fileName; //filepath saved in object attribute
+		File destinationFile = new File(folder, fileName);
+		
+		//creates img file if doesn't exist
+		if (!destinationFile.getParentFile().exists()) {
+			destinationFile.getParentFile().mkdirs();
+		}
+		
+		//Checks is file name exists. Prevents saving if exists.
+		if (destinationFile.exists()){ 
+			System.out.println("File Exits");
+			JLabel label = new JLabel("PicFile name exists! Try another one!");
+			label.setFont(new Font("Tahoma", Font.BOLD, 14));
+			JOptionPane.showMessageDialog(this, label, "Error", JOptionPane.INFORMATION_MESSAGE);
+			return;
+		}
 
-        if (name.isEmpty() || password.isEmpty()) {
+        if (n.isEmpty() || pwd.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Name and password are required!", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -182,10 +250,26 @@ public class AddAccount extends JPanel {
             JOptionPane.showMessageDialog(this, "Please select a profile picture!", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        
+        if (staffRadioButton.isSelected()){
+        	r = staffRadioButton.getText();
+        }
+        else if (managerRadioButton.isSelected()){
+        	r = managerRadioButton.getText();
+        }
+        
+        try {
+            BufferedImage originalImage = ImageIO.read(new File(this.filePath));
+            ImageIO.write(originalImage, "jpg", destinationFile);
+            
+            int id = main.getController().generateUserID();
+            main.getController().addUser(n, pwd, r, pic, id);
 
-        //no create account functionality yet
-
-        JOptionPane.showMessageDialog(this, "Account created successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
-        this.main.showManageAccounts();
+            JOptionPane.showMessageDialog(this, "Account created successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            this.main.showManageAccounts();
+        } catch (IOException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error saving image file!", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 }
