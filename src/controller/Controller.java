@@ -263,7 +263,29 @@ public class Controller {
 	    }
 	    return null; //otherwise, return null
 	}
+	
+	public void addUser(String n, String pwd, String r, String pic, int id) {
+		User u = new User();
+		// setting info
+		u.setName(n);
+		u.setPassword(pwd);
+		// u.setUserID(id);
+		u.setRole(r);
+		u.setPicFile(pic);
+		u.setUserID(id);
+		// Store info into datastorage
+		this.ds.storeUser(u);
+	}
 		
+	public int generateUserID() {
+		return ds.getUsers().length + 1;
+	}
+	
+	public User getCurrentUser() {
+		return this.ds.getCurrentUser();
+	}
+
+
 
 	public Order getCurrentOrder() {
         return this.ds.getCurrentOrder();
@@ -326,6 +348,7 @@ public class Controller {
 		this.ds.reassignCategory(originalCategory, selectedCat);
 		
 	}
+
 
 
 }

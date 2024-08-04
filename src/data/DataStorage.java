@@ -24,6 +24,7 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 	private Vector<User> users;
 //	Vector<User> storage = new Vector<User>();
 	private Order currentOrder;
+	private User currentUser;
 //	private String[] category = {"All", "Fruits", "Vegetables", "Meat", "Dairy", "Others"};
 	private Vector<String> category;
 	
@@ -286,7 +287,18 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 		this.currentOrder.setGroceryItems(new Vector<GroceryItem>());
 	}
 
-
+	public void storeUser(User u){
+		this.users.add(u); 
+		
+		for (int i=0; i<users.size(); i++)
+		{
+			User temp = users.get(i);
+		}
+	}
+	
+	public User getCurrentUser(){
+		return this.currentUser;
+	}
 
 
 
