@@ -179,6 +179,6 @@ public class ManageAccounts extends JPanel {
     }
 
     private void editAccount(User user) {
-        System.out.println("Show details for user: " + user.getName());
+        this.main.showEditAccount(user);
     }
 }
