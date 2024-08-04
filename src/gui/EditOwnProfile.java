@@ -170,7 +170,24 @@ public class EditOwnProfile extends JPanel {
     }
 
     private void changePic() {
-        // Implement picture change logic similar to EditAccount
+        JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Image Files", "jpg", "png", "gif");
+        fileChooser.setFileFilter(filter);
+
+        int result = fileChooser.showOpenDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            try {
+                BufferedImage img = ImageIO.read(selectedFile);
+                Image scaledImg = img.getScaledInstance(280, 280, Image.SCALE_SMOOTH);
+                picLabel.setIcon(new ImageIcon(scaledImg));
+                this.selectedFile = selectedFile.getAbsolutePath();
+                picChanged = true;
+                FileNameText.setText(selectedFile.getName().split("\\.")[0]);
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(this, "Error reading the image file", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }
 
     private void save() {
