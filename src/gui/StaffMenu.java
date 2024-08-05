@@ -315,12 +315,17 @@ public class StaffMenu extends JPanel {
 			if (response == JOptionPane.YES_OPTION) {
 				this.main.getController().clearCurrentOrder();
 				StaffMenu.categorySele = "All";
-		        JOptionPane.showMessageDialog(this, "Logged Out Successfully", "Notification", JOptionPane.INFORMATION_MESSAGE);
+				JLabel label1 = new JLabel("Logged Out Successfully");
+				label1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		        JOptionPane.showMessageDialog(this, label1, "Notification", JOptionPane.INFORMATION_MESSAGE);
 		        this.main.showLoginScreen();
 			}
     	}
     	else{
-    		JOptionPane.showMessageDialog(this, "Logged Out Successfully", "Notification", JOptionPane.INFORMATION_MESSAGE);
+//    		JOptionPane.showMessageDialog(this, "Logged Out Successfully", "Notification", JOptionPane.INFORMATION_MESSAGE);
+    		JLabel label1 = new JLabel("Logged Out Successfully");
+			label1.setFont(new Font("Tahoma", Font.BOLD, 14));
+	        JOptionPane.showMessageDialog(this, label1, "Notification", JOptionPane.INFORMATION_MESSAGE);
 	        this.main.showLoginScreen();
     	}
 

@@ -125,7 +125,10 @@ public class ManagerHome extends JPanel{
 	
 	private void logOut(){
 		System.out.println("LogOut");
-	    JOptionPane.showMessageDialog(this, "Logged Out Successfully", "Notification", JOptionPane.INFORMATION_MESSAGE);
+//	    JOptionPane.showMessageDialog(this, "Logged Out Successfully", "Notification", JOptionPane.INFORMATION_MESSAGE);
+		JLabel label = new JLabel("Logged Out Successfully");
+		label.setFont(new Font("Tahoma", Font.BOLD, 14));
+        JOptionPane.showMessageDialog(this, label, "Notification", JOptionPane.INFORMATION_MESSAGE);
 		this.main.showLoginScreen();
 	}
 
