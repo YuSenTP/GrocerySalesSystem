@@ -176,6 +176,6 @@ public class StaffSales extends JPanel{
 	
 	private void showOrderScreen(String name, Order order){
 		System.out.println(name);
-		this.main.showOrderDetails(order);
+		this.main.showStaffOrderDetails(order);
 	}
 }
