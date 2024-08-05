@@ -1,8 +1,10 @@
-package data;
+package archive;
 
 import java.math.BigDecimal;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+import data.User;
 
 @JsonPropertyOrder({ "userID", "name", "password" }) //To change the save order to json
 public class Manager extends User {

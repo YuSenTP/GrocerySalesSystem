@@ -1,7 +1,7 @@
 [ {
   "name" : "Milk",
   "price" : 2.99,
-  "quantity" : 5,
+  "quantity" : 3,
   "picFile" : "./img/milk1.jpg",
   "onSale" : true,
   "percentOff" : 0.3,
@@ -10,7 +10,7 @@
 }, {
   "name" : "Bread",
   "price" : 1.99,
-  "quantity" : 5,
+  "quantity" : 3,
   "picFile" : "./img/bread2.jpg",
   "onSale" : false,
   "percentOff" : 0.0,
@@ -19,7 +19,7 @@
 }, {
   "name" : "Tomato",
   "price" : 1.15,
-  "quantity" : 5,
+  "quantity" : 4,
   "picFile" : "./img/tomato.jpg",
   "onSale" : false,
   "percentOff" : 0.0,
@@ -28,7 +28,7 @@
 }, {
   "name" : "Lettuce",
   "price" : 2.10,
-  "quantity" : 5,
+  "quantity" : 4,
   "picFile" : "./img/lettuce.jpg",
   "onSale" : false,
   "percentOff" : 0.0,
@@ -37,7 +37,7 @@
 }, {
   "name" : "Watermelon",
   "price" : 3.50,
-  "quantity" : 5,
+  "quantity" : 4,
   "picFile" : "./img/watermelon1.jpg",
   "onSale" : false,
   "percentOff" : 0.0,
@@ -46,7 +46,7 @@
 }, {
   "name" : "Chicken Breast",
   "price" : 3.00,
-  "quantity" : 5,
+  "quantity" : 4,
   "picFile" : "./img/bonelessChickenBreast.jpg",
   "onSale" : false,
   "percentOff" : 0.0,
@@ -55,7 +55,7 @@
 }, {
   "name" : "Eggs Carton",
   "price" : 2.20,
-  "quantity" : 5,
+  "quantity" : 4,
   "picFile" : "./img/eggsCarton.jpg",
   "onSale" : false,
   "percentOff" : 0.0,
@@ -73,7 +73,7 @@
 }, {
   "name" : "Apple",
   "price" : 0.50,
-  "quantity" : 100,
+  "quantity" : 99,
   "picFile" : "./img/apple.jpg",
   "onSale" : false,
   "percentOff" : 0.0,
@@ -91,7 +91,7 @@
 }, {
   "name" : "Orange Juice",
   "price" : 3.50,
-  "quantity" : 70,
+  "quantity" : 65,
   "picFile" : "./img/orangejuice.jpg",
   "onSale" : false,
   "percentOff" : 0.0,
@@ -100,7 +100,7 @@
 }, {
   "name" : "Cheese",
   "price" : 4.00,
-  "quantity" : 30,
+  "quantity" : 29,
   "picFile" : "./img/cheese.jpg",
   "onSale" : false,
   "percentOff" : 0.0,

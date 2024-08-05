@@ -1,7 +1,7 @@
 /**
  * 
  */
-package JsonReadWrite;
+package archive;
 
 import java.io.File;
 import java.io.IOException;

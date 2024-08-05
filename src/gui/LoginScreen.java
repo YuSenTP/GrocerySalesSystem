@@ -7,25 +7,19 @@ import java.awt.Graphics;
 import java.awt.Image;
 
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.KeyStroke;
 
 import controller.MainFrame;
-import data.Manager;
-import data.Staff;
 
-import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.util.Vector;
 import java.awt.event.ActionEvent;
 import javax.swing.JCheckBox;
-import javax.swing.JComponent;
 import javax.swing.JPasswordField;
 import javax.swing.SwingConstants;
+
 import java.awt.Color;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;

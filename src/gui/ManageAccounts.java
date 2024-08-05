@@ -101,7 +101,7 @@ public class ManageAccounts extends JPanel {
             //User Pic
             JLabel picLabel = new JLabel();
             ImageIcon userPic = new ImageIcon(user.getPicFile());
-            System.out.println("Loading image from: " + user.getPicFile());
+//            System.out.println("Loading image from: " + user.getPicFile());
             Image img = userPic.getImage();
             Image newimg = img.getScaledInstance(95, 95, java.awt.Image.SCALE_SMOOTH);
             userPic = new ImageIcon(newimg);
@@ -159,7 +159,7 @@ public class ManageAccounts extends JPanel {
         this.bottomPanel.setLayout(new BorderLayout(0, 0));
         this.bottomPanel.setBorder(new EmptyBorder(10, 20, 10, 20));
         
-        //Back Nutton
+        //Back Button
         this.backButton = new JButton("Back");
         this.backButton.setFont(new Font("Tahoma", Font.BOLD, 15));
         this.backButton.setPreferredSize(new Dimension(100, 40));

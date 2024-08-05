@@ -1,0 +1,124 @@
+[ {
+  "orderID" : 1,
+  "totalCost" : 13.83,
+  "groceryItems" : [ {
+    "name" : "Milk",
+    "price" : 2.99,
+    "quantity" : 1,
+    "picFile" : "./img/milk1.jpg",
+    "onSale" : true,
+    "percentOff" : 0.3,
+    "onSalePrice" : 2.09,
+    "category" : "Dairy"
+  }, {
+    "name" : "Bread",
+    "price" : 1.99,
+    "quantity" : 1,
+    "picFile" : "./img/bread2.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "onSalePrice" : 0,
+    "category" : "Others"
+  }, {
+    "name" : "Tomato",
+    "price" : 1.15,
+    "quantity" : 1,
+    "picFile" : "./img/tomato.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "onSalePrice" : 0,
+    "category" : "Vegetables"
+  }, {
+    "name" : "Lettuce",
+    "price" : 2.10,
+    "quantity" : 1,
+    "picFile" : "./img/lettuce.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "onSalePrice" : 0,
+    "category" : "Vegetables"
+  }, {
+    "name" : "Watermelon",
+    "price" : 3.50,
+    "quantity" : 1,
+    "picFile" : "./img/watermelon1.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "onSalePrice" : 0,
+    "category" : "Fruits"
+  }, {
+    "name" : "Chicken Breast",
+    "price" : 3.00,
+    "quantity" : 1,
+    "picFile" : "./img/bonelessChickenBreast.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "onSalePrice" : 0,
+    "category" : "Meat"
+  } ],
+  "staffName" : "Jerry"
+}, {
+  "orderID" : 2,
+  "totalCost" : 4.29,
+  "groceryItems" : [ {
+    "name" : "Milk",
+    "price" : 2.99,
+    "quantity" : 1,
+    "picFile" : "./img/milk1.jpg",
+    "onSale" : true,
+    "percentOff" : 0.3,
+    "onSalePrice" : 2.09,
+    "category" : "Dairy"
+  }, {
+    "name" : "Eggs Carton",
+    "price" : 2.20,
+    "quantity" : 1,
+    "picFile" : "./img/eggsCarton.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "onSalePrice" : 0,
+    "category" : "Others"
+  } ],
+  "staffName" : "Jerry"
+}, {
+  "orderID" : 3,
+  "totalCost" : 23.99,
+  "groceryItems" : [ {
+    "name" : "Bread",
+    "price" : 1.99,
+    "quantity" : 1,
+    "picFile" : "./img/bread2.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "onSalePrice" : 0,
+    "category" : "Others"
+  }, {
+    "name" : "Apple",
+    "price" : 0.50,
+    "quantity" : 1,
+    "picFile" : "./img/apple.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "onSalePrice" : 0,
+    "category" : "Fruits"
+  }, {
+    "name" : "Cheese",
+    "price" : 4.00,
+    "quantity" : 1,
+    "picFile" : "./img/cheese.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "onSalePrice" : 0,
+    "category" : "Dairy"
+  }, {
+    "name" : "Orange Juice",
+    "price" : 3.50,
+    "quantity" : 5,
+    "picFile" : "./img/orangejuice.jpg",
+    "onSale" : false,
+    "percentOff" : 0.0,
+    "onSalePrice" : 0,
+    "category" : "Others"
+  } ],
+  "staffName" : "Jenny"
+} ]

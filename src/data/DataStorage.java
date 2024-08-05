@@ -235,29 +235,22 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 		
 		try{
 			this.users = objectMapper.readValue(
-	                 new File("./src/JsonReadWrite/startuser.json"),
+	                 new File("./src/database/user.json"),
 	                 new TypeReference<Vector<User>>(){}
 	         );
 	        
 	         this.inventory = objectMapper.readValue(
-	                 new File("./src/JsonReadWrite/startinventory.json"),
+	                 new File("./src/database/inventory.json"),
 	                 new TypeReference<Vector<GroceryItem>>(){}
 	         );
 	         
 	         this.orders = objectMapper.readValue(
-	                 new File("./src/JsonReadWrite/order.json"),
+	                 new File("./src/database/order.json"),
 	                 new TypeReference<Vector<Order>>(){}
 	         );
-
-	         //Loops through staffs Vector and set each object index to staff
-//	         for (Staff staff : this.staffs) { //set new instance of order to each staff -- current state of order: null
-////	             System.out.println(user.getName());
-//	        	 staff.start();
-	        	 
-//	         } 
 	         
 	         String temp = "", read = "";
-	         BufferedReader in = new BufferedReader(new FileReader("./src/JsonReadWrite/category.txt"));
+	         BufferedReader in = new BufferedReader(new FileReader("./src/database/category.txt"));
 	         while ((read = in.readLine()) != null){
 	        	 temp += read;
 	         }
@@ -274,17 +267,14 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 	}
 	
 	public void writeFile(){  //Method to save to JSON file
-//		for (int i = 0; i < this.staffs.size(); i++){ //Clear staff order object to null
-//			this.staffs.get(i).setOrder(null);
-//		}
     	ObjectMapper objectMapper = new ObjectMapper(); 
     	try {
     		//! TO-CHANGE filePath
-    		objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File("./src/JsonReadWrite/inventory.json"), this.inventory);
-			objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File("./src/JsonReadWrite/user.json"), this.users);
-			objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File("./src/JsonReadWrite/order.json"), this.orders);
+    		objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File("./src/database/inventory.json"), this.inventory);
+			objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File("./src/database/user.json"), this.users);
+			objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File("./src/database/order.json"), this.orders);
 			
-			BufferedWriter out = new BufferedWriter(new FileWriter("src/JsonReadWrite/category.txt"));
+			BufferedWriter out = new BufferedWriter(new FileWriter("src/database/category.txt"));
 			for (int i = 0; i < this.category.size() - 1; i++){
 				out.write(this.category.get(i) + ";");
 				out.newLine();
@@ -323,20 +313,5 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 	public void setCurrentUser(User user) {
 	    this.currentUser = user;
 	}
-
-
-
-
-
-//	public User getUser(String n) {
-//		for (int i = 0 ; i <storage.size(); i++)
-//		{
-//			User temp = storage.get(i);
-//			if (temp.getName().equals(n)){
-//				return temp;
-//			}
-//		}
-//		return null;
-//	}
 
 }
