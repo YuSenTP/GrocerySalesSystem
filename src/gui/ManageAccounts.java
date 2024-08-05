@@ -24,12 +24,14 @@ import data.User;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 
 public class ManageAccounts extends JPanel {
     private MainFrame main;
     private JLabel lblManageAccounts;
     private JPanel gridPanel;
     private JPanel bottomPanel;
+    private JPanel topPanel;
     private JButton backButton;
     private JButton addAccountButton; 
     private JScrollPane scrollPane;
@@ -38,6 +40,11 @@ public class ManageAccounts extends JPanel {
     private JButton userButton;
     private JLabel name;
     private JLabel role;
+    private JComboBox<String> roleComboBox;
+    private JLabel lblView;
+    private String[] roles = {"All", "Staff", "Manager"};
+    private static String roleSele = "All";
+
 
     public ManageAccounts(MainFrame main) {
         this.main = main;
@@ -47,7 +54,12 @@ public class ManageAccounts extends JPanel {
 
         this.setBackground(UIManager.getColor("OptionPane.background"));
         this.setLayout(new BorderLayout(0, 0));
-
+        
+        //Top Panel 
+        this.topPanel = new JPanel();
+        this.topPanel.setLayout(null);
+        this.topPanel.setPreferredSize(new Dimension(10, 70));
+        
         // Top Label
         this.lblManageAccounts = new JLabel("Manage Accounts");
         this.lblManageAccounts.setBackground(UIManager.getColor("Button.background"));
@@ -55,6 +67,31 @@ public class ManageAccounts extends JPanel {
         this.lblManageAccounts.setFont(new Font("Tahoma", Font.BOLD, 20));
         this.lblManageAccounts.setHorizontalAlignment(SwingConstants.CENTER);
         this.add(this.lblManageAccounts, BorderLayout.NORTH);
+        
+     // ComboBox for role selection
+        this.roleComboBox = new JComboBox<>(roles);
+        this.roleComboBox.setBounds(588, 24, 111, 25);
+        this.roleComboBox.setSelectedItem(roleSele);
+        this.roleComboBox.setFont(new Font("Tahoma", Font.BOLD, 15));
+        this.roleComboBox.setFocusable(false);
+        this.roleComboBox.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+            	roleSele = (String) roleComboBox.getSelectedItem();
+                main.showManageAccounts();
+            }
+        });
+
+        // View label
+        this.lblView = new JLabel("View:");
+        this.lblView.setBounds(529, 25, 47, 21);
+        this.lblView.setFont(new Font("Tahoma", Font.BOLD, 17));
+
+        // Add components to the top panel
+        this.topPanel.add(this.lblManageAccounts);
+        this.topPanel.add(this.lblView);
+        this.topPanel.add(this.roleComboBox);
+
+        this.add(this.topPanel, BorderLayout.NORTH);
 
         // Middle Panel
         this.gridPanel = new JPanel(new GridBagLayout());
@@ -67,7 +104,7 @@ public class ManageAccounts extends JPanel {
         gbc.anchor = GridBagConstraints.NORTHWEST;
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        // For loop to create user buttons
+     // For loop to create user buttons
         for (int i = 0; i < this.users.length; i++) {
             User user = this.users[i];
             
@@ -75,6 +112,9 @@ public class ManageAccounts extends JPanel {
                 continue;
             }
             
+            // Filter users based on selected role
+            if (roleSele.equals("All") || user.getRole().equals(roleSele)) {
+           
             // User buttons
             this.userButton = new JButton();
             this.userButton.setPreferredSize(new Dimension(0, 100));
@@ -138,6 +178,9 @@ public class ManageAccounts extends JPanel {
 
             this.gridPanel.add(userButton, gbc);
             gbc.gridy++;
+            
+            } 
+            
         }
 
         // Container to push items up --> Filler Panel

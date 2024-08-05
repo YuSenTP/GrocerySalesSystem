@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 import controller.MainFrame;
 import data.GroceryItem;
 import data.Order;
+import data.User;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -43,6 +44,7 @@ public class StaffMenu extends JPanel {
     private ImageIcon itemPic;
     private JLabel nameLabel;
     private JLabel priceLabel;
+	private JLabel userNameLabel;
     private JScrollPane scrollPane;
     private JPanel topPanel;
     private JLabel lblGroceryItems;
@@ -55,6 +57,7 @@ public class StaffMenu extends JPanel {
 //	private JButton decreaseButton;
 //	private JButton increaseButton;
 //    private boolean flag;
+	private User currentUser; 
     private GroceryItem cItem;
 	private JPanel pricePanel;
 	private GroceryItem[] cItems;
@@ -134,6 +137,21 @@ public class StaffMenu extends JPanel {
         this.bottomPanel.setBackground(Color.WHITE);
         this.bottomPanel.setLayout(new BorderLayout(0, 0));
         this.bottomPanel.setBorder(new EmptyBorder(10, 20, 10, 20)); //Used to create white space
+        
+     // User Name Label
+        this.userNameLabel = new JLabel();
+        this.userNameLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
+        this.userNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
+
+        // Get the current user and set the label text
+        currentUser = this.main.getController().getCurrentUser();
+        if (currentUser != null) {
+            this.userNameLabel.setText(currentUser.getName());
+        } else {
+            this.userNameLabel.setText("Unknown User");
+        }
+
+        this.bottomPanel.add(this.userNameLabel, BorderLayout.CENTER);
         
         //Logout
         this.logoutButton = new JButton("Logout");

@@ -128,15 +128,14 @@ public class LoginScreen extends JPanel{
 		validity = this.main.getController().verifyUser(n , pwd);
 		System.out.println(validity);
 		if ("Staff".equals(validity)||testing){ //use .equals instead of == to prevent it from accessing memory, but the string
+			this.main.getController().setCurrentUserName(n);
 			this.main.showStaffMenu();
-	        this.main.getController().setCurrentUserName(n);
 		    System.out.println("Attempting to show Staff Menu");
 		}
 		else if("Manager".equals((validity))|| testing){
-			this.main.showManagerHome();
 	        this.main.getController().setCurrentUserName(n);
-		    System.out.println("Attempting to show Manager Home");
-		    
+	        this.main.showManagerHome();
+		    System.out.println("Attempting to show Manager Home");  
 		    
 		}		
 		else{
