@@ -48,7 +48,6 @@ public class Controller {
 	//Manager
 	public void createGroceryItem(String itemName, String price, String quantity, String picFile, boolean onSale, String percentOff, String category) { 
 		GroceryItem temp = new GroceryItem(itemName, price, quantity, picFile, onSale, Double.valueOf(percentOff) / 100, category);
-//		this.getInventory().add(temp);
 		this.ds.createGroceryItem(temp);
 	 }
 	
@@ -57,54 +56,8 @@ public class Controller {
 		this.ds.editGroceryItem(item, name, price, quantity, picFile, onSale, percentOff, category);
 	}
 	
-//	
-//	//Manager
-//	public void editGroceryItemPrice(GroceryItem item, String price) { 
-////		int index = this.getInventory().indexOf(item); //IMPORTANT TO CHANGE This does not adhere to MVC, can only edit in data storage
-////		GroceryItem temp = this.getInventory().get(index);
-////		temp.setPrice(new BigDecimal(price));
-//		this.ds.editGroceryItemPrice(item, price);
-//	 }
-//	//Manager
-//	public void editGroceryItemName(GroceryItem item, String name) { 
-////		int index = this.getInventory().indexOf(item);
-////		GroceryItem temp = this.getInventory().get(index);
-////		temp.setName(name);
-//		this.ds.editGroceryItemName(item, name);
-//	 }
-//	//Manager
-//	public void editGroceryItemQuantity(GroceryItem item, String quantity) { 
-////		int index = this.getInventory().indexOf(item);
-////		GroceryItem temp = this.getInventory().get(index);
-////		temp.setQuantity(Integer.valueOf(quantity));
-//		this.ds.editGroceryItemQuantity(item, quantity);
-//	 }
-//	//Manager
-//	public void editGroceryItemSale(GroceryItem item, boolean onSale, String percentOff) { 
-////		int index = this.getInventory().indexOf(item);
-////		GroceryItem temp = this.getInventory().get(index);
-////		if (onSale){
-////			temp.setOnSale(onSale);
-////			temp.setPercentOff(Double.valueOf(percentOff)/100);
-////		}
-////		else{
-////			temp.setOnSale(onSale);
-////			temp.setPercentOff(0);
-////		}
-//		this.ds.editGroceryItemSale(item, onSale, percentOff);
-//	 }
-//	//Manager
-//	public void editGroceryItemCategory(GroceryItem item, String category) { 
-////		int index = this.getInventory().indexOf(item);
-////		GroceryItem temp = this.getInventory().get(index);
-//////		System.out.println(category);
-////		temp.setCategory(category);
-//		this.ds.editGroceryItemCategory(item, category);
-//	}
-	
 	//Manager
 	public void deleteGroceryItem(GroceryItem item) { 
-//		this.getInventory().remove(item);
 		this.ds.deleteGroceryItem(item);
 	 }
 	//Manager
@@ -142,18 +95,9 @@ public class Controller {
 	    return totalSales;
 	}
 	
-//	public void changePicPath(String path, GroceryItem item){
-////		int index = this.ds.getInventory().indexOf(item);
-////		this.ds.getInventory().get(index).setPicFile(path);
-//		this.ds.changePicPath(path, item);
-//	}
 	
 	public void editOrder(String choice, GroceryItem item) { 
 		GroceryItem[] temp = this.ds.getCurrentOrder().getGroceryItems();
-		
-//		System.out.println(item.getName());
-//		System.out.println(item.getQuantity());
-//		System.out.println(item.getPrice());
 		
 		boolean itemPresent = false;
 		int index = -1;
@@ -164,11 +108,8 @@ public class Controller {
 			}
 		}
 		
-		//logic error, when staff logout I need to add items back to the inventory. TO Solve, Remove logout when there is items in the order
 		
 		if (choice == "add"){ // Item object is from inventory (IGNORE && item.getQuantity() > 0)
-//			System.out.println(item);
-//			this.order.addGroceryItem(item);
 			
 			item.setQuantity(item.getQuantity() - 1);// minus 1 from inventory
 			
@@ -191,8 +132,6 @@ public class Controller {
 			
 			temp[index].setQuantity(temp[index].getQuantity()-1); // remove quantity by 1
 			
-			
-//			this.order.deleteGroceryItem(item);
 			item.setQuantity(item.getQuantity()+1);;// add 1 to inventory
 			
 			System.out.println("Item Name:" + item.getName());
@@ -228,16 +167,12 @@ public class Controller {
 			if (item.getName().equals(inventoryItems[i].getName())){
 				if (choice == "add"){
 					inventoryItems[i].setQuantity(inventoryItems[i].getQuantity()-1);
-//					if (inventoryItems[i].getQuantity() == 0){
-////						return true;
-//					}
 				}
 				else if (choice == "delete"){
 					inventoryItems[i].setQuantity(inventoryItems[i].getQuantity()+1);
 				}
 			}
 		}
-//		return false;
 	}
 	
 	public boolean checkInventoryAvaiblility(GroceryItem item){

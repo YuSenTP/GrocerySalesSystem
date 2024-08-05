@@ -63,14 +63,6 @@ public class User {
 
 	public void setPicFile(String picFile) {
 		this.picFile = picFile;
-	}
-
-	public void login() { 
-		// TODO Auto-generated method
-	 }
-
-	public void logout() { 
-		// TODO Auto-generated method
-	 } 
+	} 
 
 }

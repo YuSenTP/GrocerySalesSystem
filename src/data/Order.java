@@ -14,15 +14,9 @@ public class Order {
 	private int orderID;
 	private String staffName; 
 
-
-	
-////	private static int counter =  + 1;
-//	private static int counter;
-	
 	public Order() { 
 		this.groceryItems= new Vector<GroceryItem>();
 		this.totalCost = BigDecimal.ZERO;
-//		this.orderID = counter++;
 	 }
 	
 	public String getStaffName() {
@@ -47,7 +41,6 @@ public class Order {
 				this.groceryItems.remove(i);
 			}
 		}
-		
 	}
 
 	public void setGroceryItems(Vector<GroceryItem> groceryItems) { 
@@ -69,52 +62,5 @@ public class Order {
 	public void setOrderID(int orderID) { 
 		 this.orderID = orderID; 
 	}
-
-//	public int getCounter() {
-//	 	 return counter; 
-//	}
-
-//	public void setCounter(int counter) { 
-//		 this.counter = counter; 
-//	}
-
-//	public BigDecimal calculateTotalCost() { //Gab to change --> total cost to be calculated in controller and passed to this order via settotalcost (setter)
-//		totalCost = BigDecimal.ZERO; //!
-//		for(int i = 0; i < groceryItems.size(); i++){
-//			BigDecimal groceryCost = groceryItems.get(i).getPrice().multiply(BigDecimal.valueOf(groceryItems.get(i).getQuantity()));
-//			totalCost = totalCost.add(groceryCost);
-////			totalCost = totalCost.add(groceryItems.get(i).getPrice() * BigDecimal.valueOf(groceryItems.get(i).getQuantity())); // BigDecimal is Immutable
-//		}
-//		return totalCost;
-//	 }
-
-//	public void deleteGroceryItem(GroceryItem item) { //check this
-////		groceryItems.get(index)
-//		for (int i = 0; i < groceryItems.size(); i++){
-//			if(groceryItems.get(i).getName() == item.getName()){
-//				groceryItems.get(i).subtractQuantity();
-//			}
-//		}
-//
-//	 }
-
-//	public void addGroceryItem(GroceryItem item) { 
-//		boolean itemPresent = false;
-//		int index = 0;
-//		for (int i = 0; i < groceryItems.size(); i++){
-//			if(groceryItems.get(i).getName() == item.getName()){
-//				itemPresent = true;
-//				index = i;
-//			}
-//		}
-//		if (itemPresent == false){
-//			groceryItems.add(item.copy());
-//		}
-//		else{
-//			//add 1 to the grocery item
-//			groceryItems.get(index).addQuantity(); 
-//		}
-//		
-//	 } 
 
 }

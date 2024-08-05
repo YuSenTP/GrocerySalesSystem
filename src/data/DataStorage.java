@@ -23,10 +23,8 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 	private Vector<Order> orders;
 	private Vector<Order> staffOrders;
 	private Vector<User> users;
-//	Vector<User> storage = new Vector<User>();
 	private Order currentOrder;
 	private User currentUser;
-//	private String[] category = {"All", "Fruits", "Vegetables", "Meat", "Dairy", "Others"};
 	private Vector<String> category;
 	
 	public DataStorage(){
@@ -124,63 +122,12 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 		item.setCategory(category);
 	}
 	
-//	public void editGroceryItemPrice(GroceryItem item, String price){
-////		int index = this.inventory.indexOf(item);
-////		GroceryItem temp = this.inventory.get(index);
-//		
-//		BigDecimal tempPrice = new BigDecimal(price);
-//		tempPrice = tempPrice.setScale(2, BigDecimal.ROUND_HALF_UP); //Rounds and set to 2dp
-//		item.setPrice(tempPrice);
-//		
-////		this.price = new BigDecimal(price); // Took in as a string as the double will truncate the .00 to .0 -- Nvm lol
-////		this.price = this.price.setScale(2, BigDecimal.ROUND_HALF_UP); //Rounds and set to 2dp
-//		
-////		item.setPrice(new BigDecimal(price));
-//	}
-//	
-//	public void editGroceryItemName(GroceryItem item, String name) { 
-////		int index = this.inventory.indexOf(item);
-////		GroceryItem temp = this.inventory.get(index);
-//		item.setName(name);
-//	 }
-//	
-//	public void editGroceryItemQuantity(GroceryItem item, String quantity) { 
-////		int index = this.inventory.indexOf(item);
-////		GroceryItem temp = this.inventory.get(index);
-//		item.setQuantity(Integer.valueOf(quantity));
-//	 }
-//	
-//	public void editGroceryItemSale(GroceryItem item, boolean onSale, String percentOff) { 
-////		int index = this.inventory.indexOf(item);
-////		GroceryItem temp = this.inventory.get(index);
-//		if (onSale){
-//			item.setOnSale(onSale);
-//			item.setPercentOff(Double.valueOf(percentOff)/100);
-//		}
-//		else{
-//			item.setOnSale(onSale);
-//			item.setPercentOff(0);
-//		}
-//	 }
-//	
-//	public void editGroceryItemCategory(GroceryItem item, String category) { 
-////		int index = this.inventory.indexOf(item);
-////		GroceryItem temp = this.inventory.get(index);
-////		System.out.println(category);
-//		item.setCategory(category);
-//	}
 	
 	public void deleteGroceryItem(GroceryItem item) { 
 		File picFile = new File(item.getPicFile());
 		picFile.delete();
 		this.inventory.remove(item);
 	 }
-	
-//	public void changePicPath(String path, GroceryItem item){
-////		int index = this.inventory.indexOf(item);
-////		this.inventory.get(index).setPicFile(path);
-//		item.setPicFile(path);
-//	}
 	
 	public void editCategory(int originalIndex, int endIndex, String Name){
 		String originalCat = this.category.get(originalIndex + 1);
@@ -227,6 +174,32 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 			}
 		}
 		
+	}
+	
+	public void setCurrentOrder(Order order) {
+        this.currentOrder = order;
+	}
+	
+	public void clearCurrentOrderItems(){
+		this.currentOrder.setGroceryItems(new Vector<GroceryItem>());
+	}
+
+	public void storeUser(User u){
+		this.users.add(u); 
+		
+		for (int i=0; i<users.size(); i++)
+		{
+			User temp = users.get(i);
+		}
+	}
+	
+	public User getCurrentUser(){
+		return this.currentUser;
+	}
+	
+	
+	public void setCurrentUser(User user) {
+	    this.currentUser = user;
 	}
 	
 	
@@ -287,31 +260,6 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 		} 
 	}
 
-	public void setCurrentOrder(Order order) {
-		// TODO Auto-generated method stub
-        this.currentOrder = order;
-	}
-	
-	public void clearCurrentOrderItems(){
-		this.currentOrder.setGroceryItems(new Vector<GroceryItem>());
-	}
 
-	public void storeUser(User u){
-		this.users.add(u); 
-		
-		for (int i=0; i<users.size(); i++)
-		{
-			User temp = users.get(i);
-		}
-	}
-	
-	public User getCurrentUser(){
-		return this.currentUser;
-	}
-	
-	
-	public void setCurrentUser(User user) {
-	    this.currentUser = user;
-	}
 
 }
