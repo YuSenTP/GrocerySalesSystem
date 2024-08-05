@@ -45,7 +45,7 @@ public class LoginScreen extends JPanel{
 		this.backgroundImage = new ImageIcon("./img/loginbk2.jpg").getImage();
 		
 		this.lblName = new JLabel("User Name:");
-		this.lblName.setFont(new Font("Tahoma", Font.BOLD, 17));
+		this.lblName.setFont(new Font("Tahoma", Font.BOLD, 18));
 		this.lblName.setBounds(442, 177, 125, 33);
 		this.add(this.lblName);
 		
@@ -66,7 +66,7 @@ public class LoginScreen extends JPanel{
 		this.add(this.login);
 		
 		this.lblPassword = new JLabel("Password:");
-		this.lblPassword.setFont(new Font("Tahoma", Font.BOLD, 17));
+		this.lblPassword.setFont(new Font("Tahoma", Font.BOLD, 18));
 		this.lblPassword.setBounds(442, 246, 99, 33);
 		this.add(this.lblPassword);
 				
@@ -86,7 +86,7 @@ public class LoginScreen extends JPanel{
 		this.add(this.textPassword);
 		
 		this.chckbxShowPassword = new JCheckBox("Show Password");
-		this.chckbxShowPassword.setFont(new Font("Tahoma", Font.BOLD, 15));
+		this.chckbxShowPassword.setFont(new Font("Tahoma", Font.BOLD, 16));
 		this.chckbxShowPassword.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (chckbxShowPassword.isSelected()){
@@ -104,7 +104,7 @@ public class LoginScreen extends JPanel{
 		this.lblLogin = new JLabel("Joy MiniMart");
 		this.lblLogin.setFont(new Font("Tahoma", Font.BOLD, 47));
 		this.lblLogin.setHorizontalAlignment(SwingConstants.CENTER);
-		this.lblLogin.setBounds(363, 43, 363, 106);
+		this.lblLogin.setBounds(363, 58, 363, 106);
 		add(this.lblLogin);
 		
 		this.lblwrong = new JLabel("*Incorrect Username or Password");
