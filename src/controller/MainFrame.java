@@ -43,8 +43,8 @@ import java.awt.event.WindowEvent;
  * 1x MainFrame
  * 1x Controller
  * 1x DataStorage
- * 5x Entities
- * 10x GUI/Panel
+ * 3x Entities
+ * 17x GUI/Panel
  *
  */
 public class MainFrame extends JFrame {

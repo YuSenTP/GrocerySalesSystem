@@ -40,6 +40,7 @@ public class ManagerOrderDetails extends JPanel {
     private JPanel boxPanel;
     private ImageIcon itemPic;
 	private JLabel totalCostLabel;
+	private JLabel cashierLabel;
 
     public ManagerOrderDetails(MainFrame main, Order order) {
         this.main = main;
@@ -65,6 +66,7 @@ public class ManagerOrderDetails extends JPanel {
         this.bottomPanel.setLayout(new BorderLayout(0, 0));
         this.bottomPanel.setBorder(new EmptyBorder(10, 20, 10, 20)); //Used to create white space
         
+        //Back Button
         this.backButton = new JButton("Back");
         this.backButton.setFont(new Font("Tahoma", Font.BOLD, 15));
         this.backButton.setPreferredSize(new Dimension(100, 40));
@@ -75,10 +77,17 @@ public class ManagerOrderDetails extends JPanel {
         });
         this.bottomPanel.add(this.backButton, BorderLayout.WEST);
         
+        //Cashier Name
+        this.cashierLabel = new JLabel("Cashier " + order.getStaffName());
+        this.cashierLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
+        this.cashierLabel.setBorder(new EmptyBorder(0, 60, 0, 0)); //t l b r
+        this.cashierLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        this.bottomPanel.add(this.cashierLabel, BorderLayout.CENTER);
+        
         // Total Label
         this.totalCostLabel = new JLabel("Total Cost: $" + order.getTotalCost());
         this.totalCostLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
-        this.totalCostLabel.setBorder(new EmptyBorder(0, 0, 0, 20)); //t l b r
+        this.totalCostLabel.setBorder(new EmptyBorder(0, 0, 0, 10)); //t l b r
         this.totalCostLabel.setHorizontalAlignment(SwingConstants.CENTER);
         this.bottomPanel.add(this.totalCostLabel, BorderLayout.EAST);
         
