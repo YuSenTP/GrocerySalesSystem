@@ -41,7 +41,6 @@ public class ManagerSales extends JPanel{
 	private JScrollPane scrollPane;
 	private Order[] orders;
 	private Order currentOrder;
-//	private JPanel orderPanel;
 	private JButton orderButton;
 	private JLabel orderNumber;
 	private JLabel orderTotal;

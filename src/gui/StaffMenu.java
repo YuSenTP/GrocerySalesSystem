@@ -52,11 +52,6 @@ public class StaffMenu extends JPanel {
     private JButton logoutButton;
     private JButton cartButton;
 	private JButton viewSalesHistory;
-//    private JTextField quantityField;
-//    private JLabel quantityField;
-//	private JButton decreaseButton;
-//	private JButton increaseButton;
-//    private boolean flag;
 	private User currentUser; 
     private GroceryItem cItem;
 	private JPanel pricePanel;
@@ -185,17 +180,6 @@ public class StaffMenu extends JPanel {
             this.itemButton.setBackground(Color.WHITE);
             this.itemButton.setPreferredSize(new Dimension(213, 143));
 
-            // Item Action
-//            this.itemButton.setActionCommand(currentItem.getName());
-//            this.itemButton.putClientProperty("object", currentItem); // associate each button to each GroceryItem object
-//            this.itemButton.addActionListener(new ActionListener() {
-//                @Override
-//                public void actionPerformed(ActionEvent e) {
-//                    int quantity = Integer.valueOf(quantityField.getText());
-//                    // Handle item button action
-//                }
-//            });
-
             // Item Pic
             this.itemPic = new ImageIcon(currentItem.getPicFile());
             Image img = this.itemPic.getImage();
@@ -227,10 +211,6 @@ public class StaffMenu extends JPanel {
 
             	this.pricePanel.add(this.priceLabel);
 
-//            	BigDecimal salePercent = new BigDecimal(1 - currentItem.getPercentOff());
-//            	BigDecimal salePrice = currentItem.getPrice().multiply(salePercent);
-//            	salePrice = salePrice.setScale(2, BigDecimal.ROUND_HALF_UP);
-//            	JLabel saleLabel = new JLabel("$" + salePrice.toString());
             	JLabel saleLabel = new JLabel("$" + currentItem.getOnSalePrice());
             	saleLabel.setHorizontalAlignment(SwingConstants.CENTER);
             	saleLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -259,9 +239,7 @@ public class StaffMenu extends JPanel {
             this.itemPanel.add(addToCartButton, BorderLayout.SOUTH);
 
             this.gridPanel.add(this.itemPanel);
-//            System.out.println(currentItem);
-//            showQuantityControls(addToCartButton, currentItem);
-//            System.out.println(cItems.length);
+            
             for (int x = 0; x < this.cItems.length; x++){
 //            	System.out.println(cItems[x].getName());
             	if(currentItem.getName().equals(this.cItems[x].getName())){
@@ -281,33 +259,6 @@ public class StaffMenu extends JPanel {
         this.scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         this.scrollPane.getVerticalScrollBar().setUnitIncrement(15);
         this.add(this.scrollPane);
-
-//        // Top Panel
-//        this.topPanel = new JPanel();
-//        this.lblGroceryItems = new JLabel("Grocery Items");
-//        this.lblGroceryItems.setPreferredSize(new Dimension(200, 60));
-//        this.lblGroceryItems.setFont(new Font("Tahoma", Font.BOLD, 20));
-//        this.lblGroceryItems.setHorizontalAlignment(SwingConstants.CENTER);
-//        this.topPanel.add(this.lblGroceryItems);
-//        this.add(this.topPanel, BorderLayout.NORTH);
-//
-//        // Bottom Panel
-//        this.bottomPanel = new JPanel();
-//        this.bottomPanel.setBackground(Color.WHITE);
-//        this.bottomPanel.setLayout(new BorderLayout(0, 0));
-//        
-//        //Logout
-//        this.logoutButton = new JButton("Logout");
-//        this.logoutButton.setFont(new Font("Tahoma", Font.BOLD, 15));
-//        this.logoutButton.setPreferredSize(new Dimension(100, 40));
-//        this.logoutButton.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//            	logOut();
-//            }
-//        });
-//        
-//        this.bottomPanel.add(this.logoutButton, BorderLayout.WEST);
 
         //Cart
         this.cartButton = new JButton("Cart");
@@ -352,9 +303,6 @@ public class StaffMenu extends JPanel {
     private void showQuantityControls(JButton addToCartButton, GroceryItem currentItem, boolean flag) {
         JPanel parentPanel = (JPanel) addToCartButton.getParent(); // Parent is itemPanel
         parentPanel.remove(addToCartButton); // itemPanel to remove button
-//    	 itemPanel.remove(addToCartButton);
-//        GroceryItem currentItem = (GroceryItem) addToCartButton.getClientProperty("object");
-        
         
 
         JPanel quantityPanel = new JPanel(new BorderLayout());
@@ -362,7 +310,6 @@ public class StaffMenu extends JPanel {
         decreaseButton.putClientProperty("object", currentItem);
         JButton increaseButton = new JButton("+");
         increaseButton.putClientProperty("object", currentItem);
-//        this.quantityField = new JTextField("1", 3);
         JLabel quantityField = new JLabel("1");
         quantityField.setHorizontalAlignment(SwingConstants.CENTER);
         quantityField.setOpaque(true);
@@ -370,13 +317,11 @@ public class StaffMenu extends JPanel {
 //        this.quantityField.setBorder(new Border()); TO ADD LATER
         if(flag == true){
         	this.main.getController().editOrder("add", currentItem);
-//        	flag = false;
         }
         else{
         	quantityField.setText(String.valueOf(this.cItem.getQuantity()));
         }
-        
-        
+
         //this is to set when back from cart
         if (currentItem.getQuantity() == 0){
         	increaseButton.setEnabled(false);
@@ -396,9 +341,6 @@ public class StaffMenu extends JPanel {
                     increaseButton.setEnabled(true);
                     
                 } else {
-//                	if (main.getController().ds.getCurrentOrder().getGroceryItems().length == 0){
-//                    	logoutButton.setVisible(true);
-//                    }
                 	parentPanel.remove(quantityPanel);
                 	parentPanel.add(addToCartButton, BorderLayout.SOUTH);
                 	parentPanel.revalidate();
@@ -423,18 +365,10 @@ public class StaffMenu extends JPanel {
                     if (object.getQuantity() == 0){
                     	increaseButton.setEnabled(false);
                     }
-            	}
-//            	else if (object.getQuantity() == 0){
-//                	increaseButton.setEnabled(false);
-//            	}
-                
+            	}    
 
             }
         });
-        
-
-//        this.logoutButton.setVisible(false);
-
 
         quantityPanel.add(decreaseButton, BorderLayout.WEST);
         quantityPanel.add(quantityField, BorderLayout.CENTER);

@@ -33,19 +33,15 @@ import javax.swing.JTextPane;
 public class StaffSales extends JPanel{
 	private MainFrame main;
 	private JLabel lblEditItem;
-	private JPanel middlePanel;
 	private JPanel bottomPanel;
 	private JButton backButton;
 	private JScrollPane scrollPane;
-//	private Order[] orders;
 	private Order currentOrder;
-//	private JPanel orderPanel;
 	private JButton orderButton;
 	private JLabel orderNumber;
 	private JLabel orderTotal;
 	private JLabel totalSales;
 	private JPanel gridPanel;
-	private User currentUser;
 	private Order[] staffOrders;
 	
 	public StaffSales(MainFrame main){
