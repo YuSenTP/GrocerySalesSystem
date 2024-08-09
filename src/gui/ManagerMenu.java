@@ -30,7 +30,11 @@ import javax.swing.border.EmptyBorder;
 
 import controller.MainFrame;
 import data.GroceryItem;
+import javafx.scene.layout.GridPane;
+
 import java.awt.FlowLayout;
+
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import java.awt.Component;
 
@@ -58,6 +62,7 @@ public class ManagerMenu extends JPanel{
 	private JComboBox comboBox;
 	private JLabel lblView;
 	private String[] category;
+	private JPanel namePanel;
 	
 	private static String categorySele = "All";
 
@@ -117,13 +122,30 @@ public class ManagerMenu extends JPanel{
     		Image newimg = img.getScaledInstance( 90, 90,  java.awt.Image.SCALE_SMOOTH ) ;  
     		this.itemPic = new ImageIcon(newimg);
     		this.itemButton.setIcon(this.itemPic);
+    		
+    		
+            //Item Price
+            this.namePanel = new JPanel();
+            this.namePanel.setOpaque(false);
             
         	//Item Name
-            this.nameLabel = new JLabel(this.currentItem.getName());
+            this.nameLabel = new JLabel(this.currentItem.getName());            
             this.nameLabel.setHorizontalAlignment(SwingConstants.CENTER);
             this.nameLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
             this.nameLabel.setOpaque(false);
             this.itemButton.add(this.nameLabel, BorderLayout.NORTH);
+            this.namePanel.add(this.nameLabel);
+            
+            if(this.currentItem.getQuantity() == 0){
+            	//SoldOut Label
+            	JLabel soldoutLabel = new JLabel("(Sold Out)");
+            	soldoutLabel.setHorizontalAlignment(SwingConstants.CENTER);
+            	soldoutLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
+            	soldoutLabel.setForeground(Color.RED);
+            	this.namePanel.add(soldoutLabel);
+            }
+            
+            this.itemButton.add(this.namePanel, BorderLayout.NORTH);
    
             //Item Price
             this.pricePanel = new JPanel();
@@ -159,7 +181,7 @@ public class ManagerMenu extends JPanel{
             this.itemButton.add(this.pricePanel, BorderLayout.SOUTH);
            
             this.itemPanel.add(this.itemButton, BorderLayout.CENTER);
-
+            
             this.gridPanel.add(this.itemPanel);
             
             

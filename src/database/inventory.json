@@ -1,7 +1,7 @@
 [ {
   "name" : "Milk",
   "price" : 2.99,
-  "quantity" : 3,
+  "quantity" : 0,
   "picFile" : "./img/milk1.jpg",
   "onSale" : true,
   "percentOff" : 0.3,

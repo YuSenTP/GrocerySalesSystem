@@ -15,6 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
@@ -63,6 +64,11 @@ public class StaffMenu extends JPanel {
 	private static String categorySele = "All";
 
     public StaffMenu(MainFrame main) {
+    	
+        ImageIcon soldOutIcon = new ImageIcon("./img/soldout.png");
+        Image soldOutImg = soldOutIcon.getImage().getScaledInstance(119, 100, Image.SCALE_SMOOTH);
+        soldOutIcon = new ImageIcon(soldOutImg);
+        
         this.main = main;
         this.main.setTitle("Joy MiniMart - Staff Menu");
         this.inventory = this.main.getController().getInventory();
@@ -169,9 +175,9 @@ public class StaffMenu extends JPanel {
         			continue;
         		}
         	}
-            if (currentItem.getQuantity() == 0 && this.cItems.length == 0){ // If item not in cart and no more in inventory then no show
-            	continue;
-            }
+//            if (currentItem.getQuantity() == 0 && this.cItems.length == 0){ // If item not in cart and no more in inventory then no show
+//            	continue;
+//            }
 
             this.itemPanel = new JPanel(new BorderLayout());
 
@@ -194,7 +200,6 @@ public class StaffMenu extends JPanel {
             this.itemButton.add(this.nameLabel, BorderLayout.NORTH);
 
             // Item Price
-            
             this.pricePanel = new JPanel();
             this.pricePanel.setOpaque(false);
             
@@ -223,9 +228,9 @@ public class StaffMenu extends JPanel {
             
             
             this.itemButton.add(this.pricePanel, BorderLayout.SOUTH);
-
-            this.itemPanel.add(this.itemButton, BorderLayout.CENTER);
-
+            this.itemPanel.add(itemButton, BorderLayout.CENTER);
+            
+           
             // Add to Cart Button
             JButton addToCartButton = new JButton("Add to Cart");
             addToCartButton.putClientProperty("object", currentItem);
@@ -236,6 +241,13 @@ public class StaffMenu extends JPanel {
                     showQuantityControls(addToCartButton, currentItem, true);
                 }
             });
+            
+            //If soldout, change text and disable button
+            if (currentItem.getQuantity() == 0){
+            	addToCartButton.setText("SOLD OUT");
+            	addToCartButton.setEnabled(false);
+            }
+            
             this.itemPanel.add(addToCartButton, BorderLayout.SOUTH);
 
             this.gridPanel.add(this.itemPanel);

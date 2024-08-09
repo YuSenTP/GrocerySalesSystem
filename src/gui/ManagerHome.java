@@ -7,10 +7,13 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -34,22 +37,27 @@ public class ManagerHome extends JPanel{
 	private JLabel frameName;
 	private JPanel bottomPanel;
 	private JButton logOutButton;
+	private Image backgroundImage;
 	
 	public ManagerHome(MainFrame main){
 		this.main = main;
 		this.setLayout(new BorderLayout(0, 0));
         this.setBackground(UIManager.getColor("OptionPane.background"));
+        
+        this.backgroundImage = new ImageIcon("./img/fabric_2.png").getImage();
 
 		main.setTitle("Joy MiniMart - Manager Home");
 		
 		this.gridPanel = new JPanel(new GridLayout(0, 3, 30, 30)); // rows, cols, hgap, vgap
         this.gridPanel.setBorder(new EmptyBorder(20, 20, 20, 20)); // top, left, bottom, right
+        this.gridPanel.setOpaque(false);
         
         //Func Buttons
         for (int i = 0; i < buttonNames.length; i++){
         	this.button = new JButton();
         	this.button.setLayout(new BorderLayout());
         	this.button.setPreferredSize(new Dimension(213, 123));
+        	this.button.setBackground(Color.WHITE);
         	this.button.setActionCommand(buttonNames[i]);
         	this.button.addActionListener(new ActionListener(){
         		@Override
@@ -75,18 +83,21 @@ public class ManagerHome extends JPanel{
         this.frameName.setFont(new Font("Tahoma", Font.BOLD, 20));
         this.frameName.setHorizontalAlignment(SwingConstants.CENTER);
         this.frameName.setVerticalAlignment(SwingConstants.CENTER);
+//        this.frameName.setOpaque(false);
         this.add(this.frameName, BorderLayout.NORTH);
         
         //Bottom Panel
         this.bottomPanel = new JPanel();
         this.bottomPanel.setLayout(new BorderLayout(0, 0));
         this.bottomPanel.setBorder(new EmptyBorder(0, 20, 10, 0));
+        this.bottomPanel.setOpaque(false);
         this.add(this.bottomPanel, BorderLayout.SOUTH);
         
         //Logout Button
         this.logOutButton = new JButton("Logout");
         this.logOutButton.setPreferredSize(new Dimension(90, 40));
         this.logOutButton.setFont(new Font("Tahoma", Font.BOLD, 15));
+        this.logOutButton.setBackground(Color.WHITE);
         this.logOutButton.addActionListener(new ActionListener(){
     		@Override
     		public void actionPerformed(ActionEvent e){
@@ -131,5 +142,11 @@ public class ManagerHome extends JPanel{
         JOptionPane.showMessageDialog(this, label, "Notification", JOptionPane.INFORMATION_MESSAGE);
 		this.main.showLoginScreen();
 	}
+	
+    @Override
+    protected void paintComponent(Graphics g) { // Over rides the command
+        super.paintComponent(g); //calls super class to execute default painting
+        g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this); // add my own painting
+    }
 
 }
