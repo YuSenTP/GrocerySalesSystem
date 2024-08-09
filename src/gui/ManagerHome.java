@@ -57,7 +57,7 @@ public class ManagerHome extends JPanel{
         	this.button = new JButton();
         	this.button.setLayout(new BorderLayout());
         	this.button.setPreferredSize(new Dimension(213, 123));
-        	this.button.setBackground(Color.WHITE);
+//        	this.button.setBackground(Color.WHITE);
         	this.button.setActionCommand(buttonNames[i]);
         	this.button.addActionListener(new ActionListener(){
         		@Override
@@ -97,7 +97,7 @@ public class ManagerHome extends JPanel{
         this.logOutButton = new JButton("Logout");
         this.logOutButton.setPreferredSize(new Dimension(90, 40));
         this.logOutButton.setFont(new Font("Tahoma", Font.BOLD, 15));
-        this.logOutButton.setBackground(Color.WHITE);
+//        this.logOutButton.setBackground(Color.WHITE);
         this.logOutButton.addActionListener(new ActionListener(){
     		@Override
     		public void actionPerformed(ActionEvent e){
