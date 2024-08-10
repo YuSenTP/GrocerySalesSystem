@@ -366,19 +366,29 @@ public class StaffMenu extends JPanel {
         increaseButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-    			GroceryItem object = (GroceryItem) increaseButton.getClientProperty("object");
-    			System.out.println(object.getQuantity());
+    			GroceryItem item = (GroceryItem) increaseButton.getClientProperty("object");
+    			System.out.println(item.getQuantity());
             	int quantity = Integer.parseInt(quantityField.getText());
-            	if (object.getQuantity()>0){
+            	if (item.getQuantity()>0){
                     quantity++;
                     quantityField.setText(String.valueOf(quantity));
-                    main.getController().editOrder("add", object);
+                    main.getController().editOrder("add", item);
                     
-                    if (object.getQuantity() == 0){
+                    if (item.getQuantity() == 0){
                     	increaseButton.setEnabled(false);
                     }
             	}    
 
+            }
+        });
+        
+        //Add Mouse listener for max quantity        
+        increaseButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                if (!increaseButton.isEnabled()) {
+                    JOptionPane.showMessageDialog(null, "Max Quantity Reached", " Notification", JOptionPane.INFORMATION_MESSAGE);
+                }
             }
         });
 

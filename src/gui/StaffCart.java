@@ -311,6 +311,16 @@ public class StaffCart extends JPanel {
                 }
             });
             
+            //Add Mouse listener for max quantity        
+            increaseButton.addMouseListener(new java.awt.event.MouseAdapter() {
+                @Override
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+                    if (!increaseButton.isEnabled()) {
+                        JOptionPane.showMessageDialog(null, "Max Quantity Reached", " Notification", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                }
+            });
+            
             //Delete all item Button
             ImageIcon dIcon = new ImageIcon("./img/Trash.png");
             Image dimg = dIcon.getImage();

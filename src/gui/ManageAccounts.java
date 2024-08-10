@@ -62,10 +62,11 @@ public class ManageAccounts extends JPanel {
         
         // Top Label
         this.lblManageAccounts = new JLabel("Manage Accounts");
+        this.lblManageAccounts.setBounds(280, 24, 200, 25);
         this.lblManageAccounts.setBackground(UIManager.getColor("Button.background"));
         this.lblManageAccounts.setPreferredSize(new Dimension(87, 60));
         this.lblManageAccounts.setFont(new Font("Tahoma", Font.BOLD, 20));
-        this.lblManageAccounts.setHorizontalAlignment(SwingConstants.CENTER);
+
         this.add(this.lblManageAccounts, BorderLayout.NORTH);
         
      // ComboBox for role selection
