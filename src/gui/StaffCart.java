@@ -423,13 +423,22 @@ public class StaffCart extends JPanel {
     
     private void resetItemQuantity(GroceryItem item) {
         int currentQuantity = item.getQuantity();
+        if (currentQuantity == 1){
+            JOptionPane.showMessageDialog(this, "Item is already set to quantity 1", "Notification", JOptionPane.INFORMATION_MESSAGE);
+        }
         if (currentQuantity > 1) {
             // Remove the excess quantity from the cart
+        	 int result = JOptionPane.showConfirmDialog(this, 
+        	            "Are you sure you want to reset this item to quantity 1?", 
+        	            "Reset Item", 
+        	            JOptionPane.YES_NO_OPTION);
+        	 if (result == JOptionPane.YES_OPTION) {
             for (int i = currentQuantity; i > 1; i--) {
                 main.getController().cartUpdateInventory("delete", item);
+                item.setQuantity(1);
             }
+        	 }
             // Set the quantity to 1
-            item.setQuantity(1);
             main.getController().calculateTotalCost();
             updateCartItems();
             updateTotalLabel();
