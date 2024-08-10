@@ -16,7 +16,7 @@ import data.User;
  */
 public class Controller {
 	public DataStorage ds; 
-	
+	  
 	public Controller(){
 		 this.ds = new DataStorage();
 	}
@@ -251,6 +251,10 @@ public class Controller {
 		// Store info into datastorage
 		this.ds.storeUser(u);
 	}
+	
+	 public void deleteUser(User user) {
+	        this.ds.deleteUser(user);
+	    }
 		
 	public int generateUserID() {
 		return ds.getUsers().length + 1;

@@ -35,6 +35,7 @@ public class EditAccount extends JPanel {
     private JCheckBox chckbxShowPassword;
     private String selectedFile;
     private boolean picChanged;
+	private JButton btnDeleteAccount;
 
     public EditAccount(MainFrame main, User user) {
         this.main = main;
@@ -119,7 +120,7 @@ public class EditAccount extends JPanel {
             this.managerRadioButton.setSelected(true);
         }
 
-        // Password Field
+        // Password TextField
         this.lblPassword = new JLabel("Password:");
         this.lblPassword.setFont(new Font("Tahoma", Font.BOLD, 20));
         this.lblPassword.setBounds(377, 180, 135, 30);
@@ -142,6 +143,18 @@ public class EditAccount extends JPanel {
                 }
             }
         });
+        
+        this.btnDeleteAccount = new JButton("Delete Account");
+        this.btnDeleteAccount.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                deleteAccount();
+            }
+        });
+        this.btnDeleteAccount.setForeground(new Color(255, 0, 51));
+        this.btnDeleteAccount.setFont(new Font("Tahoma", Font.BOLD, 15));
+        this.btnDeleteAccount.setBounds(588, 335, 150, 30);
+        this.middlePanel.add(this.btnDeleteAccount);
+        
         this.chckbxShowPassword.setBounds(377, 253, 161, 25);
         this.chckbxShowPassword.setOpaque(false);
         this.middlePanel.add(this.chckbxShowPassword);
@@ -189,8 +202,16 @@ public class EditAccount extends JPanel {
         this.add(this.bottomPanel, BorderLayout.SOUTH);
     }
 
-    private void back() {
-        // Implement logic to go back to previous screen
+    private void deleteAccount() {
+        int response = JOptionPane.showConfirmDialog(this, "Confirm Delete?", "Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (response == JOptionPane.YES_OPTION) {
+            this.main.getController().deleteUser(this.user);
+            JOptionPane.showMessageDialog(this, "Account Deleted Successfully", "Delete Account", JOptionPane.INFORMATION_MESSAGE);
+            this.main.showManageAccounts();
+        }
+    }
+
+	private void back() {
         this.main.showManageAccounts();
     }
 

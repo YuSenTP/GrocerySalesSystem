@@ -193,6 +193,12 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 		}
 	}
 	
+	 public void deleteUser(User user) {
+	        File picFile = new File(user.getPicFile());
+	        picFile.delete();
+	        this.users.remove(user);
+	    }
+	
 	public User getCurrentUser(){
 		return this.currentUser;
 	}
