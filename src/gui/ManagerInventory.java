@@ -43,7 +43,7 @@ public class ManagerInventory extends JPanel {
         this.add(this.lblInventory, BorderLayout.NORTH);
         
         // Set Model and Create Columns
-        String[] columnNames = {"Item Name", "Price", "Quantity", "Category", "On Sale"};
+        String[] columnNames = {"Item Name", "Price", "Quantity", "Category", "On Sale", "% Off"};
         tableColumns = new DefaultTableModel(columnNames, 0);
         
         // Create table
@@ -55,16 +55,16 @@ public class ManagerInventory extends JPanel {
             } 
         };
         
-        
-        this.scrollPane = new JScrollPane(inventoryTable);
-        this.scrollPane.setBorder(new EmptyBorder(0, 2, 2, 2));
-        this.add(this.scrollPane, BorderLayout.CENTER);
-        
         //Adjust Font Size
         Font font = new Font("Tahoma", Font.PLAIN, 19);
         inventoryTable.setFont(font);
         inventoryTable.getTableHeader().setFont(font);
         inventoryTable.setRowHeight(font.getSize() + 10); // Adjust row height for the new font size
+        
+        //Adjust Column Size
+        inventoryTable.getColumnModel().getColumn(0).setPreferredWidth(150);
+        
+
         
         //Create scrollPane	
         this.scrollPane = new JScrollPane(inventoryTable);
@@ -115,14 +115,24 @@ public class ManagerInventory extends JPanel {
             } else {
                 onSaleStatus = "No";
             }
+            String percentOff;
+            if (item.getPercentOff() == 0.0){
+            	percentOff = "0";
+            }
+            else{
+            	percentOff = String.valueOf((int)(item.getPercentOff() * 100)) + "%";
+            }
+            
             Object[] row = {
                 item.getName(),
                 "$" + item.getPrice(),
                 item.getQuantity(),
                 item.getCategory(),
-                onSaleStatus
+                onSaleStatus,
+                percentOff
             };
             tableColumns.addRow(row);
         }
+
     }
 }
