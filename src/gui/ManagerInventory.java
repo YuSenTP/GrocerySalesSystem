@@ -64,8 +64,6 @@ public class ManagerInventory extends JPanel {
         //Adjust Column Size
         inventoryTable.getColumnModel().getColumn(0).setPreferredWidth(150);
         
-
-        
         //Create scrollPane	
         this.scrollPane = new JScrollPane(inventoryTable);
         this.scrollPane.setBorder(new EmptyBorder(0, 2, 2, 2));

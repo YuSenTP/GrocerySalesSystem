@@ -46,8 +46,9 @@ public class ManagerHome extends JPanel{
         
         this.backgroundImage = new ImageIcon("./img/fabric_2.png").getImage();
 
-		main.setTitle("Joy MiniMart - Manager Home");
+		this.main.setTitle("Joy MiniMart - Manager Home");
 		
+		//GridLayout Panel
 		this.gridPanel = new JPanel(new GridLayout(0, 3, 30, 30)); // rows, cols, hgap, vgap
         this.gridPanel.setBorder(new EmptyBorder(20, 20, 20, 20)); // top, left, bottom, right
         this.gridPanel.setOpaque(false);
@@ -108,6 +109,7 @@ public class ManagerHome extends JPanel{
         
 	}
 	
+	//Display Manager actions
 	private void showNextPanel(String name){
 		if (name == "Grocery Menu"){
 			System.out.println("Grocery Menu");
@@ -134,15 +136,17 @@ public class ManagerHome extends JPanel{
 		}
 	}
 	
+	//LogOut
 	private void logOut(){
 		System.out.println("LogOut");
 //	    JOptionPane.showMessageDialog(this, "Logged Out Successfully", "Notification", JOptionPane.INFORMATION_MESSAGE);
 		JLabel label = new JLabel("Logged Out Successfully");
 		label.setFont(new Font("Tahoma", Font.BOLD, 14));
-        JOptionPane.showMessageDialog(this, label, "Notification", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, label, "Notification", JOptionPane.INFORMATION_MESSAGE); // LogOut Message
 		this.main.showLoginScreen();
 	}
 	
+	//For BackGround Image
     @Override
     protected void paintComponent(Graphics g) { // Over rides the command
         super.paintComponent(g); //calls super class to execute default painting

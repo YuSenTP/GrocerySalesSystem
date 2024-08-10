@@ -49,7 +49,7 @@ public class EditCategory extends JPanel{
 		this.main = main;
         this.main.setTitle("Joy MiniMart - Edit Category");
         this.category = this.main.getController().getCategory();
-        this.category = Arrays.copyOfRange(this.category, 1, this.category.length - 1);
+        this.category = Arrays.copyOfRange(this.category, 1, this.category.length - 1); //Don't get "ALL" & "Add New"
 
         this.setBackground(UIManager.getColor("OptionPane.background"));
         this.setLayout(new BorderLayout(0, 0));
@@ -67,6 +67,7 @@ public class EditCategory extends JPanel{
         this.middlePanel.setBackground(UIManager.getColor("Button.background"));
         this.add(this.middlePanel, BorderLayout.CENTER);
         
+        // Box Panel -> Contains All Category Panel
         this.boxPanel = new JPanel();
         this.boxPanel.setLayout(new BoxLayout(boxPanel, BoxLayout.Y_AXIS));
         for (int i = 0; i < this.category.length; i++){
@@ -127,7 +128,7 @@ public class EditCategory extends JPanel{
 
          			int response = JOptionPane.showConfirmDialog(EditCategory.this, panel, "Edit Category", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 
-         			if (response == JOptionPane.YES_OPTION) {
+         			if (response == JOptionPane.YES_OPTION) { // Edit category name or placing
          				String cName = nameField.getText().trim();
          				int cIndex = placingComboBox.getSelectedIndex();
          				main.getController().editCategory(index, cIndex, cName);
@@ -153,7 +154,7 @@ public class EditCategory extends JPanel{
          			boolean inUse = main.getController().categoryInUse(originalCategory);
          			System.out.println(inUse);
          			
-         			if (inUse){
+         			if (inUse){ // Checks if Category is Used by Grocery Item
          				
          				JPanel panel = new JPanel(new GridLayout(2, 1, 5, 5));
          				JLabel qLabel = new JLabel("Category In Use! Reassign Items!");
@@ -178,7 +179,7 @@ public class EditCategory extends JPanel{
              			panel.add(catComboBox);
              			int response = JOptionPane.showConfirmDialog(EditCategory.this, panel, "Delete Category", JOptionPane.OK_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
              			
-             			if (response == JOptionPane.YES_OPTION){
+             			if (response == JOptionPane.YES_OPTION){ // Reassign Category
              				String selectedCat = (String) catComboBox.getSelectedItem();
 //             				System.out.println(selectedCat);
              				main.getController().reassignCategory(originalCategory, selectedCat);
@@ -191,7 +192,7 @@ public class EditCategory extends JPanel{
              			}
          				
          			}
-         			else{
+         			else{ // Category Not in use --> delete category
          				main.getController().deleteCategory(originalCategory);
          				//Success Message
          				JLabel label = new JLabel("Category Deleted!");
@@ -203,6 +204,7 @@ public class EditCategory extends JPanel{
          		}
             });
             
+            //Button Panel (Edit & Delete)
             JPanel buttonPanel = new JPanel();
             buttonPanel.setBackground(Color.WHITE);
             buttonPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -216,9 +218,8 @@ public class EditCategory extends JPanel{
         }
         
         
-
+        // Scroll Panel
         this.scrollPane = new JScrollPane(this.boxPanel);
-//        this.scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         this.scrollPane.setBorder(new EmptyBorder(0, 2, 2, 2));
         this.scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         this.scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -242,6 +243,8 @@ public class EditCategory extends JPanel{
         });
         this.bottomPanel.add(this.backButton, BorderLayout.WEST);
 
+        
+        //Create Category Button
         this.createButton = new JButton("Create Category");
         this.createButton.setFont(new Font("Tahoma", Font.BOLD, 15));
         this.createButton.setPreferredSize(new Dimension(170, 40));
@@ -256,10 +259,12 @@ public class EditCategory extends JPanel{
         this.add(this.bottomPanel, BorderLayout.SOUTH);
 	}
 	
+	//GO Home
 	private void back(){
 		this.main.showManagerHome();
 	}
 
+	//Create Category Method
 	private void create(){
 		//Using GridLayout to design
 		JPanel panel = new JPanel(new GridLayout(2, 2, 5, 5));
