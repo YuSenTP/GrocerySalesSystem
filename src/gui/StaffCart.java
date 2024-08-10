@@ -316,7 +316,7 @@ public class StaffCart extends JPanel {
                 @Override
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
                     if (!increaseButton.isEnabled()) {
-                        JOptionPane.showMessageDialog(null, "Max Quantity Reached", " Notification", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(StaffCart.this, "Max Quantity Reached", " Notification", JOptionPane.INFORMATION_MESSAGE);
                     }
                 }
             });
