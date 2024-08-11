@@ -79,7 +79,7 @@ public class EditAccount extends JPanel {
             }
         });
         this.btnChangePic.setFont(new Font("Tahoma", Font.BOLD, 16));
-        this.btnChangePic.setBounds(163, 337, 165, 30);
+        this.btnChangePic.setBounds(163, 337, 165, 31);
         this.middlePanel.add(this.btnChangePic);
 
         // Name Field
@@ -91,7 +91,7 @@ public class EditAccount extends JPanel {
         this.nameField = new JTextField(this.user.getName());
         this.nameField.setHorizontalAlignment(SwingConstants.LEFT);
         this.nameField.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        this.nameField.setBounds(377, 134, 200, 32);
+        this.nameField.setBounds(377, 134, 185, 32);
         this.middlePanel.add(this.nameField);
 
         // Role Selection
@@ -129,7 +129,7 @@ public class EditAccount extends JPanel {
         this.passwordField = new JPasswordField(this.user.getPassword());
         this.passwordField.setHorizontalAlignment(SwingConstants.LEFT);
         this.passwordField.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        this.passwordField.setBounds(377, 216, 200, 32);
+        this.passwordField.setBounds(377, 216, 185, 32);
         this.middlePanel.add(this.passwordField);
 
         this.chckbxShowPassword = new JCheckBox("Show Password");
@@ -152,7 +152,7 @@ public class EditAccount extends JPanel {
         });
         this.btnDeleteAccount.setForeground(new Color(255, 0, 51));
         this.btnDeleteAccount.setFont(new Font("Tahoma", Font.BOLD, 15));
-        this.btnDeleteAccount.setBounds(588, 335, 150, 30);
+        this.btnDeleteAccount.setBounds(574, 336, 151, 32);
         this.middlePanel.add(this.btnDeleteAccount);
         
         this.chckbxShowPassword.setBounds(377, 253, 161, 25);
@@ -170,7 +170,7 @@ public class EditAccount extends JPanel {
         this.FileNameText = new JTextField(picNameL[0]);
         this.FileNameText.setHorizontalAlignment(SwingConstants.CENTER);
         this.FileNameText.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        this.FileNameText.setBounds(377, 335, 200, 32);
+        this.FileNameText.setBounds(377, 335, 185, 32);
         this.middlePanel.add(this.FileNameText);
 
         // Bottom Panel
