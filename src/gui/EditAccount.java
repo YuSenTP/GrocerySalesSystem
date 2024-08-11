@@ -203,10 +203,15 @@ public class EditAccount extends JPanel {
     }
 
     private void deleteAccount() {
-        int response = JOptionPane.showConfirmDialog(this, "Confirm Delete?", "Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+    	JLabel label1 = new JLabel("Confirm Delete?");
+        label1.setFont(new Font("Tahoma", Font.BOLD, 14));
+        int response = JOptionPane.showConfirmDialog(this, label1, "Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (response == JOptionPane.YES_OPTION) {
             this.main.getController().deleteUser(this.user);
-            JOptionPane.showMessageDialog(this, "Account Deleted Successfully", "Delete Account", JOptionPane.INFORMATION_MESSAGE);
+            
+            JLabel label = new JLabel("Account Deleted Successfully!");
+            label.setFont(new Font("Tahoma", Font.BOLD, 14));
+            JOptionPane.showMessageDialog(this, label, "Delete Account", JOptionPane.INFORMATION_MESSAGE);
             this.main.showManageAccounts();
         }
     }
@@ -252,8 +257,17 @@ public class EditAccount extends JPanel {
         String newFileName = this.FileNameText.getText().trim() + ".jpg";
 
         if (newName.isEmpty() || newPassword.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Name and password cannot be empty!", "Error", JOptionPane.ERROR_MESSAGE);
+            JLabel label = new JLabel("Name and password cannot be empty!");
+			label.setFont(new Font("Tahoma", Font.BOLD, 14));
+            JOptionPane.showMessageDialog(this, label, "Error", JOptionPane.ERROR_MESSAGE);
             return;
+        }
+        
+        if (this.main.getController().accountExists(newName, newRole)){
+            JLabel label = new JLabel("Account Exists! Try another name!");
+			label.setFont(new Font("Tahoma", Font.BOLD, 14));
+        	JOptionPane.showMessageDialog(this, label, "Error", JOptionPane.ERROR_MESSAGE);
+        	return;
         }
 
         try {
@@ -262,7 +276,9 @@ public class EditAccount extends JPanel {
 
             if (this.picChanged) {
                 if (destinationFile.exists()) {
-                    JOptionPane.showMessageDialog(this, "File name already exists! Try another one!", "Error", JOptionPane.ERROR_MESSAGE);
+                	JLabel label = new JLabel("File name exists! Try another one!");
+        			label.setFont(new Font("Tahoma", Font.BOLD, 14));
+                    JOptionPane.showMessageDialog(this, label, "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
                 BufferedImage originalImage = ImageIO.read(new File(this.selectedFile));
@@ -281,11 +297,15 @@ public class EditAccount extends JPanel {
             // Save changes to data storage
             this.main.getController().saveAll();
 
-            JOptionPane.showMessageDialog(this, "Account updated successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            JLabel label = new JLabel("Account updated successfully!");
+			label.setFont(new Font("Tahoma", Font.BOLD, 14));
+            JOptionPane.showMessageDialog(this, label, "Success", JOptionPane.INFORMATION_MESSAGE);
             this.main.showManageAccounts();
         } catch (IOException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error saving changes!", "Error", JOptionPane.ERROR_MESSAGE);
+            JLabel label = new JLabel("Error saving changes!");
+			label.setFont(new Font("Tahoma", Font.BOLD, 14));
+            JOptionPane.showMessageDialog(this, label, "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 }

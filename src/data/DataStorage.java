@@ -208,6 +208,17 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 	    this.currentUser = user;
 	}
 	
+	public boolean accountExists(String name, String role){
+		System.out.println(name);
+		System.out.println(role);
+		for (User cUser: this.users){
+			if (cUser.getName().equals(name) && cUser.getRole().equals(role)){
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	
 	public void readFile(){ // Method to read from JSON file
 		ObjectMapper objectMapper = new ObjectMapper();

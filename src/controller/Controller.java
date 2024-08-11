@@ -329,6 +329,8 @@ public class Controller {
 		
 	}
 
-
+	public boolean accountExists(String name, String role){
+		return this.ds.accountExists(name, role);
+	}
 
 }

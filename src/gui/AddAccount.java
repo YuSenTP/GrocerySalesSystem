@@ -251,7 +251,7 @@ public class AddAccount extends JPanel {
     }
 
     private void addAccount() {
-        User currentUser = main.getController().getCurrentUser();
+//        User currentUser = main.getController().getCurrentUser();
         String n = this.nameField.getText().trim();
         String pwd = new String(this.passwordField.getText()).trim();
         String r = "";
@@ -276,12 +276,18 @@ public class AddAccount extends JPanel {
 		}
 
         if (n.isEmpty() || pwd.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Name and password are required!", "Error", JOptionPane.ERROR_MESSAGE);
+//            JOptionPane.showMessageDialog(this, "Name and password are required!", "Error", JOptionPane.ERROR_MESSAGE);
+            JLabel label = new JLabel("Name and password are required!");
+			label.setFont(new Font("Tahoma", Font.BOLD, 14));
+        	JOptionPane.showMessageDialog(this, label, "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         if (this.filePath == null) {
-            JOptionPane.showMessageDialog(this, "Please select a profile picture!", "Error", JOptionPane.ERROR_MESSAGE);
+//            JOptionPane.showMessageDialog(this, "Please select a profile picture!", "Error", JOptionPane.ERROR_MESSAGE);
+            JLabel label = new JLabel("Please select a profile picture!");
+			label.setFont(new Font("Tahoma", Font.BOLD, 14));
+        	JOptionPane.showMessageDialog(this, label, "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         
@@ -292,6 +298,13 @@ public class AddAccount extends JPanel {
         	r = managerRadioButton.getText();
         }
         
+        if (this.main.getController().accountExists(n, r)){
+        	JLabel label = new JLabel("Account Exists! Try another name!");
+			label.setFont(new Font("Tahoma", Font.BOLD, 14));
+        	JOptionPane.showMessageDialog(this, label, "Error", JOptionPane.ERROR_MESSAGE);
+        	return;
+        }
+        
         try {
             BufferedImage originalImage = ImageIO.read(new File(this.filePath));
             ImageIO.write(originalImage, "jpg", destinationFile);
@@ -299,11 +312,15 @@ public class AddAccount extends JPanel {
             int id = main.getController().generateUserID();
             main.getController().addUser(n, pwd, r, pic, id);
 
-            JOptionPane.showMessageDialog(this, "Account created successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            JLabel label = new JLabel("Account created successfully!");
+			label.setFont(new Font("Tahoma", Font.BOLD, 14));
+            JOptionPane.showMessageDialog(this, label, "Success", JOptionPane.INFORMATION_MESSAGE);
             this.main.showManageAccounts();
         } catch (IOException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error saving image file!", "Error", JOptionPane.ERROR_MESSAGE);
+            JLabel label = new JLabel("Error saving image file!");
+			label.setFont(new Font("Tahoma", Font.BOLD, 14));
+            JOptionPane.showMessageDialog(this, label, "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 }
