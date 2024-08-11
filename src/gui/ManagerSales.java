@@ -92,8 +92,6 @@ public class ManagerSales extends JPanel{
         	this.orderButton.addActionListener(new ActionListener(){
         		@Override
         		public void actionPerformed(ActionEvent e){
-        			//TO CHANGE
-//        			System.out.println(e.getSource());
         			JButton sourceBtn = (JButton) e.getSource(); //get source return button object that is called
         			Order object = (Order) sourceBtn.getClientProperty("object");
 //        			System.out.println(object);
@@ -165,10 +163,12 @@ public class ManagerSales extends JPanel{
         
 	}
 	
+	//Back to Manager Home
 	private void back(){
 		this.main.showManagerHome();
 	}
 	
+	//Direct to Order Details
 	private void showOrderScreen(String name, Order order){
 		System.out.println(name);
 		this.main.showOrderDetails(order);

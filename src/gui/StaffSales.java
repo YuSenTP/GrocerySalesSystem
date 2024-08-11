@@ -145,6 +145,7 @@ public class StaffSales extends JPanel{
         this.bottomPanel.setLayout(new BorderLayout(0, 0));
         this.bottomPanel.setBorder(new EmptyBorder(10, 20, 10, 20));
 
+        //Back Button
         this.backButton = new JButton("Back");
         this.backButton.setFont(new Font("Tahoma", Font.BOLD, 15));
         this.backButton.setPreferredSize(new Dimension(100, 40));
@@ -156,6 +157,7 @@ public class StaffSales extends JPanel{
     	});
         this.bottomPanel.add(this.backButton, BorderLayout.WEST);
         
+        //Total Sales Label
         this.totalSales = new JLabel("Total Sales: $" + this.main.getController().getCurrentStaffTotalSales());
         this.totalSales.setHorizontalAlignment(SwingConstants.CENTER);
         this.totalSales.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -166,10 +168,12 @@ public class StaffSales extends JPanel{
         
 	}
 	
+	//Back to Staff Menu
 	private void back(){
 		this.main.showStaffMenu();
 	}
 	
+	//Show Staff Order
 	private void showOrderScreen(String name, Order order){
 		System.out.println(name);
 		this.main.showStaffOrderDetails(order);

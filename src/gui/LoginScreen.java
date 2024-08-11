@@ -42,19 +42,23 @@ public class LoginScreen extends JPanel{
 		
 		this.setLayout(null);
 		
+		//Back Ground Image
 		this.backgroundImage = new ImageIcon("./img/loginbk2.jpg").getImage();
 		
+		//Name Label
 		this.lblName = new JLabel("User Name:");
 		this.lblName.setFont(new Font("Tahoma", Font.BOLD, 18));
 		this.lblName.setBounds(442, 177, 125, 33);
 		this.add(this.lblName);
 		
+		//UserName TextField
 		this.textName = new JTextField();
 		this.textName.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		this.textName.setBounds(442, 210, 192, 33);
 		add(this.textName);
 		this.textName.setColumns(10);
 		
+		//Login Button
 		this.login = new JButton("Login");
 		login.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -65,11 +69,13 @@ public class LoginScreen extends JPanel{
 		this.login.setBounds(442, 367, 192, 42);
 		this.add(this.login);
 		
+		//Password Label
 		this.lblPassword = new JLabel("Password:");
 		this.lblPassword.setFont(new Font("Tahoma", Font.BOLD, 18));
 		this.lblPassword.setBounds(442, 246, 99, 33);
 		this.add(this.lblPassword);
 				
+		//Password Field
 		this.textPassword = new JPasswordField();
 		this.textPassword.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		this.textPassword.setColumns(10);
@@ -85,6 +91,7 @@ public class LoginScreen extends JPanel{
 		});
 		this.add(this.textPassword);
 		
+		//Show Button Check Box
 		this.chckbxShowPassword = new JCheckBox("Show Password");
 		this.chckbxShowPassword.setFont(new Font("Tahoma", Font.BOLD, 16));
 		this.chckbxShowPassword.addActionListener(new ActionListener() {
@@ -101,12 +108,14 @@ public class LoginScreen extends JPanel{
 		this.chckbxShowPassword.setOpaque(false);
 		this.add(this.chckbxShowPassword);
 		
+		//Page Title
 		this.lblLogin = new JLabel("Joy MiniMart");
 		this.lblLogin.setFont(new Font("Tahoma", Font.BOLD, 47));
 		this.lblLogin.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lblLogin.setBounds(363, 58, 363, 106);
 		add(this.lblLogin);
 		
+		//Wrong Credentials Label
 		this.lblwrong = new JLabel("*Incorrect Username or Password");
 		this.lblwrong.setVisible(false);
 		this.lblwrong.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -120,7 +129,7 @@ public class LoginScreen extends JPanel{
 
 	}
 	
-	public void openPage(){
+	public void openPage(){ //Open Page
 		boolean testing = false; //set to true for easy login for Staff. Switch main.showStaffMenu or ManagerHome if want Manager
 		String n = textName.getText().trim();
 		String pwd = new String(textPassword.getPassword()).trim();

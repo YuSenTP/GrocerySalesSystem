@@ -143,6 +143,7 @@ public class StaffOrderDetails extends JPanel {
             
             infoPanel.add(pricePanel);
             
+            //Quantity Label
             JLabel quantityLabel = new JLabel("Quantity: " + currentItem.getQuantity());
             quantityLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
             infoPanel.add(quantityLabel);

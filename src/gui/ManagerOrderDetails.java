@@ -176,6 +176,7 @@ public class ManagerOrderDetails extends JPanel {
         this.middlePanel.add(this.scrollPane, BorderLayout.CENTER);
     }
     
+    //Back to Sales
     private void back() {
         this.main.showSales();
     }
