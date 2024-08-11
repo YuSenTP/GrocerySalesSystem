@@ -179,6 +179,7 @@ public class EditAccount extends JPanel {
         this.bottomPanel.setBackground(Color.WHITE);
         this.bottomPanel.setLayout(new BorderLayout(0, 0));
 
+        //Back Button
         this.backButton = new JButton("Back");
         this.backButton.setFont(new Font("Tahoma", Font.BOLD, 14));
         this.backButton.setPreferredSize(new Dimension(100, 40));
@@ -189,6 +190,7 @@ public class EditAccount extends JPanel {
         });
         this.bottomPanel.add(this.backButton, BorderLayout.WEST);
 
+        //Save Button
         this.saveButton = new JButton("Save");
         this.saveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -202,6 +204,7 @@ public class EditAccount extends JPanel {
         this.add(this.bottomPanel, BorderLayout.SOUTH);
     }
 
+    //Delete Account
     private void deleteAccount() {
     	JLabel label1 = new JLabel("Confirm Delete?");
         label1.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -216,10 +219,12 @@ public class EditAccount extends JPanel {
         }
     }
 
+    //Back To Manage Accounts
 	private void back() {
         this.main.showManageAccounts();
     }
 
+	//Change Pic
     private void changePic() {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setAcceptAllFileFilterUsed(false);
@@ -249,6 +254,7 @@ public class EditAccount extends JPanel {
         }
     }
 
+    //Save Changes to Account
     private void save() {
         // save changes
         String newName = this.nameField.getText().trim();
@@ -275,7 +281,7 @@ public class EditAccount extends JPanel {
             File destinationFile = new File("./img", newFileName);
 
             if (this.picChanged) {
-                if (destinationFile.exists()) {
+                if (destinationFile.exists()) { //Check is file name exists
                 	JLabel label = new JLabel("File name exists! Try another one!");
         			label.setFont(new Font("Tahoma", Font.BOLD, 14));
                     JOptionPane.showMessageDialog(this, label, "Error", JOptionPane.ERROR_MESSAGE);
@@ -283,7 +289,7 @@ public class EditAccount extends JPanel {
                 }
                 BufferedImage originalImage = ImageIO.read(new File(this.selectedFile));
                 ImageIO.write(originalImage, "jpg", destinationFile);
-            } else if (!this.user.getPicFile().equals(newPicFile)) {
+            } else if (!this.user.getPicFile().equals(newPicFile)) { //Change file name
                 File oldFile = new File(this.user.getPicFile());
                 oldFile.renameTo(destinationFile);
             }

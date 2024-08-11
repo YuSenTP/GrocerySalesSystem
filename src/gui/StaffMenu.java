@@ -65,6 +65,7 @@ public class StaffMenu extends JPanel {
 
     public StaffMenu(MainFrame main) {
     	
+    	//SoldOut Image
         ImageIcon soldOutIcon = new ImageIcon("./img/soldout.png");
         Image soldOutImg = soldOutIcon.getImage().getScaledInstance(119, 100, Image.SCALE_SMOOTH);
         soldOutIcon = new ImageIcon(soldOutImg);
@@ -80,6 +81,7 @@ public class StaffMenu extends JPanel {
         this.setBackground(Color.WHITE);
         this.setLayout(new BorderLayout(0, 0));
 
+        //Grid Panel
         this.gridPanel = new JPanel(new GridLayout(0, 3, 10, 10)); // rows, cols, hgap, vgap
         this.gridPanel.setBorder(new EmptyBorder(0, 10, 10, 10)); // top, left, bottom, right
         this.gridPanel.setBackground(UIManager.getColor("OptionPane.background"));
@@ -89,6 +91,7 @@ public class StaffMenu extends JPanel {
         this.topPanel.setPreferredSize(new Dimension(10, 70));
         this.topPanel.setLayout(null);
 
+        // Page Title
         this.lblGroceryItems = new JLabel("Grocery Items");
         this.lblGroceryItems.setBounds(275, 5, 200, 60);
         this.lblGroceryItems.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -97,8 +100,7 @@ public class StaffMenu extends JPanel {
         this.lblGroceryItems.setHorizontalAlignment(SwingConstants.CENTER);
         this.topPanel.add(this.lblGroceryItems);
         
-        
-
+        // Combo Box for filtering
         this.comboBox = new JComboBox(Arrays.copyOfRange(this.category, 0, this.category.length - 1));
         this.comboBox.setBounds(588, 24, 111, 25);
         this.comboBox.setSelectedItem(StaffMenu.categorySele);
@@ -139,7 +141,7 @@ public class StaffMenu extends JPanel {
         this.bottomPanel.setLayout(new BorderLayout(0, 0));
         this.bottomPanel.setBorder(new EmptyBorder(10, 20, 10, 20)); //Used to create white space
         
-     // User Name Label
+        // User Name Label
         this.userNameLabel = new JLabel();
         this.userNameLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
         this.userNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -170,6 +172,7 @@ public class StaffMenu extends JPanel {
         for (int i = 0; i < this.inventory.length; i++) {
         	GroceryItem currentItem = this.inventory[i];
             
+        	//Checks if item is part of category selected
             if (StaffMenu.categorySele.equals("All") != true){
         		if (currentItem.getCategory().equals(StaffMenu.categorySele) != true){
         			continue;
@@ -181,6 +184,7 @@ public class StaffMenu extends JPanel {
 
             this.itemPanel = new JPanel(new BorderLayout());
 
+            //Item Button
             this.itemButton = new JButton();
             this.itemButton.setLayout(new BorderLayout());
             this.itemButton.setBackground(Color.WHITE);
@@ -316,7 +320,7 @@ public class StaffMenu extends JPanel {
         JPanel parentPanel = (JPanel) addToCartButton.getParent(); // Parent is itemPanel
         parentPanel.remove(addToCartButton); // itemPanel to remove button
         
-
+        //Quantity Panel
         JPanel quantityPanel = new JPanel(new BorderLayout());
         JButton decreaseButton = new JButton("-");
         decreaseButton.putClientProperty("object", currentItem);
@@ -327,6 +331,8 @@ public class StaffMenu extends JPanel {
         quantityField.setOpaque(true);
         quantityField.setBackground(Color.WHITE);
 //        this.quantityField.setBorder(new Border()); TO ADD LATER
+        
+        // Checks if quantity field is called when add to button is pressed
         if(flag == true){
         	this.main.getController().editOrder("add", currentItem);
         }

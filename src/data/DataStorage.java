@@ -27,7 +27,7 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 	private User currentUser;
 	private Vector<String> category;
 	
-	public DataStorage(){
+	public DataStorage(){ //creates new vectors and called read file to load in data
 		this.inventory = new Vector<GroceryItem>();
 		this.orders = new Vector<Order>();
 		this.users = new Vector<User>();
@@ -37,38 +37,47 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 		this.readFile();
 	}
 	
+	//Get Inventory
 	public GroceryItem[] getInventory(){
 		return this.inventory.toArray(new GroceryItem[this.inventory.size()]);
 	}
 	
+	//Get Orders
 	public Order[] getOrders(){
 		return this.orders.toArray(new Order[this.orders.size()]);
 	}
 	
+	//Get Users
 	public User[] getUsers(){
 		return this.users.toArray(new User[this.users.size()]);
 	}
 	
+	//Get Current Order
 	public Order getCurrentOrder(){
 		return this.currentOrder;
 	}
 	
+	//Add new Order
 	public void addOrder(Order order){
 		this.orders.add(order);
 	}
 	
+	//Get All Category
 	public String[] getCategory() {
 		return this.category.toArray(new String[this.category.size()]);
 	}
 
+	//Add New Category
 	public void addCategory(String category) {
 		this.category.add(this.category.size()-2, category);
 	}
 
+	//Create new Item
 	public void createGroceryItem(GroceryItem item){
 		this.inventory.add(item);
 	}
 	
+	//Get Staff Orders
 	public Order[] getStaffOrders(String staffName) {
 	    // Initialize staffOrders if it's null
 	    if (this.staffOrders == null) {
@@ -87,6 +96,7 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 	    return staffOrders.toArray(new Order[staffOrders.size()]);
 	}
 	
+	//Edit Item
 	public void editGroceryItem(GroceryItem item, String name, String price, String quantity, String picFile, boolean onSale, String percentOff, String category){
 		//Name
 		item.setName(name);
@@ -102,7 +112,7 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 		//PicFile
 		item.setPicFile(picFile);
 		
-		//Sale
+		//OnSale & Percentage Off & OnSale price
 		if (onSale){
 			item.setOnSale(onSale);
 			item.setPercentOff(Double.valueOf(percentOff)/100);
@@ -122,23 +132,25 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 		item.setCategory(category);
 	}
 	
-	
+	//Delete Item
 	public void deleteGroceryItem(GroceryItem item) { 
 		File picFile = new File(item.getPicFile());
 		picFile.delete();
 		this.inventory.remove(item);
 	 }
 	
+	//Edit Category
 	public void editCategory(int originalIndex, int endIndex, String Name){
 		String originalCat = this.category.get(originalIndex + 1);
-		if (originalIndex == endIndex){
+		if (originalIndex == endIndex){ //Placing no change
 			this.category.set(originalIndex + 1, Name); //Account for "All" at index 0
 		}
-		else{
+		else{ //Placing changed
 			this.category.remove(originalIndex + 1);
 			this.category.add(endIndex + 1, Name);
 		}
 		
+		//Sets all item with old category to new category name
 		for (GroceryItem g: this.inventory){
 //			System.out.println(c);
 			if (g.getCategory().equals(originalCat)){
@@ -147,15 +159,18 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 		}
 	}
 	
+	//New Category
 	public void newCategory(int cIndex, String name) {
 		this.category.add(cIndex + 1, name);
 		
 	}
 	
+	//Delete Category
 	public void deleteCategory(String name){
 		this.category.removeElement(name);
 	}
 	
+	//Checks if category is used by any item
 	public boolean categoryInUse(String name) {
 		for (GroceryItem g: this.inventory){
 //			System.out.println(c);
@@ -166,6 +181,7 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 		return false;
 	}
 	
+	//Reassigns category of item that is using the one being deleted
 	public void reassignCategory(String originalCategory, String selectedCat) {
 		for (GroceryItem g: this.inventory){
 //			System.out.println(c);
@@ -176,14 +192,17 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 		
 	}
 	
+	//Sets current order
 	public void setCurrentOrder(Order order) {
         this.currentOrder = order;
 	}
 	
+	//Clear current order
 	public void clearCurrentOrderItems(){
 		this.currentOrder.setGroceryItems(new Vector<GroceryItem>());
 	}
 
+	//Save User
 	public void storeUser(User u){
 		this.users.add(u); 
 		
@@ -193,21 +212,24 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 		}
 	}
 	
-	 public void deleteUser(User user) {
-	        File picFile = new File(user.getPicFile());
-	        picFile.delete();
-	        this.users.remove(user);
-	    }
-	
+	//Delete User
+	public void deleteUser(User user) {
+		File picFile = new File(user.getPicFile());
+		picFile.delete();
+		this.users.remove(user);
+	}
+
+	//Get Current User
 	public User getCurrentUser(){
 		return this.currentUser;
 	}
 	
-	
+	//Sets Current User
 	public void setCurrentUser(User user) {
 	    this.currentUser = user;
 	}
 	
+	//Checks is current account exists --> returns true to prevents creation
 	public boolean accountExists(String name, String role){
 		System.out.println(name);
 		System.out.println(role);
@@ -220,7 +242,7 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 	}
 	
 	
-	public void readFile(){ // Method to read from JSON file
+	public void readFile(){ // Method to read from JSON & text file
 		ObjectMapper objectMapper = new ObjectMapper();
 		
 		try{
@@ -256,7 +278,7 @@ public class DataStorage { //!! TO_CHANGE -- filePaths
 	     }
 	}
 	
-	public void writeFile(){  //Method to save to JSON file
+	public void writeFile(){  //Method to save to JSON & text file
     	ObjectMapper objectMapper = new ObjectMapper(); 
     	try {
     		//! TO-CHANGE filePath

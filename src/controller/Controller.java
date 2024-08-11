@@ -21,14 +21,17 @@ public class Controller {
 		 this.ds = new DataStorage();
 	}
 	
+	//Get orders
 	public Order[] getOrders(){
 		return ds.getOrders();
 	}
 	
+	//Get Users
 	public User[] getUsers(){
 		return ds.getUsers();
 	}
 	
+	//Get Inventory
 	public GroceryItem[] getInventory(){
 		return ds.getInventory();
 	}
@@ -38,6 +41,7 @@ public class Controller {
 		this.ds.writeFile();
 	}
 	
+	//Get Category
 	public String[] getCategory(){
 		return this.ds.getCategory();
 	}
@@ -152,6 +156,7 @@ public class Controller {
 		System.out.println("Order size: " + this.ds.getCurrentOrder().getGroceryItems().length);
 	 }
 	
+	//Get Current staff order
 	public Order[] getCurrentStaffOrders() {
 	    User currentUser = this.getCurrentUser();
 	    System.out.println("Current user: " + (currentUser != null ? currentUser.getName() : "null"));
@@ -247,22 +252,27 @@ public class Controller {
 		this.ds.storeUser(u);
 	}
 	
-	 public void deleteUser(User user) {
-	        this.ds.deleteUser(user);
-	    }
+	//Deletes User
+	public void deleteUser(User user) {
+		this.ds.deleteUser(user);
+	}
 		
+	//Generate UserID based on number of users
 	public int generateUserID() {
 		return ds.getUsers().length + 1;
 	}
 	
+	//Get Current user
 	public User getCurrentUser() {
 		return this.ds.getCurrentUser();
 	}
 
+	//Get current order
 	public Order getCurrentOrder() {
         return this.ds.getCurrentOrder();
 	}
 
+	//Generate Order Number base on total number of orders
 	public int generateOrderNumber() {
         return ds.getOrders().length + 1;
 	}

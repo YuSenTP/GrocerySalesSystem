@@ -75,6 +75,7 @@ public class AddAccount extends JPanel {
         this.picLabel.setBounds(48, 20, 280, 280);
         this.middlePanel.add(this.picLabel);
 
+        //Change Pic Button
         this.btnChangePic = new JButton("Upload Picture");
         this.btnChangePic.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -97,12 +98,13 @@ public class AddAccount extends JPanel {
         this.nameField.setBounds(377, 134, 200, 32);
         this.middlePanel.add(this.nameField);
         
-     // Add Role Selection
+        // Add Role Selection
         JLabel lblRole = new JLabel("Role:");
         lblRole.setFont(new Font("Tahoma", Font.BOLD, 20));
         lblRole.setBounds(377, 20, 100, 30);
         this.middlePanel.add(lblRole);
-
+        
+        //Radio Buttons
         this.staffRadioButton = new JRadioButton("Staff");
         this.staffRadioButton.setFont(new Font("Tahoma", Font.BOLD, 16));
         this.staffRadioButton.setBounds(377, 59, 100, 30);
@@ -120,19 +122,20 @@ public class AddAccount extends JPanel {
         // Set Staff as default selection
         this.staffRadioButton.setSelected(true);
 
-        // Add Password
+        // Password Label
         this.lblPassword = new JLabel("Password:");
         this.lblPassword.setFont(new Font("Tahoma", Font.BOLD, 20));
         this.lblPassword.setBounds(377, 180, 135, 30);
         this.middlePanel.add(this.lblPassword);
 
+        // Password Field
         this.passwordField = new JPasswordField();
         this.passwordField.setHorizontalAlignment(SwingConstants.LEFT);
         this.passwordField.setFont(new Font("Tahoma", Font.PLAIN, 20));
         this.passwordField.setBounds(377, 216, 200, 32);
         this.middlePanel.add(this.passwordField);
         
-        
+        // Show Password CheckBox
         this.chckbxShowPassword = new JCheckBox("Show Password");
 		this.chckbxShowPassword.setFont(new Font("Tahoma", Font.BOLD, 15));
 		this.chckbxShowPassword.addActionListener(new ActionListener() {
@@ -181,17 +184,20 @@ public class AddAccount extends JPanel {
 		this.FileNameText.setBounds(377, 335, 200, 32);
 		this.middlePanel.add(this.FileNameText);
 		
+		//Label for add square pic only
 		this.label_1 = new JLabel("*Only Add Square Picture");
 		this.label_1.setForeground(new Color(255, 0, 51));
 		this.label_1.setFont(new Font("Tahoma", Font.BOLD, 12));
 		this.label_1.setBounds(163, 313, 165, 16);
 		this.middlePanel.add(this.label_1);
+		
         // Bottom Panel 
         this.bottomPanel = new JPanel();
         this.bottomPanel.setBorder(new EmptyBorder(10, 20, 10, 20));
         this.bottomPanel.setBackground(Color.WHITE);
         this.bottomPanel.setLayout(new BorderLayout(0, 0));
 
+        //Back Button
         this.backButton = new JButton("Back");
         this.backButton.setFont(new Font("Tahoma", Font.BOLD, 14));
         this.backButton.setPreferredSize(new Dimension(100, 40));
@@ -202,6 +208,7 @@ public class AddAccount extends JPanel {
         });
         this.bottomPanel.add(this.backButton, BorderLayout.WEST);
 
+        //Save Account Button
         this.addAccountButton = new JButton("Save");
         this.addAccountButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -215,6 +222,7 @@ public class AddAccount extends JPanel {
         this.add(this.bottomPanel, BorderLayout.SOUTH);
     }
 
+    //Back To Manage Accounts
     private void back() {
         this.main.showManageAccounts();
     }
@@ -250,6 +258,7 @@ public class AddAccount extends JPanel {
         }
     }
 
+    //Add Account
     private void addAccount() {
 //        User currentUser = main.getController().getCurrentUser();
         String n = this.nameField.getText().trim();

@@ -448,7 +448,7 @@ public class EditGroceryItem extends JPanel{
 		
 	}
 	
-	private void changePic(){
+	private void changePic(){ //Change Pic
 		JFileChooser fileChooser = new JFileChooser();
 		//Only allow jpg
 		fileChooser.setAcceptAllFileFilterUsed(false);
@@ -483,7 +483,7 @@ public class EditGroceryItem extends JPanel{
 		}
 	}
 	
-	private void save(){
+	private void save(){ //Save Item
 		
 		// Check if all text box is filled
 		if (this.FileNameText.getText().trim().contentEquals("") || this.itemName.getText().trim().contentEquals("Enter Name") || this.priceText.getText().trim().contentEquals("Enter Price") || this.quantityText.getText().trim().contentEquals("Enter Quantity")){
