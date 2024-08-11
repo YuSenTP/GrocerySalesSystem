@@ -33,6 +33,7 @@ public class Controller {
 		return ds.getInventory();
 	}
 	
+	//Write data to file
 	public void saveAll(){
 		this.ds.writeFile();
 	}
@@ -41,26 +42,28 @@ public class Controller {
 		return this.ds.getCategory();
 	}
 	
+	//Add category
 	public void addCategory(String category){
 		this.ds.addCategory(category);
 	}
 	
-	//Manager
+	//Manager create item
 	public void createGroceryItem(String itemName, String price, String quantity, String picFile, boolean onSale, String percentOff, String category) { 
 		GroceryItem temp = new GroceryItem(itemName, price, quantity, picFile, onSale, Double.valueOf(percentOff) / 100, category);
 		this.ds.createGroceryItem(temp);
 	 }
 	
-	//Manager
+	//Manager edit item
 	public void editGroceryItem(GroceryItem item, String name, String price, String quantity, String picFile, boolean onSale, String percentOff, String category){
 		this.ds.editGroceryItem(item, name, price, quantity, picFile, onSale, percentOff, category);
 	}
 	
-	//Manager
+	//Manager delete item
 	public void deleteGroceryItem(GroceryItem item) { 
 		this.ds.deleteGroceryItem(item);
 	 }
-	//Manager
+	
+	//Manager total order cost
 	public BigDecimal getTotalOrderCost(){
 		Order[] tempOrders = this.getOrders();
 		BigDecimal totalSales = BigDecimal.ZERO;
@@ -78,6 +81,7 @@ public class Controller {
 		}
 	}
 	
+	// Staff total sales
 	public BigDecimal getCurrentStaffTotalSales() {
 	    User currentUser = this.getCurrentUser();
 	    if (currentUser == null || !currentUser.getRole().equals("Staff")) {
@@ -96,6 +100,7 @@ public class Controller {
 	}
 	
 	
+	//Staff edit order
 	public void editOrder(String choice, GroceryItem item) { 
 		GroceryItem[] temp = this.ds.getCurrentOrder().getGroceryItems();
 		
@@ -161,6 +166,7 @@ public class Controller {
 	    return new Order[0];
 	}
 	
+	//Update cart
 	public void cartUpdateInventory(String choice, GroceryItem item){
 		GroceryItem[] inventoryItems = this.ds.getInventory();
 		for(int i = 0; i < inventoryItems.length; i++){
@@ -175,6 +181,7 @@ public class Controller {
 		}
 	}
 	
+	//Checks if item available
 	public boolean checkInventoryAvaiblility(GroceryItem item){
 		GroceryItem[] inventoryItems = this.ds.getInventory();
 		for(int i = 0; i < inventoryItems.length; i++){
@@ -187,6 +194,7 @@ public class Controller {
 		return true;	
 	}
 	
+	//Clear cart
 	public void clearCurrentOrder() {
 	    GroceryItem[] items = this.ds.getCurrentOrder().getGroceryItems();
 	    for (int i = 0; i < items.length; i++) {
@@ -198,23 +206,8 @@ public class Controller {
 	    this.ds.clearCurrentOrderItems();
 	}
 	
-	public void clearCartItems() {
-	
-		    Order currentOrder = this.ds.getCurrentOrder();
-		    GroceryItem[] items = currentOrder.getGroceryItems();
-
-		    for (int i = 0; i < items.length; i++) {
-		        cartUpdateInventory("delete", items[i]);
-		    }
-
-		    // Clear the current order
-		    this.ds.clearCurrentOrderItems();
-
-		    // Reset the total cost of the current order
-		    this.calculateTotalCost();
 		
-	}
-		
+	//Checks user for login
 	public String verifyUser(String n, String pwd) {
 	    User[] users = getUsers();
 	    for (int i = 0; i < users.length; i++) {
@@ -226,6 +219,7 @@ public class Controller {
 	    return null; //otherwise, return null
 	}
 	
+	//Set current user
 	public void setCurrentUserName(String username) {
 	    User[] users = getUsers();
 	    for (int i = 0; i < users.length; i++) {
@@ -239,6 +233,7 @@ public class Controller {
 	    System.out.println("User not found: " + username);
 	}
 	
+	//Add new user
 	public void addUser(String n, String pwd, String r, String pic, int id) {
 		User u = new User();
 		// setting info
@@ -264,8 +259,6 @@ public class Controller {
 		return this.ds.getCurrentUser();
 	}
 
-
-
 	public Order getCurrentOrder() {
         return this.ds.getCurrentOrder();
 	}
@@ -274,8 +267,9 @@ public class Controller {
         return ds.getOrders().length + 1;
 	}
 	
+	//Calculate total cost
 	public BigDecimal calculateTotalCost() {
-		BigDecimal totalCost = BigDecimal.ZERO; //!
+		BigDecimal totalCost = BigDecimal.ZERO;
 		BigDecimal groceryCost;
 		GroceryItem[] items = this.ds.getCurrentOrder().getGroceryItems();
 		//Loop through all items and add to total cost
@@ -295,7 +289,7 @@ public class Controller {
 		return totalCost;
 	 }
 	
-
+	//Saves order
 	public void confirmOrder() {
 		 Order currentOrder = this.ds.getCurrentOrder();
 	        if (currentOrder.getGroceryItems().length != 0) {
@@ -306,29 +300,35 @@ public class Controller {
 	        }
 	}
 
+	//Edit category
 	public void editCategory(int originalIndex, int endIndex, String Name) {
 		this.ds.editCategory(originalIndex, endIndex, Name);
 		
 	}
 
+	//Add category with placing
 	public void newCategory(int cIndex, String name) {
 		this.ds.newCategory(cIndex, name);
 		
 	}
 	
+	//Delete Category
 	public void deleteCategory(String name){
 		this.ds.deleteCategory(name);
 	}
 
+	//Checks if category in use
 	public boolean categoryInUse(String name) {
 		return this.ds.categoryInUse(name);
 	}
 
+	//Reassign category in use
 	public void reassignCategory(String originalCategory, String selectedCat) {
 		this.ds.reassignCategory(originalCategory, selectedCat);
 		
 	}
 
+	//Checks if account exists
 	public boolean accountExists(String name, String role){
 		return this.ds.accountExists(name, role);
 	}

@@ -145,7 +145,7 @@ public class StaffCart extends JPanel {
         } else {
             int result = JOptionPane.showConfirmDialog(this, "Are you sure you want to clear the cart?", "Clear Cart", JOptionPane.YES_NO_OPTION);
             if (result == JOptionPane.YES_OPTION) {
-                main.getController().clearCartItems();
+            	main.getController().clearCurrentOrder();
                 updateCartItems();
                 updateTotalLabel();
                 JOptionPane.showMessageDialog(this, "Cart has been cleared.", "Cart Cleared", JOptionPane.INFORMATION_MESSAGE);
